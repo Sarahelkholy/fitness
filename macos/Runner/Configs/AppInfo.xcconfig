@@ -8,7 +8,7 @@
 PRODUCT_NAME = fitness
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.fitness
+PRODUCT_BUNDLE_IDENTIFIER = com.elevate.c5.t1.fitness
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2026 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2026 com.elevate.c5.t1. All rights reserved.

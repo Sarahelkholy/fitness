@@ -15,7 +15,6 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' as _i528;
 
-import '../../core/helpers/url_launcher_helper.dart' as _i220;
 import '../../core/local_cubit/locale_cubit.dart' as _i65;
 import '../module/api_module.dart' as _i235;
 import '../module/storage_module.dart' as _i487;
@@ -38,7 +37,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => storageModule.provideSecureCacheStorage(),
     );
-    gh.lazySingleton<_i220.UrlLauncherHelper>(() => _i220.UrlLauncherHelper());
     gh.lazySingleton<_i23.SecureCache>(
       () => _i987.SecureCacheImpl(gh<_i558.FlutterSecureStorage>()),
     );
