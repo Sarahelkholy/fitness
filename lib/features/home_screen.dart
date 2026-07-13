@@ -1,3 +1,4 @@
+import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -5,7 +6,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       body: Center(
         child: Text(
           'Home Screen',

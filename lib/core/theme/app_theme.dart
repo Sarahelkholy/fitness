@@ -9,6 +9,7 @@ class AppTheme {
     return ThemeData(
       textTheme: GoogleFonts.interTextTheme(),
       useMaterial3: true,
+      brightness: Brightness.dark,
 
       ///? Input Decoration
       inputDecorationTheme: InputDecorationTheme(
