@@ -4,82 +4,75 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51337ca5-173c-4de8-a45e-e917e13fd467" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_graph.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_graph.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+    <list default="true" id="51337ca5-173c-4de8-a45e-e917e13fd467" name="Changes" comment="update .gitignore to include .idea and .dart_tool directories">
+      <change afterPath="$PROJECT_DIR$/assets/icons/explore_home_icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/api/data_sources/remote/user_remote_data_source_impl.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/api/user_api_client/user_api_client.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/data/data_sources/remote/user_remote_data_source.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/data/mapper/user_mapper.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/data/models/responses/get_user_response/get_user_data_response.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/data/models/responses/get_user_response/user_response.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/data/repositories/user_repo_impl.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/domain/entities/user_entity.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/domain/repositories/user_repo.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/domain/use_cases/get_user_data_use_case.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/domain/use_cases/logout_use_case.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/manager/user_cubit.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/manager/user_events.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/config/user/manager/user_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/api/auth_api_client/auth_api_client.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/api/data_sources/remote/auth_remote_data_source_impl.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/data_sources/remote/auth_remote_data_source.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/requests/forget_password_request.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/requests/login_request.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/requests/register_request.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/requests/reset_password_request.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/requests/verify_reset_otp_request.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/responses/auth_response.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/repositories/auth_repo_impl.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/repositories/auth_repo.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/use_cases/forget_password_use_case.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/use_cases/login_use_case.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/use_cases/register_use_case.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/use_cases/reset_password_use_case.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/use_cases/verify_reset_otp_use_case.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/forget_password_cubit/forget_password_event.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/forget_password_cubit/forget_password_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/login_cubit/login_cubit.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/login_cubit/login_event.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/login_cubit/login_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/register_cubit/register_cubit.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/register_cubit/register_event.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/register_cubit/register_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/forget_password/password_enter_email_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/forget_password/password_reset_password_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/forget_password/password_verify_otp_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/login/login_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/onboarding/onboarding_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/register/register_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/splash/splash_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/widgets/forget_password/forget_password_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/widgets/login/login_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/widgets/onboarding/onboarding_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/widgets/register/register_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/widgets/splash/splash_widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/.last_build_id" beforeDir="false" afterPath="$PROJECT_DIR$/build/.last_build_id" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness.iml" beforeDir="false" afterPath="$PROJECT_DIR$/fitness.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/runner/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/runner/main.cc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/runner/my_application.cc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/runner/my_application.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/Flutter-Debug.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/Flutter-Release.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner.xcodeproj/project.pbxproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/AppDelegate.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Base.lproj/MainMenu.xib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Configs/AppInfo.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Configs/Debug.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Configs/Release.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Configs/Warnings.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/DebugProfile.entitlements" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/MainFlutterWindow.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Runner/Release.entitlements" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/RunnerTests/RunnerTests.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/icons/Icon-192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/icons/Icon-512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/icons/Icon-maskable-192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/icons/Icon-maskable-512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/Runner.rc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/flutter_window.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/flutter_window.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/resource.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/resources/app_icon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/runner.exe.manifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/utils.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/utils.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/win32_window.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/runner/win32_window.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/app_logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/homeIcon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/orders.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/personIcon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/whats_app_icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/Image_test.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/store_image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/user_test_image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/di/di.config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/di/di.config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/module/api_module.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/module/api_module.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/shared_widgets/custom_bottom_nav.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/shared_widgets/custom_bottom_nav.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/shared_widgets/custom_scaffold.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/shared_widgets/custom_scaffold.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/utils/app_assets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/utils/app_assets.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/values/api_end_points.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/values/api_end_points.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +96,11 @@
     </leaf>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="McpProjectServerCommands">
@@ -120,10 +118,28 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "develop"
+    "git-widget-placeholder": "feature/auth__module",
+    "last_opened_file_path": "D:/Flutter/Flutter Projects/fitness/lib/features/auth/presentation/widgets"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Flutter\Flutter Projects\fitness\lib\features\auth\presentation\widgets" />
+      <recent name="D:\Flutter\Flutter Projects\fitness\assets\icons" />
+      <recent name="D:\Flutter\Flutter Projects\fitness\lib\features\auth" />
+      <recent name="D:\Flutter\Flutter Projects\fitness\lib\config" />
+    </key>
+  </component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="update .gitignore to include .idea and .dart_tool directories">
+      <option name="closed" value="true" />
+      <created>1784051624895</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1784051624895</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -134,6 +150,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update SDK version to ^3.11.0 and add pubspec.lock to .gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="update SDK version to ^3.11.0 and add pubspec.lock to .gitignore" />
+    <MESSAGE value="update .gitignore to include .idea and .dart_tool directories" />
+    <option name="LAST_COMMIT_MESSAGE" value="update .gitignore to include .idea and .dart_tool directories" />
   </component>
 </project>
