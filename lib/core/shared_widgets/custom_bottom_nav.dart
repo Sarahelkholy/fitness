@@ -1,5 +1,4 @@
 import 'dart:ui'; // Required for ImageFilter
-import 'package:fitness/core/helpers/my_responsive.dart';
 import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:fitness/features/chat_screen.dart';
 import 'package:fitness/features/home_screen.dart';
