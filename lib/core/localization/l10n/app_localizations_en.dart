@@ -143,4 +143,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get defaultError => 'An error occurred';
+
+  @override
+  String get explore => 'Explore';
+
+  @override
+  String get smartCoach => 'Smart coach';
+
+  @override
+  String get workouts => 'Workouts';
+
+  @override
+  String get profile => 'Profile';
 }

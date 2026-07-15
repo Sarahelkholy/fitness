@@ -355,6 +355,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An error occurred'**
   String get defaultError;
+
+  /// No description provided for @explore.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore'**
+  String get explore;
+
+  /// No description provided for @smartCoach.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart coach'**
+  String get smartCoach;
+
+  /// No description provided for @workouts.
+  ///
+  /// In en, this message translates to:
+  /// **'Workouts'**
+  String get workouts;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
 }
 
 class _AppLocalizationsDelegate

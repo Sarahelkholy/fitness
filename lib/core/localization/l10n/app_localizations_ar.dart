@@ -143,4 +143,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get defaultError => 'حدث خطأ ما';
+
+  @override
+  String get explore => 'استكشاف';
+
+  @override
+  String get smartCoach => 'المدرب الذكي';
+
+  @override
+  String get workouts => 'التمارين';
+
+  @override
+  String get profile => 'الملف الشخصي';
 }

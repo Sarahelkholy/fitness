@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fitness App',
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.homeRoute,
+      initialRoute: Routes.bottomNavBarRoute,
       onGenerateRoute: RouteGenerator.getRoute,
       theme: AppTheme.appTheme(context),
 
