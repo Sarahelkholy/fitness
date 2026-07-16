@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../core/helpers/custom_logger.dart';
 import '../error_handling/execute_api.dart';
 import '../error_handling/result.dart';
 import 'social_auth_constants.dart';
@@ -28,10 +26,25 @@ class SocialAuthServiceImpl implements SocialAuthService {
         throw PlatformException(code: 'sign_in_cancelled');
       }
 
+      // Extract first and last name from display name
+      String? firstName;
+      String? lastName;
+      if (googleUser.displayName != null) {
+        final nameParts = googleUser.displayName!.trim().split(' ');
+        if (nameParts.isNotEmpty) {
+          firstName = nameParts.first;
+          if (nameParts.length > 1) {
+            lastName = nameParts.sublist(1).join(' ');
+          }
+        }
+      }
+
       return SocialUser(
         id: googleUser.id,
         email: googleUser.email,
         name: googleUser.displayName,
+        firstName: firstName,
+        lastName: lastName,
         photo: googleUser.photoUrl,
       );
     });
@@ -55,8 +68,9 @@ class SocialAuthServiceImpl implements SocialAuthService {
           name: userData[SocialAuthConstants.nameKey],
           firstName: userData[SocialAuthConstants.firstNameKey],
           lastName: userData[SocialAuthConstants.lastNameKey],
-          photo: userData[SocialAuthConstants.pictureKey]
-              ?[SocialAuthConstants.dataKey]?[SocialAuthConstants.urlKey],
+          photo:
+              userData[SocialAuthConstants.pictureKey]?[SocialAuthConstants
+                  .dataKey]?[SocialAuthConstants.urlKey],
         );
       } else if (result.status == LoginStatus.cancelled) {
         throw PlatformException(code: 'sign_in_cancelled');
