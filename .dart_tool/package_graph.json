@@ -531,7 +531,7 @@
     },
     {
       "name": "google_fonts",
-      "version": "8.1.0",
+      "version": "8.2.0",
       "dependencies": [
         "crypto",
         "flutter",
@@ -2160,7 +2160,7 @@
     },
     {
       "name": "package_info_plus",
-      "version": "10.2.0",
+      "version": "10.2.1",
       "dependencies": [
         "clock",
         "ffi",
@@ -2202,7 +2202,7 @@
     },
     {
       "name": "uuid",
-      "version": "4.5.3",
+      "version": "4.6.0",
       "dependencies": [
         "crypto",
         "fixnum"

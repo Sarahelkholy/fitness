@@ -6,4 +6,7 @@ abstract class AppAssets {
   static const String authBackgroundImage = "$_baseImagesPath/background.png";
 
   static const String exploreHomeIcon = "$_baseIconsPath/explore_home_icon.svg";
+
+  // =============== Splash Screen ==================
+  static const String splashScreenLogoImage = "$_baseImagesPath/splash.png";
 }
