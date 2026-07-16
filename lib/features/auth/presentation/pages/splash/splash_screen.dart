@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../config/di/di.dart';
 import '../../../../../config/route_manager/routes.dart';
 import '../../../../../config/secure_cache/secure_cache/cache_keys.dart';
@@ -9,7 +8,6 @@ import '../../../../../config/secure_cache/secure_cache/secure_cache.dart';
 import '../../../../../config/user/manager/user_cubit.dart';
 import '../../../../../config/user/manager/user_events.dart';
 import '../../../../../config/user/manager/user_state.dart';
-import '../../../../../core/shared_widgets/svg_wrapper.dart';
 import '../../../../../core/utils/app_assets.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -120,11 +118,8 @@ class _SplashScreenState extends State<SplashScreen>
         child: Center(
           child: FadeTransition(
             opacity: _fadeAnimation,
-            child: SvgWrapper(
-              path: AppAssets.exploreHomeIcon,
-              width: 240,
-              height: 240,
-              fit: BoxFit.contain,
+            child: Image.asset(
+              AppAssets.splashScreenLogoImage,
             ),
           ),
         ),
