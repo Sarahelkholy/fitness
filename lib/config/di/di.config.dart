@@ -35,6 +35,8 @@ import '../module/api_module.dart' as _i235;
 import '../module/storage_module.dart' as _i487;
 import '../secure_cache/secure_cache/secure_cache.dart' as _i23;
 import '../secure_cache/secure_cache/secure_cache_helper.dart' as _i987;
+import '../social_auth/social_auth_service.dart' as _i857;
+import '../social_auth/social_auth_service_impl.dart' as _i874;
 import '../user/api/data_sources/remote/user_remote_data_source_impl.dart'
     as _i694;
 import '../user/api/user_api_client/user_api_client.dart' as _i1062;
@@ -59,6 +61,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => storageModule.provideSecureCacheStorage(),
+    );
+    gh.lazySingleton<_i857.SocialAuthService>(
+      () => _i874.SocialAuthServiceImpl(),
     );
     gh.lazySingleton<_i23.SecureCache>(
       () => _i987.SecureCacheImpl(gh<_i558.FlutterSecureStorage>()),
