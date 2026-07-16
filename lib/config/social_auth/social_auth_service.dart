@@ -1,6 +1,7 @@
+import '../error_handling/result.dart';
 import 'social_user.dart';
 
 abstract class SocialAuthService {
-  Future<SocialUser?> getGoogleUserData();
-  Future<SocialUser?> getFacebookUserData();
+  Future<Result<SocialUser>> getGoogleUserData();
+  Future<Result<SocialUser>> getFacebookUserData();
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../core/helpers/custom_logger.dart';
+import '../error_handling/execute_api.dart';
+import '../error_handling/result.dart';
 import 'social_auth_constants.dart';
 import 'social_auth_service.dart';
 import 'social_user.dart';
@@ -18,10 +21,12 @@ class SocialAuthServiceImpl implements SocialAuthService {
   );
 
   @override
-  Future<SocialUser?> getGoogleUserData() async {
-    try {
+  Future<Result<SocialUser>> getGoogleUserData() {
+    return executeApi<SocialUser>(() async {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return null;
+      if (googleUser == null) {
+        throw PlatformException(code: 'sign_in_cancelled');
+      }
 
       return SocialUser(
         id: googleUser.id,
@@ -29,16 +34,12 @@ class SocialAuthServiceImpl implements SocialAuthService {
         name: googleUser.displayName,
         photo: googleUser.photoUrl,
       );
-    } catch (e, s) {
-      CustomLogger.bgRed(e.toString());
-      debugPrintStack(stackTrace: s);
-      return null;
-    }
+    });
   }
 
   @override
-  Future<SocialUser?> getFacebookUserData() async {
-    try {
+  Future<Result<SocialUser>> getFacebookUserData() {
+    return executeApi<SocialUser>(() async {
       final LoginResult result = await FacebookAuth.instance.login(
         permissions: SocialAuthConstants.facebookPermissions,
       );
@@ -57,12 +58,14 @@ class SocialAuthServiceImpl implements SocialAuthService {
           photo: userData[SocialAuthConstants.pictureKey]
               ?[SocialAuthConstants.dataKey]?[SocialAuthConstants.urlKey],
         );
+      } else if (result.status == LoginStatus.cancelled) {
+        throw PlatformException(code: 'sign_in_cancelled');
+      } else {
+        throw PlatformException(
+          code: 'facebook_login_error',
+          message: result.message,
+        );
       }
-      return null;
-    } catch (e, s) {
-      CustomLogger.bgRed(e.toString());
-      debugPrintStack(stackTrace: s);
-      return null;
-    }
+    });
   }
 }

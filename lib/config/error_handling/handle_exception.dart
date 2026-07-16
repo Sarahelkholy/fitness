@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:fitness/core/values/app_strings.dart';
 
 class NetworkException {
@@ -32,8 +33,23 @@ class NetworkException {
           // TODO: Handle this case.
           throw UnimplementedError();
       }
+    } else if (exception is PlatformException) {
+      return _handlePlatformException(exception);
     } else {
       return AppStrings.current.unexpectedErrorMessage;
+    }
+  }
+
+  static String _handlePlatformException(PlatformException e) {
+    switch (e.code) {
+      case 'sign_in_cancelled':
+        return AppStrings.current.socialSignInCancelled;
+      case 'facebook_login_error':
+        return AppStrings.current.facebookLoginError;
+      case 'network_error':
+        return AppStrings.current.connectionErrorMessage;
+      default:
+        return e.message ?? AppStrings.current.unexpectedErrorMessage;
     }
   }
 

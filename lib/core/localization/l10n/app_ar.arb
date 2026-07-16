@@ -41,6 +41,7 @@
   "error502": "بوابة غير صالحة",
   "error503": "الخدمة غير متاحة",
   "error504": "انتهت مهلة البوابة",
-  "defaultError": "حدث خطأ ما"
-  
+  "defaultError": "حدث خطأ ما",
+  "socialSignInCancelled": "تم إلغاء تسجيل الدخول",
+  "facebookLoginError": "خطأ في تسجيل الدخول عبر فيسبوك"
 }
