@@ -77,10 +77,10 @@
   "learnTheBasic": "Learn The Basic",
 
   "yourRegularPhysicalActivityLevel": "YOUR REGULAR PHYSICAL ACTIVITY LEVEL ?",
-  "rookie": "Rookie",
-  "beginner": "Beginner",
-  "intermediate": "Intermediate",
-  "advance": "Advance",
-  "trueBeast": "True Beast",
+  "level1": "Rookie",
+  "level2": "Beginner",
+  "level3": "Intermediate",
+  "level4": "Advance",
+  "level5": "True Beast",
   "done": "Done"
 }

@@ -1,6 +1,10 @@
 import 'package:fitness/config/base_cubit/base_cubit.dart';
 import 'package:fitness/config/base_cubit/base_event.dart';
 import 'package:fitness/config/base_state/base_state.dart';
+import 'package:fitness/config/di/di.dart';
+import 'package:fitness/config/route_manager/routes.dart';
+import 'package:fitness/config/user/manager/user_cubit.dart';
+import 'package:fitness/config/user/manager/user_events.dart';
 import 'package:fitness/core/utils/app_constants.dart';
 import 'package:injectable/injectable.dart';
 
@@ -19,9 +23,11 @@ class RegisterCubit extends BaseCubit<RegisterState, BaseEvent> {
   final GetGoogleUserDataUseCase _getGoogleUserDataUseCase;
   final GetFacebookUserDataUseCase _getFacebookUserDataUseCase;
 
-  RegisterCubit(this._registerUseCase,
-      this._getGoogleUserDataUseCase,
-      this._getFacebookUserDataUseCase,) : super(const RegisterState());
+  RegisterCubit(
+    this._registerUseCase,
+    this._getGoogleUserDataUseCase,
+    this._getFacebookUserDataUseCase,
+  ) : super(const RegisterState());
 
   void doEvents(RegisterEvents event) {
     switch (event) {
@@ -50,7 +56,7 @@ class RegisterCubit extends BaseCubit<RegisterState, BaseEvent> {
       weight: 75,
       age: 25,
       goal: "Lose Weight",
-      activityLevel: "Beginner",
+      activityLevel: "level1",
     );
 
     final result = await _registerUseCase.call(request);
@@ -86,7 +92,7 @@ class RegisterCubit extends BaseCubit<RegisterState, BaseEvent> {
           weight: 75,
           age: 25,
           goal: "Lose Weight",
-          activityLevel: "Beginner",
+          activityLevel: "level1",
         );
 
         final callingApi = await _registerUseCase.call(request);
@@ -110,6 +116,14 @@ class RegisterCubit extends BaseCubit<RegisterState, BaseEvent> {
             registerStateParam: BaseState(isSuccess: true, data: result.data),
           ),
         );
+        getIt<UserCubit>().doEvent(SetUserDataEvent(user: result.data));
+        emitEvent(
+          const NavigationEvent(
+            routeName: Routes.registerFormRoute,
+            type: NavigationType.pushReplacementAndRemoveUntil,
+          ),
+        );
+
       case Failure():
         emit(
           state.copyWith(

@@ -77,10 +77,10 @@
   "learnTheBasic": "تعلم الأساسيات",
 
   "yourRegularPhysicalActivityLevel": "مستوى نشاطك البدني المعتاد؟",
-  "rookie": "مبتدئ جداً",
-  "beginner": "مبتدئ",
-  "intermediate": "متوسط",
-  "advance": "متقدم",
-  "trueBeast": "محترف",
+  "level1": "مبتدئ جداً",
+  "level2": "مبتدئ",
+  "level3": "متوسط",
+  "level4": "متقدم",
+  "level5": "محترف",
   "done": "تم"
 }
