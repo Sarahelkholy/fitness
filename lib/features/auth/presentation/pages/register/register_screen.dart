@@ -1,13 +1,16 @@
 import 'dart:ui';
 
+import 'package:fitness/core/helpers/event_handler_mixin.dart';
 import 'package:fitness/core/shared_widgets/custom_button.dart';
 import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:fitness/core/utils/app_assets.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
+import 'package:fitness/features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:fitness/features/auth/presentation/widgets/register/have_an_account_widget.dart';
 import 'package:fitness/features/auth/presentation/widgets/register/or_divider.dart';
 import 'package:fitness/features/auth/presentation/widgets/register/social_row_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../../../../../core/helpers/validator.dart';
@@ -20,7 +23,8 @@ class RegisterScreen extends StatefulWidget {
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends State<RegisterScreen>
+    with EventHandlerMixin {
   final TextEditingController firstNameController = TextEditingController();
 
   final TextEditingController lastNameController = TextEditingController();
@@ -39,13 +43,50 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final passwordFocus = FocusNode();
 
   late AppLocalizations localizations;
+  late final RegisterCubit _cubit;
 
   bool isPasswordHidden = true;
+
+  @override
+  void initState() {
+    keyboardVisibilityController = KeyboardVisibilityController();
+
+    keyboardVisibilityController.onChange.listen((visible) {
+      if (!visible) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      }
+    });
+
+    _cubit = context.read<RegisterCubit>();
+
+    _cubit.eventStream.listen((event) {
+      if (!mounted) return;
+
+      handleEvent(event);
+    });
+
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
     localizations = AppLocalizations.of(context)!;
     super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+
+    firstNameFocus.dispose();
+    lastNameFocus.dispose();
+    emailFocus.dispose();
+    passwordFocus.dispose();
+
+    super.dispose();
   }
 
   @override

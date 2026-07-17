@@ -62,6 +62,10 @@ class SocialAuthServiceImpl implements SocialAuthService {
           fields: SocialAuthConstants.facebookFields,
         );
 
+        if (userData[SocialAuthConstants.emailKey] == null) {
+          throw PlatformException(code: "email_not_found");
+        }
+
         return SocialUser(
           id: userData[SocialAuthConstants.idKey],
           email: userData[SocialAuthConstants.emailKey],
