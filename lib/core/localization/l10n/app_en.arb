@@ -52,6 +52,7 @@
   "createNewPassword": "Create New Password",
   "makeSureIts8Chars": "Make sure it's at least 8 characters",
   "didntReceiveCode": "Didn't receive the verification code?",
-  "resendCode": "Resend Code"
-  
+  "resendCode": "Resend Code",
+  "socialSignInCancelled": "Sign in was cancelled",
+  "facebookLoginError": "Facebook login error"
 }
