@@ -1,7 +1,6 @@
 import 'package:fitness/config/secure_cache/secure_cache/secure_cache.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../config/error_handling/result.dart';
-import '../../../../config/user/data/mapper/user_mapper.dart';
 import '../../../../config/user/domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repo.dart';
 import 'package:fitness/features/auth/data/data_sources/remote/auth_remote_data_source.dart';

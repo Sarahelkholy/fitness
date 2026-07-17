@@ -18,6 +18,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final PageController _pageController = PageController();
+
   int _currentPage = 0;
   String _email = '';
 
@@ -26,6 +27,17 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
+  }
+
+  void _previousPage() {
+    if (_currentPage > 0) {
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -37,8 +49,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+
     return BlocProvider(
-      create: (context) => getIt<ForgetPasswordCubit>(),
+      create: (_) => getIt<ForgetPasswordCubit>(),
       child: AppScaffold(
         backgroundImage: AppAssets.authBackgroundImage,
         child: SizedBox(
@@ -49,17 +62,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               children: [
                 AppBar(
                   backgroundColor: AppColors.transparent,
+                  elevation: 0,
                   leading: InkWell(
-                    onTap: () {
-                      if (_currentPage > 0) {
-                        _pageController.previousPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      } else {
-                        Navigator.of(context).pop();
-                      }
-                    },
+                    onTap: _previousPage,
                     child: const Icon(
                       Icons.arrow_back,
                       color: AppColors.main,
@@ -76,20 +81,22 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 Expanded(
                   child: PageView(
                     controller: _pageController,
+                    physics: const NeverScrollableScrollPhysics(),
                     onPageChanged: (page) {
                       setState(() {
                         _currentPage = page;
                       });
                     },
-                    physics: const NeverScrollableScrollPhysics(),
                     children: [
                       ProvideEmailView(
                         onNext: (email) {
-                          setState(() => _email = email);
+                          setState(() {
+                            _email = email;
+                          });
                           _nextPage();
                         },
                       ),
-                      VerifyCodeView(email: _email, onNext: () => _nextPage()),
+                      VerifyCodeView(email: _email, onNext: _nextPage),
                       const ResetPasswordView(),
                     ],
                   ),

@@ -1,4 +1,3 @@
-import 'package:injectable/injectable.dart';
 import '../../../../../config/error_handling/execute_api.dart';
 import '../../../../../config/error_handling/result.dart';
 import 'package:fitness/features/auth/data/data_sources/remote/auth_remote_data_source.dart';

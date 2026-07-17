@@ -41,6 +41,17 @@
   "error502": "بوابة غير صالحة",
   "error503": "الخدمة غير متاحة",
   "error504": "انتهت مهلة البوابة",
-  "defaultError": "حدث خطأ ما"
+  "defaultError": "حدث خطأ ما",
+  "sendOtp": "إرسال رمز التحقق",
+  "confirm": "تأكيد",
+  "done": "تم",
+  "otpCode": "رمز التحقق",
+  "otpCodeDescription": "أدخل رمز التحقق المرسل إلى بريدك الإلكتروني",
+  "newPassword": "كلمة المرور الجديدة",
+  "confirmNewPasswordHint": "تأكيد كلمة المرور الجديدة",
+  "createNewPassword": "إنشاء كلمة مرور جديدة",
+  "makeSureIts8Chars": "تأكد من أنها 8 أحرف على الأقل",
+  "didntReceiveCode": "لم تستلم رمز التحقق؟",
+  "resendCode": "إعادة إرسال الرمز"
   
 }

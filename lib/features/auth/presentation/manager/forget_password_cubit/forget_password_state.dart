@@ -1,9 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:fitness/config/base_state/base_state.dart';
-import 'package:fitness/features/auth/data/models/responses/auth_response.dart';
-import 'package:equatable/equatable.dart';
 
-import '../../../../../config/base_state/base_state.dart';
 
 class ForgetPasswordState extends Equatable {
   final BaseState<void> sendEmailState;

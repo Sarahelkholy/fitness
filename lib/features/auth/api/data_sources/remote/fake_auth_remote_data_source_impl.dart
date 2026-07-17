@@ -4,8 +4,6 @@ import 'package:fitness/config/error_handling/execute_api.dart';
 import 'package:fitness/config/error_handling/result.dart';
 import 'package:fitness/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:fitness/features/auth/data/models/requests/forget_password_request.dart';
-import 'package:fitness/features/auth/data/models/requests/login_request.dart';
-import 'package:fitness/features/auth/data/models/requests/register_request.dart';
 import 'package:fitness/features/auth/data/models/requests/reset_password_request.dart';
 import 'package:fitness/features/auth/data/models/requests/verify_reset_otp_request.dart';
 import 'package:fitness/features/auth/data/models/responses/auth_response.dart';
