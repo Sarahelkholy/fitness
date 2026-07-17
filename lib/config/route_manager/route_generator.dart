@@ -1,9 +1,13 @@
 import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/core/helpers/custom_logger.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
+import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart';
 import 'package:fitness/features/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../config/di/di.dart';
+import '../../core/local_cubit/locale_cubit.dart';
 import '../../core/localization/l10n/app_localizations.dart';
 
 abstract class RouteGenerator {
@@ -13,6 +17,15 @@ abstract class RouteGenerator {
         /// home screen
         case Routes.homeRoute:
           return MaterialPageRoute(builder: (_) => const HomeScreen());
+
+        /// login screen
+        case Routes.loginRoute:
+          return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (context) => getIt<LocaleCubit>(),
+              child: const LoginScreen(),
+            ),
+          );
 
         /// Default
         default:
