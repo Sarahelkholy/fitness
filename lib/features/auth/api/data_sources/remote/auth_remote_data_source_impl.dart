@@ -10,7 +10,7 @@ import '../../../data/models/requests/verify_reset_otp_request.dart';
 import '../../../data/models/responses/auth_response.dart';
 import '../../auth_api_client/auth_api_client.dart';
 
-@Injectable(as: AuthRemoteDataSource)
+// @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final AuthApiClient _apiClient;
 

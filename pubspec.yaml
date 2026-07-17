@@ -39,7 +39,7 @@ dependencies:
   get_it:
   retrofit:
   logger:
-  json_annotation:
+  json_annotation:  ^4.9.0
   pretty_dio_logger: ^1.4.0
   flutter_bloc:
   equatable: ^2.0.8
