@@ -1,6 +1,7 @@
 import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/core/helpers/custom_logger.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
+import 'package:fitness/features/auth/presentation/pages/register/register_screen.dart';
 import 'package:fitness/features/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,9 @@ abstract class RouteGenerator {
         /// home screen
         case Routes.homeRoute:
           return MaterialPageRoute(builder: (_) => const HomeScreen());
+
+        case Routes.registerRoute:
+          return MaterialPageRoute(builder: (_) => const RegisterScreen());
 
         /// Default
         default:
