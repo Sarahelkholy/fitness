@@ -6,12 +6,18 @@ import 'package:fitness/features/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/localization/l10n/app_localizations.dart';
+import '../../features/auth/presentation/pages/onboarding/view/on_boarding_screen.dart';
+import '../../features/auth/presentation/pages/splash/splash_screen.dart';
 import '../../features/auth/presentation/pages/forget_password/view/screens/forget_password_screen.dart';
 
 abstract class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
       switch (settings.name) {
+
+        /// Splash Screen
+        case Routes.splashRoute:
+          return MaterialPageRoute(builder: (_) => const SplashScreen());
         /// home screen
         case Routes.homeRoute:
           return MaterialPageRoute(builder: (_) => const HomeScreen());
@@ -21,6 +27,10 @@ abstract class RouteGenerator {
           );
         case Routes.loginRoute:
           return MaterialPageRoute(builder: (_) => const LoginScreen());
+
+        ///================ OnBoardingScreen ================
+        case Routes.onboardingRoute:
+          return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
 
         /// Default
         default:
