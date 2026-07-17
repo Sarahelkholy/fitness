@@ -1,8 +1,12 @@
+import 'package:fitness/config/base_cubit/base_cubit.dart';
+import 'package:fitness/config/base_cubit/base_event.dart';
+import 'package:fitness/config/error_handling/result.dart';
+import 'package:fitness/config/route_manager/routes.dart';
+import 'package:fitness/config/user/domain/entities/user_entity.dart';
 import 'package:fitness/features/auth/domain/use_cases/get_facebook_user_data_use_case.dart';
 import 'package:fitness/features/auth/domain/use_cases/get_google_user_data_use_case.dart';
 import 'package:fitness/features/auth/domain/use_cases/login_use_case.dart';
 import 'package:fitness/features/auth/presentation/manager/login_cubit/login_state.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../config/base_state/base_state.dart';
@@ -10,7 +14,7 @@ import '../../../data/models/requests/login_request.dart';
 import 'login_event.dart';
 
 @injectable
-class LoginCubit extends Cubit<LoginState> {
+class LoginCubit extends BaseCubit<LoginState, BaseEvent> {
   LoginCubit(
     this._getGoogleUserDataUseCase,
     this._loginUseCase,
@@ -26,16 +30,69 @@ class LoginCubit extends Cubit<LoginState> {
       case LoginWithApi():
         _loginWithApi(event.request);
       case LoginWithGoogle():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _loginWithGoogle();
       case LoginWithFacebook():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _loginWithFacebook();
     }
   }
 
   Future<void> _loginWithApi(LoginRequest request) async {
     emit(state.copyWith(loginWithApi: const BaseState(isLoading: true)));
     final result = await _loginUseCase(request);
+    switch (result) {
+      case Success<UserEntity>():
+        emit(state.copyWith(
+          loginWithApi: BaseState(data: result.data, isSuccess: true),
+        ));
+        emitEvent(const NavigationEvent(
+          routeName: Routes.homeRoute,
+          type: NavigationType.pushReplacementAndRemoveUntil,
+        ));
+      case Failure<UserEntity>():
+        emit(state.copyWith(
+          loginWithApi: BaseState(errorMessage: result.errorMessage),
+        ));
+        emitEvent(DisplayErrorEvent(errorMsg: result.errorMessage));
+    }
+  }
+
+  Future<void> _loginWithGoogle() async {
+    emit(state.copyWith(loginWithGoogle: const BaseState(isLoading: true)));
+    final result = await _getGoogleUserDataUseCase();
+    switch (result) {
+      case Success():
+        emit(state.copyWith(
+          loginWithGoogle: BaseState(data: result.data, isSuccess: true),
+        ));
+        emitEvent(const NavigationEvent(
+          routeName: Routes.homeRoute,
+          type: NavigationType.pushReplacementAndRemoveUntil,
+        ));
+      case Failure():
+        emit(state.copyWith(
+          loginWithGoogle: BaseState(errorMessage: result.errorMessage),
+        ));
+        emitEvent(DisplayErrorEvent(errorMsg: result.errorMessage));
+    }
+  }
+
+  Future<void> _loginWithFacebook() async {
+    emit(state.copyWith(loginWithFacebook: const BaseState(isLoading: true)));
+    final result = await _getFacebookUserDataUseCase();
+    switch (result) {
+      case Success():
+        emit(state.copyWith(
+          loginWithFacebook: BaseState(data: result.data, isSuccess: true),
+        ));
+        emitEvent(const NavigationEvent(
+          routeName: Routes.homeRoute,
+          type: NavigationType.pushReplacementAndRemoveUntil,
+        ));
+      case Failure():
+        emit(state.copyWith(
+          loginWithFacebook: BaseState(errorMessage: result.errorMessage),
+        ));
+        emitEvent(DisplayErrorEvent(errorMsg: result.errorMessage));
+    }
   }
 }

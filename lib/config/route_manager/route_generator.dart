@@ -1,6 +1,7 @@
 import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/core/helpers/custom_logger.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
+import 'package:fitness/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart';
 import 'package:fitness/features/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +22,8 @@ abstract class RouteGenerator {
         /// login screen
         case Routes.loginRoute:
           return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-              create: (context) => getIt<LocaleCubit>(),
+            builder: (_) => BlocProvider<LoginCubit>(
+              create: (context) => getIt<LoginCubit>(),
               child: const LoginScreen(),
             ),
           );
