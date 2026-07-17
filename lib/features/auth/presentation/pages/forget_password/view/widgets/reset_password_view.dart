@@ -104,10 +104,8 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                 controller: _confirmPasswordController,
                 obscureText: _obscureConfirmPassword,
                 style: AppTextStyles.medium18(context),
-                validator: (value) => Validator.confirmPassword(
-                  value,
-                  _passwordController.text,
-                ),
+                validator: (value) =>
+                    Validator.confirmPassword(value, _passwordController.text),
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.lock_outline),
                   suffixIcon: GestureDetector(
@@ -135,10 +133,12 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                       if (_formKey.currentState!.validate()) {
                         context.read<ForgetPasswordCubit>().doEvents(
                           ResetPasswordEvent(
-                            email: context
-                                .read<ForgetPasswordCubit>()
-                                .state
-                                .email ?? '',
+                            email:
+                                context
+                                    .read<ForgetPasswordCubit>()
+                                    .state
+                                    .email ??
+                                '',
                             newPassword: _passwordController.text,
                           ),
                         );
