@@ -61,4 +61,3 @@ app.*.map.json
 /lib/secret_keys.dart
 /.idea/
 /.dart_tool/
-/devtools_options.yaml

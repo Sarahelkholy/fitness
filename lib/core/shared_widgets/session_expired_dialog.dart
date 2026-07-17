@@ -16,10 +16,7 @@ class SessionExpiredDialog extends StatelessWidget {
       actions: [
         CustomButton(
           onPressed: () {
-            AppConstants.navigatorKey.currentState!.pushNamedAndRemoveUntil(
-              Routes.loginRoute,
-              (route) => false,
-            );
+            AppConstants.navigatorKey.currentState!.pushNamedAndRemoveUntil(Routes.loginRoute, (route) => false,);
           },
           title: localizations.login,
         ),
