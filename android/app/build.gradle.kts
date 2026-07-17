@@ -42,5 +42,6 @@ flutter {
 
 // أضف هذا الجزء بالكامل
 dependencies {
+    implementation("com.facebook.android:facebook-login:latest.release")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 }

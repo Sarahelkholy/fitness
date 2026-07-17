@@ -11,7 +11,7 @@ class CustomScaffold extends StatelessWidget {
     super.key,
     this.body,
     this.appBar,
-    this.backgroundImage = AppAssets.authBackgroungImage,
+    this.backgroundImage = AppAssets.authBackgroundImage,
   });
 
   @override

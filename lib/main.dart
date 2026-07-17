@@ -1,29 +1,87 @@
-import 'package:fitness/config/route_manager/route_generator.dart';
-import 'package:fitness/config/route_manager/routes.dart';
-import 'package:fitness/core/localization/l10n/app_localizations.dart';
-import 'package:fitness/core/theme/app_theme.dart';
+import 'package:fitness/config/user/manager/user_cubit.dart';
+import 'package:fitness/config/user/manager/user_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+import 'config/di/di.dart';
+import 'config/route_manager/route_generator.dart';
+import 'config/route_manager/routes.dart';
+import 'core/helpers/custom_bloc_observer.dart';
+import 'core/helpers/show_session_expired_dialog.dart';
+import 'core/local_cubit/locale_cubit.dart';
+import 'core/localization/l10n/app_localizations.dart';
+import 'core/theme/app_theme.dart';
+import 'core/utils/app_constants.dart';
+import 'core/values/app_strings.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  configureDependencies();
+
+  Bloc.observer = CustomBlocObserver();
+
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Fitness App',
-      debugShowCheckedModeBanner: false,
-      initialRoute: Routes.homeRoute,
-      onGenerateRoute: RouteGenerator.getRoute,
-      theme: AppTheme.appTheme(context),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<UserCubit>(create: (_) => getIt<UserCubit>()),
 
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+        BlocProvider<LocaleCubit>(
+          create: (_) => getIt<LocaleCubit>()..loadSavedLanguage(),
+        ),
+      ],
+      child: BlocBuilder<LocaleCubit, Locale>(
+        builder: (context, locale) {
+          return MaterialApp(
+            navigatorKey: AppConstants.navigatorKey,
 
-      supportedLocales: AppLocalizations.supportedLocales,
+            debugShowCheckedModeBanner: false,
+
+            title: 'Fitness APP',
+
+            initialRoute: Routes.loginRoute,
+
+            onGenerateRoute: RouteGenerator.getRoute,
+
+            locale: locale,
+
+            theme: AppTheme.appTheme(context),
+
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+
+            supportedLocales: AppLocalizations.supportedLocales,
+
+            builder: (context, child) {
+              final localization = AppLocalizations.of(context);
+
+              if (localization != null) {
+                AppStrings.current = localization;
+              }
+
+              return BlocListener<UserCubit, UserState>(
+                listener: (context, state) {
+                  if (state.isUnauthorized) {
+                    showSessionExpiredDialog();
+                  }
+                },
+                child: child ?? const SizedBox(),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

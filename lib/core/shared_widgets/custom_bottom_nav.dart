@@ -1,8 +1,5 @@
-import 'package:fitness/config/di/di.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../shared_widgets/svg_wrapper.dart';
-import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
