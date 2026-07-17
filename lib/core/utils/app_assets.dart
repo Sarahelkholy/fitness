@@ -9,4 +9,12 @@ abstract class AppAssets {
 
   // =============== Splash Screen ==================
   static const String splashScreenLogoImage = "$_baseImagesPath/splash.png";
+  // =================== Onboarding ===================
+  static const String onBoardingBackground = "$_baseImagesPath/onboarding_bg.png";
+  static const String onBoardingScreenOne =
+      "$_baseImagesPath/onboarding_screen_one.png";
+  static const String onBoardingScreenTwo =
+      "$_baseImagesPath/onboarding_screen_two.png";
+  static const String onBoardingScreenThree =
+      "$_baseImagesPath/onboarding_screen_three.png";
 }

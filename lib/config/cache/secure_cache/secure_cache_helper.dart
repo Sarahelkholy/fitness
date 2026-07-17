@@ -10,6 +10,21 @@ class SecureCacheHelper {
     await _storage.write(key: key, value: value);
   }
 
+  static Future<void> set(
+      String key,
+      dynamic value,
+      ) async {
+
+    if (value == null) {
+      return;
+    }
+
+    await _storage.write(
+      key: key,
+      value: value.toString(),
+    );
+  }
+
   static Future<String?> getData({required String key}) async {
     return await _storage.read(key: key);
   }
