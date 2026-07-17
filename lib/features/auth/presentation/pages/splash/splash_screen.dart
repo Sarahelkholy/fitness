@@ -81,9 +81,9 @@ class _SplashScreenState extends State<SplashScreen>
     final isSuccess = results[1] as bool;
 
     if (isSuccess) {
-      Navigator.pushReplacementNamed(context, Routes.bottomNavBarRoute);
+      Navigator.pushReplacementNamed(context, Routes.homeRoute);
     } else {
-      Navigator.pushReplacementNamed(context, Routes.loginRoute);
+      Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
     }
   }
 

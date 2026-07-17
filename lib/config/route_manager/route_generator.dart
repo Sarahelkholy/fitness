@@ -5,6 +5,7 @@ import 'package:fitness/features/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/localization/l10n/app_localizations.dart';
+import '../../features/auth/presentation/pages/onboarding/view/on_boarding_screen.dart';
 import '../../features/auth/presentation/pages/splash/splash_screen.dart';
 
 abstract class RouteGenerator {
@@ -18,6 +19,10 @@ abstract class RouteGenerator {
         /// home screen
         case Routes.homeRoute:
           return MaterialPageRoute(builder: (_) => const HomeScreen());
+
+        ///================ OnBoardingScreen ================
+        case Routes.onboardingRoute:
+          return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
 
         /// Default
         default:
