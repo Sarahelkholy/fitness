@@ -4,75 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51337ca5-173c-4de8-a45e-e917e13fd467" name="Changes" comment="update .gitignore to include .idea and .dart_tool directories">
-      <change afterPath="$PROJECT_DIR$/assets/icons/explore_home_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/api/data_sources/remote/user_remote_data_source_impl.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/api/user_api_client/user_api_client.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/data/data_sources/remote/user_remote_data_source.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/data/mapper/user_mapper.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/data/models/responses/get_user_response/get_user_data_response.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/data/models/responses/get_user_response/user_response.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/data/repositories/user_repo_impl.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/domain/entities/user_entity.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/domain/repositories/user_repo.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/domain/use_cases/get_user_data_use_case.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/domain/use_cases/logout_use_case.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/manager/user_cubit.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/manager/user_events.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/user/manager/user_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/api/auth_api_client/auth_api_client.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/api/data_sources/remote/auth_remote_data_source_impl.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/data_sources/remote/auth_remote_data_source.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/requests/forget_password_request.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/requests/login_request.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/requests/register_request.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/requests/reset_password_request.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/requests/verify_reset_otp_request.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/models/responses/auth_response.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/data/repositories/auth_repo_impl.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/repositories/auth_repo.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/use_cases/forget_password_use_case.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/use_cases/login_use_case.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/use_cases/register_use_case.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/use_cases/reset_password_use_case.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/domain/use_cases/verify_reset_otp_use_case.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/forget_password_cubit/forget_password_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/forget_password_cubit/forget_password_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/login_cubit/login_cubit.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/login_cubit/login_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/login_cubit/login_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/register_cubit/register_cubit.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/register_cubit/register_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/manager/register_cubit/register_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/forget_password/password_enter_email_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/forget_password/password_reset_password_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/forget_password/password_verify_otp_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/login/login_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/onboarding/onboarding_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/register/register_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/splash/splash_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/widgets/forget_password/forget_password_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/widgets/login/login_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/widgets/onboarding/onboarding_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/widgets/register/register_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/auth/presentation/widgets/splash/splash_widget.dart" afterDir="false" />
+    <list default="true" id="51337ca5-173c-4de8-a45e-e917e13fd467" name="Changes" comment="- updated onboarding navigation to point to login route instead of home route&#10;- optimized onboarding text widgets with const keywords&#10;- removed redundant onboarding_screen.dart file">
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_graph.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_graph.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/app_logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/homeIcon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/orders.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/personIcon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/whats_app_icon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/Image_test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/store_image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/user_test_image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/config/di/di.config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/di/di.config.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/config/module/api_module.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/module/api_module.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/shared_widgets/custom_bottom_nav.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/shared_widgets/custom_bottom_nav.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/shared_widgets/custom_scaffold.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/shared_widgets/custom_scaffold.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/utils/app_assets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/utils/app_assets.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/values/api_end_points.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/values/api_end_points.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/auth/data/repositories/auth_repo_impl.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/auth/data/repositories/auth_repo_impl.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/auth/presentation/pages/onboarding/onboarding_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/auth/presentation/pages/onboarding/view/on_boarding_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/auth/presentation/pages/onboarding/view/on_boarding_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,13 +54,13 @@
       </pane>
     </panes>
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "feature/auth__module",
-    "last_opened_file_path": "D:/Flutter/Flutter Projects/fitness/lib/features/auth/presentation/widgets"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;demo/sprint-1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Flutter/Flutter Projects/fitness/lib/features/auth/presentation/widgets&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Flutter\Flutter Projects\fitness\lib\features\auth\presentation\widgets" />
@@ -129,6 +68,12 @@
       <recent name="D:\Flutter\Flutter Projects\fitness\lib\features\auth" />
       <recent name="D:\Flutter\Flutter Projects\fitness\lib\config" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="update .gitignore to include .idea and .dart_tool directories">

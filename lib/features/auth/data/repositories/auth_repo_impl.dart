@@ -110,25 +110,6 @@ class AuthRepoImpl implements AuthRepo {
     }
   }
 
-  @override
-  Future<Result<SocialUser>> getGoogleUserData() async {
-    var response = await _socialAuthService.getGoogleUserData();
-    switch (response) {
-      case Success<SocialUser>():
-        return Success(data: response.data);
-      case Failure<SocialUser>():
-        return Failure(errorMessage: response.errorMessage);
-    }
-  }
 
-  @override
-  Future<Result<SocialUser>> getFacebookUserData() async {
-    var response = await _socialAuthService.getFacebookUserData();
-    switch (response) {
-      case Success<SocialUser>():
-        return Success(data: response.data);
-      case Failure<SocialUser>():
-        return Failure(errorMessage: response.errorMessage);
-    }
-  }
+
 }

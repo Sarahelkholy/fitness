@@ -88,14 +88,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           style: OutlinedButton.styleFrom(
             minimumSize: Size.zero,
             foregroundColor: AppColors.white,
-            side: BorderSide(
+            side: const BorderSide(
               color: AppColors.main,
               width: 1.5,
             ),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           ),
           onPressed: _pageController.navigateToPreviousPage,
-          child: Text(KeysStrings.onBoardingBack),
+          child: const Text(KeysStrings.onBoardingBack),
         ),
         ///? Next
         ElevatedButton(
@@ -105,15 +105,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           onPressed: _currentPage.value == _onBoardingModel.length - 1 ? () {
             SecureCacheHelper.set(LocalKeys.onBoarding, true);
-            Navigator.of(context,).pushNamedAndRemoveUntil(Routes.homeRoute, (route) => false);
+            Navigator.of(context,).pushNamedAndRemoveUntil(Routes.loginRoute, (route) => false);
           } : _pageController.navigateToNextPage,
           child: ValueListenableBuilder(
             valueListenable: _currentPage,
             builder: (context, value, child) {
               if (value == _onBoardingModel.length - 1) {
-                return Text(KeysStrings.onBoardingDoIt);
+                return const Text(KeysStrings.onBoardingDoIt);
               }
-              return Text(KeysStrings.onBoardingNext);
+              return const Text(KeysStrings.onBoardingNext);
             },
           ),
         ),
