@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   // --- Monochromatic / Grayscale (White to Black) ---
-  static const Color transparent = Color(0x00000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color darkCharcoal = Color(0xFF242424);
   static const Color jetBlack = Color(0xFF0B0B0B);

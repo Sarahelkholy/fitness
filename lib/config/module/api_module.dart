@@ -1,13 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:fitness/config/user/manager/user_cubit.dart';
-import 'package:fitness/config/user/manager/user_events.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../core/values/api_end_points.dart';
 import '../../core/values/api_strings.dart';
-import '../di/di.dart';
 import '../secure_cache/secure_cache/cache_keys.dart';
 import '../secure_cache/secure_cache/secure_cache.dart';
 
@@ -86,11 +83,11 @@ abstract class ApiModule {
           final isTokenError =
               message.contains("expired token") ||
               message.contains("invalid token") ||
-              message.contains("user not found");
+              message.contains("driver not found");
 
           if (requiresAuth && isTokenError) {
             await secureCache.removeData(key: CacheKeys.token);
-            getIt<UserCubit>().doEvent(UnauthorizedUserEvent());
+            // getIt<DriverCubit>().doEvent(UnauthorizedDriverEvent());
           }
 
           return handler.next(error);
@@ -103,19 +100,19 @@ abstract class ApiModule {
     return dio;
   }
 
-  // @Named(ApiStrings.fcmDio)
-  // @lazySingleton
-  // Dio provideFcmDio(PrettyDioLogger logger) {
-  //   final dio = Dio(
-  //     BaseOptions(
-  //       baseUrl: ApiEndPoints.fcmBaseUrl,
-  //       connectTimeout: const Duration(seconds: 10),
-  //       sendTimeout: const Duration(seconds: 10),
-  //       receiveTimeout: const Duration(seconds: 10),
-  //     ),
-  //   );
-  //   // dio.interceptors.add(fcmInterceptor);
-  //   dio.interceptors.add(logger);
-  //   return dio;
-  // }
+  @Named(ApiStrings.fcmDio)
+  @lazySingleton
+  Dio provideFcmDio(PrettyDioLogger logger) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: ApiEndPoints.fcmBaseUrl,
+        connectTimeout: const Duration(seconds: 10),
+        sendTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
+      ),
+    );
+    // dio.interceptors.add(fcmInterceptor);
+    dio.interceptors.add(logger);
+    return dio;
+  }
 }

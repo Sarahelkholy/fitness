@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Fitness App</string>
+	<string>Fitness</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -66,38 +66,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.682819384064-5kf84cr4rnpucrojrhs8u9ci7k1hl872</string>
-				<string>fb3150346411819344</string>
-			</array>
-		</dict>
-	</array>
-	<key>FacebookAppID</key>
-    <string>3150346411819344</string>
-
-    <key>FacebookClientToken</key>
-    <string>48d1b739d51135b455db79b716d9bf4e</string>
-
-    <key>FacebookDisplayName</key>
-    <string>Fitness App</string>
-
-    <key>FacebookAutoLogAppEventsEnabled</key>
-    <false/>
-
-    <key>FacebookAdvertiserIDCollectionEnabled</key>
-    <false/>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-        <string>fbapi</string>
-        <string>fb-messenger-share-api</string>
-        <string>fbauth2</string>
-        <string>fbshareextension</string>
-    </array>
 </dict>
 </plist>
