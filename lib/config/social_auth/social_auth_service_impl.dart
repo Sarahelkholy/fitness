@@ -21,6 +21,8 @@ class SocialAuthServiceImpl implements SocialAuthService {
   @override
   Future<Result<SocialUser>> getGoogleUserData() {
     return executeApi<SocialUser>(() async {
+      // Disconnect or SignOut to force account selector
+      await _googleSignIn.signOut();
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
         throw PlatformException(code: 'sign_in_cancelled');
