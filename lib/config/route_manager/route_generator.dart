@@ -1,10 +1,12 @@
 import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/core/helpers/custom_logger.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
+import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart';
 import 'package:fitness/features/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/localization/l10n/app_localizations.dart';
+import '../../features/auth/presentation/pages/forget_password/view/screens/forget_password_screen.dart';
 
 abstract class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -13,6 +15,12 @@ abstract class RouteGenerator {
         /// home screen
         case Routes.homeRoute:
           return MaterialPageRoute(builder: (_) => const HomeScreen());
+        case Routes.forgetPasswordRoute:
+          return MaterialPageRoute(
+            builder: (_) => const ForgetPasswordScreen(),
+          );
+        case Routes.loginRoute:
+          return MaterialPageRoute(builder: (_) => const LoginScreen());
 
         /// Default
         default:

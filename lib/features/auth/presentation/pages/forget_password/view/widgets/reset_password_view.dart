@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:fitness/config/base_cubit/base_event.dart';
+import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/core/helpers/app_snack_bar.dart';
 import 'package:fitness/core/helpers/validator.dart';
 import 'package:fitness/core/shared_widgets/custom_button.dart';
+import 'package:fitness/core/utils/app_colors.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
 import 'package:fitness/core/values/app_strings.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
@@ -67,14 +69,16 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
       children: [
         Text(
           AppStrings.current.makeSureIts8Chars,
-          style: AppTextStyles.semiBold18(context),
+          style: AppTextStyles.regular14(
+            context,
+          ).copyWith(color: AppColors.white),
         ),
         const SizedBox(height: 4),
         Text(
           AppStrings.current.createNewPassword,
-          style: AppTextStyles.bold24(context),
+          style: AppTextStyles.bold24(context).copyWith(color: AppColors.white),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 24),
         Form(
           key: _formKey,
           child: Column(
@@ -82,10 +86,16 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
               TextFormField(
                 controller: _passwordController,
                 obscureText: _obscurePassword,
-                style: AppTextStyles.medium18(context),
+                style: AppTextStyles.medium16(
+                  context,
+                ).copyWith(color: AppColors.white),
                 validator: Validator.password,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock_outline),
+                  prefixIcon: const Icon(
+                    Icons.lock_outline,
+                    color: AppColors.white,
+                    size: 20,
+                  ),
                   suffixIcon: GestureDetector(
                     onTap: () =>
                         setState(() => _obscurePassword = !_obscurePassword),
@@ -93,21 +103,55 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                       _obscurePassword
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined,
+                      color: AppColors.white,
+                      size: 20,
                     ),
                   ),
-                  hintText: AppStrings.current.newPassword,
-                  hintStyle: AppTextStyles.regular16(context),
+                  hintText: AppStrings.current.password,
+                  hintStyle: AppTextStyles.regular14(
+                    context,
+                  ).copyWith(color: AppColors.white.withOpacity(0.5)),
+                  filled: true,
+                  fillColor: AppColors.pureBlack.withOpacity(0.2),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 20,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: AppColors.white.withOpacity(0.5),
+                      width: 1,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: AppColors.white.withOpacity(0.5),
+                      width: 1,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(color: AppColors.main, width: 1),
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
               TextFormField(
                 controller: _confirmPasswordController,
                 obscureText: _obscureConfirmPassword,
-                style: AppTextStyles.medium18(context),
+                style: AppTextStyles.medium16(
+                  context,
+                ).copyWith(color: AppColors.white),
                 validator: (value) =>
                     Validator.confirmPassword(value, _passwordController.text),
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock_outline),
+                  prefixIcon: const Icon(
+                    Icons.lock_outline,
+                    color: AppColors.white,
+                    size: 20,
+                  ),
                   suffixIcon: GestureDetector(
                     onTap: () => setState(
                       () => _obscureConfirmPassword = !_obscureConfirmPassword,
@@ -116,10 +160,41 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                       _obscureConfirmPassword
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined,
+                      color: AppColors.white,
+                      size: 20,
                     ),
                   ),
-                  hintText: AppStrings.current.confirmNewPasswordHint,
-                  hintStyle: AppTextStyles.regular16(context),
+                  hintText: AppStrings.current.password,
+                  hintStyle: AppTextStyles.regular14(
+                    context,
+                  ).copyWith(color: AppColors.white.withOpacity(0.5)),
+                  filled: true,
+                  fillColor: AppColors.pureBlack.withOpacity(0.2),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 20,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: AppColors.white.withOpacity(0.5),
+                      width: 1,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: AppColors.white.withOpacity(0.5),
+                      width: 1,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(
+                      color: AppColors.main,
+                      width: 1,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -141,6 +216,11 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                                 '',
                             newPassword: _passwordController.text,
                           ),
+                        );
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          Routes.loginRoute,
+                          (route) => false,
                         );
                       }
                     },

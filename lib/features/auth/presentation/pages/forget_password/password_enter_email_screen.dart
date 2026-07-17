@@ -1,5 +1,7 @@
+import 'dart:ui';
 import 'package:fitness/config/di/di.dart';
 import 'package:fitness/core/shared_widgets/app_scafold.dart';
+import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:fitness/core/utils/app_assets.dart';
 import 'package:fitness/core/utils/app_colors.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
@@ -39,9 +41,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     final size = MediaQuery.sizeOf(context);
     return BlocProvider(
       create: (context) => getIt<ForgetPasswordCubit>(),
-      child: AppScaffold(
+      child: CustomScaffold(
         backgroundImage: AppAssets.authBackgroundImage,
-        child: SizedBox(
+        body: SizedBox(
           height: size.height,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -49,49 +51,61 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               children: [
                 AppBar(
                   backgroundColor: AppColors.transparent,
-                  leading: InkWell(
-                    onTap: () {
-                      if (_currentPage > 0) {
-                        _pageController.previousPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      } else {
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    child: const Icon(
-                      Icons.arrow_back,
-                      color: AppColors.main,
-                      size: 35,
-                    ),
-                  ),
+                  leading: const SizedBox.shrink(),
                   title: Image.asset(
-                    AppAssets.authBackgroundImage,
-                    height: 75,
-                    width: 90,
+                    AppAssets.fitnessLogo,
+                    height: size.height * .8,
+                    width: size.width * .5,
                   ),
+                  centerTitle: true,
                 ),
                 SizedBox(height: size.height * .1),
                 Expanded(
-                  child: PageView(
-                    controller: _pageController,
-                    onPageChanged: (page) {
-                      setState(() {
-                        _currentPage = page;
-                      });
-                    },
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      ProvideEmailView(
-                        onNext: (email) {
-                          setState(() => _email = email);
-                          _nextPage();
-                        },
+                  child: Center(
+                    child: SingleChildScrollView(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(30),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                          child: Container(
+                            padding: const EdgeInsets.all(24),
+                            decoration: BoxDecoration(
+                              color: AppColors.pureBlack.withOpacity(0.4),
+                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(
+                                color: AppColors.white.withOpacity(0.1),
+                                width: 1,
+                              ),
+                            ),
+                            child: SizedBox(
+                              height: 380, // Approximate height to fit content
+                              child: PageView(
+                                controller: _pageController,
+                                onPageChanged: (page) {
+                                  setState(() {
+                                    _currentPage = page;
+                                  });
+                                },
+                                physics: const NeverScrollableScrollPhysics(),
+                                children: [
+                                  ProvideEmailView(
+                                    onNext: (email) {
+                                      setState(() => _email = email);
+                                      _nextPage();
+                                    },
+                                  ),
+                                  VerifyCodeView(
+                                    email: _email,
+                                    onNext: () => _nextPage(),
+                                  ),
+                                  const ResetPasswordView(),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                      VerifyCodeView(email: _email, onNext: () => _nextPage()),
-                      const ResetPasswordView(),
-                    ],
+                    ),
                   ),
                 ),
               ],

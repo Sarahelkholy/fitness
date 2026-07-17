@@ -30,7 +30,7 @@ class FakeAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return executeApi(() async {
       await Future.delayed(const Duration(seconds: 1));
 
-      if (request.resetCode != '123456') {
+      if (request.resetCode != '1234') {
         throw Exception('Invalid reset code');
       }
 

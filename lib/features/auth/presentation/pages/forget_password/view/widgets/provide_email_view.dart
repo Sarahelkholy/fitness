@@ -4,6 +4,7 @@ import 'package:fitness/config/base_cubit/base_event.dart';
 import 'package:fitness/core/helpers/app_snack_bar.dart';
 import 'package:fitness/core/helpers/validator.dart';
 import 'package:fitness/core/shared_widgets/custom_button.dart';
+import 'package:fitness/core/utils/app_colors.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
 import 'package:fitness/core/values/app_strings.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
@@ -59,12 +60,14 @@ class _ProvideEmailViewState extends State<ProvideEmailView> {
       children: [
         Text(
           AppStrings.current.enterEmail,
-          style: AppTextStyles.regular18(context),
+          style: AppTextStyles.regular14(
+            context,
+          ).copyWith(color: AppColors.white),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 4),
         Text(
           AppStrings.current.forgetPassword,
-          style: AppTextStyles.bold24(context),
+          style: AppTextStyles.bold24(context).copyWith(color: AppColors.white),
         ),
         const SizedBox(height: 16),
         Form(
@@ -74,20 +77,52 @@ class _ProvideEmailViewState extends State<ProvideEmailView> {
               TextFormField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                style: AppTextStyles.medium18(context),
+                style: AppTextStyles.medium16(
+                  context,
+                ).copyWith(color: AppColors.white),
                 validator: Validator.email,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.email_outlined),
+                  prefixIcon: const Icon(
+                    Icons.email_outlined,
+                    color: AppColors.white,
+                    size: 20,
+                  ),
                   hintText: AppStrings.current.email,
-                  hintStyle: AppTextStyles.regular16(context),
+                  hintStyle: AppTextStyles.regular14(
+                    context,
+                  ).copyWith(color: AppColors.white.withOpacity(0.5)),
+                  filled: true,
+                  fillColor: AppColors.pureBlack.withOpacity(0.2),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 20,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: AppColors.white.withOpacity(0.5),
+                      width: 1,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: AppColors.white.withOpacity(0.5),
+                      width: 1,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(color: AppColors.white, width: 1),
+                  ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
               BlocSelector<ForgetPasswordCubit, ForgetPasswordState, bool>(
                 selector: (state) => state.sendEmailState.isLoading,
                 builder: (context, isLoading) {
                   return CustomButton(
-                    title: AppStrings.current.login,
+                    title: AppStrings.current.sendOtp,
                     isLoading: isLoading,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {

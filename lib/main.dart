@@ -36,18 +36,23 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => getIt<UserCubit>()),
+        BlocProvider<UserCubit>(create: (_) => getIt<UserCubit>()),
 
-        BlocProvider(create: (_) => getIt<LocaleCubit>()..loadSavedLanguage()),
+        BlocProvider<LocaleCubit>(
+          create: (_) => getIt<LocaleCubit>()..loadSavedLanguage(),
+        ),
       ],
       child: BlocBuilder<LocaleCubit, Locale>(
         builder: (context, locale) {
           return MaterialApp(
             navigatorKey: AppConstants.navigatorKey,
+
             debugShowCheckedModeBanner: false,
+
             title: 'Fitness APP',
 
-            initialRoute: Routes.splashRoute,
+            initialRoute: Routes.loginRoute,
+
             onGenerateRoute: RouteGenerator.getRoute,
 
             locale: locale,
@@ -59,7 +64,11 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: AppLocalizations.supportedLocales,
 
             builder: (context, child) {
-              AppStrings.current = AppLocalizations.of(context)!;
+              final localization = AppLocalizations.of(context);
+
+              if (localization != null) {
+                AppStrings.current = localization;
+              }
 
               return BlocListener<UserCubit, UserState>(
                 listener: (context, state) {
@@ -67,7 +76,7 @@ class _MyAppState extends State<MyApp> {
                     showSessionExpiredDialog();
                   }
                 },
-                child: child!,
+                child: child ?? const SizedBox(),
               );
             },
           );

@@ -72,10 +72,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     ),
                   ),
                   title: Image.asset(
-                    AppAssets.authBackgroundImage,
-                    height: 75,
-                    width: 90,
+                    AppAssets.fitnessLogo,
+                    height: size.height * .8,
+                    width: size.width * .5,
                   ),
+                  centerTitle: true,
                 ),
                 SizedBox(height: size.height * .1),
                 Expanded(

@@ -59,23 +59,31 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppStrings.current.otpCode, style: AppTextStyles.bold24(context)),
+        Text(
+          AppStrings.current.otpCode,
+          style: AppTextStyles.bold24(context).copyWith(color: AppColors.white),
+        ),
         const SizedBox(height: 4),
         Text(
           AppStrings.current.otpCodeDescription,
-          style: AppTextStyles.semiBold18(context),
+          style: AppTextStyles.regular16(
+            context,
+          ).copyWith(color: AppColors.white),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 24),
         PinCodeTextField(
           appContext: context,
           controller: _otpController,
-          length: 6,
+          length: 4,
           keyboardType: TextInputType.number,
           animationType: AnimationType.fade,
+          textStyle: AppTextStyles.medium18(
+            context,
+          ).copyWith(color: AppColors.main),
           pinTheme: PinTheme(
             shape: PinCodeFieldShape.underline,
             activeColor: AppColors.main,
-            inactiveColor: AppColors.white,
+            inactiveColor: AppColors.white.withOpacity(0.5),
             selectedColor: AppColors.main,
             activeFillColor: AppColors.transparent,
             inactiveFillColor: AppColors.transparent,
@@ -108,7 +116,9 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
         Center(
           child: Text(
             AppStrings.current.didntReceiveCode,
-            style: AppTextStyles.semiBold16(context),
+            style: AppTextStyles.regular14(
+              context,
+            ).copyWith(color: AppColors.white.withOpacity(0.7)),
           ),
         ),
         const SizedBox(height: 6),
@@ -121,7 +131,7 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
             },
             child: Text(
               AppStrings.current.resendCode,
-              style: AppTextStyles.bold16(context).copyWith(
+              style: AppTextStyles.bold14(context).copyWith(
                 color: AppColors.main,
                 decoration: TextDecoration.underline,
                 decorationColor: AppColors.main,
