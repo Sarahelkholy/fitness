@@ -11,7 +11,8 @@ abstract class AppAssets {
   // =============== Splash Screen ==================
   static const String splashScreenLogoImage = "$_baseImagesPath/splash.png";
   // =================== Onboarding ===================
-  static const String onBoardingBackground = "$_baseImagesPath/onboarding_bg.png";
+  static const String onBoardingBackground =
+      "$_baseImagesPath/onboarding_bg.png";
   static const String onBoardingScreenOne =
       "$_baseImagesPath/onboarding_screen_one.png";
   static const String onBoardingScreenTwo =
@@ -22,9 +23,7 @@ abstract class AppAssets {
   static const String googleIcon = "$_baseIconsPath/google_icon.svg";
   static const String appleIcon = "$_baseIconsPath/apple_icon.svg";
 
-  static const String appLogo = "$_baseImagesPath/app_logo.png";
-
-  static const String facebookIcon = "$_baseIconsPath/facebook_icon.svg";
-  static const String googleIcon = "$_baseIconsPath/google_icon.svg";
-  static const String appleIcon = "$_baseIconsPath/apple_icon.svg";
+  // static const String facebookIcon = "$_baseIconsPath/facebook_icon.svg";
+  // static const String googleIcon = "$_baseIconsPath/google_icon.svg";
+  // static const String appleIcon = "$_baseIconsPath/apple_icon.svg";
 }
