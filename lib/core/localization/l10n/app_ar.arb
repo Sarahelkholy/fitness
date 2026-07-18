@@ -54,5 +54,10 @@
   "didntReceiveCode": "لم تستلم رمز التحقق؟",
   "resendCode": "إعادة إرسال الرمز",
   "socialSignInCancelled": "تم إلغاء تسجيل الدخول",
-  "facebookLoginError": "خطأ في تسجيل الدخول عبر فيسبوك"
+  "facebookLoginError": "خطأ في تسجيل الدخول عبر فيسبوك",
+  "explore": "استكشاف",
+  "smartCoach": "المدرب الذكي",
+  "workouts": "التمارين",
+  "profile": "الملف الشخصي"
+  
 }

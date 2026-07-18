@@ -9,7 +9,8 @@ abstract class AppAssets {
   // =============== Splash Screen ==================
   static const String splashScreenLogoImage = "$_baseImagesPath/splash.png";
   // =================== Onboarding ===================
-  static const String onBoardingBackground = "$_baseImagesPath/onboarding_bg.png";
+  static const String onBoardingBackground =
+      "$_baseImagesPath/onboarding_bg.png";
   static const String onBoardingScreenOne =
       "$_baseImagesPath/onboarding_screen_one.png";
   static const String onBoardingScreenTwo =
@@ -17,4 +18,10 @@ abstract class AppAssets {
   static const String onBoardingScreenThree =
       "$_baseImagesPath/onboarding_screen_three.png";
   static const String fitnessLogo = "$_baseImagesPath/fit 1.png";
+
+  static const String homeIcon = "$_baseIconsPath/home.svg";
+  static const String chatIcon = "$_baseIconsPath/chat.svg";
+
+  static const String workoutIcon = "$_baseIconsPath/gym.svg";
+  static const String personIcon = "$_baseIconsPath/profile.svg";
 }
