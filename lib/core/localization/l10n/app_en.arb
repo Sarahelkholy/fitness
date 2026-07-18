@@ -52,6 +52,12 @@
   "error503": "Service Unavailable",
   "error504": "Gateway Timeout",
   "defaultError": "An error occurred",
+  "explore":"Explore",
+  "smartCoach":"Smart coach",
+  "workouts":"Workouts",
+  "profile":"Profile"
+  
+  "defaultError": "An error occurred",
   "socialSignInCancelled": "Sign in was cancelled",
   "facebookLoginError": "Facebook login error"
 }

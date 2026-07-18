@@ -151,3 +151,4 @@
     <option name="LAST_COMMIT_MESSAGE" value="splash screen implementation to `splash_screen.dart`&#10;- add `splashRoute` to the route generator&#10;- add `splashScreenLogoImage` asset path to `AppAssets`" />
   </component>
 </project>
+
