@@ -10,7 +10,7 @@ class RegisterStepLayout extends StatelessWidget {
   final String subtitle;
   final Widget content;
   final String buttonText;
-  final VoidCallback onButtonPressed;
+  final VoidCallback? onButtonPressed;
   final bool isLoading;
 
   const RegisterStepLayout({
@@ -27,20 +27,29 @@ class RegisterStepLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 32),
-          Text(
-            title,
-            style: AppTextStyles.extraBold20(
-              context,
-            ).copyWith(color: AppColors.white),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            subtitle,
-            style: AppTextStyles.regular16(
-              context,
-            ).copyWith(color: AppColors.white),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: AppTextStyles.extraBold20(
+                    context,
+                  ).copyWith(color: AppColors.white),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  subtitle,
+                  style: AppTextStyles.regular16(
+                    context,
+                  ).copyWith(color: AppColors.white),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 16),
           ClipRRect(

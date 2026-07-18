@@ -52,42 +52,47 @@ class _NumberPickerWidgetState extends State<NumberPickerWidget> {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 160,
-          child: ListWheelScrollView.useDelegate(
-            controller: _controller,
-            itemExtent: 60,
-            perspective: 0.005,
-            diameterRatio: 1.5,
-            // useMagnifier: true,
-            physics: const FixedExtentScrollPhysics(),
-            onSelectedItemChanged: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-              widget.onValueChanged(widget.min + index);
-            },
-            childDelegate: ListWheelChildBuilderDelegate(
-              builder: (context, index) {
-                final value = widget.min + index;
-                final isSelected = index == _selectedIndex;
-                return Center(
-                  child: Text(
-                    "$value",
-                    style: isSelected
-                        ? AppTextStyles.extraBold44(
-                            context,
-                          ).copyWith(color: AppColors.main)
-                        : AppTextStyles.extraBold33(
-                            context,
-                          ).copyWith(color: AppColors.white),
-                  ),
-                );
+          height: 100,
+          child: RotatedBox(
+            quarterTurns: -1,
+            child: ListWheelScrollView.useDelegate(
+              controller: _controller,
+              itemExtent: 80,
+              perspective: 0.005,
+              diameterRatio: 1.5,
+              physics: const FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+                widget.onValueChanged(widget.min + index);
               },
-              childCount: (widget.max - widget.min + 1).toInt(),
+              childDelegate: ListWheelChildBuilderDelegate(
+                builder: (context, index) {
+                  final value = widget.min + index;
+                  final isSelected = index == _selectedIndex;
+                  return RotatedBox(
+                    quarterTurns: 1,
+                    child: Center(
+                      child: Text(
+                        "$value",
+                        style: isSelected
+                            ? AppTextStyles.extraBold44(
+                                context,
+                              ).copyWith(color: AppColors.main)
+                            : AppTextStyles.extraBold33(
+                                context,
+                              ).copyWith(color: AppColors.white),
+                      ),
+                    ),
+                  );
+                },
+                childCount: (widget.max - widget.min + 1).toInt(),
+              ),
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
         const Icon(Icons.arrow_drop_up, color: AppColors.main, size: 40),
       ],
     );

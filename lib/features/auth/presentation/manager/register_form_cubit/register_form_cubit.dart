@@ -4,6 +4,7 @@ import '../../../../../config/base_cubit/base_cubit.dart';
 import '../../../../../config/base_cubit/base_event.dart';
 import '../../../../../config/base_state/base_state.dart';
 import '../../../../../config/di/di.dart';
+import '../../../../../config/route_manager/routes.dart';
 import '../../../../../config/user/manager/user_cubit.dart';
 import '../../../../../config/user/manager/user_events.dart';
 import '../../../../../config/error_handling/result.dart';
@@ -121,6 +122,12 @@ class RegisterFormCubit extends BaseCubit<RegisterFormState, BaseEvent> {
         );
 
         getIt<UserCubit>().doEvent(SetUserDataEvent(user: result.data));
+        emitEvent(
+          const NavigationEvent(
+            routeName: Routes.homeRoute,
+            type: NavigationType.pushReplacementAndRemoveUntil,
+          ),
+        );
 
       case Failure():
         emit(

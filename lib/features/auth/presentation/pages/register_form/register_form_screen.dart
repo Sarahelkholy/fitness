@@ -67,6 +67,26 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
     }
   }
 
+  bool _isNextEnabled(RegisterFormState state) {
+    final data = state.formData;
+    switch (_currentPage) {
+      case 0:
+        return data.gender != null;
+      case 1:
+        return data.age != null;
+      case 2:
+        return data.weight != null;
+      case 3:
+        return data.height != null;
+      case 4:
+        return data.goal != null;
+      case 5:
+        return data.activityLevel != null;
+      default:
+        return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -100,9 +120,10 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
       ),
       body: BlocBuilder<RegisterFormCubit, RegisterFormState>(
         builder: (context, state) {
+          final bool isEnabled = _isNextEnabled(state);
           return Column(
             children: [
-              const SizedBox(height: 24),
+              const SizedBox(height: 50),
               CircularStepProgress(
                 currentStep: _currentPage + 1,
                 totalSteps: _totalPages,
@@ -122,7 +143,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                       title: localizations.tellUsAboutYourself,
                       subtitle: localizations.weNeedToKnowYourGender,
                       buttonText: localizations.next,
-                      onButtonPressed: _nextPage,
+                      onButtonPressed: isEnabled ? _nextPage : null,
                       content: GenderSelectionWidget(
                         selectedGender: state.formData.gender,
                         onGenderSelected: (gender) {
@@ -137,7 +158,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                       subtitle:
                           localizations.thisHelpsUsCreateYourPersonalizedPlan,
                       buttonText: localizations.next,
-                      onButtonPressed: _nextPage,
+                      onButtonPressed: isEnabled ? _nextPage : null,
                       content: NumberPickerWidget(
                         initialValue: state.formData.age ?? 25,
                         min: 10,
@@ -155,7 +176,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                       subtitle:
                           localizations.thisHelpsUsCreateYourPersonalizedPlan,
                       buttonText: localizations.next,
-                      onButtonPressed: _nextPage,
+                      onButtonPressed: isEnabled ? _nextPage : null,
                       content: NumberPickerWidget(
                         initialValue: state.formData.weight ?? 70,
                         min: 30,
@@ -173,7 +194,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                       subtitle:
                           localizations.thisHelpsUsCreateYourPersonalizedPlan,
                       buttonText: localizations.next,
-                      onButtonPressed: _nextPage,
+                      onButtonPressed: isEnabled ? _nextPage : null,
                       content: NumberPickerWidget(
                         initialValue: state.formData.height ?? 170,
                         min: 100,
@@ -191,7 +212,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                       subtitle:
                           localizations.thisHelpsUsCreateYourPersonalizedPlan,
                       buttonText: localizations.next,
-                      onButtonPressed: _nextPage,
+                      onButtonPressed: isEnabled ? _nextPage : null,
                       content: SelectionListWidget<UserGoal>(
                         selectedValue: state.formData.goal,
                         options: [
@@ -229,7 +250,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                           localizations.thisHelpsUsCreateYourPersonalizedPlan,
                       buttonText: localizations.done,
                       isLoading: state.updateUserState.isLoading,
-                      onButtonPressed: _nextPage,
+                      onButtonPressed: isEnabled ? _nextPage : null,
                       content: SelectionListWidget<ActivityLevel>(
                         selectedValue: state.formData.activityLevel,
                         options: [

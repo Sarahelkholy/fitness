@@ -32,7 +32,7 @@ class SelectionListWidget<T> extends StatelessWidget {
           child: GestureDetector(
             onTap: () => onSelected(option.value),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(
@@ -40,7 +40,7 @@ class SelectionListWidget<T> extends StatelessWidget {
                 ),
                 color: isSelected
                     ? AppColors.main.withValues(alpha: 0.1)
-                    : Colors.transparent,
+                    : AppColors.grayD3.withValues(alpha: 0.2),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,28 +51,12 @@ class SelectionListWidget<T> extends StatelessWidget {
                       color: isSelected ? AppColors.main : AppColors.white,
                     ),
                   ),
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: isSelected ? AppColors.main : AppColors.grayD3,
-                        width: 2,
-                      ),
-                    ),
-                    child: isSelected
-                        ? Center(
-                            child: Container(
-                              width: 10,
-                              height: 10,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.main,
-                              ),
-                            ),
-                          )
-                        : null,
+                  Icon(
+                    isSelected
+                        ? Icons.radio_button_checked
+                        : Icons.radio_button_off,
+                    color: isSelected ? AppColors.main : AppColors.grayD3,
+                    size: 24,
                   ),
                 ],
               ),
