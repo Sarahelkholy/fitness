@@ -67,6 +67,15 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
     }
   }
 
+  void _previousPage() {
+    if (_currentPage > 0) {
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
   bool _isNextEnabled(RegisterFormState state) {
     final data = state.formData;
     switch (_currentPage) {
@@ -89,205 +98,208 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const CircleAvatar(
-            backgroundColor: AppColors.main,
-            child: Icon(
-              Icons.arrow_back_ios_new,
-              size: 16,
-              color: AppColors.white,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        _previousPage();
+      },
+      child: CustomScaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const CircleAvatar(
+              backgroundColor: AppColors.main,
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                size: 16,
+                color: AppColors.white,
+              ),
             ),
+            onPressed: () {
+              if (_currentPage > 0) {
+                _previousPage();
+              }
+              // Removed Navigator.pop(context) to prevent popping from first page
+            },
           ),
-          onPressed: () {
-            if (_currentPage > 0) {
-              _pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              );
-            } else {
-              Navigator.pop(context);
-            }
+          title: Image.asset(
+            AppAssets.appLogo,
+            height: 48,
+            width: 70,
+            fit: BoxFit.fill,
+          ),
+        ),
+        body: BlocBuilder<RegisterFormCubit, RegisterFormState>(
+          builder: (context, state) {
+            final bool isEnabled = _isNextEnabled(state);
+            return Column(
+              children: [
+                const SizedBox(height: 50),
+                CircularStepProgress(
+                  currentStep: _currentPage + 1,
+                  totalSteps: _totalPages,
+                ),
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    onPageChanged: (page) {
+                      setState(() {
+                        _currentPage = page;
+                      });
+                    },
+                    children: [
+                      // Step 1: Gender
+                      RegisterStepLayout(
+                        title: localizations.tellUsAboutYourself,
+                        subtitle: localizations.weNeedToKnowYourGender,
+                        buttonText: localizations.next,
+                        onButtonPressed: isEnabled ? _nextPage : null,
+                        content: GenderSelectionWidget(
+                          selectedGender: state.formData.gender,
+                          onGenderSelected: (gender) {
+                            _cubit.doEvents(PickGenderEvent(gender: gender));
+                          },
+                        ),
+                      ),
+
+                      // Step 2: Age
+                      RegisterStepLayout(
+                        title: localizations.howOldAreYou,
+                        subtitle:
+                            localizations.thisHelpsUsCreateYourPersonalizedPlan,
+                        buttonText: localizations.next,
+                        onButtonPressed: isEnabled ? _nextPage : null,
+                        content: NumberPickerWidget(
+                          initialValue: state.formData.age ?? 25,
+                          min: 10,
+                          max: 100,
+                          unit: localizations.year,
+                          onValueChanged: (age) {
+                            _cubit.doEvents(PickAgeEvent(age: age));
+                          },
+                        ),
+                      ),
+
+                      // Step 3: Weight
+                      RegisterStepLayout(
+                        title: localizations.whatIsYourWeight,
+                        subtitle:
+                            localizations.thisHelpsUsCreateYourPersonalizedPlan,
+                        buttonText: localizations.next,
+                        onButtonPressed: isEnabled ? _nextPage : null,
+                        content: NumberPickerWidget(
+                          initialValue: state.formData.weight ?? 70,
+                          min: 30,
+                          max: 200,
+                          unit: localizations.kg,
+                          onValueChanged: (weight) {
+                            _cubit.doEvents(PickWeightEvent(weight: weight));
+                          },
+                        ),
+                      ),
+
+                      // Step 4: Height
+                      RegisterStepLayout(
+                        title: localizations.whatIsYourHeight,
+                        subtitle:
+                            localizations.thisHelpsUsCreateYourPersonalizedPlan,
+                        buttonText: localizations.next,
+                        onButtonPressed: isEnabled ? _nextPage : null,
+                        content: NumberPickerWidget(
+                          initialValue: state.formData.height ?? 170,
+                          min: 100,
+                          max: 250,
+                          unit: localizations.cm,
+                          onValueChanged: (height) {
+                            _cubit.doEvents(PickHeightEvent(height: height));
+                          },
+                        ),
+                      ),
+
+                      // Step 5: Goal
+                      RegisterStepLayout(
+                        title: localizations.whatIsYourGoal,
+                        subtitle:
+                            localizations.thisHelpsUsCreateYourPersonalizedPlan,
+                        buttonText: localizations.next,
+                        onButtonPressed: isEnabled ? _nextPage : null,
+                        content: SelectionListWidget<UserGoal>(
+                          selectedValue: state.formData.goal,
+                          options: [
+                            SelectionOption(
+                              value: UserGoal.loseWeight,
+                              label: localizations.loseWeight,
+                            ),
+                            SelectionOption(
+                              value: UserGoal.gainWeight,
+                              label: localizations.gainWeight,
+                            ),
+                            SelectionOption(
+                              value: UserGoal.getFitter,
+                              label: localizations.getFitted,
+                            ),
+                            SelectionOption(
+                              value: UserGoal.gainMoreFlexible,
+                              label: localizations.gainMoreFlexible,
+                            ),
+                            SelectionOption(
+                              value: UserGoal.learnTheBasic,
+                              label: localizations.learnTheBasic,
+                            ),
+                          ],
+                          onSelected: (goal) {
+                            _cubit.doEvents(PickGoalEvent(goal: goal));
+                          },
+                        ),
+                      ),
+
+                      // Step 6: Activity Level
+                      RegisterStepLayout(
+                        title: localizations.yourRegularPhysicalActivityLevel,
+                        subtitle:
+                            localizations.thisHelpsUsCreateYourPersonalizedPlan,
+                        buttonText: localizations.done,
+                        isLoading: state.updateUserState.isLoading,
+                        onButtonPressed: isEnabled ? _nextPage : null,
+                        content: SelectionListWidget<ActivityLevel>(
+                          selectedValue: state.formData.activityLevel,
+                          options: [
+                            SelectionOption(
+                              value: ActivityLevel.level1,
+                              label: localizations.level1,
+                            ),
+                            SelectionOption(
+                              value: ActivityLevel.level2,
+                              label: localizations.level2,
+                            ),
+                            SelectionOption(
+                              value: ActivityLevel.level3,
+                              label: localizations.level3,
+                            ),
+                            SelectionOption(
+                              value: ActivityLevel.level4,
+                              label: localizations.level4,
+                            ),
+                            SelectionOption(
+                              value: ActivityLevel.level5,
+                              label: localizations.level5,
+                            ),
+                          ],
+                          onSelected: (level) {
+                            _cubit.doEvents(
+                              PickActivityLevelEvent(activityLevel: level),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
           },
         ),
-        title: Image.asset(
-          AppAssets.appLogo,
-          height: 48,
-          width: 70,
-          fit: BoxFit.fill,
-        ),
-      ),
-      body: BlocBuilder<RegisterFormCubit, RegisterFormState>(
-        builder: (context, state) {
-          final bool isEnabled = _isNextEnabled(state);
-          return Column(
-            children: [
-              const SizedBox(height: 50),
-              CircularStepProgress(
-                currentStep: _currentPage + 1,
-                totalSteps: _totalPages,
-              ),
-              Expanded(
-                child: PageView(
-                  controller: _pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  onPageChanged: (page) {
-                    setState(() {
-                      _currentPage = page;
-                    });
-                  },
-                  children: [
-                    // Step 1: Gender
-                    RegisterStepLayout(
-                      title: localizations.tellUsAboutYourself,
-                      subtitle: localizations.weNeedToKnowYourGender,
-                      buttonText: localizations.next,
-                      onButtonPressed: isEnabled ? _nextPage : null,
-                      content: GenderSelectionWidget(
-                        selectedGender: state.formData.gender,
-                        onGenderSelected: (gender) {
-                          _cubit.doEvents(PickGenderEvent(gender: gender));
-                        },
-                      ),
-                    ),
-
-                    // Step 2: Age
-                    RegisterStepLayout(
-                      title: localizations.howOldAreYou,
-                      subtitle:
-                          localizations.thisHelpsUsCreateYourPersonalizedPlan,
-                      buttonText: localizations.next,
-                      onButtonPressed: isEnabled ? _nextPage : null,
-                      content: NumberPickerWidget(
-                        initialValue: state.formData.age ?? 25,
-                        min: 10,
-                        max: 100,
-                        unit: localizations.year,
-                        onValueChanged: (age) {
-                          _cubit.doEvents(PickAgeEvent(age: age));
-                        },
-                      ),
-                    ),
-
-                    // Step 3: Weight
-                    RegisterStepLayout(
-                      title: localizations.whatIsYourWeight,
-                      subtitle:
-                          localizations.thisHelpsUsCreateYourPersonalizedPlan,
-                      buttonText: localizations.next,
-                      onButtonPressed: isEnabled ? _nextPage : null,
-                      content: NumberPickerWidget(
-                        initialValue: state.formData.weight ?? 70,
-                        min: 30,
-                        max: 200,
-                        unit: localizations.kg,
-                        onValueChanged: (weight) {
-                          _cubit.doEvents(PickWeightEvent(weight: weight));
-                        },
-                      ),
-                    ),
-
-                    // Step 4: Height
-                    RegisterStepLayout(
-                      title: localizations.whatIsYourHeight,
-                      subtitle:
-                          localizations.thisHelpsUsCreateYourPersonalizedPlan,
-                      buttonText: localizations.next,
-                      onButtonPressed: isEnabled ? _nextPage : null,
-                      content: NumberPickerWidget(
-                        initialValue: state.formData.height ?? 170,
-                        min: 100,
-                        max: 250,
-                        unit: localizations.cm,
-                        onValueChanged: (height) {
-                          _cubit.doEvents(PickHeightEvent(height: height));
-                        },
-                      ),
-                    ),
-
-                    // Step 5: Goal
-                    RegisterStepLayout(
-                      title: localizations.whatIsYourGoal,
-                      subtitle:
-                          localizations.thisHelpsUsCreateYourPersonalizedPlan,
-                      buttonText: localizations.next,
-                      onButtonPressed: isEnabled ? _nextPage : null,
-                      content: SelectionListWidget<UserGoal>(
-                        selectedValue: state.formData.goal,
-                        options: [
-                          SelectionOption(
-                            value: UserGoal.loseWeight,
-                            label: localizations.loseWeight,
-                          ),
-                          SelectionOption(
-                            value: UserGoal.gainWeight,
-                            label: localizations.gainWeight,
-                          ),
-                          SelectionOption(
-                            value: UserGoal.getFitter,
-                            label: localizations.getFitted,
-                          ),
-                          SelectionOption(
-                            value: UserGoal.gainMoreFlexible,
-                            label: localizations.gainMoreFlexible,
-                          ),
-                          SelectionOption(
-                            value: UserGoal.learnTheBasic,
-                            label: localizations.learnTheBasic,
-                          ),
-                        ],
-                        onSelected: (goal) {
-                          _cubit.doEvents(PickGoalEvent(goal: goal));
-                        },
-                      ),
-                    ),
-
-                    // Step 6: Activity Level
-                    RegisterStepLayout(
-                      title: localizations.yourRegularPhysicalActivityLevel,
-                      subtitle:
-                          localizations.thisHelpsUsCreateYourPersonalizedPlan,
-                      buttonText: localizations.done,
-                      isLoading: state.updateUserState.isLoading,
-                      onButtonPressed: isEnabled ? _nextPage : null,
-                      content: SelectionListWidget<ActivityLevel>(
-                        selectedValue: state.formData.activityLevel,
-                        options: [
-                          SelectionOption(
-                            value: ActivityLevel.level1,
-                            label: localizations.level1,
-                          ),
-                          SelectionOption(
-                            value: ActivityLevel.level2,
-                            label: localizations.level2,
-                          ),
-                          SelectionOption(
-                            value: ActivityLevel.level3,
-                            label: localizations.level3,
-                          ),
-                          SelectionOption(
-                            value: ActivityLevel.level4,
-                            label: localizations.level4,
-                          ),
-                          SelectionOption(
-                            value: ActivityLevel.level5,
-                            label: localizations.level5,
-                          ),
-                        ],
-                        onSelected: (level) {
-                          _cubit.doEvents(
-                            PickActivityLevelEvent(activityLevel: level),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
-        },
       ),
     );
   }

@@ -32,6 +32,10 @@ class _NumberPickerWidgetState extends State<NumberPickerWidget> {
     super.initState();
     _selectedIndex = (widget.initialValue - widget.min).toInt();
     _controller = FixedExtentScrollController(initialItem: _selectedIndex);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onValueChanged(widget.initialValue);
+    });
   }
 
   @override
@@ -52,7 +56,7 @@ class _NumberPickerWidgetState extends State<NumberPickerWidget> {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 100,
+          height: 62,
           child: RotatedBox(
             quarterTurns: -1,
             child: ListWheelScrollView.useDelegate(
