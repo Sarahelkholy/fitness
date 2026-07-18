@@ -9,11 +9,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../config/di/di.dart';
 import '../../core/localization/l10n/app_localizations.dart';
+import '../../features/auth/presentation/pages/onboarding/view/on_boarding_screen.dart';
+import '../../features/auth/presentation/pages/splash/splash_screen.dart';
 
 abstract class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
       switch (settings.name) {
+
+        /// Splash Screen
+        case Routes.splashRoute:
+          return MaterialPageRoute(builder: (_) => const SplashScreen());
         /// home screen
         case Routes.homeRoute:
           return MaterialPageRoute(builder: (_) => const HomeScreen());
@@ -26,6 +32,10 @@ abstract class RouteGenerator {
               child: const LoginScreen(),
             ),
           );
+
+        ///================ OnBoardingScreen ================
+        case Routes.onboardingRoute:
+          return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
 
         /// Default
         default:
