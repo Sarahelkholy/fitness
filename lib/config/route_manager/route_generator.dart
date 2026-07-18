@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../config/di/di.dart';
-import '../../core/local_cubit/locale_cubit.dart';
 import '../../core/localization/l10n/app_localizations.dart';
 
 abstract class RouteGenerator {

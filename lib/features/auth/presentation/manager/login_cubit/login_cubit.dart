@@ -2,6 +2,7 @@ import 'package:fitness/config/base_cubit/base_cubit.dart';
 import 'package:fitness/config/base_cubit/base_event.dart';
 import 'package:fitness/config/error_handling/result.dart';
 import 'package:fitness/config/route_manager/routes.dart';
+import 'package:fitness/config/social_auth/social_user.dart';
 import 'package:fitness/config/user/domain/entities/user_entity.dart';
 import 'package:fitness/features/auth/domain/use_cases/get_facebook_user_data_use_case.dart';
 import 'package:fitness/features/auth/domain/use_cases/get_google_user_data_use_case.dart';
@@ -60,15 +61,29 @@ class LoginCubit extends BaseCubit<LoginState, BaseEvent> {
     emit(state.copyWith(loginWithGoogle: const BaseState(isLoading: true)));
     final result = await _getGoogleUserDataUseCase();
     switch (result) {
-      case Success():
-        emit(state.copyWith(
-          loginWithGoogle: BaseState(data: result.data, isSuccess: true),
+      case Success<SocialUser>():
+        final loginResult = await _loginUseCase(LoginRequest(
+          email: result.data.email ?? "",
+          password: result.data.id // where is the social ,
         ));
-        emitEvent(const NavigationEvent(
-          routeName: Routes.homeRoute,
-          type: NavigationType.pushReplacementAndRemoveUntil,
-        ));
-      case Failure():
+        switch (loginResult) {
+          case Success<UserEntity>():
+            emit(state.copyWith(
+              loginWithGoogle:
+                  BaseState(data: loginResult.data, isSuccess: true),
+            ));
+            emitEvent(const NavigationEvent(
+              routeName: Routes.homeRoute,
+              type: NavigationType.pushReplacementAndRemoveUntil,
+            ));
+          case Failure<UserEntity>():
+            emit(state.copyWith(
+              loginWithGoogle:
+                  BaseState(errorMessage: loginResult.errorMessage),
+            ));
+            emitEvent(DisplayErrorEvent(errorMsg: loginResult.errorMessage));
+        }
+      case Failure<SocialUser>():
         emit(state.copyWith(
           loginWithGoogle: BaseState(errorMessage: result.errorMessage),
         ));
@@ -80,15 +95,29 @@ class LoginCubit extends BaseCubit<LoginState, BaseEvent> {
     emit(state.copyWith(loginWithFacebook: const BaseState(isLoading: true)));
     final result = await _getFacebookUserDataUseCase();
     switch (result) {
-      case Success():
-        emit(state.copyWith(
-          loginWithFacebook: BaseState(data: result.data, isSuccess: true),
+      case Success<SocialUser>():
+        final loginResult = await _loginUseCase(LoginRequest(
+          email: result.data.email ?? "",
+          password: result.data.id,
         ));
-        emitEvent(const NavigationEvent(
-          routeName: Routes.homeRoute,
-          type: NavigationType.pushReplacementAndRemoveUntil,
-        ));
-      case Failure():
+        switch (loginResult) {
+          case Success<UserEntity>():
+            emit(state.copyWith(
+              loginWithFacebook:
+                  BaseState(data: loginResult.data, isSuccess: true),
+            ));
+            emitEvent(const NavigationEvent(
+              routeName: Routes.homeRoute,
+              type: NavigationType.pushReplacementAndRemoveUntil,
+            ));
+          case Failure<UserEntity>():
+            emit(state.copyWith(
+              loginWithFacebook:
+                  BaseState(errorMessage: loginResult.errorMessage),
+            ));
+            emitEvent(DisplayErrorEvent(errorMsg: loginResult.errorMessage));
+        }
+      case Failure<SocialUser>():
         emit(state.copyWith(
           loginWithFacebook: BaseState(errorMessage: result.errorMessage),
         ));

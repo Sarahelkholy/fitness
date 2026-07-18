@@ -4,6 +4,7 @@ import 'package:fitness/core/helpers/event_handler_mixin.dart';
 import 'package:fitness/core/shared_widgets/custom_button.dart';
 import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:fitness/core/utils/app_assets.dart';
+import 'package:fitness/core/utils/app_colors.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
 import 'package:fitness/features/auth/data/models/requests/login_request.dart';
 import 'package:fitness/features/auth/presentation/manager/login_cubit/login_cubit.dart';
@@ -103,7 +104,9 @@ class _LoginScreenState extends State<LoginScreen> with EventHandlerMixin {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
                   localizations.heyThere,
-                  style: AppTextStyles.regular18(context),
+                  style: AppTextStyles.regular18(
+                    context,
+                  ).copyWith(color: AppColors.white),
                 ),
               ),
               const SizedBox(height: 6),
@@ -111,7 +114,9 @@ class _LoginScreenState extends State<LoginScreen> with EventHandlerMixin {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
                   localizations.welcomeBack,
-                  style: AppTextStyles.extraBold20(context),
+                  style: AppTextStyles.extraBold20(
+                    context,
+                  ).copyWith(color: AppColors.white),
                 ),
               ),
               const SizedBox(height: 16),
@@ -130,7 +135,9 @@ class _LoginScreenState extends State<LoginScreen> with EventHandlerMixin {
                           children: [
                             Text(
                               localizations.login,
-                              style: AppTextStyles.extraBold24(context),
+                              style: AppTextStyles.extraBold24(
+                                context,
+                              ).copyWith(color: AppColors.white),
                             ),
                             const SizedBox(height: 16),
 
@@ -142,6 +149,9 @@ class _LoginScreenState extends State<LoginScreen> with EventHandlerMixin {
                                   TextFormField(
                                     controller: emailController,
                                     enabled: true,
+                                    style: const TextStyle(
+                                      color: AppColors.white,
+                                    ),
                                     validator: Validator.email,
                                     keyboardType: TextInputType.emailAddress,
                                     focusNode: emailFocus,
@@ -157,8 +167,12 @@ class _LoginScreenState extends State<LoginScreen> with EventHandlerMixin {
                                     },
                                     decoration: InputDecoration(
                                       labelText: localizations.email,
+                                      labelStyle: const TextStyle(
+                                        color: AppColors.white,
+                                      ),
                                       prefixIcon: const Icon(
                                         Icons.email_outlined,
+                                        color: AppColors.white,
                                       ),
                                     ),
                                   ),
@@ -169,6 +183,9 @@ class _LoginScreenState extends State<LoginScreen> with EventHandlerMixin {
                                     controller: passwordController,
                                     obscureText: isPasswordHidden,
                                     enabled: true,
+                                    style: const TextStyle(
+                                      color: AppColors.white,
+                                    ),
                                     validator: Validator.password,
                                     keyboardType: TextInputType.visiblePassword,
                                     focusNode: passwordFocus,
@@ -183,14 +200,19 @@ class _LoginScreenState extends State<LoginScreen> with EventHandlerMixin {
                                     },
                                     decoration: InputDecoration(
                                       labelText: localizations.password,
+                                      labelStyle: const TextStyle(
+                                        color: AppColors.white,
+                                      ),
                                       prefixIcon: const Icon(
                                         Icons.lock_outline,
+                                        color: AppColors.white,
                                       ),
                                       suffixIcon: IconButton(
                                         icon: Icon(
                                           isPasswordHidden
                                               ? Icons.visibility_outlined
                                               : Icons.visibility_off_outlined,
+                                          color: AppColors.white,
                                         ),
                                         onPressed: () {
                                           setState(() {
@@ -222,6 +244,7 @@ class _LoginScreenState extends State<LoginScreen> with EventHandlerMixin {
                                   const SizedBox(height: 24),
                                   CustomButton(
                                     title: localizations.login,
+                                    foregroundColor: AppColors.white,
                                     onPressed: () {
                                       if (formKey.currentState!.validate()) {
                                         _cubit.doIntent(

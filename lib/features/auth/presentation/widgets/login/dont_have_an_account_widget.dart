@@ -22,7 +22,12 @@ class DontHaveAnAccountWidget extends StatelessWidget {
       child: Text.rich(
         TextSpan(
           children: [
-            TextSpan(text: title, style: AppTextStyles.regular14(context)),
+            TextSpan(
+              text: title,
+              style: AppTextStyles.regular14(context).copyWith(
+                color: AppColors.white,
+              ),
+            ),
             const TextSpan(text: ' '),
             TextSpan(
               text: actionText,

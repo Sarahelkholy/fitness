@@ -22,7 +22,7 @@ class OrDivider extends StatelessWidget {
           localizations.or,
           style: AppTextStyles.regular12(
             context,
-          ).copyWith(color: AppColors.grayD3),
+          ).copyWith(color: AppColors.white),
         ),
         const Expanded(
           child: Padding(
