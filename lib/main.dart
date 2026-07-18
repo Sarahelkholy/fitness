@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: 'Fitness APP',
 
-            initialRoute: Routes.registerRoute,
+            initialRoute: Routes.registerFormRoute,
             onGenerateRoute: RouteGenerator.getRoute,
 
             locale: locale,

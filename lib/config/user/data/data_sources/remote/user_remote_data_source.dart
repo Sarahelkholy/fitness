@@ -7,5 +7,4 @@ abstract interface class UserRemoteDataSource {
   Future<Result<GetUserDataResponse>> updateUserData(
     UpdateUserDataRequest request,
   );
-  // Future<Result<Map<String,String>>> logout();
 }
