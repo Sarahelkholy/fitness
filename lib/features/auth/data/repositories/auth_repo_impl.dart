@@ -1,14 +1,16 @@
-import 'package:fitness/config/secure_cache/secure_cache/cache_keys.dart';
-import 'package:fitness/config/secure_cache/secure_cache/secure_cache.dart';
-import 'package:fitness/config/social_auth/social_auth_service.dart';
-import 'package:fitness/config/social_auth/social_user.dart';
-import 'package:fitness/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
+
+
 import 'package:injectable/injectable.dart';
 
 import '../../../../config/error_handling/result.dart';
+import '../../../../config/secure_cache/secure_cache/cache_keys.dart';
+import '../../../../config/secure_cache/secure_cache/secure_cache.dart';
+import '../../../../config/social_auth/social_auth_service.dart';
+import '../../../../config/social_auth/social_user.dart';
 import '../../../../config/user/data/mapper/user_mapper.dart';
 import '../../../../config/user/domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repo.dart';
+import '../data_sources/remote/auth_remote_data_source.dart';
 import '../models/requests/forget_password_request.dart';
 import '../models/requests/login_request.dart';
 import '../models/requests/register_request.dart';
