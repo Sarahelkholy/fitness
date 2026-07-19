@@ -6,4 +6,11 @@ abstract class AppAssets {
   static const String authBackgroundImage = "$_baseImagesPath/background.png";
   static const String exploreHomeIcon = "$_baseIconsPath/explore_home_icon.svg";
   static const String fitnessLogo = "$_baseImagesPath/fit 1.png";
+  static const String authBackgroungImage = "$_baseImagesPath/background.png";
+
+  static const String homeIcon = "$_baseIconsPath/home.svg";
+  static const String chatIcon = "$_baseIconsPath/chat.svg";
+
+  static const String workoutIcon = "$_baseIconsPath/gym.svg";
+  static const String personIcon = "$_baseIconsPath/profile.svg";
 }

@@ -54,5 +54,10 @@
   "didntReceiveCode": "Didn't receive the verification code?",
   "resendCode": "Resend Code",
   "socialSignInCancelled": "Sign in was cancelled",
-  "facebookLoginError": "Facebook login error"
+  "facebookLoginError": "Facebook login error",
+  "explore":"Explore",
+  "smartCoach":"Smart coach",
+  "workouts":"Workouts",
+  "profile":"Profile"
+  
 }
