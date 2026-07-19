@@ -2,9 +2,9 @@ import 'dart:ui'; // Required for ImageFilter
 import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:fitness/core/utils/app_assets.dart';
 import 'package:fitness/features/chat_screen.dart';
-import 'package:fitness/features/home_screen.dart';
+import 'package:fitness/features/exercise/presentation/pages/home_screen.dart';
 import 'package:fitness/features/profile_screen.dart';
-import 'package:fitness/features/workout_screen.dart';
+import 'package:fitness/features/exercise/presentation/pages/workout_screen.dart';
 import 'package:flutter/material.dart';
 import '../shared_widgets/svg_wrapper.dart';
 import '../utils/app_colors.dart';

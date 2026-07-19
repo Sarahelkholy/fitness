@@ -7,7 +7,7 @@ import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/register_form_cubit/register_form_cubit.dart';
 import 'package:fitness/features/auth/presentation/pages/register/register_screen.dart';
-import 'package:fitness/features/home_screen.dart';
+import 'package:fitness/features/exercise/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
