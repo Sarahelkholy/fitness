@@ -93,4 +93,9 @@
   "level4": "Advance",
   "level5": "True Beast",
   "done": "Done"
+  "explore":"Explore",
+  "smartCoach":"Smart coach",
+  "workouts":"Workouts",
+  "profile":"Profile"
+  
 }

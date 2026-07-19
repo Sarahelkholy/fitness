@@ -1,5 +1,6 @@
 import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/core/helpers/custom_logger.dart';
+import 'package:fitness/core/shared_widgets/custom_bottom_nav.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
 import 'package:fitness/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart';
@@ -15,14 +16,15 @@ import '../../core/localization/l10n/app_localizations.dart';
 import '../../features/auth/presentation/pages/onboarding/view/on_boarding_screen.dart';
 import '../../features/auth/presentation/pages/splash/splash_screen.dart';
 import '../../features/auth/presentation/pages/register_form/register_form_screen.dart';
+
 abstract class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
       switch (settings.name) {
-
         /// Splash Screen
         case Routes.splashRoute:
           return MaterialPageRoute(builder: (_) => const SplashScreen());
+
         /// home screen
         case Routes.homeRoute:
           return MaterialPageRoute(builder: (_) => const HomeScreen());
@@ -56,6 +58,15 @@ abstract class RouteGenerator {
               create: (context) => getIt<RegisterFormCubit>(),
               child: const RegisterFormScreen(),
             ),
+          );
+
+        /// bottom nav bar screen
+        case Routes.bottomNavBarRoute:
+          final args = settings.arguments as Map<String, dynamic>?;
+
+          return MaterialPageRoute(
+            builder: (_) =>
+                CustomBottomNavBar(initialIndex: args?['initialIndex'] ?? 0),
           );
 
         /// Default
