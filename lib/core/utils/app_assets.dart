@@ -33,4 +33,7 @@ abstract class AppAssets {
 
   static const String workoutIcon = "$_baseIconsPath/gym.svg";
   static const String personIcon = "$_baseIconsPath/profile.svg";
+
+  static const String exercisesBackground =
+      "$_baseImagesPath/exercises_background.jpg";
 }
