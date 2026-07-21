@@ -5,6 +5,7 @@ import 'package:fitness/core/shared_widgets/custom_button.dart';
 import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:fitness/core/utils/app_assets.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
+import 'package:fitness/core/values/keys_strings.dart';
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_event.dart';
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_state.dart';
@@ -152,6 +153,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 children: [
                                   /// first name Field
                                   TextFormField(
+                                    key: const Key(
+                                        KeysStrings.registerFirstNameField),
                                     controller: firstNameController,
                                     enabled: !state.registerState.isLoading,
                                     validator: Validator.name,
@@ -178,6 +181,8 @@ class _RegisterScreenState extends State<RegisterScreen>
 
                                   /// lastname Field
                                   TextFormField(
+                                    key: const Key(
+                                        KeysStrings.registerLastNameField),
                                     controller: lastNameController,
                                     enabled: !state.registerState.isLoading,
                                     validator: Validator.name,
@@ -204,6 +209,8 @@ class _RegisterScreenState extends State<RegisterScreen>
 
                                   /// Email Field
                                   TextFormField(
+                                    key: const Key(
+                                        KeysStrings.registerEmailField),
                                     controller: emailController,
                                     enabled: !state.registerState.isLoading,
                                     validator: Validator.email,
@@ -230,6 +237,8 @@ class _RegisterScreenState extends State<RegisterScreen>
 
                                   /// Password Field
                                   TextFormField(
+                                    key: const Key(
+                                        KeysStrings.registerPasswordField),
                                     controller: passwordController,
                                     obscureText: isPasswordHidden,
                                     enabled: !state.registerState.isLoading,
@@ -281,6 +290,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                                   ),
                                   const SizedBox(height: 24),
                                   CustomButton(
+                                    key: const Key(
+                                        KeysStrings.registerNextButton),
                                     title: localizations.next,
                                     onPressed: () {
                                       _cubit.doEvents(SubmitPressedEvent());
@@ -301,6 +312,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                                   ),
                                   const SizedBox(height: 8),
                                   HaveAnAccountWidget(
+                                    key: const Key(
+                                        KeysStrings.registerLoginButton),
                                     onTap: () {
                                       Navigator.pop(context);
                                     },
