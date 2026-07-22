@@ -1,5 +1,6 @@
 abstract class ApiEndPoints {
   static const String baseUrl = "https://fitness.elevateegy.com/api/v1";
+  static const String mealsBaseUrl = "https://www.themealdb.com/api/json/v1/1";
 
   static const String getUserData = "/auth/profile-data";
   static const String editProfile = "/auth/editProfile";
@@ -17,4 +18,7 @@ abstract class ApiEndPoints {
   ///? ================ Get Muscles Group using id
   static const String getMuscleGroupId="/musclesGroup/by-muscle-group";
 
+  static const String getMealsCategories = "/categories.php";
+  static const String getMealsByCategory = "/filter.php";
+  static const String getMealDetails = "/lookup.php";
 }

@@ -6,7 +6,7 @@ import '../../../../core/values/api_end_points.dart';
 import '../../data/module/response/get_muscles_group_id_response.dart';
 part 'home_api_client.g.dart';
 
-@injectable
+// @injectable
 @RestApi()
 abstract class HomeApiClient {
   @factoryMethod
