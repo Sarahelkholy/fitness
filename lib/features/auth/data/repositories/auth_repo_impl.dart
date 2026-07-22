@@ -3,6 +3,8 @@ import 'package:fitness/config/social_auth/social_auth_service.dart';
 import 'package:fitness/config/social_auth/social_user.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../config/error_handling/result.dart';
+import '../../../../config/secure_cache/secure_cache/cache_keys.dart';
+import '../../../../config/user/data/mapper/user_mapper.dart';
 import '../../../../config/user/domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repo.dart';
 import 'package:fitness/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
@@ -11,6 +13,7 @@ import '../models/requests/login_request.dart';
 import '../models/requests/register_request.dart';
 import '../models/requests/reset_password_request.dart';
 import '../models/requests/verify_reset_otp_request.dart';
+import '../models/responses/auth_response.dart';
 
 @Injectable(as: AuthRepo)
 class AuthRepoImpl implements AuthRepo {
@@ -32,8 +35,25 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Result<UserEntity>> register(RegisterRequest registerRequest) async {
-    // TODO: implement register
-    throw UnimplementedError();
+    final response = await _authRemoteDataSource.register(registerRequest);
+
+    switch (response) {
+      case Success<AuthResponse>():
+        {
+          if (response.data.token != null) {
+            await _secureCache.saveData(
+              key: CacheKeys.token,
+              value: response.data.token!,
+            );
+          }
+
+          final entity = response.data.user!.toEntity();
+
+          return Success(data: entity);
+        }
+      case Failure<AuthResponse>():
+        return Failure(errorMessage: response.errorMessage);
+    }
   }
 
   @override

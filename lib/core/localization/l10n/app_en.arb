@@ -43,5 +43,44 @@
   "error504": "Gateway Timeout",
   "defaultError": "An error occurred",
   "socialSignInCancelled": "Sign in was cancelled",
-  "facebookLoginError": "Facebook login error"
+  "facebookLoginError": "Facebook login error",
+
+  "heyThere": "Hey There",
+  "createAnAccount": "CREATE AN ACCOUNT",
+  "register": "Register",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "or": "Or",
+  "alreadyHaveAnAccount": "Already Have An Account ? ",
+
+  "tellUsAboutYourself": "TELL US ABOUT YOURSELF!",
+  "weNeedToKnowYourGender": "We Need To Know Your Gender",
+  "male": "Male",
+  "female": "Female",
+  "next": "Next",
+
+  "howOldAreYou": "HOW OLD ARE YOU ?",
+  "thisHelpsUsCreateYourPersonalizedPlan": "This Helps Us Create Your Personalized Plan",
+  "year": "Year",
+
+  "whatIsYourWeight": "WHAT IS YOUR WEIGHT ?",
+  "kg": "Kg",
+
+  "whatIsYourHeight": "WHAT IS YOUR HEIGHT ?",
+  "cm": "CM",
+
+  "whatIsYourGoal": "WHAT IS YOUR GOAL ?",
+  "gainWeight": "Gain Weight",
+  "loseWeight": "Lose Weight",
+  "getFitted": "Get Fitted",
+  "gainMoreFlexible": "Gain More Flexible",
+  "learnTheBasic": "Learn The Basic",
+
+  "yourRegularPhysicalActivityLevel": "YOUR REGULAR PHYSICAL ACTIVITY LEVEL ?",
+  "level1": "Rookie",
+  "level2": "Beginner",
+  "level3": "Intermediate",
+  "level4": "Advance",
+  "level5": "True Beast",
+  "done": "Done"
 }
