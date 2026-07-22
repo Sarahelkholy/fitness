@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/app_assets.dart';
-import '../../../domain/entities/register_form_data.dart';
+import '../../../domain/entities/register_form_params.dart';
 import '../../widgets/register_form/register_step_layout.dart';
 
 class RegisterFormScreen extends StatefulWidget {
@@ -153,7 +153,8 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                       // Step 1: Gender
                       RegisterStepLayout(
                         buttonKey: const Key(
-                            KeysStrings.registerFormNextButtonStep1),
+                          KeysStrings.registerFormNextButtonStep1,
+                        ),
                         title: localizations.tellUsAboutYourself,
                         subtitle: localizations.weNeedToKnowYourGender,
                         buttonText: localizations.next,
@@ -169,7 +170,8 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                       // Step 2: Age
                       RegisterStepLayout(
                         buttonKey: const Key(
-                            KeysStrings.registerFormNextButtonStep2),
+                          KeysStrings.registerFormNextButtonStep2,
+                        ),
                         title: localizations.howOldAreYou,
                         subtitle:
                             localizations.thisHelpsUsCreateYourPersonalizedPlan,
@@ -189,7 +191,8 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                       // Step 3: Weight
                       RegisterStepLayout(
                         buttonKey: const Key(
-                            KeysStrings.registerFormNextButtonStep3),
+                          KeysStrings.registerFormNextButtonStep3,
+                        ),
                         title: localizations.whatIsYourWeight,
                         subtitle:
                             localizations.thisHelpsUsCreateYourPersonalizedPlan,
@@ -209,7 +212,8 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                       // Step 4: Height
                       RegisterStepLayout(
                         buttonKey: const Key(
-                            KeysStrings.registerFormNextButtonStep4),
+                          KeysStrings.registerFormNextButtonStep4,
+                        ),
                         title: localizations.whatIsYourHeight,
                         subtitle:
                             localizations.thisHelpsUsCreateYourPersonalizedPlan,
@@ -229,7 +233,8 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                       // Step 5: Goal
                       RegisterStepLayout(
                         buttonKey: const Key(
-                            KeysStrings.registerFormNextButtonStep5),
+                          KeysStrings.registerFormNextButtonStep5,
+                        ),
                         title: localizations.whatIsYourGoal,
                         subtitle:
                             localizations.thisHelpsUsCreateYourPersonalizedPlan,
@@ -268,7 +273,8 @@ class _RegisterFormScreenState extends State<RegisterFormScreen>
                       // Step 6: Activity Level
                       RegisterStepLayout(
                         buttonKey: const Key(
-                            KeysStrings.registerFormNextButtonStep6),
+                          KeysStrings.registerFormNextButtonStep6,
+                        ),
                         title: localizations.yourRegularPhysicalActivityLevel,
                         subtitle:
                             localizations.thisHelpsUsCreateYourPersonalizedPlan,

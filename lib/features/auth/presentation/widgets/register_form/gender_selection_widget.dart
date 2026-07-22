@@ -4,7 +4,7 @@ import '../../../../../core/localization/l10n/app_localizations.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 import '../../../../../core/values/keys_strings.dart';
-import '../../../domain/entities/register_form_data.dart';
+import '../../../domain/entities/register_form_params.dart';
 
 class GenderSelectionWidget extends StatelessWidget {
   final UserGender? selectedGender;

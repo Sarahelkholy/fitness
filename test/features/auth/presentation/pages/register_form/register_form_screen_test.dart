@@ -4,7 +4,7 @@ import 'package:fitness/config/base_cubit/base_event.dart';
 import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:fitness/core/values/app_strings.dart';
 import 'package:fitness/core/values/keys_strings.dart';
-import 'package:fitness/features/auth/domain/entities/register_form_data.dart';
+import 'package:fitness/features/auth/domain/entities/register_form_params.dart';
 import 'package:fitness/features/auth/presentation/manager/register_form_cubit/register_form_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/register_form_cubit/register_form_event.dart';
 import 'package:fitness/features/auth/presentation/manager/register_form_cubit/register_form_state.dart';
@@ -101,7 +101,7 @@ void main() {
 
       emitState(
         const RegisterFormState(
-          formData: RegisterFormData(gender: UserGender.male),
+          formData: RegisterFormParams(gender: UserGender.male),
         ),
       );
       await tester.pump();
@@ -131,7 +131,7 @@ void main() {
         await pumpScreen(tester);
         emitState(
           const RegisterFormState(
-            formData: RegisterFormData(gender: UserGender.male),
+            formData: RegisterFormParams(gender: UserGender.male),
           ),
         );
         await tester.pumpAndSettle();
@@ -144,7 +144,7 @@ void main() {
         // Age
         emitState(
           const RegisterFormState(
-            formData: RegisterFormData(gender: UserGender.male, age: 25),
+            formData: RegisterFormParams(gender: UserGender.male, age: 25),
           ),
         );
         await tester.pumpAndSettle();
@@ -156,7 +156,7 @@ void main() {
         // Weight
         emitState(
           const RegisterFormState(
-            formData: RegisterFormData(
+            formData: RegisterFormParams(
               gender: UserGender.male,
               age: 25,
               weight: 70,
@@ -172,7 +172,7 @@ void main() {
         // Height
         emitState(
           const RegisterFormState(
-            formData: RegisterFormData(
+            formData: RegisterFormParams(
               gender: UserGender.male,
               age: 25,
               weight: 70,
@@ -189,7 +189,7 @@ void main() {
         // Goal
         emitState(
           const RegisterFormState(
-            formData: RegisterFormData(
+            formData: RegisterFormParams(
               gender: UserGender.male,
               age: 25,
               weight: 70,
@@ -207,7 +207,7 @@ void main() {
         // Activity Level
         emitState(
           const RegisterFormState(
-            formData: RegisterFormData(
+            formData: RegisterFormParams(
               gender: UserGender.male,
               age: 25,
               weight: 70,
@@ -247,7 +247,7 @@ void main() {
       await pumpScreen(tester);
       emitState(
         const RegisterFormState(
-          formData: RegisterFormData(gender: UserGender.male, age: 25),
+          formData: RegisterFormParams(gender: UserGender.male, age: 25),
         ),
       );
       await tester.pump();
