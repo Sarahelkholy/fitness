@@ -1,8 +1,6 @@
 import 'package:fitness/config/base_state/base_state.dart';
 import 'package:fitness/config/user/domain/entities/user_entity.dart';
 
-import '../../../../../config/social_auth/social_user.dart';
-
 class LoginState {
   LoginState({this.loginWithApi, this.loginWithGoogle, this.loginWithFacebook});
 
