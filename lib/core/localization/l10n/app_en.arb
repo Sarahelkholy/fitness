@@ -96,6 +96,25 @@
   "explore":"Explore",
   "smartCoach":"Smart coach",
   "workouts":"Workouts",
-  "profile":"Profile"
+  "profile":"Profile",
+    "seeAll":"See All",
+    "category":"Category",
+    "gym":"Gym",
+    "fitness":"Fitness",
+    "yoga":"Yoga",
+    "aerobics":"Aerobics",
+    "trainer":"Trainer",
+    "hi":"Hi",
+    "startYourDay":"Let's start your day",
+    "recommendationToDay":"Recommendation To Day",
+    "upcomingWorkouts":"Upcoming Workouts",
+    "recommendationForYou":"Recommendation For You",
+    "popularTraining":"popular training",
+    "breakfast":"Breakfast",
+    "lunch":"Lunch",
+    "dinner":"Dinner"
+
+
+
   
 }

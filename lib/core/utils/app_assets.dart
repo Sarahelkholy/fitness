@@ -36,4 +36,17 @@ abstract class AppAssets {
 
   static const String exercisesBackground =
       "$_baseImagesPath/exercises_background.jpg";
+
+  static const String gymCategoryIcon = "$_baseIconsPath/gym_category.png";
+  static const String yogaCategoryIcon = "$_baseIconsPath/yoga_category.png";
+  static const String fitnessCategoryIcon =
+      "$_baseIconsPath/fitness_category.png";
+  static const String aerobicCategoryIcon =
+      "$_baseIconsPath/aerobics_category.png";
+  static const String trainerCategoryIcon =
+      "$_baseIconsPath/trainer_category.png";
+
+  static const String breakfastImage = "$_baseImagesPath/breakfast.png";
+  static const String dinnerImage = "$_baseImagesPath/dinner.png";
+  static const String lunchImage = "$_baseImagesPath/lunch.png";
 }

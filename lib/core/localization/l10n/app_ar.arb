@@ -96,6 +96,23 @@
   "explore": "استكشاف",
   "smartCoach": "المدرب الذكي",
   "workouts": "التمارين",
-  "profile": "الملف الشخصي"
+  "profile": "الملف الشخصي",
+  "seeAll":"المزيد",
+      "category":"الاقسام",
+      "gym": "جيم",
+    "fitness": "فتنس",
+    "yoga": "يوغا",
+    "aerobics": "أيروبيكس",
+    "trainer": "مدرب",
+    "hi":"اهلا",
+    "startYourDay":"لنبدأ يومك",
+    "recommendationToDay": "توصية اليوم",
+"upcomingWorkouts": "التمارين القادمة",
+"recommendationForYou": "توصيات لكِ",
+"popularTraining": "التمارين الشائعة",
+"breakfast": "وجبة الإفطار",
+  "lunch": "وجبة الغداء",
+  "dinner": "وجبة العشاء"
+
   
 }
