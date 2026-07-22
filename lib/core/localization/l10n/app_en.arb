@@ -96,6 +96,6 @@
   "explore":"Explore",
   "smartCoach":"Smart coach",
   "workouts":"Workouts",
-  "profile":"Profile"
-  
+  "profile": "Profile",
+  "mealNotFound": "Meal not found"
 }
