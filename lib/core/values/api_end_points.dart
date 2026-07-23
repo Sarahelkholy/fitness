@@ -14,6 +14,13 @@ abstract class ApiEndPoints {
   static const String resetPassword = "/auth/resetPassword";
 
   static const String randomExercises = "/exercises/random";
+
+  ///? ================== Get All Muscles Group =================
+  static const String getAllMusclesGroup = "/muscles";
+
+  ///? ================ Get Muscles Group using id
+  static const String getMuscleGroupId = "/musclesGroup/by-muscle-group";
+
   static const String getMealsCategories = "/categories.php";
   static const String getMealsByCategory = "/filter.php";
   static const String getMealDetails = "/lookup.php";
