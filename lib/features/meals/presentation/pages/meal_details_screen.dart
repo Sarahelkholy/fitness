@@ -46,11 +46,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     if (videoId != null) {
       _controller = YoutubePlayerController(
         initialVideoId: videoId,
-        flags: const YoutubePlayerFlags(
-          autoPlay: true,
-          mute: false,
-          loop: false,
-        ),
+        flags: const YoutubePlayerFlags(autoPlay: true, mute: false),
       );
     }
   }
@@ -74,7 +70,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
       body: BlocBuilder<MealDetailsCubit, MealDetailsState>(
         builder: (context, state) {
           if (state.mealDetailsState.isLoading) {
-            return const Center(child: CustomLoadingIndicator());
+            return const CustomLoadingIndicator();
           } else if (state.mealDetailsState.errorMessage != null) {
             return CustomErrorWidget(
               errorMessage: state.mealDetailsState.errorMessage!,
@@ -93,7 +89,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
 
           return Column(
             children: [
-              // 1. Header Image Stack (Fixed)
+              // Header Image Stack
               Stack(
                 alignment: Alignment.center,
                 children: [
@@ -105,9 +101,6 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                         controller: _controller!,
                         showVideoProgressIndicator: true,
                         progressIndicatorColor: AppColors.main,
-                        onReady: () {
-                          // Player is ready.
-                        },
                       ),
                     )
                   else
@@ -117,7 +110,6 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                       width: double.infinity,
                     ),
 
-                  // Play Button Overlay
                   if (!_showYoutubePlayer && meal.youtubeUrl.isNotEmpty)
                     Positioned.fill(
                       child: Center(
