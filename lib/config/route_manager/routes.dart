@@ -17,6 +17,6 @@ abstract class Routes {
   static const String bottomNavBarRoute = "/bottomNavBar";
   static const String changPasswordRoute = "/changePassword";
 
-  static const String activeOrderDetails = "/activeOrderDetails";
-  static const String orderSuccess = "/orderSuccess";
+  static const String mealRecommendationRoute = "/mealRecommendation";
+  static const String mealDetailsRoute = "/mealDetails";
 }

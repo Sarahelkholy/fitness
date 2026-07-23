@@ -97,5 +97,10 @@
   "smartCoach": "المدرب الذكي",
   "workouts": "التمارين",
   "profile": "الملف الشخصي",
-  "mealNotFound": "لم يتم العثور على الوجبة"
+  "mealNotFound": "لم يتم العثور على الوجبة",
+
+  "foodRecommendation": "توصية الطعام",
+  "ingredients": "المكونات",
+  "noCategoriesFound": "لم يتم العثور على فئات",
+  "noMealsFound": "لم يتم العثور على وجبات لهذه الفئة"
 }
