@@ -103,4 +103,21 @@ abstract class AppTextStyles {
 
   static TextStyle bold32(BuildContext context) =>
       _base(context, size: 32, weight: FontWeight.w700);
+
+  ///?  ExtraBold  (FontWeight.w800)
+
+  static TextStyle extraBold14(BuildContext context) =>
+      _base(context, size: 14, weight: FontWeight.w800);
+
+  static TextStyle extraBold20(BuildContext context) =>
+      _base(context, size: 20, weight: FontWeight.w800);
+
+  static TextStyle extraBold24(BuildContext context) =>
+      _base(context, size: 24, weight: FontWeight.w800);
+
+  static TextStyle extraBold33(BuildContext context) =>
+      _base(context, size: 33, weight: FontWeight.w800);
+
+  static TextStyle extraBold44(BuildContext context) =>
+      _base(context, size: 44, weight: FontWeight.w800);
 }

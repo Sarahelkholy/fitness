@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<UserCubit>(create: (_) => getIt<UserCubit>()),
+        BlocProvider(create: (_) => getIt<UserCubit>()),
 
         BlocProvider<LocaleCubit>(
           create: (_) => getIt<LocaleCubit>()..loadSavedLanguage(),

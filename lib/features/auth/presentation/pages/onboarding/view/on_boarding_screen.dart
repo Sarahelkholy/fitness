@@ -44,10 +44,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       appBar: _buildAppBar(),
       imagePath: AppAssets.onBoardingBackground,
       child: Stack(
-        children: [
-          _buildOnboardingImage(),
-          _buildOnboardingContent()
-        ],
+        children: [_buildOnboardingImage(), _buildOnboardingContent()],
       ),
     );
   }
@@ -64,12 +61,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           valueListenable: _currentPage,
           builder: (context, value, child) {
             if (value == _onBoardingModel.length - 1) {
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
             return GestureDetector(
               onTap: () =>
                   _pageController.skipToLastPage(_onBoardingModel.length - 1),
-              child: Text(KeysStrings.onBoardingSkip),
+              child: const Text(KeysStrings.onBoardingSkip),
             );
           },
         ),
@@ -88,25 +85,28 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           style: OutlinedButton.styleFrom(
             minimumSize: Size.zero,
             foregroundColor: AppColors.white,
-            side: const BorderSide(
-              color: AppColors.main,
-              width: 1.5,
-            ),
+            side: const BorderSide(color: AppColors.main, width: 1.5),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           ),
           onPressed: _pageController.navigateToPreviousPage,
           child: const Text(KeysStrings.onBoardingBack),
         ),
+
         ///? Next
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             minimumSize: Size.zero,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           ),
-          onPressed: _currentPage.value == _onBoardingModel.length - 1 ? () {
-            SecureCacheHelper.set(LocalKeys.onBoarding, true);
-            Navigator.of(context,).pushNamedAndRemoveUntil(Routes.loginRoute, (route) => false);
-          } : _pageController.navigateToNextPage,
+          onPressed: _currentPage.value == _onBoardingModel.length - 1
+              ? () {
+                  SecureCacheHelper.set(LocalKeys.onBoarding, true);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    Routes.loginRoute,
+                    (route) => false,
+                  );
+                }
+              : _pageController.navigateToNextPage,
           child: ValueListenableBuilder(
             valueListenable: _currentPage,
             builder: (context, value, child) {
@@ -128,8 +128,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       right: 0,
       left: 0,
       child: GlassContainer(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 31),
-        borderRadius: BorderRadius.only(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 31),
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(50),
           topRight: Radius.circular(50),
         ),
@@ -144,9 +144,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   child: Text(
                     _onBoardingModel[value].title,
                     style: AppTextStyles.bold24(context).copyWith(
-                        height: 1.40,
-                        color: AppColors.white,
-                        fontWeight: FontWeight.w800
+                      height: 1.40,
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w800,
                     ),
                     textAlign: TextAlign.center,
                     maxLines: 2,
@@ -156,24 +156,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 Text(
                   _onBoardingModel[value].desc,
                   style: AppTextStyles.bold16(context).copyWith(
-                      height: 1.40,
-                      color: AppColors.grayD3,
-                      fontWeight: FontWeight.w400
+                    height: 1.40,
+                    color: AppColors.grayD3,
+                    fontWeight: FontWeight.w400,
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                 ),
 
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 _buildIndicator(),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 ValueListenableBuilder(
                   valueListenable: _currentPage,
                   builder: (context, value, child) {
                     if (value == 0) {
                       return ElevatedButton(
                         onPressed: _pageController.navigateToNextPage,
-                        child: Text(KeysStrings.onBoardingNext),
+                        child: const Text(KeysStrings.onBoardingNext),
                       );
                     }
                     return _buildRowButtons();
@@ -193,7 +193,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     child: SmoothPageIndicator(
       controller: _pageController.controller,
       count: _onBoardingModel.length,
-      effect: ExpandingDotsEffect(
+      effect: const ExpandingDotsEffect(
         dotHeight: 8,
         dotWidth: 8,
         dotColor: AppColors.white,
@@ -215,4 +215,3 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     );
   }
 }
-

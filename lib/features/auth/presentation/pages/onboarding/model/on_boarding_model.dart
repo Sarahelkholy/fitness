@@ -13,17 +13,17 @@ final class OnboardingModel {
   });
 
   static final List<OnboardingModel> onBoardingModel = [
-    OnboardingModel(
+    const OnboardingModel(
       image: AppAssets.onBoardingScreenOne,
       title: KeysStrings.onBoardingTitle1,
       desc: KeysStrings.onBoardingDesc2,
     ),
-    OnboardingModel(
+    const OnboardingModel(
       image: AppAssets.onBoardingScreenTwo,
       title: KeysStrings.onBoardingTitle2,
       desc: KeysStrings.onBoardingDesc2,
     ),
-    OnboardingModel(
+    const OnboardingModel(
       image: AppAssets.onBoardingScreenThree,
       title: KeysStrings.onBoardingTitle3,
       desc: KeysStrings.onBoardingDesc3,
