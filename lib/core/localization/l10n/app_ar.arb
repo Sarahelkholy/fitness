@@ -56,8 +56,52 @@
   "smartCoach": "المدرب الذكي",
   "workouts": "التمارين",
   "profile": "الملف الشخصي"
-  
+
   "defaultError": "حدث خطأ ما",
   "socialSignInCancelled": "تم إلغاء تسجيل الدخول",
-  "facebookLoginError": "خطأ في تسجيل الدخول عبر فيسبوك"
+  "facebookLoginError": "خطأ في تسجيل الدخول عبر فيسبوك",
+
+  "heyThere": "أهلاً بك",
+  "createAnAccount": "إنشاء حساب",
+  "register": "تسجيل",
+  "firstName": "الاسم الأول",
+  "lastName": "اسم العائلة",
+  "or": "أو",
+  "alreadyHaveAnAccount": "هل لديك حساب بالفعل؟ ",
+
+  "tellUsAboutYourself": "أخبرنا عن نفسك!",
+  "weNeedToKnowYourGender": "نحتاج لمعرفة جنسك",
+  "male": "ذكر",
+  "female": "أنثى",
+  "next": "التالي",
+
+  "howOldAreYou": "كم عمرك؟",
+  "thisHelpsUsCreateYourPersonalizedPlan": "هذا يساعدنا في إنشاء خطتك المخصصة",
+  "year": "سنة",
+
+  "whatIsYourWeight": "ما هو وزنك؟",
+  "kg": "كجم",
+
+  "whatIsYourHeight": "ما هو طولك؟",
+  "cm": "سم",
+
+  "whatIsYourGoal": "ما هو هدفك؟",
+  "gainWeight": "زيادة الوزن",
+  "loseWeight": "خسارة الوزن",
+  "getFitted": "الحصول على جسم رياضي",
+  "gainMoreFlexible": "زيادة المرونة",
+  "learnTheBasic": "تعلم الأساسيات",
+
+  "yourRegularPhysicalActivityLevel": "مستوى نشاطك البدني المعتاد؟",
+  "level1": "مبتدئ جداً",
+  "level2": "مبتدئ",
+  "level3": "متوسط",
+  "level4": "متقدم",
+  "level5": "محترف",
+  "done": "تم",
+  "explore": "استكشاف",
+  "smartCoach": "المدرب الذكي",
+  "workouts": "التمارين",
+  "profile": "الملف الشخصي"
+
 }

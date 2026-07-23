@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../../../core/values/api_end_points.dart';
+import '../../data/models/requests/update_user_data_request.dart';
 import '../../data/models/responses/get_user_response/get_user_data_response.dart';
 
 part 'user_api_client.g.dart';
@@ -14,4 +15,9 @@ abstract class UserApiClient {
 
   @GET(ApiEndPoints.getUserData)
   Future<GetUserDataResponse> getUserData();
+
+  @PUT(ApiEndPoints.editProfile)
+  Future<GetUserDataResponse> updateUserData(
+    @Body() UpdateUserDataRequest request,
+  );
 }

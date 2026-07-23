@@ -114,4 +114,10 @@ abstract class AppTextStyles {
 
   static TextStyle extraBold24(BuildContext context) =>
       _base(context, size: 24, weight: FontWeight.w800);
+
+  static TextStyle extraBold33(BuildContext context) =>
+      _base(context, size: 33, weight: FontWeight.w800);
+
+  static TextStyle extraBold44(BuildContext context) =>
+      _base(context, size: 44, weight: FontWeight.w800);
 }

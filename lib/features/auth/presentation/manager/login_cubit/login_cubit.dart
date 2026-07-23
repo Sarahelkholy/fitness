@@ -50,7 +50,7 @@ class LoginCubit extends BaseCubit<LoginState, BaseEvent> {
         );
         emitEvent(
           const NavigationEvent(
-            routeName: Routes.homeRoute,
+            routeName: Routes.bottomNavBarRoute,
             type: NavigationType.pushReplacementAndRemoveUntil,
           ),
         );
