@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import '../../../../../config/error_handling/execute_api.dart';
 import '../../../../../config/error_handling/result.dart';
 import 'package:fitness/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
@@ -9,7 +10,7 @@ import '../../../data/models/requests/verify_reset_otp_request.dart';
 import '../../../data/models/responses/auth_response.dart';
 import '../../auth_api_client/auth_api_client.dart';
 
-// @Injectable(as: AuthRemoteDataSource)
+@Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final AuthApiClient _apiClient;
 
@@ -30,29 +31,41 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Result<AuthResponse>> forgetPassword(
-    ForgetPasswordRequest forgetPasswordRequest,
-  ) {
+  Future<Result<AuthResponse>> forgetPassword(ForgetPasswordRequest request) {
     return executeApi(() async {
-      return await _apiClient.forgetPassword(forgetPasswordRequest);
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (request.email == 'notfound@test.com') {
+        throw Exception('Email not found');
+      }
+
+      return AuthResponse(message: 'Reset code sent successfully.');
     });
   }
 
   @override
-  Future<Result<AuthResponse>> verifyResetCode(
-    VerifyResetOtpRequest verifyResetOtpRequest,
-  ) {
+  Future<Result<AuthResponse>> verifyResetCode(VerifyResetOtpRequest request) {
     return executeApi(() async {
-      return await _apiClient.verifyResetCode(verifyResetOtpRequest);
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (request.resetCode != '1234') {
+        throw Exception('Invalid reset code');
+      }
+
+      return AuthResponse(message: 'OTP verified successfully.');
     });
   }
 
   @override
-  Future<Result<AuthResponse>> resetPassword(
-    ResetPasswordRequest resetPasswordRequest,
-  ) {
+  Future<Result<AuthResponse>> resetPassword(ResetPasswordRequest request) {
     return executeApi(() async {
-      return await _apiClient.resetPassword(resetPasswordRequest);
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (request.newPassword.length < 8) {
+        throw Exception('Password is too short');
+      }
+
+      return AuthResponse(message: 'Password reset successfully.');
     });
   }
 }

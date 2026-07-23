@@ -50,13 +50,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             child: Column(
               children: [
                 AppBar(
-                  backgroundColor: AppColors.transparent,
-                  leading: const SizedBox.shrink(),
                   title: Image.asset(
-                    AppAssets.fitnessLogo,
-                    height: size.height * .8,
-                    width: size.width * .5,
+                    AppAssets.appLogo,
+                    height: 48,
+                    width: 70,
+                    fit: BoxFit.fill,
                   ),
+
                   centerTitle: true,
                 ),
                 SizedBox(height: size.height * .1),
@@ -66,11 +66,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(30),
                         child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                          filter: ImageFilter.blur(sigmaX: 35, sigmaY: 35),
                           child: Container(
                             padding: const EdgeInsets.all(24),
                             decoration: BoxDecoration(
-                              color: AppColors.pureBlack.withOpacity(0.4),
+                              // color: AppColors.pureBlack.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(30),
                               border: Border.all(
                                 color: AppColors.white.withOpacity(0.1),

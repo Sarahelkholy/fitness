@@ -31,76 +31,101 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
-  dio: ^5.9.2
-  injectable:
-  get_it:
-  retrofit:
-  logger:
-  json_annotation:  ^4.9.0
-  pretty_dio_logger: ^1.4.0
-  flutter_bloc:
-  equatable: ^2.0.8
-  flutter_secure_storage:
-  flutter_svg: ^2.2.4
-  pin_code_fields: ^8.0.1
-  cached_network_image: ^3.4.1
-  hive_ce:
-  hive_ce_flutter:
-  google_fonts:
   flutter_localizations:
     sdk: flutter
-  intl: any
-  flutter_intl_phone_field: ^0.0.7
-  flutter_keyboard_visibility: ^6.0.0
+
+  cupertino_icons: ^1.0.8
+
+  # Dependency Injection
+  get_it: ^9.0.5
+  injectable: ^2.5.1
+
+  # Networking
+  dio: ^5.9.2
+  retrofit: ^4.7.2
+  logger: ^2.6.1
+  pretty_dio_logger: ^1.4.0
+
+  # Serialization
+  json_annotation: ^4.9.0
+
+  # State Management
+  flutter_bloc: ^9.1.1
+  equatable: ^2.0.8
+
+  # Storage
+  flutter_secure_storage: ^10.3.1
+  hive_ce: ^2.15.1
+  hive_ce_flutter: ^2.3.2
+
+  # UI
+  flutter_svg: ^2.2.4
+  cached_network_image: ^3.4.1
+  google_fonts: ^8.2.0
   carousel_slider: ^5.1.2
   smooth_page_indicator: ^2.0.1
   shimmer: ^3.0.0
-  image_picker: ^1.2.2
-  geocoding: ^4.0.0
-  google_maps_flutter: ^2.17.1
-  firebase_core: ^4.9.0
-  flutter_local_notifications: ^18.0.1
-  firebase_messaging: ^16.2.2
-  permission_handler: ^12.0.3
-  firebase_crashlytics: ^5.2.3
-  cloud_firestore: ^6.6.0
-  firebase_analytics: ^12.4.2
+  timeline_tile: ^2.0.0
 
+  # Forms
+  pin_code_fields: ^8.0.1
+  flutter_intl_phone_field: ^0.0.7
+  flutter_keyboard_visibility: ^6.0.0
+
+  # Localization
+  intl: ^0.20.2
+
+  # Images
+  image_picker: ^1.2.2
+
+  # Location & Maps
+  geocoding: ^4.0.0
+  geolocator: ^14.0.3
+  google_maps_flutter: ^2.17.1
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+
+  # Firebase
+  firebase_core: ^4.1.0
+  firebase_auth: ^6.0.0
+  cloud_firestore: ^6.0.0
+  firebase_messaging: ^16.0.0
+  firebase_crashlytics: ^5.0.0
+  firebase_analytics: ^12.0.0
+
+  flutter_local_notifications: ^18.0.1
+  permission_handler: ^12.0.3
+
+  # Authentication
   google_sign_in: ^6.2.1
   flutter_facebook_auth: ^7.1.1
 
-  webview_flutter: ^4.13.1
-  geolocator: ^14.0.3
+  # Others
   url_launcher: ^6.3.1
-  flutter_map: ^7.0.2
-  latlong2: ^0.9.1
+  webview_flutter: ^4.13.1
   googleapis: ^16.0.0
   googleapis_auth: ^2.3.2
-  timeline_tile: ^2.0.0
-
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^6.0.0
-  injectable_generator:
-  build_runner:
-  retrofit_generator:
-  json_serializable:
-  hive_ce_generator:
-  flutter_launcher_icons:
-  test:
-  mockito:
-  bloc_test:
+
+  build_runner: ^2.5.4
+  injectable_generator: ^2.7.0
+  retrofit_generator: ^10.2.7
+  json_serializable: ^6.11.1
+  hive_ce_generator: ^1.9.2
+
+  flutter_launcher_icons: ^0.14.4
+
+  mockito: ^5.6.0
+  bloc_test: ^10.0.0
+  test: ^1.31.0
+
+
+
 
 
 # For information on the generic Dart part of this file, see the

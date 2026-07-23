@@ -9,6 +9,7 @@ import 'package:fitness/core/values/app_strings.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_event.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_state.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -71,7 +72,19 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
           ).copyWith(color: AppColors.white),
         ),
         const SizedBox(height: 24),
-        PinCodeTextField(
+        ClipRRect(
+          borderRadius: BorderRadius.circular(50),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 35, sigmaY: 35),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 32.0,
+                vertical: 24,
+              ),
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              PinCodeTextField(
           appContext: context,
           controller: _otpController,
           length: 4,
@@ -139,7 +152,12 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
             ),
           ),
         ),
-        const SizedBox(height: 6),
+              const SizedBox(height: 6),
+            ],
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

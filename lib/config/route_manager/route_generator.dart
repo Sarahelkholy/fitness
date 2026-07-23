@@ -3,7 +3,7 @@ import 'package:fitness/core/helpers/custom_logger.dart';
 import 'package:fitness/core/shared_widgets/custom_bottom_nav.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
 import 'package:fitness/features/auth/presentation/manager/login_cubit/login_cubit.dart';
-import 'package:fitness/features/auth/presentation/pages/forget_password/password_enter_email_screen.dart';
+import 'package:fitness/features/auth/presentation/pages/forget_password/view/screens/password_enter_email_screen.dart';
 import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart';
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/register_form_cubit/register_form_cubit.dart';
@@ -33,8 +33,6 @@ abstract class RouteGenerator {
           return MaterialPageRoute(
             builder: (_) => const ForgetPasswordScreen(),
           );
-        case Routes.loginRoute:
-          return MaterialPageRoute(builder: (_) => const LoginScreen());
 
         ///================ OnBoardingScreen ================
         case Routes.onboardingRoute:

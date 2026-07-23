@@ -10,6 +10,7 @@ import 'package:fitness/core/values/app_strings.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_event.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_state.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -70,74 +71,93 @@ class _ProvideEmailViewState extends State<ProvideEmailView> {
           style: AppTextStyles.bold24(context).copyWith(color: AppColors.white),
         ),
         const SizedBox(height: 16),
-        Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                style: AppTextStyles.medium16(
-                  context,
-                ).copyWith(color: AppColors.white),
-                validator: Validator.email,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(
-                    Icons.email_outlined,
-                    color: AppColors.white,
-                    size: 20,
-                  ),
-                  hintText: AppStrings.current.email,
-                  hintStyle: AppTextStyles.regular14(
-                    context,
-                  ).copyWith(color: AppColors.white.withOpacity(0.5)),
-                  filled: true,
-                  fillColor: AppColors.pureBlack.withOpacity(0.2),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 20,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      color: AppColors.white.withOpacity(0.5),
-                      width: 1,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(50),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 35, sigmaY: 35),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 32.0,
+                vertical: 24,
+              ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      style: AppTextStyles.medium16(
+                        context,
+                      ).copyWith(color: AppColors.white),
+                      validator: Validator.email,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          Icons.email_outlined,
+                          color: AppColors.white,
+                          size: 20,
+                        ),
+                        hintText: AppStrings.current.email,
+                        hintStyle: AppTextStyles.regular14(
+                          context,
+                        ).copyWith(color: AppColors.white.withOpacity(0.5)),
+                        filled: true,
+                        fillColor: AppColors.pureBlack.withOpacity(0.2),
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 20,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: AppColors.white.withOpacity(0.5),
+                            width: 1,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: AppColors.white.withOpacity(0.5),
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: AppColors.white,
+                            width: 1,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      color: AppColors.white.withOpacity(0.5),
-                      width: 1,
+                    const SizedBox(height: 24),
+                    BlocSelector<
+                      ForgetPasswordCubit,
+                      ForgetPasswordState,
+                      bool
+                    >(
+                      selector: (state) => state.sendEmailState.isLoading,
+                      builder: (context, isLoading) {
+                        return CustomButton(
+                          title: AppStrings.current.sendOtp,
+                          isLoading: isLoading,
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              context.read<ForgetPasswordCubit>().doEvents(
+                                SendEmailEvent(
+                                  email: _emailController.text.toLowerCase(),
+                                ),
+                              );
+                            }
+                          },
+                        );
+                      },
                     ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(color: AppColors.white, width: 1),
-                  ),
+                    const SizedBox(height: 15),
+                  ],
                 ),
               ),
-              const SizedBox(height: 24),
-              BlocSelector<ForgetPasswordCubit, ForgetPasswordState, bool>(
-                selector: (state) => state.sendEmailState.isLoading,
-                builder: (context, isLoading) {
-                  return CustomButton(
-                    title: AppStrings.current.sendOtp,
-                    isLoading: isLoading,
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        context.read<ForgetPasswordCubit>().doEvents(
-                          SendEmailEvent(
-                            email: _emailController.text.toLowerCase(),
-                          ),
-                        );
-                      }
-                    },
-                  );
-                },
-              ),
-              const SizedBox(height: 15),
-            ],
+            ),
           ),
         ),
       ],

@@ -68,23 +68,41 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Result<String>> forgetPassword(
-      ForgetPasswordRequest forgetPasswordRequest,) {
-    // TODO: implement forgetPassword
-    throw UnimplementedError();
+      ForgetPasswordRequest forgetPasswordRequest,) async {
+    final response =
+        await _authRemoteDataSource.forgetPassword(forgetPasswordRequest);
+    switch (response) {
+      case Success<AuthResponse>():
+        return Success(data: response.data.message ?? 'Success');
+      case Failure<AuthResponse>():
+        return Failure(errorMessage: response.errorMessage);
+    }
   }
 
   @override
   Future<Result<String>> resetPassword(
-      ResetPasswordRequest resetPasswordRequest,) {
-    // TODO: implement resetPassword
-    throw UnimplementedError();
+      ResetPasswordRequest resetPasswordRequest,) async {
+    final response =
+        await _authRemoteDataSource.resetPassword(resetPasswordRequest);
+    switch (response) {
+      case Success<AuthResponse>():
+        return Success(data: response.data.message ?? 'Success');
+      case Failure<AuthResponse>():
+        return Failure(errorMessage: response.errorMessage);
+    }
   }
 
   @override
   Future<Result<String>> verifyResetCode(
-      VerifyResetOtpRequest verifyResetOtpRequest,) {
-    // TODO: implement verifyResetCode
-    throw UnimplementedError();
+      VerifyResetOtpRequest verifyResetOtpRequest,) async {
+    final response =
+        await _authRemoteDataSource.verifyResetCode(verifyResetOtpRequest);
+    switch (response) {
+      case Success<AuthResponse>():
+        return Success(data: response.data.message ?? 'Success');
+      case Failure<AuthResponse>():
+        return Failure(errorMessage: response.errorMessage);
+    }
   }
 
   @override

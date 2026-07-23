@@ -11,6 +11,7 @@ import 'package:fitness/core/values/app_strings.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_event.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_state.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -79,10 +80,19 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
           style: AppTextStyles.bold24(context).copyWith(color: AppColors.white),
         ),
         const SizedBox(height: 24),
-        Form(
-          key: _formKey,
-          child: Column(
-            children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(50),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 35, sigmaY: 35),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 32.0,
+                vertical: 24,
+              ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
               TextFormField(
                 controller: _passwordController,
                 obscureText: _obscurePassword,
@@ -229,8 +239,11 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
               ),
               const SizedBox(height: 15),
             ],
+                  ),
+                ),
+              ),
+            ),
           ),
-        ),
       ],
     );
   }
