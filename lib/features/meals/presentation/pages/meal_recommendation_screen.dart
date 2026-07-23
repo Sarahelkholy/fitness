@@ -1,4 +1,4 @@
-import 'package:fitness/core/helpers/event_handler_mixin.dart';
+import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/core/shared_widgets/custom_error_widget.dart';
 import 'package:fitness/core/shared_widgets/custom_grid_item.dart';
 import 'package:fitness/core/shared_widgets/custom_loading_indicator.dart';
@@ -23,8 +23,7 @@ class MealRecommendationScreen extends StatefulWidget {
       _MealRecommendationScreenState();
 }
 
-class _MealRecommendationScreenState extends State<MealRecommendationScreen>
-    with EventHandlerMixin {
+class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
   late AppLocalizations localizations;
   late final MealRecommendationCubit _cubit;
 
@@ -32,11 +31,6 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen>
   void initState() {
     super.initState();
     _cubit = context.read<MealRecommendationCubit>();
-
-    _cubit.eventStream.listen((event) {
-      if (!mounted) return;
-      handleEvent(event);
-    });
   }
 
   @override
@@ -174,7 +168,11 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen>
                                     title: meal.name,
                                     imageUrl: meal.image,
                                     onTap: () {
-                                      // Navigate to details
+                                      Navigator.pushNamed(
+                                        context,
+                                        Routes.mealDetailsRoute,
+                                        arguments: meal.id,
+                                      );
                                     },
                                   );
                                 },

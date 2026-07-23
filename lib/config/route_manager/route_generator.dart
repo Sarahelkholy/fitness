@@ -18,6 +18,7 @@ import '../../features/auth/presentation/pages/onboarding/view/on_boarding_scree
 import '../../features/auth/presentation/pages/splash/splash_screen.dart';
 import '../../features/auth/presentation/pages/register_form/register_form_screen.dart';
 import '../../features/meals/presentation/manager/meal_details_cubit/meal_details_cubit.dart';
+import '../../features/meals/presentation/manager/meal_details_cubit/meal_details_event.dart';
 import '../../features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_cubit.dart';
 import '../../features/meals/presentation/pages/meal_details_screen.dart';
 import '../../features/meals/presentation/pages/meal_recommendation_screen.dart';
@@ -87,15 +88,14 @@ abstract class RouteGenerator {
 
         /// meal details screen
         case Routes.mealDetailsRoute:
-          // final mealId = settings.arguments as String;
+          final mealId = settings.arguments as String;
 
           return MaterialPageRoute(
             builder: (_) => BlocProvider(
-              // create: (context) =>
-              // getIt<MealDetailsCubit>()
-              //   ..doEvents(GetMealDetailsEvent(mealId: mealId)),
-              create: (context) => getIt<MealDetailsCubit>(),
-              child: const MealDetailsScreen(),
+              create: (context) =>
+                  getIt<MealDetailsCubit>()
+                    ..doEvents(GetMealDetailsEvent(mealId: mealId)),
+              child: MealDetailsScreen(mealId: mealId),
             ),
           );
 

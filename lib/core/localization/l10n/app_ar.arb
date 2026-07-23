@@ -102,5 +102,8 @@
   "foodRecommendation": "توصية الطعام",
   "ingredients": "المكونات",
   "noCategoriesFound": "لم يتم العثور على فئات",
-  "noMealsFound": "لم يتم العثور على وجبات لهذه الفئة"
+  "noMealsFound": "لم يتم العثور على وجبات لهذه الفئة",
+  "category": "الفئة",
+  "area": "المنطقة",
+  "country": "البلد"
 }
