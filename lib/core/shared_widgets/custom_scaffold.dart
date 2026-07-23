@@ -1,5 +1,5 @@
-import 'dart:ui'; // Required for ImageFilter
 import 'package:fitness/core/utils/app_assets.dart';
+import 'package:fitness/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomScaffold extends StatelessWidget {
@@ -18,18 +18,16 @@ class CustomScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: AppColors.pureBlack.withValues(alpha: .5),
         image: DecorationImage(
           image: AssetImage(backgroundImage),
           fit: BoxFit.cover,
         ),
       ),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: appBar,
-          body: body,
-        ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: appBar,
+        body: body,
       ),
     );
   }
