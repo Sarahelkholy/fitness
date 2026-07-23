@@ -113,7 +113,8 @@
 "breakfast": "وجبة الإفطار",
   "lunch": "وجبة الغداء",
   "dinner": "وجبة العشاء",
-
+"noMuscleGroupsAvailable": "لا توجد مجموعات متاحة",
+"noExercisesFoundForThisCategory": "لم يتم العثور على تمارين لهذه الفئة",
   
   "mealNotFound": "لم يتم العثور على الوجبة"
 }

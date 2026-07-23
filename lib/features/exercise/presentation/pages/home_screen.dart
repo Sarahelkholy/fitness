@@ -7,6 +7,7 @@ import 'package:fitness/features/exercise/presentation/widgets/headline_widget.d
 import 'package:fitness/features/exercise/presentation/widgets/home/categories_list.dart';
 import 'package:fitness/features/exercise/presentation/widgets/home/recommendation_exercise_list.dart';
 import 'package:fitness/features/exercise/presentation/widgets/home/recommendation_food_list.dart';
+import 'package:fitness/features/exercise/presentation/widgets/home/upcoming_workouts_section.dart';
 import 'package:fitness/features/exercise/presentation/widgets/home/user_info_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,9 +22,10 @@ class HomeScreen extends StatelessWidget {
     return CustomScaffold(
       backgroundImage: AppAssets.exercisesBackground,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-          child: Column(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+            child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const UserInfoBar(),
@@ -54,6 +56,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 24),
 
               HeadlineWidget(title: local.upcomingWorkouts, isViewAll: true),
+              const UpcomingWorkoutsSection(),
               const SizedBox(height: 24),
 
               HeadlineWidget(
@@ -83,6 +86,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
   }
 }

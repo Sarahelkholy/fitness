@@ -21,13 +21,13 @@ abstract class HomeApiClient {
   });
 
   ///? ============= Get All Muscles Group =================
-  @POST(ApiEndPoints.getAllMusclesGroup)
+  @GET(ApiEndPoints.getAllMusclesGroup)
   Future<GetAllMusclesGroupResponse> getAllMusclesGroup(
     @Header('accept-language') String language,
   );
 
   ///? ================= Get Muscle Using id ===================
-  @POST(ApiEndPoints.getMuscleGroupId)
+  @GET(ApiEndPoints.getMuscleGroupId)
   Future<GetMusclesGroupIdResponse> getMuscleGroupId(
     @Header('accept-language') String language,
     @Query('muscleGroupId') String muscleGroupId,

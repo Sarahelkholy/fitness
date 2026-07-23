@@ -113,6 +113,9 @@
     "breakfast":"Breakfast",
     "lunch":"Lunch",
     "dinner":"Dinner",
+    "noMuscleGroupsAvailable":"No muscle groups available",
+    "noExercisesFoundForThisCategory":"No exercises found for this category",
+
 
 
 
