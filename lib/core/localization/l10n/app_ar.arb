@@ -52,6 +52,12 @@
   "error503": "الخدمة غير متاحة",
   "error504": "انتهت مهلة البوابة",
   "defaultError": "حدث خطأ ما",
+  "explore": "استكشاف",
+  "smartCoach": "المدرب الذكي",
+  "workouts": "التمارين",
+  "profile": "الملف الشخصي"
+
+  "defaultError": "حدث خطأ ما",
   "socialSignInCancelled": "تم إلغاء تسجيل الدخول",
   "facebookLoginError": "خطأ في تسجيل الدخول عبر فيسبوك",
 
@@ -97,5 +103,5 @@
   "smartCoach": "المدرب الذكي",
   "workouts": "التمارين",
   "profile": "الملف الشخصي"
-  
+
 }

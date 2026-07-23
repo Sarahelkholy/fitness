@@ -29,6 +29,14 @@ abstract class RouteGenerator {
         case Routes.homeRoute:
           return MaterialPageRoute(builder: (_) => const HomeScreen());
 
+        case Routes.bottomNavBarRoute:
+          final args = settings.arguments as Map<String, dynamic>?;
+
+          return MaterialPageRoute(
+            builder: (_) =>
+                CustomBottomNavBar(initialIndex: args?['initialIndex'] ?? 0),
+          );
+
         /// login screen
         case Routes.loginRoute:
           return MaterialPageRoute(

@@ -22,6 +22,13 @@ abstract class AppAssets {
   static const String facebookIcon = "$_baseIconsPath/facebook_icon.svg";
   static const String googleIcon = "$_baseIconsPath/google_icon.svg";
   static const String appleIcon = "$_baseIconsPath/apple_icon.svg";
+  static const String authBackgroungImage = "$_baseImagesPath/background.png";
+
+  static const String homeIcon = "$_baseIconsPath/home.svg";
+  static const String chatIcon = "$_baseIconsPath/chat.svg";
+
+  static const String workoutIcon = "$_baseIconsPath/gym.svg";
+  static const String personIcon = "$_baseIconsPath/profile.svg";
 
   // static const String facebookIcon = "$_baseIconsPath/facebook_icon.svg";
   // static const String googleIcon = "$_baseIconsPath/google_icon.svg";
