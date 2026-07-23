@@ -1,26 +1,26 @@
 sealed class ForgetPasswordEvents {}
 
 class SendEmailEvent extends ForgetPasswordEvents {
-  final String email;
+  final String? email;
 
-  SendEmailEvent({required this.email});
+  SendEmailEvent({this.email});
 }
 
 class VerifyOtpEvent extends ForgetPasswordEvents {
-  final String otp;
+  final String? otp;
 
-  VerifyOtpEvent({required this.otp});
+  VerifyOtpEvent({this.otp});
 }
 
 class ResendOtpEvent extends ForgetPasswordEvents {
-  final String email;
+  final String? email;
 
-  ResendOtpEvent({required this.email});
+  ResendOtpEvent({this.email});
 }
 
 class ResetPasswordEvent extends ForgetPasswordEvents {
-  final String email;
-  final String newPassword;
+  final String? email;
+  final String? newPassword;
 
-  ResetPasswordEvent({required this.newPassword, required this.email});
+  ResetPasswordEvent({this.newPassword, this.email});
 }

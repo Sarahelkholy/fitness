@@ -40,48 +40,38 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _streamSubscription = context
-          .read<ForgetPasswordCubit>()
-          .eventStream
-          .listen((event) {
-            if (!mounted) return;
-            switch (event) {
-              case DisplayErrorEvent():
-                AppSnackBar.error(context, event.errorMsg);
-              case DisplaySuccessEvent():
-                AppSnackBar.success(context, event.successMsg);
-                Navigator.of(context).pop();
-              case NavigationEvent():
-                Navigator.of(context).pop();
-            }
-          });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppStrings.current.makeSureIts8Chars,
-          style: AppTextStyles.regular14(
+    final mediaQuery = MediaQuery.of(context).size;
+    return BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
+      listener: (context, state) {
+        if (state.resetPasswordState.isSuccess) {
+          Navigator.pushNamedAndRemoveUntil(
             context,
-          ).copyWith(color: AppColors.white),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          AppStrings.current.createNewPassword,
-          style: AppTextStyles.bold24(context).copyWith(color: AppColors.white),
-        ),
-        const SizedBox(height: 24),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(50),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 35, sigmaY: 35),
+            Routes.loginRoute,
+            (route) => false,
+          );
+        } else if (state.resetPasswordState.errorMessage != null) {
+          AppSnackBar.error(context, state.resetPasswordState.errorMessage!);
+        }
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppStrings.current.makeSureIts8Chars,
+            style: AppTextStyles.regular14(
+              context,
+            ).copyWith(color: AppColors.white),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            AppStrings.current.createNewPassword,
+            style: AppTextStyles.bold24(
+              context,
+            ).copyWith(color: AppColors.white),
+          ),
+          const SizedBox(height: 24),
+          Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 32.0,
@@ -227,33 +217,26 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                             if (_formKey.currentState!.validate()) {
                               context.read<ForgetPasswordCubit>().doEvents(
                                 ResetPasswordEvent(
-                                  email:
-                                      context
-                                          .read<ForgetPasswordCubit>()
-                                          .state
-                                          .email ??
-                                      '',
+                                  email: context
+                                      .read<ForgetPasswordCubit>()
+                                      .state
+                                      .email!,
                                   newPassword: _passwordController.text,
                                 ),
-                              );
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                Routes.loginRoute,
-                                (route) => false,
                               );
                             }
                           },
                         );
                       },
                     ),
-                    const SizedBox(height: 15),
+                    // const SizedBox(height: 15),
                   ],
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -100,12 +100,12 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
                       selectedFillColor: AppColors.transparent,
                     ),
                     cursorColor: AppColors.main,
-                    enableActiveFill: true,
-                    onChanged: (value) {
-                      context.read<ForgetPasswordCubit>().doEvents(
-                        VerifyOtpEvent(otp: value),
-                      );
-                    },
+                    // enableActiveFill: true,
+                    // onChanged: (value) {
+                    //   context.read<ForgetPasswordCubit>().doEvents(
+                    //     VerifyOtpEvent(otp: value),
+                    //   );
+                    // },
                   ),
                   const SizedBox(height: 24),
                   BlocSelector<ForgetPasswordCubit, ForgetPasswordState, bool>(

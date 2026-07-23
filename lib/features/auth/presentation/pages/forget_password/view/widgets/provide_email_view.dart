@@ -35,43 +35,39 @@ class _ProvideEmailViewState extends State<ProvideEmailView> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _streamSubscription = context
-          .read<ForgetPasswordCubit>()
-          .eventStream
-          .listen((event) {
-            if (event case DisplayErrorEvent()) {
-              // AppSnackBar.error(context, event.errorMsg);
-            } else if (event case NavigationEvent()) {
-              widget.onNext(_emailController.text);
-            } else {}
-          });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppStrings.current.enterEmail,
-          style: AppTextStyles.regular14(
+    return BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
+      listenWhen: (previous, current) =>
+          previous.sendEmailState != current.sendEmailState,
+      listener: (context, state) {
+        if (state.sendEmailState.isSuccess) {
+          widget.onNext(_emailController.text);
+        } else if (state.sendEmailState.errorMessage?.isNotEmpty ?? false) {
+          AppSnackBar.error(
             context,
-          ).copyWith(color: AppColors.white),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          AppStrings.current.forgetPassword,
-          style: AppTextStyles.bold24(context).copyWith(color: AppColors.white),
-        ),
-        const SizedBox(height: 16),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(50),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 35, sigmaY: 35),
+            state.sendEmailState.errorMessage ?? 'Error',
+          );
+        }
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppStrings.current.enterEmail,
+            style: AppTextStyles.regular14(
+              context,
+            ).copyWith(color: AppColors.white),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            AppStrings.current.forgetPassword,
+            style: AppTextStyles.bold24(
+              context,
+            ).copyWith(color: AppColors.white),
+          ),
+          const SizedBox(height: 16),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(50),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 32.0,
@@ -87,7 +83,8 @@ class _ProvideEmailViewState extends State<ProvideEmailView> {
                       style: AppTextStyles.medium16(
                         context,
                       ).copyWith(color: AppColors.white),
-                      validator: Validator.email,
+
+                      // validator: Validator.email,
                       decoration: InputDecoration(
                         prefixIcon: const Icon(
                           Icons.email_outlined,
@@ -141,7 +138,9 @@ class _ProvideEmailViewState extends State<ProvideEmailView> {
                           onPressed: () {
                             context.read<ForgetPasswordCubit>().doEvents(
                               SendEmailEvent(
-                                email: _emailController.text.toLowerCase(),
+                                email: _emailController.text
+                                    .trim()
+                                    .toLowerCase(),
                               ),
                             );
                           },
@@ -154,8 +153,8 @@ class _ProvideEmailViewState extends State<ProvideEmailView> {
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

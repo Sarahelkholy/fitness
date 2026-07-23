@@ -35,11 +35,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return executeApi(() async {
       await Future.delayed(const Duration(seconds: 1));
 
-      if (request.email == 'notfound@test.com') {
+      if (request.email.toLowerCase() == 'email123@gmail.com') {
+        return AuthResponse(message: 'Reset code sent successfully.');
+      } else {
         throw Exception('Email not found');
       }
-
-      return AuthResponse(message: 'Reset code sent successfully.');
     });
   }
 

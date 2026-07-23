@@ -50,52 +50,45 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 AppBar(
                   title: Image.asset(
                     AppAssets.appLogo,
-                    height: 48,
-                    width: 70,
+                    height: size.height * 0.05,
+                    width: size.width * 0.1,
                     fit: BoxFit.fill,
                   ),
                   centerTitle: true,
                 ),
-                SizedBox(height: size.height * .1),
+                // SizedBox(height: size.height * .1),
                 Expanded(
+                  flex: 1,
                   child: Center(
-                    child: SingleChildScrollView(
-                      child: ClipRRect(
+                    child: Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 35, sigmaY: 35),
-                          child: Container(
-                            padding: const EdgeInsets.all(24),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                color: AppColors.white.withValues(alpha: 0.1),
-                                width: 1,
-                              ),
+                        border: Border.all(
+                          color: AppColors.white.withValues(alpha: 0.1),
+                          width: 1,
+                        ),
+                      ),
+                      child: SizedBox(
+                        height: 380, // Approximate height to fit content
+                        child: PageView(
+                          controller: _pageController,
+                          onPageChanged: (page) {
+                            setState(() {});
+                          },
+                          physics: const NeverScrollableScrollPhysics(),
+                          children: [
+                            ProvideEmailView(
+                              onNext: (email) {
+                                _nextPage();
+                              },
                             ),
-                            child: SizedBox(
-                              height: 380, // Approximate height to fit content
-                              child: PageView(
-                                controller: _pageController,
-                                onPageChanged: (page) {
-                                  setState(() {});
-                                },
-                                physics: const NeverScrollableScrollPhysics(),
-                                children: [
-                                  ProvideEmailView(
-                                    onNext: (email) {
-                                      _nextPage();
-                                    },
-                                  ),
-                                  VerifyCodeView(
-                                    email: _email,
-                                    onNext: () => _nextPage(),
-                                  ),
-                                  const ResetPasswordView(),
-                                ],
-                              ),
+                            VerifyCodeView(
+                              email: _email,
+                              onNext: () => _nextPage(),
                             ),
-                          ),
+                            const ResetPasswordView(),
+                          ],
                         ),
                       ),
                     ),

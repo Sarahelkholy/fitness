@@ -5,6 +5,7 @@ import 'package:fitness/config/base_cubit/base_event.dart';
 import 'package:fitness/config/base_state/base_state.dart';
 import 'package:fitness/config/error_handling/result.dart';
 import 'package:fitness/config/route_manager/routes.dart';
+// import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/features/auth/data/models/requests/forget_password_request.dart';
 import 'package:fitness/features/auth/data/models/requests/reset_password_request.dart';
 import 'package:fitness/features/auth/data/models/requests/verify_reset_otp_request.dart';
@@ -54,11 +55,12 @@ class ForgetPasswordCubit extends BaseCubit<ForgetPasswordState, BaseEvent> {
     );
 
     final result = await _enterEmailUseCase.call(
-      ForgetPasswordRequest(email: event.email),
+      ForgetPasswordRequest(email: event.email!),
     );
 
     switch (result) {
       case Success():
+        print("********************* ${result.data}");
         startResendTimer();
         emit(
           state.copyWith(sendEmailStateParam: const BaseState(isSuccess: true)),
@@ -70,8 +72,10 @@ class ForgetPasswordCubit extends BaseCubit<ForgetPasswordState, BaseEvent> {
             arguments: this,
           ),
         );
+        break;
 
       case Failure():
+        print("********************* ${result.errorMessage}");
         emit(
           state.copyWith(
             sendEmailStateParam: BaseState(errorMessage: result.errorMessage),
@@ -85,11 +89,12 @@ class ForgetPasswordCubit extends BaseCubit<ForgetPasswordState, BaseEvent> {
     emit(state.copyWith(verifyOtpStateParam: const BaseState(isLoading: true)));
 
     final result = await _verifyOtpUseCase.call(
-      VerifyResetOtpRequest(resetCode: event.otp),
+      VerifyResetOtpRequest(resetCode: event.otp!),
     );
 
     switch (result) {
       case Success():
+        print("********************* ${result.data}");
         emit(
           state.copyWith(verifyOtpStateParam: const BaseState(isSuccess: true)),
         );
@@ -102,6 +107,7 @@ class ForgetPasswordCubit extends BaseCubit<ForgetPasswordState, BaseEvent> {
         );
 
       case Failure():
+        print("********************* ${result.errorMessage}");
         emit(
           state.copyWith(
             verifyOtpStateParam: BaseState(errorMessage: result.errorMessage),
@@ -120,17 +126,21 @@ class ForgetPasswordCubit extends BaseCubit<ForgetPasswordState, BaseEvent> {
     );
 
     final result = await _enterEmailUseCase.call(
-      ForgetPasswordRequest(email: event.email),
+      ForgetPasswordRequest(email: event.email!),
     );
 
     switch (result) {
       case Success():
+        print("********************* ${event.email}");
+
         startResendTimer();
         emit(
           state.copyWith(sendEmailStateParam: const BaseState(isSuccess: true)),
         );
 
       case Failure():
+        print("********************* ${result.errorMessage}");
+
         emit(
           state.copyWith(
             sendEmailStateParam: BaseState(errorMessage: result.errorMessage),
@@ -147,13 +157,15 @@ class ForgetPasswordCubit extends BaseCubit<ForgetPasswordState, BaseEvent> {
 
     final result = await _addNewPasswordUseCase.call(
       ResetPasswordRequest(
-        email: state.email ?? "",
-        newPassword: event.newPassword,
+        email: state.email!,
+        newPassword: event.newPassword!,
       ),
     );
 
     switch (result) {
       case Success():
+        print("********************* ${event.newPassword}");
+
         emit(
           state.copyWith(
             resetPasswordStateParam: const BaseState(isSuccess: true),
@@ -172,6 +184,7 @@ class ForgetPasswordCubit extends BaseCubit<ForgetPasswordState, BaseEvent> {
         );
 
       case Failure():
+        print("********************* ${result.errorMessage}");
         emit(
           state.copyWith(
             resetPasswordStateParam: BaseState(
