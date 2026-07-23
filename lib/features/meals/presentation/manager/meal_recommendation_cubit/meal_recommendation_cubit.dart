@@ -25,13 +25,16 @@ class MealRecommendationCubit
       case GetCategoriesEvent():
         _getCategories();
       case GetMealsByCategoryEvent():
-        _getMealsByCategory(event.category);
+        _getMealsByCategory(event.category, event.index);
     }
   }
 
   Future<void> _getCategories() async {
     emit(
-      state.copyWith(categoriesStateParam: const BaseState(isLoading: true)),
+      state.copyWith(
+        categoriesStateParam: const BaseState(isLoading: true),
+        selectedCategoryIndexParam: 0,
+      ),
     );
 
     final result = await _getCategoriesUseCase.call();
@@ -53,8 +56,11 @@ class MealRecommendationCubit
     }
   }
 
-  Future<void> _getMealsByCategory(String category) async {
-    emit(state.copyWith(mealsStateParam: const BaseState(isLoading: true)));
+  Future<void> _getMealsByCategory(String category, int index) async {
+    emit(state.copyWith(
+      mealsStateParam: const BaseState(isLoading: true),
+      selectedCategoryIndexParam: index,
+    ));
 
     final result = await _getMealsByCategoryUseCase.call(category);
 

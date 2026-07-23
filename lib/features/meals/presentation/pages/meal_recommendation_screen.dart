@@ -27,7 +27,6 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen>
     with EventHandlerMixin {
   late AppLocalizations localizations;
   late final MealRecommendationCubit _cubit;
-  int _selectedCategoryIndex = 0;
 
   @override
   void initState() {
@@ -68,9 +67,6 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen>
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          setState(() {
-            _selectedCategoryIndex = 0;
-          });
           _cubit.doEvents(GetCategoriesEvent());
         },
         color: AppColors.main,
@@ -83,13 +79,9 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen>
               ListView(physics: const AlwaysScrollableScrollPhysics()),
               BlocBuilder<MealRecommendationCubit, MealRecommendationState>(
                 builder: (context, state) {
-                  // Case 1: Categories Loading
                   if (state.categoriesState.isLoading) {
                     return const CustomLoadingIndicator();
-                  }
-
-                  // Case 2: Categories Error
-                  if (state.categoriesState.errorMessage != null) {
+                  } else if (state.categoriesState.errorMessage != null) {
                     return CustomErrorWidget(
                       errorMessage: state.categoriesState.errorMessage!,
                       haveTryAgain: true,
@@ -99,7 +91,6 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen>
 
                   final categories = state.categoriesState.data ?? [];
 
-                  // Case 3: Categories Empty
                   if (categories.isEmpty) {
                     return CustomErrorWidget(
                       errorMessage: localizations.noCategoriesFound,
@@ -109,11 +100,14 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen>
                   }
 
                   // Trigger first category fetch if needed
-                  if (_selectedCategoryIndex == 0 &&
+                  if (state.selectedCategoryIndex == 0 &&
                       state.mealsState.data == null &&
                       !state.mealsState.isLoading) {
                     _cubit.doEvents(
-                      GetMealsByCategoryEvent(category: categories[0].name),
+                      GetMealsByCategoryEvent(
+                        category: categories[0].name,
+                        index: 0,
+                      ),
                     );
                   }
 
@@ -123,15 +117,13 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen>
                         const SizedBox(height: 20),
                         CustomTabBar(
                           tabs: categories.map((e) => e.name).toList(),
-                          selectedIndex: _selectedCategoryIndex,
+                          selectedIndex: state.selectedCategoryIndex,
                           onTabChanged: (index) {
-                            if (_selectedCategoryIndex == index) return;
-                            setState(() {
-                              _selectedCategoryIndex = index;
-                            });
+                            if (state.selectedCategoryIndex == index) return;
                             _cubit.doEvents(
                               GetMealsByCategoryEvent(
                                 category: categories[index].name,
+                                index: index,
                               ),
                             );
                           },
@@ -140,21 +132,20 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen>
                         Expanded(
                           child: Builder(
                             builder: (context) {
-                              // Case 4: Meals Loading
                               if (state.mealsState.isLoading) {
                                 return const CustomLoadingIndicator();
-                              }
-
-                              // Case 5: Meals Error
-                              if (state.mealsState.errorMessage != null) {
+                              } else if (state.mealsState.errorMessage !=
+                                  null) {
                                 return CustomErrorWidget(
                                   errorMessage: state.mealsState.errorMessage!,
                                   haveTryAgain: true,
                                   onPressed: () => _cubit.doEvents(
                                     GetMealsByCategoryEvent(
                                       category:
-                                          categories[_selectedCategoryIndex]
+                                          categories[state
+                                                  .selectedCategoryIndex]
                                               .name,
+                                      index: state.selectedCategoryIndex,
                                     ),
                                   ),
                                 );
@@ -162,14 +153,12 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen>
 
                               final meals = state.mealsState.data ?? [];
 
-                              // Case 6: Meals Empty
-                              if (meals.isEmpty) {
+                              if (meals.isEmpty && state.mealsState.isSuccess) {
                                 return CustomErrorWidget(
                                   errorMessage: localizations.noMealsFound,
                                 );
                               }
 
-                              // Case 7: Meals Success (Grid)
                               return GridView.builder(
                                 gridDelegate:
                                     const SliverGridDelegateWithFixedCrossAxisCount(
