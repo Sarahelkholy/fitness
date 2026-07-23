@@ -12,7 +12,7 @@ enum UserGoal {
 
 enum ActivityLevel { level1, level2, level3, level4, level5 }
 
-class RegisterFormData extends Equatable {
+class RegisterFormParams extends Equatable {
   final UserGender? gender;
   final num? age;
   final num? weight;
@@ -20,7 +20,7 @@ class RegisterFormData extends Equatable {
   final UserGoal? goal;
   final ActivityLevel? activityLevel;
 
-  const RegisterFormData({
+  const RegisterFormParams({
     this.gender,
     this.age,
     this.weight,
@@ -29,7 +29,7 @@ class RegisterFormData extends Equatable {
     this.activityLevel,
   });
 
-  RegisterFormData copyWith({
+  RegisterFormParams copyWith({
     UserGender? gender,
     num? age,
     num? weight,
@@ -37,7 +37,7 @@ class RegisterFormData extends Equatable {
     UserGoal? goal,
     ActivityLevel? activityLevel,
   }) {
-    return RegisterFormData(
+    return RegisterFormParams(
       gender: gender ?? this.gender,
       age: age ?? this.age,
       weight: weight ?? this.weight,

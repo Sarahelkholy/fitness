@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../core/localization/l10n/app_localizations.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
-import '../../../domain/entities/register_form_data.dart';
+import '../../../../../core/values/keys_strings.dart';
+import '../../../domain/entities/register_form_params.dart';
 
 class GenderSelectionWidget extends StatelessWidget {
   final UserGender? selectedGender;
@@ -22,6 +23,7 @@ class GenderSelectionWidget extends StatelessWidget {
     return Column(
       children: [
         _GenderButton(
+          key: const Key(KeysStrings.registerFormMaleButton),
           gender: UserGender.male,
           isSelected: selectedGender == UserGender.male,
           onTap: () => onGenderSelected(UserGender.male),
@@ -30,6 +32,7 @@ class GenderSelectionWidget extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         _GenderButton(
+          key: const Key(KeysStrings.registerFormFemaleButton),
           gender: UserGender.female,
           isSelected: selectedGender == UserGender.female,
           onTap: () => onGenderSelected(UserGender.female),
@@ -49,6 +52,7 @@ class _GenderButton extends StatelessWidget {
   final String label;
 
   const _GenderButton({
+    super.key,
     required this.gender,
     required this.isSelected,
     required this.onTap,
