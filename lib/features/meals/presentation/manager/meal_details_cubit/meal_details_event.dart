@@ -5,3 +5,5 @@ class GetMealDetailsEvent extends MealDetailsEvents {
 
   GetMealDetailsEvent({required this.mealId});
 }
+
+class PlayVideoEvent extends MealDetailsEvents {}

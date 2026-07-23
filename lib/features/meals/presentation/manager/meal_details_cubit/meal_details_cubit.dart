@@ -19,12 +19,17 @@ class MealDetailsCubit extends BaseCubit<MealDetailsState, BaseEvent> {
     switch (event) {
       case GetMealDetailsEvent():
         _getMealDetails(event.mealId);
+      case PlayVideoEvent():
+        emit(state.copyWith(showYoutubePlayerParam: true));
     }
   }
 
   Future<void> _getMealDetails(String mealId) async {
     emit(
-      state.copyWith(mealDetailsStateParam: const BaseState(isLoading: true)),
+      state.copyWith(
+        mealDetailsStateParam: const BaseState(isLoading: true),
+        showYoutubePlayerParam: false,
+      ),
     );
 
     final result = await _getMealDetailsUseCase.call(mealId);

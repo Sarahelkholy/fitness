@@ -31,7 +31,6 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
   late final MealDetailsCubit _cubit;
 
   YoutubePlayerController? _controller;
-  bool _showYoutubePlayer = false;
 
   @override
   void initState() {
@@ -67,68 +66,171 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       backgroundImage: AppAssets.mealsBackground,
-      body: BlocBuilder<MealDetailsCubit, MealDetailsState>(
-        builder: (context, state) {
-          if (state.mealDetailsState.isLoading) {
-            return const CustomLoadingIndicator();
-          } else if (state.mealDetailsState.errorMessage != null) {
-            return CustomErrorWidget(
-              errorMessage: state.mealDetailsState.errorMessage!,
-              haveTryAgain: true,
-              onPressed: () =>
-                  _cubit.doEvents(GetMealDetailsEvent(mealId: widget.mealId)),
+      body: SafeArea(
+        child: BlocBuilder<MealDetailsCubit, MealDetailsState>(
+          builder: (context, state) {
+            if (state.mealDetailsState.isLoading) {
+              return const CustomLoadingIndicator();
+            } else if (state.mealDetailsState.errorMessage != null) {
+              return CustomErrorWidget(
+                errorMessage: state.mealDetailsState.errorMessage!,
+                haveTryAgain: true,
+                onPressed: () =>
+                    _cubit.doEvents(GetMealDetailsEvent(mealId: widget.mealId)),
+              );
+            }
+
+            final meal = state.mealDetailsState.data;
+            if (meal == null) return const SizedBox.shrink();
+
+            if (meal.youtubeUrl.isNotEmpty) {
+              _initYoutubeController(meal.youtubeUrl);
+            }
+
+            final scrollableContent = Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(vertical: 24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppConstants.paddingHorizontal,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            meal.name,
+                            style: AppTextStyles.medium24(
+                              context,
+                            ).copyWith(color: AppColors.white),
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            meal.instructions,
+                            style: AppTextStyles.regular16(
+                              context,
+                            ).copyWith(color: AppColors.white),
+                          ),
+                          const SizedBox(height: 24),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              MealInfoBadge(
+                                label: localizations.category,
+                                value: meal.category,
+                              ),
+                              MealInfoBadge(
+                                label: localizations.area,
+                                value: meal.area,
+                              ),
+                              MealInfoBadge(
+                                label: localizations.country,
+                                value: meal.country,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 32),
+                          Text(
+                            localizations.ingredients,
+                            style: AppTextStyles.bold20(
+                              context,
+                            ).copyWith(color: AppColors.white),
+                          ),
+                          const SizedBox(height: 16),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppConstants.paddingHorizontal,
+                      ),
+                      child: MealIngredientsList(ingredients: meal.ingredients),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              ),
             );
-          }
 
-          final meal = state.mealDetailsState.data;
-          if (meal == null) return const SizedBox.shrink();
+            if (_controller != null) {
+              return YoutubePlayerBuilder(
+                player: YoutubePlayer(
+                  controller: _controller!,
+                  showVideoProgressIndicator: true,
+                  progressIndicatorColor: AppColors.main,
+                ),
+                builder: (context, player) {
+                  return Column(
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          if (state.showYoutubePlayer)
+                            SizedBox(
+                              height: 350,
+                              width: double.infinity,
+                              child: player,
+                            )
+                          else
+                            CachedNetworkImageWrapper(
+                              imagePath: meal.image,
+                              height: 350,
+                              width: double.infinity,
+                            ),
+                          if (!state.showYoutubePlayer &&
+                              meal.youtubeUrl.isNotEmpty)
+                            Positioned.fill(
+                              child: Center(
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.play_circle_fill,
+                                    color: AppColors.white,
+                                    size: 64,
+                                  ),
+                                  onPressed: () {
+                                    _cubit.doEvents(PlayVideoEvent());
+                                  },
+                                ),
+                              ),
+                            ),
+                          PositionedDirectional(
+                            top: 20,
+                            start: 16,
+                            child: IconButton(
+                              icon: const CircleAvatar(
+                                backgroundColor: AppColors.main,
+                                child: Icon(
+                                  Icons.arrow_back_ios_new,
+                                  size: 16,
+                                  color: AppColors.white,
+                                ),
+                              ),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ),
+                        ],
+                      ),
+                      scrollableContent,
+                    ],
+                  );
+                },
+              );
+            }
 
-          if (meal.youtubeUrl.isNotEmpty) {
-            _initYoutubeController(meal.youtubeUrl);
-          }
-
-          Widget buildContent(Widget? player) {
             return Column(
               children: [
-                // Header Image
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    if (_showYoutubePlayer && player != null)
-                      SizedBox(
-                        height: 400,
-                        width: double.infinity,
-                        child: player,
-                      )
-                    else
-                      CachedNetworkImageWrapper(
-                        imagePath: meal.image,
-                        height: 400,
-                        width: double.infinity,
-                      ),
-
-                    // Play Button
-                    if (!_showYoutubePlayer && meal.youtubeUrl.isNotEmpty)
-                      Positioned.fill(
-                        child: Center(
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.play_circle_fill,
-                              color: AppColors.white,
-                              size: 64,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _showYoutubePlayer = true;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-
-                    // Back Button
+                    CachedNetworkImageWrapper(
+                      imagePath: meal.image,
+                      height: 350,
+                      width: double.infinity,
+                    ),
                     PositionedDirectional(
-                      top: 40,
+                      top: 20,
                       start: 16,
                       child: IconButton(
                         icon: const CircleAvatar(
@@ -144,101 +246,11 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                     ),
                   ],
                 ),
-
-                // Scrollable Content
-                Expanded(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(vertical: 24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppConstants.paddingHorizontal,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                meal.name,
-                                style: AppTextStyles.medium24(
-                                  context,
-                                ).copyWith(color: AppColors.white),
-                              ),
-                              const SizedBox(height: 12),
-                              Text(
-                                meal.instructions,
-                                style: AppTextStyles.regular16(
-                                  context,
-                                ).copyWith(color: AppColors.white),
-                              ),
-                              const SizedBox(height: 24),
-
-                              // Info Badges Row
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  MealInfoBadge(
-                                    label: localizations.category,
-                                    value: meal.category,
-                                  ),
-                                  MealInfoBadge(
-                                    label: localizations.area,
-                                    value: meal.area,
-                                  ),
-                                  MealInfoBadge(
-                                    label: localizations.country,
-                                    value: meal.country,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 32),
-
-                              Text(
-                                localizations.ingredients,
-                                style: AppTextStyles.bold20(
-                                  context,
-                                ).copyWith(color: AppColors.white),
-                              ),
-                              const SizedBox(height: 16),
-                            ],
-                          ),
-                        ),
-
-                        // Ingredients List View
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppConstants.paddingHorizontal,
-                          ),
-                          child: MealIngredientsList(
-                            ingredients: meal.ingredients,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
-                  ),
-                ),
+                scrollableContent,
               ],
             );
-          }
-
-          if (_controller != null) {
-            return YoutubePlayerBuilder(
-              player: YoutubePlayer(
-                controller: _controller!,
-                showVideoProgressIndicator: true,
-                progressIndicatorColor: AppColors.main,
-              ),
-              builder: (context, player) {
-                return buildContent(player);
-              },
-            );
-          }
-
-          return buildContent(null);
-        },
+          },
+        ),
       ),
     );
   }
