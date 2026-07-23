@@ -112,9 +112,10 @@
     "popularTraining":"popular training",
     "breakfast":"Breakfast",
     "lunch":"Lunch",
-    "dinner":"Dinner"
+    "dinner":"Dinner",
 
 
 
   
+  "mealNotFound": "Meal not found"
 }

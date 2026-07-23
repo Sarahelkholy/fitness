@@ -35,12 +35,10 @@ class HomeScreen extends StatelessWidget {
               HeadlineWidget(title: local.recommendationToDay),
               BlocBuilder<HomeCubit, HomeState>(
                 builder: (context, state) {
-                  if (state is HomeLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is GetRandomExercisesSuccess) {
+                  if (state is HomeSuccess &&
+                      state.randomExercisesResponseEntity != null) {
                     final exercisesList =
-                        state.randomExercisesResponseEntity.exercises ?? [];
-
+                        state.randomExercisesResponseEntity!.exercises ?? [];
                     return RecommendationExerciseList(exercises: exercisesList);
                   } else if (state is HomeFailure) {
                     return Center(
@@ -50,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     );
                   }
-                  return const SizedBox.shrink();
+                  return const Center(child: CircularProgressIndicator());
                 },
               ),
               const SizedBox(height: 24),
@@ -62,7 +60,22 @@ class HomeScreen extends StatelessWidget {
                 title: local.recommendationForYou,
                 isViewAll: true,
               ),
-              RecommendationFoodList(),
+              BlocBuilder<HomeCubit, HomeState>(
+                builder: (context, state) {
+                  if (state is HomeSuccess && state.foodCategories != null) {
+                    final categoriesList = state.foodCategories!;
+                    return RecommendationFoodList(categories: categoriesList);
+                  } else if (state is HomeFailure) {
+                    return Center(
+                      child: Text(
+                        state.errorMessage,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    );
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
               const SizedBox(height: 24),
 
               HeadlineWidget(title: local.popularTraining),

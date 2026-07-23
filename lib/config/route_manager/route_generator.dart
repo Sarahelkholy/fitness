@@ -77,7 +77,8 @@ abstract class RouteGenerator {
                     difficultyLevelId: "69d982ed85f6bfa972bf2216",
                     limit: 3,
                   ),
-                ),
+                )
+                ..doEvents(GetFoodCategories()), // <-- Added second event,
               child: CustomBottomNavBar(
                 initialIndex: args?['initialIndex'] ?? 0,
               ),

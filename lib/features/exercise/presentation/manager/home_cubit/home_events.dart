@@ -11,3 +11,5 @@ class GetRandomExercises extends HomeEvents {
     this.limit = 3,
   });
 }
+
+class GetFoodCategories extends HomeEvents {}

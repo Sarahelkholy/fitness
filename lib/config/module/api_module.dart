@@ -103,19 +103,18 @@ abstract class ApiModule {
     return dio;
   }
 
-  // @Named(ApiStrings.fcmDio)
-  // @lazySingleton
-  // Dio provideFcmDio(PrettyDioLogger logger) {
-  //   final dio = Dio(
-  //     BaseOptions(
-  //       baseUrl: ApiEndPoints.fcmBaseUrl,
-  //       connectTimeout: const Duration(seconds: 10),
-  //       sendTimeout: const Duration(seconds: 10),
-  //       receiveTimeout: const Duration(seconds: 10),
-  //     ),
-  //   );
-  //   // dio.interceptors.add(fcmInterceptor);
-  //   dio.interceptors.add(logger);
-  //   return dio;
-  // }
+  @Named(ApiStrings.mealsDio)
+  @lazySingleton
+  Dio provideFcmDio(PrettyDioLogger logger) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: ApiEndPoints.mealsBaseUrl,
+        connectTimeout: const Duration(seconds: 10),
+        sendTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
+      ),
+    );
+    dio.interceptors.add(logger);
+    return dio;
+  }
 }

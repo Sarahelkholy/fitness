@@ -16,10 +16,14 @@ class RecommendationCard extends StatelessWidget {
   });
 
   ImageProvider _getImageProvider() {
-    if (networkImage != null && networkImage!.isNotEmpty) {
-      return NetworkImage(networkImage!);
+    final path = networkImage ?? image;
+    if (path != null && path.isNotEmpty) {
+      if (path.startsWith('http://') || path.startsWith('https://')) {
+        return NetworkImage(path);
+      }
+      return AssetImage(path);
     }
-    return AssetImage(image ?? AppAssets.exercisesBackground);
+    return const AssetImage(AppAssets.exercisesBackground);
   }
 
   @override
