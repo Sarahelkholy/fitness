@@ -45,5 +45,5 @@ abstract class AppColors {
   // --- Status Colors ---
   static const Color success = Color(0xFF0CB258);
   static const Color error = Color(0xFFCC1010);
-  static const Color surfaceOverlayLow=Color(0x1A242424);
+  static const Color surfaceOverlayLow = Color(0x1A242424);
 }

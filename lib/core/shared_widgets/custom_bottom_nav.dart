@@ -58,7 +58,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
-                  color: AppColors.darkCharcoal.withOpacity(0.8),
+                  color: AppColors.darkCharcoal.withValues(alpha: 0.8),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Row(
@@ -80,8 +80,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
 
   Widget _buildNavItem(int index, String assetPath, String label) {
     final isSelected = currentIndex == index;
-    final activeColor = AppColors.main;
-    final inactiveColor = AppColors.white;
+    const activeColor = AppColors.main;
+    const inactiveColor = AppColors.white;
 
     return Expanded(
       child: GestureDetector(
@@ -106,7 +106,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
               const SizedBox(height: 4),
               Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   color: activeColor,
                   fontSize: 11,
                   fontWeight: FontWeight.w600,

@@ -93,157 +93,168 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                 key: _formKey,
                 child: Column(
                   children: [
-              TextFormField(
-                controller: _passwordController,
-                obscureText: _obscurePassword,
-                style: AppTextStyles.medium16(
-                  context,
-                ).copyWith(color: AppColors.white),
-                validator: Validator.password,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(
-                    Icons.lock_outline,
-                    color: AppColors.white,
-                    size: 20,
-                  ),
-                  suffixIcon: GestureDetector(
-                    onTap: () =>
-                        setState(() => _obscurePassword = !_obscurePassword),
-                    child: Icon(
-                      _obscurePassword
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined,
-                      color: AppColors.white,
-                      size: 20,
-                    ),
-                  ),
-                  hintText: AppStrings.current.password,
-                  hintStyle: AppTextStyles.regular14(
-                    context,
-                  ).copyWith(color: AppColors.white.withOpacity(0.5)),
-                  filled: true,
-                  fillColor: AppColors.pureBlack.withOpacity(0.2),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 20,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      color: AppColors.white.withOpacity(0.5),
-                      width: 1,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      color: AppColors.white.withOpacity(0.5),
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(color: AppColors.main, width: 1),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _confirmPasswordController,
-                obscureText: _obscureConfirmPassword,
-                style: AppTextStyles.medium16(
-                  context,
-                ).copyWith(color: AppColors.white),
-                validator: (value) =>
-                    Validator.confirmPassword(value, _passwordController.text),
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(
-                    Icons.lock_outline,
-                    color: AppColors.white,
-                    size: 20,
-                  ),
-                  suffixIcon: GestureDetector(
-                    onTap: () => setState(
-                      () => _obscureConfirmPassword = !_obscureConfirmPassword,
-                    ),
-                    child: Icon(
-                      _obscureConfirmPassword
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined,
-                      color: AppColors.white,
-                      size: 20,
-                    ),
-                  ),
-                  hintText: AppStrings.current.password,
-                  hintStyle: AppTextStyles.regular14(
-                    context,
-                  ).copyWith(color: AppColors.white.withOpacity(0.5)),
-                  filled: true,
-                  fillColor: AppColors.pureBlack.withOpacity(0.2),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 20,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      color: AppColors.white.withOpacity(0.5),
-                      width: 1,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      color: AppColors.white.withOpacity(0.5),
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: AppColors.main,
-                      width: 1,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              BlocSelector<ForgetPasswordCubit, ForgetPasswordState, bool>(
-                selector: (state) => state.resetPasswordState.isLoading,
-                builder: (context, isLoading) {
-                  return CustomButton(
-                    title: AppStrings.current.done,
-                    isLoading: isLoading,
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        context.read<ForgetPasswordCubit>().doEvents(
-                          ResetPasswordEvent(
-                            email:
-                                context
-                                    .read<ForgetPasswordCubit>()
-                                    .state
-                                    .email ??
-                                '',
-                            newPassword: _passwordController.text,
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: _obscurePassword,
+                      style: AppTextStyles.medium16(
+                        context,
+                      ).copyWith(color: AppColors.white),
+                      validator: Validator.password,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          Icons.lock_outline,
+                          color: AppColors.white,
+                          size: 20,
+                        ),
+                        suffixIcon: GestureDetector(
+                          onTap: () => setState(
+                            () => _obscurePassword = !_obscurePassword,
                           ),
+                          child: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            color: AppColors.white,
+                            size: 20,
+                          ),
+                        ),
+                        hintText: AppStrings.current.password,
+                        hintStyle: AppTextStyles.regular14(context).copyWith(
+                          color: AppColors.white.withValues(alpha: 0.5),
+                        ),
+                        filled: true,
+                        fillColor: AppColors.pureBlack.withValues(alpha: 0.2),
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 20,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: AppColors.white.withValues(alpha: 0.5),
+                            width: 1,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: AppColors.white.withValues(alpha: 0.5),
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(
+                            color: AppColors.main,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    TextFormField(
+                      controller: _confirmPasswordController,
+                      obscureText: _obscureConfirmPassword,
+                      style: AppTextStyles.medium16(
+                        context,
+                      ).copyWith(color: AppColors.white),
+                      validator: (value) => Validator.confirmPassword(
+                        value,
+                        _passwordController.text,
+                      ),
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          Icons.lock_outline,
+                          color: AppColors.white,
+                          size: 20,
+                        ),
+                        suffixIcon: GestureDetector(
+                          onTap: () => setState(
+                            () => _obscureConfirmPassword =
+                                !_obscureConfirmPassword,
+                          ),
+                          child: Icon(
+                            _obscureConfirmPassword
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            color: AppColors.white,
+                            size: 20,
+                          ),
+                        ),
+                        hintText: AppStrings.current.password,
+                        hintStyle: AppTextStyles.regular14(context).copyWith(
+                          color: AppColors.white.withValues(alpha: 0.5),
+                        ),
+                        filled: true,
+                        fillColor: AppColors.pureBlack.withValues(alpha: 0.2),
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 20,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: AppColors.white.withValues(alpha: 0.5),
+                            width: 1,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: AppColors.white.withValues(alpha: 0.5),
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(
+                            color: AppColors.main,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    BlocSelector<
+                      ForgetPasswordCubit,
+                      ForgetPasswordState,
+                      bool
+                    >(
+                      selector: (state) => state.resetPasswordState.isLoading,
+                      builder: (context, isLoading) {
+                        return CustomButton(
+                          title: AppStrings.current.done,
+                          isLoading: isLoading,
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              context.read<ForgetPasswordCubit>().doEvents(
+                                ResetPasswordEvent(
+                                  email:
+                                      context
+                                          .read<ForgetPasswordCubit>()
+                                          .state
+                                          .email ??
+                                      '',
+                                  newPassword: _passwordController.text,
+                                ),
+                              );
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                Routes.loginRoute,
+                                (route) => false,
+                              );
+                            }
+                          },
                         );
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          Routes.loginRoute,
-                          (route) => false,
-                        );
-                      }
-                    },
-                  );
-                },
-              ),
-              const SizedBox(height: 15),
-            ],
-                  ),
+                      },
+                    ),
+                    const SizedBox(height: 15),
+                  ],
                 ),
               ),
             ),
           ),
+        ),
       ],
     );
   }

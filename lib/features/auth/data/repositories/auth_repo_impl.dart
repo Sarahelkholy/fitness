@@ -22,9 +22,11 @@ class AuthRepoImpl implements AuthRepo {
   final SecureCache _secureCache;
   final SocialAuthService _socialAuthService;
 
-  AuthRepoImpl(this._authRemoteDataSource,
-      this._secureCache,
-      this._socialAuthService,);
+  AuthRepoImpl(
+    this._authRemoteDataSource,
+    this._secureCache,
+    this._socialAuthService,
+  );
 
   @override
   Future<Result<UserEntity>> login(LoginRequest loginRequest) async {
@@ -68,9 +70,11 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Result<String>> forgetPassword(
-      ForgetPasswordRequest forgetPasswordRequest,) async {
-    final response =
-        await _authRemoteDataSource.forgetPassword(forgetPasswordRequest);
+    ForgetPasswordRequest forgetPasswordRequest,
+  ) async {
+    final response = await _authRemoteDataSource.forgetPassword(
+      forgetPasswordRequest,
+    );
     switch (response) {
       case Success<AuthResponse>():
         return Success(data: response.data.message ?? 'Success');
@@ -81,9 +85,11 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Result<String>> resetPassword(
-      ResetPasswordRequest resetPasswordRequest,) async {
-    final response =
-        await _authRemoteDataSource.resetPassword(resetPasswordRequest);
+    ResetPasswordRequest resetPasswordRequest,
+  ) async {
+    final response = await _authRemoteDataSource.resetPassword(
+      resetPasswordRequest,
+    );
     switch (response) {
       case Success<AuthResponse>():
         return Success(data: response.data.message ?? 'Success');
@@ -94,9 +100,11 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Result<String>> verifyResetCode(
-      VerifyResetOtpRequest verifyResetOtpRequest,) async {
-    final response =
-        await _authRemoteDataSource.verifyResetCode(verifyResetOtpRequest);
+    VerifyResetOtpRequest verifyResetOtpRequest,
+  ) async {
+    final response = await _authRemoteDataSource.verifyResetCode(
+      verifyResetOtpRequest,
+    );
     switch (response) {
       case Success<AuthResponse>():
         return Success(data: response.data.message ?? 'Success');

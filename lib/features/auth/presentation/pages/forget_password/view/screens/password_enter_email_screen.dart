@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:fitness/config/di/di.dart';
-import 'package:fitness/core/shared_widgets/app_scafold.dart';
 import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:fitness/core/utils/app_assets.dart';
 import 'package:fitness/core/utils/app_colors.dart';
@@ -73,7 +72,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               // color: AppColors.pureBlack.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(30),
                               border: Border.all(
-                                color: AppColors.white.withOpacity(0.1),
+                                color: AppColors.white.withValues(alpha: 0.1),
                                 width: 1,
                               ),
                             ),

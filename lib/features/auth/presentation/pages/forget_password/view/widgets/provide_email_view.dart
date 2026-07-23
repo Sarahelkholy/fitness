@@ -98,11 +98,11 @@ class _ProvideEmailViewState extends State<ProvideEmailView> {
                           size: 20,
                         ),
                         hintText: AppStrings.current.email,
-                        hintStyle: AppTextStyles.regular14(
-                          context,
-                        ).copyWith(color: AppColors.white.withOpacity(0.5)),
+                        hintStyle: AppTextStyles.regular14(context).copyWith(
+                          color: AppColors.white.withValues(alpha: 0.5),
+                        ),
                         filled: true,
-                        fillColor: AppColors.pureBlack.withOpacity(0.2),
+                        fillColor: AppColors.pureBlack.withValues(alpha: 0.2),
                         contentPadding: const EdgeInsets.symmetric(
                           vertical: 16,
                           horizontal: 20,
@@ -110,20 +110,20 @@ class _ProvideEmailViewState extends State<ProvideEmailView> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide(
-                            color: AppColors.white.withOpacity(0.5),
+                            color: AppColors.white.withValues(alpha: 0.5),
                             width: 1,
                           ),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide(
-                            color: AppColors.white.withOpacity(0.5),
+                            color: AppColors.white.withValues(alpha: 0.5),
                             width: 1,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: AppColors.white,
                             width: 1,
                           ),
