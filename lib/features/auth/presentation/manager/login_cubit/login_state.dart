@@ -11,6 +11,7 @@ class LoginState extends Equatable {
     this.loginWithFacebook = const BaseState(),
   });
 
+
   final BaseState<UserEntity>? loginWithApi;
   final BaseState<UserEntity>? loginWithGoogle;
   final BaseState<UserEntity>? loginWithFacebook;
