@@ -9,4 +9,7 @@ abstract class ApiStrings {
   static const String categoryParam = "c";
   static const String mealIdParam = "i";
   static const String completed = "completed";
+  static const String primeMoverMuscleId = "primeMoverMuscleId";
+  static const String difficultyLevelId = "difficultyLevelId";
+  static const String page = "page";
 }
