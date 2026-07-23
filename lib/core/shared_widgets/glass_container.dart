@@ -28,17 +28,17 @@ class GlassContainer extends StatelessWidget {
       borderRadius:
       borderRadius ??
           BorderRadius.only(
-            bottomLeft: bottomLeft ?? Radius.circular(30),
-            bottomRight: bottomRight ?? Radius.circular(30),
-            topLeft: topLeft ?? Radius.circular(30),
-            topRight: topRight ?? Radius.circular(30),
+            bottomLeft: bottomLeft ?? const Radius.circular(30),
+            bottomRight: bottomRight ?? const Radius.circular(30),
+            topLeft: topLeft ?? const Radius.circular(30),
+            topRight: topRight ?? const Radius.circular(30),
           ),
       clipBehavior: Clip.antiAlias,
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 34, sigmaY: 34),
         child: Container(
           padding: padding ?? const EdgeInsets.all(20),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: AppColors.surfaceOverlayLow
           ),
           child: child,

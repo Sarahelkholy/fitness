@@ -45,16 +45,22 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Result<UserEntity>> register(RegisterRequest registerRequest) async {
-    var response = await _authRemoteDataSource.register(registerRequest);
+    final response = await _authRemoteDataSource.register(registerRequest);
+
     switch (response) {
       case Success<AuthResponse>():
-        if (response.data.token != null) {
-          await _secureCache.saveData(
-            key: CacheKeys.token,
-            value: response.data.token!,
-          );
+        {
+          if (response.data.token != null) {
+            await _secureCache.saveData(
+              key: CacheKeys.token,
+              value: response.data.token!,
+            );
+          }
+
+          final entity = response.data.user!.toEntity();
+
+          return Success(data: entity);
         }
-        return Success(data: response.data.user!.toEntity());
       case Failure<AuthResponse>():
         return Failure(errorMessage: response.errorMessage);
     }
