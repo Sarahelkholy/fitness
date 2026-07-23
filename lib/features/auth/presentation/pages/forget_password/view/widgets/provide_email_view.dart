@@ -42,14 +42,11 @@ class _ProvideEmailViewState extends State<ProvideEmailView> {
           .read<ForgetPasswordCubit>()
           .eventStream
           .listen((event) {
-            switch (event) {
-              case DisplayErrorEvent():
-                AppSnackBar.error(context, event.errorMsg);
-              case NavigationEvent():
-                widget.onNext(_emailController.text);
-              default:
-                break;
-            }
+            if (event case DisplayErrorEvent()) {
+              // AppSnackBar.error(context, event.errorMsg);
+            } else if (event case NavigationEvent()) {
+              widget.onNext(_emailController.text);
+            } else {}
           });
     });
   }
@@ -142,13 +139,11 @@ class _ProvideEmailViewState extends State<ProvideEmailView> {
                           title: AppStrings.current.sendOtp,
                           isLoading: isLoading,
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              context.read<ForgetPasswordCubit>().doEvents(
-                                SendEmailEvent(
-                                  email: _emailController.text.toLowerCase(),
-                                ),
-                              );
-                            }
+                            context.read<ForgetPasswordCubit>().doEvents(
+                              SendEmailEvent(
+                                email: _emailController.text.toLowerCase(),
+                              ),
+                            );
                           },
                         );
                       },

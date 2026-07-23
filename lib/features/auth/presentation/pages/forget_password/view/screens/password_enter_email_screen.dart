@@ -19,12 +19,11 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final PageController _pageController = PageController();
-  int _currentPage = 0;
   String _email = '';
 
   void _nextPage() {
     _pageController.nextPage(
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
   }
@@ -55,7 +54,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     width: 70,
                     fit: BoxFit.fill,
                   ),
-
                   centerTitle: true,
                 ),
                 SizedBox(height: size.height * .1),
@@ -69,7 +67,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           child: Container(
                             padding: const EdgeInsets.all(24),
                             decoration: BoxDecoration(
-                              // color: AppColors.pureBlack.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(30),
                               border: Border.all(
                                 color: AppColors.white.withValues(alpha: 0.1),
@@ -81,15 +78,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               child: PageView(
                                 controller: _pageController,
                                 onPageChanged: (page) {
-                                  setState(() {
-                                    _currentPage = page;
-                                  });
+                                  setState(() {});
                                 },
                                 physics: const NeverScrollableScrollPhysics(),
                                 children: [
                                   ProvideEmailView(
                                     onNext: (email) {
-                                      setState(() => _email = email);
                                       _nextPage();
                                     },
                                   ),

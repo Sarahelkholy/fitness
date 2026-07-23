@@ -47,10 +47,6 @@ abstract class RouteGenerator {
             ),
           );
 
-        ///================ OnBoardingScreen ================
-        case Routes.onboardingRoute:
-          return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
-
         /// register screen
         case Routes.registerRoute:
           return MaterialPageRoute(

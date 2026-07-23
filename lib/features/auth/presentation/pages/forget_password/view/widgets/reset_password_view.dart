@@ -56,8 +56,6 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                 Navigator.of(context).pop();
               case NavigationEvent():
                 Navigator.of(context).pop();
-              default:
-                break;
             }
           });
     });

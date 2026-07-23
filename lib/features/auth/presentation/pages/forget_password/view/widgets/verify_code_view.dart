@@ -43,13 +43,10 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
           .eventStream
           .listen((event) {
             if (!mounted) return;
-            switch (event) {
-              case DisplayErrorEvent():
-                AppSnackBar.error(context, event.errorMsg);
-              case DisplaySuccessEvent():
-                AppSnackBar.success(context, event.successMsg);
-              case NavigationEvent():
-                widget.onNext();
+            if (event case DisplayErrorEvent()) {
+              AppSnackBar.error(context, event.errorMsg);
+            } else if (event case NavigationEvent()) {
+              widget.onNext();
             }
           });
     });
