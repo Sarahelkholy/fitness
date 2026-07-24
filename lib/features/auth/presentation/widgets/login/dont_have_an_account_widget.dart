@@ -24,9 +24,9 @@ class DontHaveAnAccountWidget extends StatelessWidget {
           children: [
             TextSpan(
               text: title,
-              style: AppTextStyles.regular14(context).copyWith(
-                color: AppColors.white,
-              ),
+              style: AppTextStyles.regular14(
+                context,
+              ).copyWith(color: AppColors.white),
             ),
             const TextSpan(text: ' '),
             TextSpan(
