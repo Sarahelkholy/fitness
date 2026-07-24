@@ -3,7 +3,7 @@ import 'package:fitness/features/popular_tarining/api/random_exercise_api_client
 import 'package:fitness/features/popular_tarining/data/data_source/popular_training_data_source.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
+@Injectable(as: PopularTrainingDataSource)
 class PopularTrainingDataSourceImpl implements PopularTrainingDataSource {
   PopularTrainingDataSourceImpl(this._apiClient);
 
