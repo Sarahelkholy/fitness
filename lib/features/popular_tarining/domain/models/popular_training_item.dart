@@ -1,4 +1,4 @@
-import 'package:fitness/features/exercise/data/models/difficulty_level_response.dart';
+import 'package:fitness/features/exercise/domain/entities/difficulty_level.dart';
 import 'package:fitness/features/exercise/domain/entities/exercise.dart';
 
 class PopularTrainingItem {

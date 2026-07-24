@@ -3,9 +3,6 @@ import '../models/difficulty_level_response.dart' as model;
 
 extension DifficultyLevelMapper on model.DifficultyLevel {
   entity.DifficultyLevel toEntity() {
-    return entity.DifficultyLevel(
-      id: id,
-      name: name,
-    );
+    return entity.DifficultyLevel(id: id, name: name);
   }
 }

@@ -8,7 +8,6 @@ import 'package:fitness/core/values/app_strings.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_event.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_state.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';

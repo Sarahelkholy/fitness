@@ -41,4 +41,3 @@ extension ExerciseMapper on ExerciseDto {
     );
   }
 }
-

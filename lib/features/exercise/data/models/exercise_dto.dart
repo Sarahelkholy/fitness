@@ -4,40 +4,74 @@ part 'exercise_dto.g.dart';
 
 @JsonSerializable()
 class ExerciseDto {
-  @JsonKey(name: "_id") String? id;
-  @JsonKey(name: "exercise") String? exercise;
-  @JsonKey(name: "short_youtube_demonstration") String? shortYoutubeDemonstration;
-  @JsonKey(name: "in_depth_youtube_explanation") String? inDepthYoutubeExplanation;
-  @JsonKey(name: "difficulty_level") String? difficultyLevel;
-  @JsonKey(name: "target_muscle_group") String? targetMuscleGroup;
-  @JsonKey(name: "prime_mover_muscle") String? primeMoverMuscle;
-  @JsonKey(name: "secondary_muscle") dynamic secondaryMuscle;
-  @JsonKey(name: "tertiary_muscle") dynamic tertiaryMuscle;
-  @JsonKey(name: "primary_equipment") String? primaryEquipment;
-  @JsonKey(name: "_primary_items") int? primaryItems;
-  @JsonKey(name: "secondary_equipment") dynamic secondaryEquipment;
-  @JsonKey(name: "_secondary_items") int? secondaryItems;
-  @JsonKey(name: "posture") String? posture;
-  @JsonKey(name: "single_or_double_arm") String? singleOrDoubleArm;
-  @JsonKey(name: "continuous_or_alternating_arms") String? continuousOrAlternatingArms;
-  @JsonKey(name: "grip") String? grip;
-  @JsonKey(name: "load_position_ending") String? loadPositionEnding;
-  @JsonKey(name: "continuous_or_alternating_legs") String? continuousOrAlternatingLegs;
-  @JsonKey(name: "foot_elevation") String? footElevation;
-  @JsonKey(name: "combination_exercises") String? combinationExercises;
-  @JsonKey(name: "movement_pattern_1") String? movementPattern1;
-  @JsonKey(name: "movement_pattern_2") String? movementPattern2;
-  @JsonKey(name: "movement_pattern_3") dynamic movementPattern3;
-  @JsonKey(name: "plane_of_motion_1") String? planeOfMotion1;
-  @JsonKey(name: "plane_of_motion_2") String? planeOfMotion2;
-  @JsonKey(name: "plane_of_motion_3") dynamic planeOfMotion3;
-  @JsonKey(name: "body_region") String? bodyRegion;
-  @JsonKey(name: "force_type") String? forceType;
-  @JsonKey(name: "mechanics") String? mechanics;
-  @JsonKey(name: "laterality") String? laterality;
-  @JsonKey(name: "primary_exercise_classification") String? primaryExerciseClassification;
-  @JsonKey(name: "short_youtube_demonstration_link") String? shortYoutubeDemonstrationLink;
-  @JsonKey(name: "in_depth_youtube_explanation_link") String? inDepthYoutubeExplanationLink;
+  @JsonKey(name: "_id")
+  String? id;
+  @JsonKey(name: "exercise")
+  String? exercise;
+  @JsonKey(name: "short_youtube_demonstration")
+  String? shortYoutubeDemonstration;
+  @JsonKey(name: "in_depth_youtube_explanation")
+  String? inDepthYoutubeExplanation;
+  @JsonKey(name: "difficulty_level")
+  String? difficultyLevel;
+  @JsonKey(name: "target_muscle_group")
+  String? targetMuscleGroup;
+  @JsonKey(name: "prime_mover_muscle")
+  String? primeMoverMuscle;
+  @JsonKey(name: "secondary_muscle")
+  dynamic secondaryMuscle;
+  @JsonKey(name: "tertiary_muscle")
+  dynamic tertiaryMuscle;
+  @JsonKey(name: "primary_equipment")
+  String? primaryEquipment;
+  @JsonKey(name: "_primary_items")
+  int? primaryItems;
+  @JsonKey(name: "secondary_equipment")
+  dynamic secondaryEquipment;
+  @JsonKey(name: "_secondary_items")
+  int? secondaryItems;
+  @JsonKey(name: "posture")
+  String? posture;
+  @JsonKey(name: "single_or_double_arm")
+  String? singleOrDoubleArm;
+  @JsonKey(name: "continuous_or_alternating_arms")
+  String? continuousOrAlternatingArms;
+  @JsonKey(name: "grip")
+  String? grip;
+  @JsonKey(name: "load_position_ending")
+  String? loadPositionEnding;
+  @JsonKey(name: "continuous_or_alternating_legs")
+  String? continuousOrAlternatingLegs;
+  @JsonKey(name: "foot_elevation")
+  String? footElevation;
+  @JsonKey(name: "combination_exercises")
+  String? combinationExercises;
+  @JsonKey(name: "movement_pattern_1")
+  String? movementPattern1;
+  @JsonKey(name: "movement_pattern_2")
+  String? movementPattern2;
+  @JsonKey(name: "movement_pattern_3")
+  dynamic movementPattern3;
+  @JsonKey(name: "plane_of_motion_1")
+  String? planeOfMotion1;
+  @JsonKey(name: "plane_of_motion_2")
+  String? planeOfMotion2;
+  @JsonKey(name: "plane_of_motion_3")
+  dynamic planeOfMotion3;
+  @JsonKey(name: "body_region")
+  String? bodyRegion;
+  @JsonKey(name: "force_type")
+  String? forceType;
+  @JsonKey(name: "mechanics")
+  String? mechanics;
+  @JsonKey(name: "laterality")
+  String? laterality;
+  @JsonKey(name: "primary_exercise_classification")
+  String? primaryExerciseClassification;
+  @JsonKey(name: "short_youtube_demonstration_link")
+  String? shortYoutubeDemonstrationLink;
+  @JsonKey(name: "in_depth_youtube_explanation_link")
+  String? inDepthYoutubeExplanationLink;
 
   ExerciseDto({
     this.id,
@@ -76,6 +110,7 @@ class ExerciseDto {
     this.inDepthYoutubeExplanationLink,
   });
 
-  factory ExerciseDto.fromJson(Map<String, dynamic> json) => _$ExerciseDtoFromJson(json);
+  factory ExerciseDto.fromJson(Map<String, dynamic> json) =>
+      _$ExerciseDtoFromJson(json);
   Map<String, dynamic> toJson() => _$ExerciseDtoToJson(this);
 }

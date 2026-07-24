@@ -1,9 +1,7 @@
 import 'package:fitness/features/auth/api/auth_api_client/auth_api_client.dart';
 import 'package:fitness/features/auth/api/data_sources/remote/auth_remote_data_source_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import 'auth_remote_data_source_impl_test.mocks.dart';
 
