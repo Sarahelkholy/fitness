@@ -1,7 +1,6 @@
 import 'package:fitness/config/base_state/base_state.dart';
 import 'package:fitness/config/error_handling/result.dart';
 import 'package:fitness/features/exercise/domain/entities/difficulty_level.dart';
-import 'package:fitness/features/exercise/domain/entities/exercise.dart';
 import 'package:fitness/features/exercise/domain/entities/exercise_info.dart';
 import 'package:fitness/features/exercise/domain/use_cases/get_difficulty_levels_use_case.dart';
 import 'package:fitness/features/exercise/domain/use_cases/get_exercises_use_case.dart';
