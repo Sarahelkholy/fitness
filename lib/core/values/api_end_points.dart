@@ -21,4 +21,6 @@ abstract class ApiEndPoints {
   static const String getMealsCategories = "/categories.php";
   static const String getMealsByCategory = "/filter.php";
   static const String getMealDetails = "/lookup.php";
+
+  static const String getRandomPrimeMoverMusclesEndpoint = '/exercises/random';
 }
