@@ -77,12 +77,14 @@ abstract class RouteGenerator {
 
         /// meal recommendation screen
         case Routes.mealRecommendationRoute:
+          final index = settings.arguments as int? ?? 0;
+
           return MaterialPageRoute(
             builder: (_) => BlocProvider(
               create: (context) =>
                   getIt<MealRecommendationCubit>()
                     ..doEvents(GetCategoriesEvent()),
-              child: const MealRecommendationScreen(),
+              child: MealRecommendationScreen(initialIndex: index),
             ),
           );
 

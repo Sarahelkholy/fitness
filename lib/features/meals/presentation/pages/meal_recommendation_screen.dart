@@ -16,7 +16,9 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_constants.dart';
 
 class MealRecommendationScreen extends StatefulWidget {
-  const MealRecommendationScreen({super.key});
+  final int initialIndex;
+
+  const MealRecommendationScreen({super.key, this.initialIndex = 0});
 
   @override
   State<MealRecommendationScreen> createState() =>
@@ -93,16 +95,20 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
                     );
                   }
 
-                  // Trigger first category fetch if needed
-                  if (state.selectedCategoryIndex == 0 &&
-                      state.mealsState.data == null &&
-                      !state.mealsState.isLoading) {
-                    _cubit.doEvents(
-                      GetMealsByCategoryEvent(
-                        category: categories[0].name,
-                        index: 0,
-                      ),
-                    );
+                  if (state.mealsState.data == null &&
+                      !state.mealsState.isLoading &&
+                      categories.isNotEmpty) {
+                    final index = (widget.initialIndex < categories.length)
+                        ? widget.initialIndex
+                        : 0;
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      _cubit.doEvents(
+                        GetMealsByCategoryEvent(
+                          category: categories[index].name,
+                          index: index,
+                        ),
+                      );
+                    });
                   }
 
                   return SafeArea(
@@ -143,40 +149,38 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
                                     ),
                                   ),
                                 );
-                              }
-
-                              final meals = state.mealsState.data ?? [];
-
-                              if (meals.isEmpty && state.mealsState.isSuccess) {
+                              } else if (state.mealsState.data != null &&
+                                  state.mealsState.data!.isEmpty) {
                                 return CustomErrorWidget(
                                   errorMessage: localizations.noMealsFound,
                                 );
+                              } else if (state.mealsState.data != null) {
+                                return GridView.builder(
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 16,
+                                        mainAxisSpacing: 16,
+                                        childAspectRatio: 1,
+                                      ),
+                                  itemCount: state.mealsState.data!.length,
+                                  itemBuilder: (context, index) {
+                                    final meal = state.mealsState.data![index];
+                                    return CustomGridItem(
+                                      title: meal.name,
+                                      imageUrl: meal.image,
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                          context,
+                                          Routes.mealDetailsRoute,
+                                          arguments: meal.id,
+                                        );
+                                      },
+                                    );
+                                  },
+                                );
                               }
-
-                              return GridView.builder(
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 16,
-                                      mainAxisSpacing: 16,
-                                      childAspectRatio: 1,
-                                    ),
-                                itemCount: meals.length,
-                                itemBuilder: (context, index) {
-                                  final meal = meals[index];
-                                  return CustomGridItem(
-                                    title: meal.name,
-                                    imageUrl: meal.image,
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                        context,
-                                        Routes.mealDetailsRoute,
-                                        arguments: meal.id,
-                                      );
-                                    },
-                                  );
-                                },
-                              );
+                              return const SizedBox.shrink();
                             },
                           ),
                         ),
