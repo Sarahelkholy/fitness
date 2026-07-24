@@ -23,14 +23,6 @@ void main() async {
 
   Bloc.observer = CustomBlocObserver();
 
-  final temp1 = getIt<GetDifficultyLevelsUseCase>();
-  temp1(primeMoverMuscleId: "69d982ef85f6bfa972bf2248");
-  final temp2 = getIt<GetExercisesUseCase>();
-  temp2(
-    primeMoverMuscleId: "69d982ef85f6bfa972bf2248",
-    page: 1,
-    difficultyLevelId: "69d982ed85f6bfa972bf2216",
-  );
   runApp(const MyApp());
 }
 
@@ -57,7 +49,7 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: 'Fitness APP',
 
-            initialRoute: Routes.splashRoute,
+            initialRoute: Routes.tempRoute,
             onGenerateRoute: RouteGenerator.getRoute,
 
             locale: locale,
