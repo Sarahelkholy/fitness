@@ -89,7 +89,6 @@ abstract class RouteGenerator {
             ),
           );
 
-
         /// meal recommendation screen
         case Routes.mealRecommendationRoute:
           final index = settings.arguments as int? ?? 0;

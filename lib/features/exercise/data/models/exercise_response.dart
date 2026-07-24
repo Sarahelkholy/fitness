@@ -12,16 +12,26 @@ String exerciseResponseToJson(ExerciseResponse data) =>
 
 @JsonSerializable()
 class ExerciseResponse {
-  @JsonKey(name: "message") String? message;
-  @JsonKey(name: "totalExercises") int? totalExercises;
-  @JsonKey(name: "totalPages") int? totalPages;
-  @JsonKey(name: "currentPage") int? currentPage;
-  @JsonKey(name: "exercises") List<ExerciseDto>? exercises;
+  @JsonKey(name: "message")
+  String? message;
+  @JsonKey(name: "totalExercises")
+  int? totalExercises;
+  @JsonKey(name: "totalPages")
+  int? totalPages;
+  @JsonKey(name: "currentPage")
+  int? currentPage;
+  @JsonKey(name: "exercises")
+  List<ExerciseDto>? exercises;
 
-  ExerciseResponse(
-      {this.message, this.totalExercises, this.totalPages, this.currentPage, this.exercises});
+  ExerciseResponse({
+    this.message,
+    this.totalExercises,
+    this.totalPages,
+    this.currentPage,
+    this.exercises,
+  });
 
-  factory ExerciseResponse.fromJson(Map<String, dynamic> json)=>
+  factory ExerciseResponse.fromJson(Map<String, dynamic> json) =>
       _$ExerciseResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ExerciseResponseToJson(this);

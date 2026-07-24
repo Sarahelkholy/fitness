@@ -22,9 +22,11 @@ class AuthRepoImpl implements AuthRepo {
   final SecureCache _secureCache;
   final SocialAuthService _socialAuthService;
 
-  AuthRepoImpl(this._authRemoteDataSource,
-      this._secureCache,
-      this._socialAuthService,);
+  AuthRepoImpl(
+    this._authRemoteDataSource,
+    this._secureCache,
+    this._socialAuthService,
+  );
 
   @override
   Future<Result<UserEntity>> login(LoginRequest loginRequest) async {
@@ -68,21 +70,24 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Result<String>> forgetPassword(
-      ForgetPasswordRequest forgetPasswordRequest,) {
+    ForgetPasswordRequest forgetPasswordRequest,
+  ) {
     // TODO: implement forgetPassword
     throw UnimplementedError();
   }
 
   @override
   Future<Result<String>> resetPassword(
-      ResetPasswordRequest resetPasswordRequest,) {
+    ResetPasswordRequest resetPasswordRequest,
+  ) {
     // TODO: implement resetPassword
     throw UnimplementedError();
   }
 
   @override
   Future<Result<String>> verifyResetCode(
-      VerifyResetOtpRequest verifyResetOtpRequest,) {
+    VerifyResetOtpRequest verifyResetOtpRequest,
+  ) {
     // TODO: implement verifyResetCode
     throw UnimplementedError();
   }

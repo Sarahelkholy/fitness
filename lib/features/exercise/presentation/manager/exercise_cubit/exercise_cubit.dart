@@ -56,7 +56,8 @@ class ExerciseCubit extends Cubit<ExerciseState> {
 
     final result = await _getExercisesUseCase(
       primeMoverMuscleId: primeMoverId,
-      difficultyLevelId: event.difficultyLevelId ?? state.selectedDifficultyLevel?.id,
+      difficultyLevelId:
+          event.difficultyLevelId ?? state.selectedDifficultyLevel?.id,
       page: pageToFetch,
     );
 
@@ -64,17 +65,18 @@ class ExerciseCubit extends Cubit<ExerciseState> {
       case Success<ExerciseInfo>():
         final currentExercises = state.exercisesState.data ?? [];
         final newExercises = result.data.exercises ?? [];
-        final allExercises = pageToFetch == 1 ? newExercises : [...currentExercises, ...newExercises];
+        final allExercises = pageToFetch == 1
+            ? newExercises
+            : [...currentExercises, ...newExercises];
 
         emit(
           state.copyWith(
-            exercisesState: BaseState(
-              isSuccess: true,
-              data: allExercises,
-            ),
+            exercisesState: BaseState(isSuccess: true, data: allExercises),
             currentPage: result.data.currentPage ?? pageToFetch,
             totalPages: result.data.totalPages ?? state.totalPages,
-            selectedExercise: pageToFetch == 1 && allExercises.isNotEmpty ? allExercises.first : state.selectedExercise,
+            selectedExercise: pageToFetch == 1 && allExercises.isNotEmpty
+                ? allExercises.first
+                : state.selectedExercise,
           ),
         );
       case Failure<ExerciseInfo>():
@@ -106,18 +108,17 @@ class ExerciseCubit extends Cubit<ExerciseState> {
         final levels = result.data;
         emit(
           state.copyWith(
-            difficultyLevelsState: BaseState(
-              isSuccess: true,
-              data: levels,
-            ),
+            difficultyLevelsState: BaseState(isSuccess: true, data: levels),
             selectedDifficultyLevel: levels.isNotEmpty ? levels.first : null,
           ),
         );
         if (levels.isNotEmpty) {
-          _getExercises(GetExercisesEvent(
-            primeMoverMuscleId: event.primeMoverMuscleId,
-            difficultyLevelId: levels.first.id,
-          ));
+          _getExercises(
+            GetExercisesEvent(
+              primeMoverMuscleId: event.primeMoverMuscleId,
+              difficultyLevelId: levels.first.id,
+            ),
+          );
         }
       case Failure<List<DifficultyLevel>>():
         emit(
@@ -134,8 +135,8 @@ class ExerciseCubit extends Cubit<ExerciseState> {
 
   void _selectDifficultyLevel(SelectDifficultyLevelEvent event) {
     emit(state.copyWith(selectedDifficultyLevel: event.difficultyLevel));
-    _getExercises(GetExercisesEvent(
-      difficultyLevelId: event.difficultyLevel.id,
-    ));
+    _getExercises(
+      GetExercisesEvent(difficultyLevelId: event.difficultyLevel.id),
+    );
   }
 }

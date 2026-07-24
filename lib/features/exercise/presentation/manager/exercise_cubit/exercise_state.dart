@@ -34,11 +34,13 @@ class ExerciseState extends Equatable {
   }) {
     return ExerciseState(
       exercisesState: exercisesState ?? this.exercisesState,
-      difficultyLevelsState: difficultyLevelsState ?? this.difficultyLevelsState,
+      difficultyLevelsState:
+          difficultyLevelsState ?? this.difficultyLevelsState,
       selectedExercise: (clearSelectedExercise ?? false)
           ? null
           : (selectedExercise ?? this.selectedExercise),
-      selectedDifficultyLevel: selectedDifficultyLevel ?? this.selectedDifficultyLevel,
+      selectedDifficultyLevel:
+          selectedDifficultyLevel ?? this.selectedDifficultyLevel,
       currentPage: currentPage ?? this.currentPage,
       totalPages: totalPages ?? this.totalPages,
       primeMoverMuscleId: primeMoverMuscleId ?? this.primeMoverMuscleId,
@@ -47,12 +49,12 @@ class ExerciseState extends Equatable {
 
   @override
   List<Object?> get props => [
-        exercisesState,
-        difficultyLevelsState,
-        selectedExercise,
-        selectedDifficultyLevel,
-        currentPage,
-        totalPages,
-        primeMoverMuscleId,
-      ];
+    exercisesState,
+    difficultyLevelsState,
+    selectedExercise,
+    selectedDifficultyLevel,
+    currentPage,
+    totalPages,
+    primeMoverMuscleId,
+  ];
 }

@@ -27,11 +27,13 @@ void main() {
 
   test('should get exercises from the repository', () async {
     // arrange
-    when(mockHomeRepo.getExercises(
-      primeMoverMuscleId: anyNamed('primeMoverMuscleId'),
-      difficultyLevelId: anyNamed('difficultyLevelId'),
-      page: anyNamed('page'),
-    )).thenAnswer((_) async => Success(data: tExerciseInfo));
+    when(
+      mockHomeRepo.getExercises(
+        primeMoverMuscleId: anyNamed('primeMoverMuscleId'),
+        difficultyLevelId: anyNamed('difficultyLevelId'),
+        page: anyNamed('page'),
+      ),
+    ).thenAnswer((_) async => Success(data: tExerciseInfo));
 
     // act
     final result = await useCase.call(page: 1);

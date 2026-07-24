@@ -9,9 +9,7 @@ class GetDifficultyLevelsUseCase {
 
   GetDifficultyLevelsUseCase(this._repository);
 
-  Future<Result<List<DifficultyLevel>>> call({
-    String? primeMoverMuscleId,
-  }) {
+  Future<Result<List<DifficultyLevel>>> call({String? primeMoverMuscleId}) {
     return _repository.getDifficultyLevels(
       primeMoverMuscleId: primeMoverMuscleId,
     );

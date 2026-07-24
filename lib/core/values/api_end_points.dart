@@ -13,7 +13,8 @@ abstract class ApiEndPoints {
   static const String verifyRestOtp = "/auth/verifyResetCode";
   static const String resetPassword = "/auth/resetPassword";
 
-  static const String exercisesByMuscleDifficulty = "/exercises/by-muscle-difficulty";
+  static const String exercisesByMuscleDifficulty =
+      "/exercises/by-muscle-difficulty";
   static const String difficultyLevels =
       "/levels/difficulty-levels/by-prime-mover";
 

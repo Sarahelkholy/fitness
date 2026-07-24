@@ -21,9 +21,11 @@ abstract class MealsApiClient {
 
   @GET(ApiEndPoints.getMealsByCategory)
   Future<MealsResponse> getMealsByCategory(
-      @Query(ApiStrings.categoryParam) String category,);
+    @Query(ApiStrings.categoryParam) String category,
+  );
 
   @GET(ApiEndPoints.getMealDetails)
   Future<MealDetailsResponse> getMealDetails(
-      @Query(ApiStrings.mealIdParam) String mealId,);
+    @Query(ApiStrings.mealIdParam) String mealId,
+  );
 }

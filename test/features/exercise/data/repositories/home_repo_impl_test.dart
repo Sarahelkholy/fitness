@@ -27,35 +27,45 @@ void main() {
       currentPage: 1,
     );
 
-    test('should return Success when remote data source is successful', () async {
-      // arrange
-      when(mockRemoteDataSource.getExercises(
-        primeMoverMuscleId: anyNamed('primeMoverMuscleId'),
-        difficultyLevelId: anyNamed('difficultyLevelId'),
-        page: anyNamed('page'),
-      )).thenAnswer((_) async => tExerciseResponse);
+    test(
+      'should return Success when remote data source is successful',
+      () async {
+        // arrange
+        when(
+          mockRemoteDataSource.getExercises(
+            primeMoverMuscleId: anyNamed('primeMoverMuscleId'),
+            difficultyLevelId: anyNamed('difficultyLevelId'),
+            page: anyNamed('page'),
+          ),
+        ).thenAnswer((_) async => tExerciseResponse);
 
-      // act
-      final result = await repository.getExercises(page: 1);
+        // act
+        final result = await repository.getExercises(page: 1);
 
-      // assert
-      expect(result, isA<Success<ExerciseInfo>>());
-      verify(mockRemoteDataSource.getExercises(page: 1));
-    });
+        // assert
+        expect(result, isA<Success<ExerciseInfo>>());
+        verify(mockRemoteDataSource.getExercises(page: 1));
+      },
+    );
 
-    test('should return Failure when remote data source throws exception', () async {
-      // arrange
-      when(mockRemoteDataSource.getExercises(
-        primeMoverMuscleId: anyNamed('primeMoverMuscleId'),
-        difficultyLevelId: anyNamed('difficultyLevelId'),
-        page: anyNamed('page'),
-      )).thenThrow(Exception('Server Error'));
+    test(
+      'should return Failure when remote data source throws exception',
+      () async {
+        // arrange
+        when(
+          mockRemoteDataSource.getExercises(
+            primeMoverMuscleId: anyNamed('primeMoverMuscleId'),
+            difficultyLevelId: anyNamed('difficultyLevelId'),
+            page: anyNamed('page'),
+          ),
+        ).thenThrow(Exception('Server Error'));
 
-      // act
-      final result = await repository.getExercises(page: 1);
+        // act
+        final result = await repository.getExercises(page: 1);
 
-      // assert
-      expect(result, isA<Failure<ExerciseInfo>>());
-    });
+        // assert
+        expect(result, isA<Failure<ExerciseInfo>>());
+      },
+    );
   });
 }
