@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:fitness/config/base_cubit/base_event.dart';
 import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/core/helpers/app_snack_bar.dart';
 import 'package:fitness/core/helpers/validator.dart';
@@ -11,7 +9,6 @@ import 'package:fitness/core/values/app_strings.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_event.dart';
 import 'package:fitness/features/auth/presentation/manager/forget_password_cubit/forget_password_state.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,6 +42,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
     return BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
       listener: (context, state) {
         if (state.resetPasswordState.isSuccess) {
+          AppSnackBar.success(context, 'Password Changed Successfully');
           Navigator.pushNamedAndRemoveUntil(
             context,
             Routes.loginRoute,
@@ -63,19 +61,19 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
               context,
             ).copyWith(color: AppColors.white),
           ),
-          const SizedBox(height: 4),
+          // SizedBox(height: mediaQuery.height * .02),
           Text(
             AppStrings.current.createNewPassword,
             style: AppTextStyles.bold24(
               context,
             ).copyWith(color: AppColors.white),
           ),
-          const SizedBox(height: 24),
+          // SizedBox(height: mediaQuery.height * .02),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 32.0,
-                vertical: 24,
+              padding: EdgeInsets.symmetric(
+                horizontal: mediaQuery.width * .08,
+                vertical: mediaQuery.height * .03,
               ),
               child: Form(
                 key: _formKey,
@@ -139,7 +137,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: mediaQuery.height * .015),
                     TextFormField(
                       controller: _confirmPasswordController,
                       obscureText: _obscureConfirmPassword,
@@ -202,7 +200,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: mediaQuery.height * .02),
                     BlocSelector<
                       ForgetPasswordCubit,
                       ForgetPasswordState,
@@ -229,7 +227,6 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                         );
                       },
                     ),
-                    // const SizedBox(height: 15),
                   ],
                 ),
               ),

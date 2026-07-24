@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:fitness/config/base_cubit/base_event.dart';
 import 'package:fitness/core/helpers/app_snack_bar.dart';
 import 'package:fitness/core/shared_widgets/custom_button.dart';
 import 'package:fitness/core/utils/app_colors.dart';
@@ -35,127 +34,101 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _streamSubscription = context
-          .read<ForgetPasswordCubit>()
-          .eventStream
-          .listen((event) {
-            if (!mounted) return;
-            if (event case DisplayErrorEvent()) {
-              AppSnackBar.error(context, event.errorMsg);
-            } else if (event case NavigationEvent()) {
-              widget.onNext();
-            }
-          });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppStrings.current.otpCode,
-          style: AppTextStyles.bold24(context).copyWith(color: AppColors.white),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          AppStrings.current.otpCodeDescription,
-          style: AppTextStyles.regular16(
-            context,
-          ).copyWith(color: AppColors.white),
-        ),
-        const SizedBox(height: 24),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(50),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 35, sigmaY: 35),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 32.0,
-                vertical: 24,
+    final mediaQuery = MediaQuery.sizeOf(context);
+    return BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
+      listenWhen: (previous, current) =>
+          previous.verifyOtpState != current.verifyOtpState,
+      listener: (context, state) {
+        if (state.verifyOtpState.isSuccess) {
+          AppSnackBar.success(context, 'OTP code verified successfully');
+          widget.onNext();
+        } else if (state.verifyOtpState.errorMessage?.isNotEmpty ?? false) {
+          AppSnackBar.error(context, state.verifyOtpState.errorMessage!);
+        }
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppStrings.current.otpCode,
+            style: AppTextStyles.bold24(
+              context,
+            ).copyWith(color: AppColors.white),
+          ),
+          Text(
+            AppStrings.current.otpCodeDescription,
+            style: AppTextStyles.regular16(
+              context,
+            ).copyWith(color: AppColors.white),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              PinCodeTextField(
+                appContext: context,
+                controller: _otpController,
+                length: 4,
+                keyboardType: TextInputType.number,
+                animationType: AnimationType.fade,
+                textStyle: AppTextStyles.medium18(
+                  context,
+                ).copyWith(color: AppColors.main),
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.underline,
+                  activeColor: AppColors.main,
+                  inactiveColor: AppColors.white.withValues(alpha: 0.5),
+                  selectedColor: AppColors.main,
+                  activeFillColor: AppColors.transparent,
+                  inactiveFillColor: AppColors.transparent,
+                  selectedFillColor: AppColors.transparent,
+                ),
+                cursorColor: AppColors.main,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  PinCodeTextField(
-                    appContext: context,
-                    controller: _otpController,
-                    length: 4,
-                    keyboardType: TextInputType.number,
-                    animationType: AnimationType.fade,
-                    textStyle: AppTextStyles.medium18(
-                      context,
-                    ).copyWith(color: AppColors.main),
-                    pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.underline,
-                      activeColor: AppColors.main,
-                      inactiveColor: AppColors.white.withValues(alpha: 0.5),
-                      selectedColor: AppColors.main,
-                      activeFillColor: AppColors.transparent,
-                      inactiveFillColor: AppColors.transparent,
-                      selectedFillColor: AppColors.transparent,
-                    ),
-                    cursorColor: AppColors.main,
-                    // enableActiveFill: true,
-                    // onChanged: (value) {
-                    //   context.read<ForgetPasswordCubit>().doEvents(
-                    //     VerifyOtpEvent(otp: value),
-                    //   );
-                    // },
-                  ),
-                  const SizedBox(height: 24),
-                  BlocSelector<ForgetPasswordCubit, ForgetPasswordState, bool>(
-                    selector: (state) => state.verifyOtpState.isLoading,
-                    builder: (context, isLoading) {
-                      return CustomButton(
-                        title: AppStrings.current.confirm,
-                        isLoading: isLoading,
-                        onPressed: () {
-                          context.read<ForgetPasswordCubit>().doEvents(
-                            VerifyOtpEvent(otp: _otpController.text),
-                          );
-                        },
+              SizedBox(height: mediaQuery.height * .02),
+              BlocSelector<ForgetPasswordCubit, ForgetPasswordState, bool>(
+                selector: (state) => state.verifyOtpState.isLoading,
+                builder: (context, isLoading) {
+                  return CustomButton(
+                    title: AppStrings.current.confirm,
+                    isLoading: isLoading,
+                    onPressed: () {
+                      context.read<ForgetPasswordCubit>().doEvents(
+                        VerifyOtpEvent(otp: _otpController.text),
                       );
                     },
-                  ),
-                  const SizedBox(height: 16),
-                  Center(
-                    child: Text(
-                      AppStrings.current.didntReceiveCode,
-                      style: AppTextStyles.regular14(
-                        context,
-                      ).copyWith(color: AppColors.white.withValues(alpha: 0.7)),
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        context.read<ForgetPasswordCubit>().doEvents(
-                          ResendOtpEvent(email: widget.email),
-                        );
-                      },
-                      child: Text(
-                        AppStrings.current.resendCode,
-                        style: AppTextStyles.bold14(context).copyWith(
-                          color: AppColors.main,
-                          decoration: TextDecoration.underline,
-                          decorationColor: AppColors.main,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                ],
+                  );
+                },
               ),
-            ),
+              Center(
+                child: Text(
+                  AppStrings.current.didntReceiveCode,
+                  style: AppTextStyles.regular14(
+                    context,
+                  ).copyWith(color: AppColors.white.withValues(alpha: 0.7)),
+                ),
+              ),
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    context.read<ForgetPasswordCubit>().doEvents(
+                      ResendOtpEvent(email: widget.email),
+                    );
+                  },
+                  child: Text(
+                    AppStrings.current.resendCode,
+                    style: AppTextStyles.bold14(context).copyWith(
+                      color: AppColors.main,
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.main,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
