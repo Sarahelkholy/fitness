@@ -110,5 +110,13 @@
   "smartCoach":"Smart coach",
   "workouts":"Workouts",
   "profile": "Profile",
-  "mealNotFound": "Meal not found"
+  "mealNotFound": "Meal not found",
+
+  "foodRecommendation": "Food Recommendation",
+  "ingredients": "Ingredients",
+  "noCategoriesFound": "No categories found",
+  "noMealsFound": "No meals found for this category",
+  "category": "Category",
+  "area": "Area",
+  "country": "Country"
 }

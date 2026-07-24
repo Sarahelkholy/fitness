@@ -22,7 +22,7 @@ class DifficultyLevelResponse {
   int? totalLevels;
 
   @JsonKey(name: "difficulty_levels")
-  List<DifficultyLevel>? difficultyLevels;
+  List<DifficultyLevelDto>? difficultyLevels;
 
   DifficultyLevelResponse({
     this.message,
@@ -37,17 +37,17 @@ class DifficultyLevelResponse {
 }
 
 @JsonSerializable()
-class DifficultyLevel {
+class DifficultyLevelDto {
   @JsonKey(name: "id")
   String? id;
 
   @JsonKey(name: "name")
   String? name;
 
-  DifficultyLevel({this.id, this.name});
+  DifficultyLevelDto({this.id, this.name});
 
-  factory DifficultyLevel.fromJson(Map<String, dynamic> json) =>
-      _$DifficultyLevelFromJson(json);
+  factory DifficultyLevelDto.fromJson(Map<String, dynamic> json) =>
+      _$DifficultyLevelDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DifficultyLevelToJson(this);
+  Map<String, dynamic> toJson() => _$DifficultyLevelDtoToJson(this);
 }

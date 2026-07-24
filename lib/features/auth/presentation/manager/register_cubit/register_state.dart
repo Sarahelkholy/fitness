@@ -2,8 +2,6 @@ import 'package:equatable/equatable.dart';
 import '../../../../../config/base_state/base_state.dart';
 import '../../../../../config/user/domain/entities/user_entity.dart';
 
-enum UserGender { male, female }
-
 class RegisterState extends Equatable {
   final BaseState<UserEntity> registerState;
   final bool isSubmitted;

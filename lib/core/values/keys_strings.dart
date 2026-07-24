@@ -68,4 +68,25 @@ abstract class KeysStrings {
   static const onBoardingNext = 'Next';
   static const onBoardingBack = 'Back';
   static const onBoardingDoIt = 'DoIt';
+
+  // Register Screen
+  static const registerFirstNameField = 'register_first_name_field';
+  static const registerLastNameField = 'register_last_name_field';
+  static const registerEmailField = 'register_email_field';
+  static const registerPasswordField = 'register_password_field';
+  static const registerNextButton = 'register_next_button';
+  static const registerGoogleButton = 'register_google_button';
+  static const registerFacebookButton = 'register_facebook_button';
+  static const registerLoginButton = 'register_login_button';
+
+  // Register Form Screen
+  static const registerFormMaleButton = 'register_form_male_button';
+  static const registerFormFemaleButton = 'register_form_female_button';
+  static const registerFormNextButton = 'register_form_next_button';
+  static const registerFormNextButtonStep1 = 'register_form_next_button_step1';
+  static const registerFormNextButtonStep2 = 'register_form_next_button_step2';
+  static const registerFormNextButtonStep3 = 'register_form_next_button_step3';
+  static const registerFormNextButtonStep4 = 'register_form_next_button_step4';
+  static const registerFormNextButtonStep5 = 'register_form_next_button_step5';
+  static const registerFormNextButtonStep6 = 'register_form_next_button_step6';
 }
