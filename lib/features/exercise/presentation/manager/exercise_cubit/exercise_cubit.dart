@@ -41,6 +41,7 @@ class ExerciseCubit extends Cubit<ExerciseState> {
         state.copyWith(
           exercisesState: const BaseState(isLoading: true),
           currentPage: 1,
+          clearSelectedExercise: true,
         ),
       );
     } else {

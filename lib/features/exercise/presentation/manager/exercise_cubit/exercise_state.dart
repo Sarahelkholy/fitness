@@ -26,6 +26,7 @@ class ExerciseState extends Equatable {
     BaseState<List<Exercise>>? exercisesState,
     BaseState<List<DifficultyLevel>>? difficultyLevelsState,
     Exercise? selectedExercise,
+    bool? clearSelectedExercise,
     DifficultyLevel? selectedDifficultyLevel,
     int? currentPage,
     int? totalPages,
@@ -34,7 +35,9 @@ class ExerciseState extends Equatable {
     return ExerciseState(
       exercisesState: exercisesState ?? this.exercisesState,
       difficultyLevelsState: difficultyLevelsState ?? this.difficultyLevelsState,
-      selectedExercise: selectedExercise ?? this.selectedExercise,
+      selectedExercise: (clearSelectedExercise ?? false)
+          ? null
+          : (selectedExercise ?? this.selectedExercise),
       selectedDifficultyLevel: selectedDifficultyLevel ?? this.selectedDifficultyLevel,
       currentPage: currentPage ?? this.currentPage,
       totalPages: totalPages ?? this.totalPages,

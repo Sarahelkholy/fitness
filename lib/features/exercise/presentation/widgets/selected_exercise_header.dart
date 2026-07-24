@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '../../domain/entities/exercise.dart';
@@ -11,7 +13,9 @@ class SelectedExerciseHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final videoId = _extractYoutubeId(exercise.shortYoutubeDemonstrationLink ?? '');
+    final videoId = YoutubePlayer.convertUrlToId(
+      exercise.shortYoutubeDemonstrationLink ?? '',
+    );
     final thumbnailUrl = videoId != null
         ? 'https://img.youtube.com/vi/$videoId/hqdefault.jpg'
         : 'https://via.placeholder.com/400x300';
@@ -19,58 +23,73 @@ class SelectedExerciseHeader extends StatelessWidget {
     return Container(
       height: 300,
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(thumbnailUrl),
-          fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(
-            Colors.black.withValues(alpha: 0.5),
-            BlendMode.darken,
-          ),
-          onError: (exception, stackTrace) {
-            debugPrint('Error loading image: $exception');
-          },
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      decoration: const BoxDecoration(color: Colors.black),
+      child: Stack(
         children: [
-          Text(
-            exercise.exercise ?? 'N/A',
-            style: AppTextStyles.bold24(
-              context,
-            ).copyWith(color: AppColors.white),
+          Positioned.fill(
+            child: Image.network(
+              thumbnailUrl,
+              fit: BoxFit.cover,
+              color: Colors.black.withValues(alpha: 0.5),
+              colorBlendMode: BlendMode.darken,
+            ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus volutpat ut nisi morbi.',
-            style: AppTextStyles.regular14(
-              context,
-            ).copyWith(color: AppColors.grayD3),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+          // Gradient overlay
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black.withValues(alpha: 0.3),
+                    Colors.transparent,
+                    Colors.black.withValues(alpha: 0.8),
+                  ],
+                ),
+              ),
+            ),
           ),
-          const SizedBox(height: 16),
-          const Row(
-            children: [
-              InfoChip(label: '30 MIN'),
-              SizedBox(width: 8),
-              InfoChip(label: '130 Cal', isHighlight: true),
-            ],
+          // Exercise Info
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    exercise.exercise ?? 'N/A',
+                    style: AppTextStyles.bold24(
+                      context,
+                    ).copyWith(color: AppColors.white),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus volutpat ut nisi morbi.',
+                    style: AppTextStyles.regular14(
+                      context,
+                    ).copyWith(color: AppColors.grayD3),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 16),
+                  const Row(
+                    children: [
+                      InfoChip(label: '30 MIN'),
+                      SizedBox(width: 8),
+                      InfoChip(label: '130 Cal', isHighlight: true),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
     );
-  }
-
-  String? _extractYoutubeId(String url) {
-    if (url.isEmpty) return null;
-    final regExp = RegExp(
-      r'^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})',
-    );
-    final match = regExp.firstMatch(url);
-    return match?.group(1);
   }
 }
