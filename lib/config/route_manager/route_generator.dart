@@ -10,7 +10,6 @@ import 'package:fitness/features/auth/presentation/pages/register/register_scree
 import 'package:fitness/features/exercise/presentation/manager/exercise_cubit/exercise_cubit.dart';
 import 'package:fitness/features/exercise/presentation/pages/exercise_screen.dart';
 import 'package:fitness/features/exercise/presentation/pages/home_screen.dart';
-import 'package:fitness/features/exercise/presentation/pages/temp_screen.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,9 +89,9 @@ abstract class RouteGenerator {
             ),
           );
 
-        /// temp screen
-        case Routes.tempRoute:
-          return MaterialPageRoute(builder: (_) => const TempScreen());
+        // /// temp screen
+        // case Routes.tempRoute:
+        //   return MaterialPageRoute(builder: (_) => const TempScreen());
 
         /// meal recommendation screen
         case Routes.mealRecommendationRoute:
