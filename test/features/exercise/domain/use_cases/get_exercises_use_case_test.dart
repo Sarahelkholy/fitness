@@ -20,8 +20,9 @@ void main() {
   });
 
   const tExerciseInfo = ExerciseInfo(
-    results: [Exercise(id: '1', exercise: 'Push Up')],
-    metadata: null,
+    exercises: [Exercise(id: '1', exercise: 'Push Up')],
+    currentPage: 1,
+    totalPages: 1,
   );
 
   test('should get exercises from the repository', () async {
@@ -30,13 +31,14 @@ void main() {
       primeMoverMuscleId: anyNamed('primeMoverMuscleId'),
       difficultyLevelId: anyNamed('difficultyLevelId'),
       page: anyNamed('page'),
-    )).thenAnswer((_) async => Success(tExerciseInfo));
+    )).thenAnswer((_) async => Success(data: tExerciseInfo));
 
     // act
     final result = await useCase.call(page: 1);
 
     // assert
-    expect(result, Success(tExerciseInfo));
+    expect(result, isA<Success<ExerciseInfo>>());
+    expect((result as Success).data, tExerciseInfo);
     verify(mockHomeRepo.getExercises(page: 1));
     verifyNoMoreInteractions(mockHomeRepo);
   });

@@ -56,9 +56,9 @@ void main() {
     const tExercises = [Exercise(id: '1', exercise: 'Push Up')];
     
     when(() => mockCubit.state).thenReturn(
-      const ExerciseState(
-        difficultyLevelsState: BaseState(isSuccess: true, data: tDifficultyLevels),
-        exercisesState: BaseState(isSuccess: true, data: tExercises),
+      ExerciseState(
+        difficultyLevelsState: const BaseState(isSuccess: true, data: tDifficultyLevels),
+        exercisesState: const BaseState(isSuccess: true, data: tExercises),
         selectedDifficultyLevel: tDifficultyLevels[0],
         selectedExercise: tExercises[0],
       ),
@@ -81,9 +81,9 @@ void main() {
     const tExercises = [Exercise(id: '1', exercise: 'Push Up')];
     
     when(() => mockCubit.state).thenReturn(
-      const ExerciseState(
-        difficultyLevelsState: BaseState(isSuccess: true, data: tDifficultyLevels),
-        exercisesState: BaseState(isSuccess: true, data: tExercises),
+      ExerciseState(
+        difficultyLevelsState: const BaseState(isSuccess: true, data: tDifficultyLevels),
+        exercisesState: const BaseState(isSuccess: true, data: tExercises),
         selectedDifficultyLevel: tDifficultyLevels[0],
       ),
     );
