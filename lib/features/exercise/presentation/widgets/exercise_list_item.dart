@@ -19,7 +19,9 @@ class ExerciseListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final videoId = _extractYoutubeId(exercise.shortYoutubeDemonstrationLink ?? '');
+    final videoId = _extractYoutubeId(
+      exercise.shortYoutubeDemonstrationLink ?? '',
+    );
     final thumbnailUrl = videoId != null
         ? 'https://img.youtube.com/vi/$videoId/hqdefault.jpg'
         : 'https://via.placeholder.com/80';

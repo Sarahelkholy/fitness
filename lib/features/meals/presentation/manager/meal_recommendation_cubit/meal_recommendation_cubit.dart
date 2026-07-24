@@ -57,10 +57,12 @@ class MealRecommendationCubit
   }
 
   Future<void> _getMealsByCategory(String category, int index) async {
-    emit(state.copyWith(
-      mealsStateParam: const BaseState(isLoading: true),
-      selectedCategoryIndexParam: index,
-    ));
+    emit(
+      state.copyWith(
+        mealsStateParam: const BaseState(isLoading: true),
+        selectedCategoryIndexParam: index,
+      ),
+    );
 
     final result = await _getMealsByCategoryUseCase.call(category);
 

@@ -1,7 +1,6 @@
 import '../../../domain/entities/difficulty_level.dart';
 import '../../../domain/entities/exercise.dart';
 
-
 sealed class ExerciseEvent {}
 
 class GetExercisesEvent extends ExerciseEvent {
