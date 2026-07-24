@@ -89,9 +89,6 @@ abstract class RouteGenerator {
             ),
           );
 
-        // /// temp screen
-        // case Routes.tempRoute:
-        //   return MaterialPageRoute(builder: (_) => const TempScreen());
 
         /// meal recommendation screen
         case Routes.mealRecommendationRoute:
