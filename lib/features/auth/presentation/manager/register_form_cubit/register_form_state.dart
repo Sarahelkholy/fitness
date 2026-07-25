@@ -1,20 +1,20 @@
 import 'package:equatable/equatable.dart';
 import '../../../../../config/base_state/base_state.dart';
 import '../../../../../config/user/domain/entities/user_entity.dart';
-import '../../../domain/entities/register_form_data.dart';
+import '../../../domain/entities/register_form_params.dart';
 
 class RegisterFormState extends Equatable {
-  final RegisterFormData formData;
+  final RegisterFormParams formData;
 
   final BaseState<UserEntity> updateUserState;
 
   const RegisterFormState({
-    this.formData = const RegisterFormData(),
+    this.formData = const RegisterFormParams(),
     this.updateUserState = const BaseState(),
   });
 
   RegisterFormState copyWith({
-    RegisterFormData? formDataParam,
+    RegisterFormParams? formDataParam,
     BaseState<UserEntity>? updateUserStateParam,
   }) {
     return RegisterFormState(

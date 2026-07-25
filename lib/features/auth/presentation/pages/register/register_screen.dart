@@ -5,6 +5,7 @@ import 'package:fitness/core/shared_widgets/custom_button.dart';
 import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:fitness/core/utils/app_assets.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
+import 'package:fitness/core/values/keys_strings.dart';
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_event.dart';
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_state.dart';
@@ -47,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen>
   late AppLocalizations localizations;
   late final RegisterCubit _cubit;
 
-  bool isPasswordHidden = true;
+  bool _isPasswordHidden = true;
 
   @override
   void initState() {
@@ -152,6 +153,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 children: [
                                   /// first name Field
                                   TextFormField(
+                                    key: const Key(
+                                      KeysStrings.registerFirstNameField,
+                                    ),
                                     controller: firstNameController,
                                     enabled: !state.registerState.isLoading,
                                     validator: Validator.name,
@@ -178,6 +182,9 @@ class _RegisterScreenState extends State<RegisterScreen>
 
                                   /// lastname Field
                                   TextFormField(
+                                    key: const Key(
+                                      KeysStrings.registerLastNameField,
+                                    ),
                                     controller: lastNameController,
                                     enabled: !state.registerState.isLoading,
                                     validator: Validator.name,
@@ -204,6 +211,9 @@ class _RegisterScreenState extends State<RegisterScreen>
 
                                   /// Email Field
                                   TextFormField(
+                                    key: const Key(
+                                      KeysStrings.registerEmailField,
+                                    ),
                                     controller: emailController,
                                     enabled: !state.registerState.isLoading,
                                     validator: Validator.email,
@@ -229,41 +239,50 @@ class _RegisterScreenState extends State<RegisterScreen>
                                   const SizedBox(height: 16),
 
                                   /// Password Field
-                                  TextFormField(
-                                    controller: passwordController,
-                                    obscureText: isPasswordHidden,
-                                    enabled: !state.registerState.isLoading,
-                                    validator: Validator.password,
-                                    keyboardType: TextInputType.visiblePassword,
-                                    focusNode: passwordFocus,
-                                    textInputAction: TextInputAction.done,
-                                    onFieldSubmitted: (_) {
-                                      FocusManager.instance.primaryFocus
-                                          ?.unfocus();
-                                    },
-                                    onTapOutside: (event) {
-                                      FocusManager.instance.primaryFocus
-                                          ?.unfocus();
-                                    },
-                                    decoration: InputDecoration(
-                                      labelText: localizations.password,
-                                      prefixIcon: const Icon(
-                                        Icons.lock_outline,
-                                      ),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          isPasswordHidden
-                                              ? Icons.visibility_outlined
-                                              : Icons.visibility_off_outlined,
+                                  StatefulBuilder(
+                                    builder: (context, setState) {
+                                      return TextFormField(
+                                        key: const Key(
+                                          KeysStrings.registerPasswordField,
                                         ),
-                                        onPressed: () {
-                                          setState(() {
-                                            isPasswordHidden =
-                                                !isPasswordHidden;
-                                          });
+                                        controller: passwordController,
+                                        obscureText: _isPasswordHidden,
+                                        enabled: !state.registerState.isLoading,
+                                        validator: Validator.password,
+                                        keyboardType:
+                                            TextInputType.visiblePassword,
+                                        focusNode: passwordFocus,
+                                        textInputAction: TextInputAction.done,
+                                        onFieldSubmitted: (_) {
+                                          FocusManager.instance.primaryFocus
+                                              ?.unfocus();
                                         },
-                                      ),
-                                    ),
+                                        onTapOutside: (event) {
+                                          FocusManager.instance.primaryFocus
+                                              ?.unfocus();
+                                        },
+                                        decoration: InputDecoration(
+                                          labelText: localizations.password,
+                                          prefixIcon: const Icon(
+                                            Icons.lock_outline,
+                                          ),
+                                          suffixIcon: IconButton(
+                                            icon: Icon(
+                                              _isPasswordHidden
+                                                  ? Icons.visibility_outlined
+                                                  : Icons
+                                                        .visibility_off_outlined,
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                _isPasswordHidden =
+                                                    !_isPasswordHidden;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                   const SizedBox(height: 24),
 
@@ -281,6 +300,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                   ),
                                   const SizedBox(height: 24),
                                   CustomButton(
+                                    key: const Key(
+                                      KeysStrings.registerNextButton,
+                                    ),
                                     title: localizations.next,
                                     onPressed: () {
                                       _cubit.doEvents(SubmitPressedEvent());
@@ -301,6 +323,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                   ),
                                   const SizedBox(height: 8),
                                   HaveAnAccountWidget(
+                                    key: const Key(
+                                      KeysStrings.registerLoginButton,
+                                    ),
                                     onTap: () {
                                       Navigator.pop(context);
                                     },

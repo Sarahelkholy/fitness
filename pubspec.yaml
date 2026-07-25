@@ -80,7 +80,7 @@ dependencies:
   googleapis: ^16.0.0
   googleapis_auth: ^2.3.2
   timeline_tile: ^2.0.0
-  youtube_player_flutter: ^9.0.1
+  youtube_player_flutter: ^9.1.1
 
 
 dev_dependencies:

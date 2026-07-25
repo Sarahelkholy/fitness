@@ -12,6 +12,7 @@ class RegisterStepLayout extends StatelessWidget {
   final String buttonText;
   final VoidCallback? onButtonPressed;
   final bool isLoading;
+  final Key? buttonKey;
 
   const RegisterStepLayout({
     super.key,
@@ -21,6 +22,7 @@ class RegisterStepLayout extends StatelessWidget {
     required this.buttonText,
     required this.onButtonPressed,
     this.isLoading = false,
+    this.buttonKey,
   });
 
   @override
@@ -63,6 +65,7 @@ class RegisterStepLayout extends StatelessWidget {
                     content,
                     const SizedBox(height: 32),
                     CustomButton(
+                      key: buttonKey,
                       title: buttonText,
                       onPressed: onButtonPressed,
                       isLoading: isLoading,

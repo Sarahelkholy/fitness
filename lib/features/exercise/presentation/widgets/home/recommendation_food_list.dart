@@ -1,3 +1,4 @@
+import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/features/exercise/presentation/widgets/home/recommendation_card.dart';
 import 'package:fitness/features/meals/domain/entities/category_entity.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,18 @@ class RecommendationFoodList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: categories.length > 4 ? 4 : categories.length,
         itemBuilder: (context, index) {
-          return RecommendationCard(
-            title: categories[index].name,
-            image: categories[index].image,
+          return GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                Routes.mealRecommendationRoute,
+                arguments: index,
+              );
+            },
+            child: RecommendationCard(
+              title: categories[index].name,
+              image: categories[index].image,
+            ),
           );
         },
       ),

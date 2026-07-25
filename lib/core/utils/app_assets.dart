@@ -19,13 +19,11 @@ abstract class AppAssets {
       "$_baseImagesPath/onboarding_screen_two.png";
   static const String onBoardingScreenThree =
       "$_baseImagesPath/onboarding_screen_three.png";
+
   static const String facebookIcon = "$_baseIconsPath/facebook_icon.svg";
   static const String googleIcon = "$_baseIconsPath/google_icon.svg";
   static const String appleIcon = "$_baseIconsPath/apple_icon.svg";
 
-  // static const String facebookIcon = "$_baseIconsPath/facebook_icon.svg";
-  // static const String googleIcon = "$_baseIconsPath/google_icon.svg";
-  // static const String appleIcon = "$_baseIconsPath/apple_icon.svg";
   static const String authBackgroungImage = "$_baseImagesPath/background.png";
 
   static const String homeIcon = "$_baseIconsPath/home.svg";
@@ -51,4 +49,5 @@ abstract class AppAssets {
   static const String lunchImage = "$_baseImagesPath/lunch.png";
   static const String exerciseBackgroundBlur =
       "$_baseImagesPath/exercise_background_blur.png";
+  static const String mealsBackground = "$_baseImagesPath/food.png";
 }

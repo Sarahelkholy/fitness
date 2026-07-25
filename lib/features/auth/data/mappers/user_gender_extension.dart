@@ -1,4 +1,4 @@
-import '../../domain/entities/register_form_data.dart';
+import '../../domain/entities/register_form_params.dart';
 
 extension UserGenderExtension on UserGender {
   String get value {

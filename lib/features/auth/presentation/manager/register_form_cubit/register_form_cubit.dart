@@ -124,7 +124,7 @@ class RegisterFormCubit extends BaseCubit<RegisterFormState, BaseEvent> {
         getIt<UserCubit>().doEvent(SetUserDataEvent(user: result.data));
         emitEvent(
           const NavigationEvent(
-            routeName: Routes.homeRoute,
+            routeName: Routes.bottomNavBarRoute,
             type: NavigationType.pushReplacementAndRemoveUntil,
           ),
         );

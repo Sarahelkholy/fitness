@@ -116,5 +116,13 @@
 "noMuscleGroupsAvailable": "لا توجد مجموعات متاحة",
 "noExercisesFoundForThisCategory": "لم يتم العثور على تمارين لهذه الفئة",
   
-  "mealNotFound": "لم يتم العثور على الوجبة"
+  "mealNotFound": "لم يتم العثور على الوجبة",
+
+  "foodRecommendation": "توصية الطعام",
+  "ingredients": "المكونات",
+  "noCategoriesFound": "لم يتم العثور على فئات",
+  "noMealsFound": "لم يتم العثور على وجبات لهذه الفئة",
+  "category": "الفئة",
+  "area": "المنطقة",
+  "country": "البلد"
 }
