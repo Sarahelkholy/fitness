@@ -5,6 +5,9 @@ import '../../../../config/error_handling/result.dart';
 
 import 'package:fitness/features/exercise/data/models/home/random_exercises_response.dart';
 
+import '../models/difficulty_level_response.dart';
+import '../models/exercise_response.dart';
+
 abstract interface class HomeRemoteDataSource {
   Future<Result<RandomExercisesResponse>> getRandomExercises({
     required String targetMuscleGroupId,
@@ -12,7 +15,15 @@ abstract interface class HomeRemoteDataSource {
     int limit = 3,
   });
 
-  ///? ========= Get All Muscles Group ============
+  Future<ExerciseResponse> getExercises({
+    String? primeMoverMuscleId,
+    String? difficultyLevelId,
+    int? page,
+  });
+  Future<DifficultyLevelResponse> getDifficultyLevels({
+    String? primeMoverMuscleId,
+  });
+
   Future<Result<GetAllMusclesGroupResponse>> getAllMusclesGroup({
     required String language,
   });

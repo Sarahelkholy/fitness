@@ -6,6 +6,8 @@ import 'package:fitness/features/exercise/data/models/home/random_exercises_resp
 import 'package:fitness/features/exercise/data/models/response/get_all_muscles_group_response.dart';
 import 'package:fitness/features/exercise/data/models/response/get_muscles_group_id_response.dart';
 import 'package:injectable/injectable.dart';
+import '../../data/models/difficulty_level_response.dart';
+import '../../data/models/exercise_response.dart';
 
 @Injectable(as: HomeRemoteDataSource)
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -14,6 +16,27 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl(this._apiClient);
 
   @override
+  Future<DifficultyLevelResponse> getDifficultyLevels({
+    String? primeMoverMuscleId,
+  }) {
+    return _apiClient.getDifficultyLevels(
+      primeMoverMuscleId: primeMoverMuscleId,
+    );
+  }
+
+  @override
+  Future<ExerciseResponse> getExercises({
+    String? primeMoverMuscleId,
+    String? difficultyLevelId,
+    int? page,
+  }) {
+    return _apiClient.getExercises(
+      primeMoverMuscleId: primeMoverMuscleId,
+      difficultyLevelId: difficultyLevelId,
+      page: page,
+    );
+  }
+
   Future<Result<RandomExercisesResponse>> getRandomExercises({
     required String targetMuscleGroupId,
     required String difficultyLevelId,

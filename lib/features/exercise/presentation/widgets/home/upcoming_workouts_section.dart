@@ -1,4 +1,5 @@
 import 'package:fitness/config/di/di.dart';
+import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:fitness/core/shared_widgets/custom_tab_bar.dart';
 import 'package:fitness/core/utils/app_colors.dart';
@@ -83,7 +84,7 @@ class _UpcomingWorkoutsSectionState extends State<UpcomingWorkoutsSection> {
                 )
               else
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     local.noMuscleGroupsAvailable,
                     style: AppTextStyles.regular14(context),
@@ -116,9 +117,23 @@ class _UpcomingWorkoutsSectionState extends State<UpcomingWorkoutsSection> {
                     itemCount: musclesByGroupState.data!.length,
                     itemBuilder: (context, index) {
                       final exercise = musclesByGroupState.data![index];
-                      return UpcomingWorkoutCard(
-                        image: exercise.image,
-                        title: exercise.name ?? '',
+                      return GestureDetector(
+                        onTap: () {
+                          if (exercise.id != null &&
+                              exercise.id!.isNotEmpty) {
+                            Navigator.pushNamed(
+                              context,
+                              Routes.exerciseRoute,
+                              arguments: {
+                                'primeMoverMuscleId': exercise.id!,
+                              },
+                            );
+                          }
+                        },
+                        child: UpcomingWorkoutCard(
+                          image: exercise.image,
+                          title: exercise.name ?? '',
+                        ),
                       );
                     },
                   ),

@@ -8,18 +8,27 @@ import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_s
 import 'package:fitness/features/meals/domain/entities/category_entity.dart';
 import 'package:fitness/features/meals/domain/use_cases/get_categories_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'home_cubit_test.mocks.dart';
+import 'package:fitness/features/exercise/domain/use_cases/get_all_muscles_group_use_case.dart';
+import 'package:fitness/features/exercise/domain/use_cases/get_difficulty_levels_use_case.dart';
 
-@GenerateNiceMocks([
-  MockSpec<GetRandomExercisesUseCase>(),
-  MockSpec<GetCategoriesUseCase>(),
-])
+class MockGetRandomExercisesUseCase extends Mock
+    implements GetRandomExercisesUseCase {}
+
+class MockGetCategoriesUseCase extends Mock
+    implements GetCategoriesUseCase {}
+
+class MockGetAllMusclesGroupUseCase extends Mock
+    implements GetAllMusclesGroupUseCase {}
+
+class MockGetDifficultyLevelsUseCase extends Mock
+    implements GetDifficultyLevelsUseCase {}
 void main() {
   late MockGetRandomExercisesUseCase mockGetRandomExercisesUseCase;
   late MockGetCategoriesUseCase mockGetCategoriesUseCase;
+  late MockGetAllMusclesGroupUseCase mockGetAllMusclesGroupUseCase;
+  late MockGetDifficultyLevelsUseCase mockGetDifficultyLevelsUseCase;
   late HomeCubit homeCubit;
 
   setUpAll(() {
@@ -40,7 +49,14 @@ void main() {
   setUp(() {
     mockGetRandomExercisesUseCase = MockGetRandomExercisesUseCase();
     mockGetCategoriesUseCase = MockGetCategoriesUseCase();
-    homeCubit = HomeCubit(mockGetRandomExercisesUseCase, mockGetCategoriesUseCase);
+    mockGetAllMusclesGroupUseCase = MockGetAllMusclesGroupUseCase();
+    mockGetDifficultyLevelsUseCase = MockGetDifficultyLevelsUseCase();
+    homeCubit = HomeCubit(
+      mockGetRandomExercisesUseCase,
+      mockGetCategoriesUseCase,
+      mockGetAllMusclesGroupUseCase,
+      mockGetDifficultyLevelsUseCase,
+    );
   });
 
   tearDown(() {

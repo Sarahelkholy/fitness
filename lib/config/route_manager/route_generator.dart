@@ -3,23 +3,27 @@ import 'package:fitness/core/helpers/custom_logger.dart';
 import 'package:fitness/core/shared_widgets/custom_bottom_nav.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
 import 'package:fitness/features/auth/presentation/manager/login_cubit/login_cubit.dart';
-import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart';
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/register_form_cubit/register_form_cubit.dart';
+import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart';
 import 'package:fitness/features/auth/presentation/pages/register/register_screen.dart';
 import 'package:fitness/features/chat_screen.dart';
 import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_events.dart';
 import 'package:fitness/features/exercise/presentation/pages/home_screen.dart';
 import 'package:fitness/features/exercise/presentation/pages/upcoming_feature_screen.dart';
+import 'package:fitness/features/exercise/presentation/manager/exercise_cubit/exercise_cubit.dart';
+import 'package:fitness/features/exercise/presentation/pages/exercise_screen.dart';
+import 'package:fitness/features/exercise/domain/entities/exercise.dart';
+import 'package:fitness/features/exercise/presentation/pages/temp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../config/di/di.dart';
 import '../../core/localization/l10n/app_localizations.dart';
 import '../../features/auth/presentation/pages/onboarding/view/on_boarding_screen.dart';
-import '../../features/auth/presentation/pages/splash/splash_screen.dart';
 import '../../features/auth/presentation/pages/register_form/register_form_screen.dart';
+import '../../features/auth/presentation/pages/splash/splash_screen.dart';
 
 abstract class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -71,14 +75,8 @@ abstract class RouteGenerator {
           return MaterialPageRoute(
             builder: (_) => BlocProvider(
               create: (context) => getIt<HomeCubit>()
-                ..doEvents(
-                  GetRandomExercises(
-                    targetMuscleGroupId: "69d982ed85f6bfa972bf2218",
-                    difficultyLevelId: "69d982ed85f6bfa972bf2216",
-                    limit: 3,
-                  ),
-                )
-                ..doEvents(GetFoodCategories()), // <-- Added second event,
+                ..doEvents(GetRandomExercises())
+                ..doEvents(GetFoodCategories()),
               child: CustomBottomNavBar(
                 initialIndex: args?['initialIndex'] ?? 0,
               ),
@@ -92,6 +90,29 @@ abstract class RouteGenerator {
           return MaterialPageRoute(
             builder: (_) => const UpcomingFeatureScreen(),
           );
+
+        /// exercise screen
+        case Routes.exerciseRoute:
+          final args = settings.arguments as Map<String, dynamic>?;
+          final initialExercise = args?['initialExercise'] as Exercise?;
+          return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (context) => getIt<ExerciseCubit>(),
+              child: ExerciseScreen(
+                primeMoverMuscleId: args?['primeMoverMuscleId'] ?? '',
+                initialExercise: initialExercise,
+                initialExerciseId: args?['exerciseId'] ??
+                    args?['initialExerciseId'] ??
+                    initialExercise?.id,
+                initialDifficultyLevel: args?['difficultyLevel'] ??
+                    initialExercise?.difficultyLevel,
+              ),
+            ),
+          );
+
+        /// temp screen
+        case Routes.tempRoute:
+          return MaterialPageRoute(builder: (_) => const TempScreen());
 
         /// Default
         default:

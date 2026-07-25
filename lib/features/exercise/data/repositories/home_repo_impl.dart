@@ -10,6 +10,10 @@ import 'package:fitness/features/exercise/domain/entities/get_all_muscles_group_
 import 'package:fitness/features/exercise/domain/entities/get_muscles_by_group_id_entity.dart';
 import 'package:fitness/features/exercise/domain/entities/home/random_exercises_response_entity.dart';
 
+import 'package:fitness/features/exercise/data/mapper/difficulty_level_mapper.dart';
+import 'package:fitness/features/exercise/data/mapper/exercise_response_mapper.dart';
+import 'package:fitness/features/exercise/domain/entities/difficulty_level.dart';
+import 'package:fitness/features/exercise/domain/entities/exercise_info.dart';
 import 'package:fitness/features/exercise/domain/repositories/home_repo.dart';
 import 'package:injectable/injectable.dart';
 
@@ -82,6 +86,40 @@ class HomeRepoImpl implements HomeRepo {
         );
       case Failure<GetMusclesGroupIdResponse>():
         return Failure(errorMessage: response.errorMessage);
+    }
+  }
+
+  @override
+  Future<Result<List<DifficultyLevel>>> getDifficultyLevels({
+    String? primeMoverMuscleId,
+  }) async {
+    try {
+      final response = await _homeRemoteDataSource.getDifficultyLevels(
+        primeMoverMuscleId: primeMoverMuscleId,
+      );
+      final entities =
+          response.difficultyLevels?.map((e) => e.toEntity()).toList() ?? [];
+      return Success(data: entities);
+    } catch (e) {
+      return Failure(errorMessage: e.toString());
+    }
+  }
+
+  @override
+  Future<Result<ExerciseInfo>> getExercises({
+    String? primeMoverMuscleId,
+    String? difficultyLevelId,
+    int? page,
+  }) async {
+    try {
+      final response = await _homeRemoteDataSource.getExercises(
+        primeMoverMuscleId: primeMoverMuscleId,
+        difficultyLevelId: difficultyLevelId,
+        page: page,
+      );
+      return Success(data: response.toEntity());
+    } catch (e) {
+      return Failure(errorMessage: e.toString());
     }
   }
 }

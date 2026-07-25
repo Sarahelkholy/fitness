@@ -42,6 +42,8 @@ class Exercises {
   final String? targetMuscleGroup;
   @JsonKey(name: "prime_mover_muscle")
   final String? primeMoverMuscle;
+  @JsonKey(name: "prime_mover_muscle_id")
+  final String? primeMoverMuscleId;
   @JsonKey(name: "secondary_muscle")
   final dynamic? secondaryMuscle;
   @JsonKey(name: "tertiary_muscle")
@@ -105,6 +107,7 @@ class Exercises {
     this.difficultyLevel,
     this.targetMuscleGroup,
     this.primeMoverMuscle,
+    this.primeMoverMuscleId,
     this.secondaryMuscle,
     this.tertiaryMuscle,
     this.primaryEquipment,

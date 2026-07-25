@@ -15,48 +15,67 @@ class RecommendationCard extends StatelessWidget {
     this.image,
   });
 
-  ImageProvider _getImageProvider() {
-    final path = networkImage ?? image;
-    if (path != null && path.isNotEmpty) {
-      if (path.startsWith('http://') || path.startsWith('https://')) {
-        return NetworkImage(path);
-      }
-      return AssetImage(path);
-    }
-    return const AssetImage(AppAssets.exercisesBackground);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 120,
       margin: const EdgeInsets.only(right: 12),
-      decoration: BoxDecoration(
+      child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        image: DecorationImage(image: _getImageProvider(), fit: BoxFit.cover),
-      ),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(
-            height: 35,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColors.darkCharcoal.withOpacity(0.5),
-              borderRadius: const BorderRadius.all(Radius.circular(50)),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Positioned.fill(
+              child: _buildImage(),
             ),
-            child: Center(
-              child: Text(
-                title ?? '',
-                style: AppTextStyles.regular12(context),
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+            Container(
+              height: 35,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: AppColors.darkCharcoal.withValues(alpha: 0.6),
+                borderRadius: const BorderRadius.all(Radius.circular(50)),
+              ),
+              child: Center(
+                child: Text(
+                  title ?? '',
+                  style: AppTextStyles.regular12(context),
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildImage() {
+    final path = networkImage ?? image;
+    if (path != null && path.isNotEmpty) {
+      if (path.startsWith('http://') || path.startsWith('https://')) {
+        return Image.network(
+          path,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) => Image.asset(
+            AppAssets.exercisesBackground,
+            fit: BoxFit.cover,
+          ),
+        );
+      }
+      return Image.asset(
+        path,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => Image.asset(
+          AppAssets.exercisesBackground,
+          fit: BoxFit.cover,
+        ),
+      );
+    }
+    return Image.asset(
+      AppAssets.exercisesBackground,
+      fit: BoxFit.cover,
     );
   }
 }

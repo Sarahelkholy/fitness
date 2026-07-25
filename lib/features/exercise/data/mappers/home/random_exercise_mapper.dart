@@ -9,6 +9,8 @@ extension ExerciseModelMapper on Exercises {
       difficultyLevel: difficultyLevel,
       targetMuscleGroup: targetMuscleGroup,
       primeMoverMuscle: primeMoverMuscle,
+      primeMoverMuscleId: primeMoverMuscleId,
+      shortYoutubeDemonstrationLink: shortYoutubeDemonstrationLink,
     );
   }
 }

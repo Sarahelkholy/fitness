@@ -22,4 +22,6 @@ abstract class Routes {
 
   static const String smartCoachRoute = "/smartCoachRoute";
   static const String upcomingFeatureRoute = "/upcomingFeatureRoute";
+  static const String exerciseRoute = "/exercise";
+  static const String tempRoute = "/temp";
 }

@@ -49,4 +49,6 @@ abstract class AppAssets {
   static const String breakfastImage = "$_baseImagesPath/breakfast.png";
   static const String dinnerImage = "$_baseImagesPath/dinner.png";
   static const String lunchImage = "$_baseImagesPath/lunch.png";
+  static const String exerciseBackgroundBlur =
+      "$_baseImagesPath/exercise_background_blur.png";
 }
