@@ -1,3 +1,4 @@
+import 'package:fitness/core/utils/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -18,7 +19,7 @@ class SelectedExerciseHeader extends StatelessWidget {
     );
     final thumbnailUrl = videoId != null
         ? 'https://img.youtube.com/vi/$videoId/hqdefault.jpg'
-        : 'https://via.placeholder.com/400x300';
+        : null;
 
     return Container(
       height: 300,
@@ -27,12 +28,25 @@ class SelectedExerciseHeader extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: Image.network(
-              thumbnailUrl,
-              fit: BoxFit.cover,
-              color: Colors.black.withValues(alpha: 0.5),
-              colorBlendMode: BlendMode.darken,
-            ),
+            child: thumbnailUrl != null
+                ? Image.network(
+                    thumbnailUrl,
+                    fit: BoxFit.cover,
+                    color: Colors.black.withValues(alpha: 0.5),
+                    colorBlendMode: BlendMode.darken,
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      AppAssets.exercisesBackground,
+                      fit: BoxFit.cover,
+                      color: Colors.black.withValues(alpha: 0.5),
+                      colorBlendMode: BlendMode.darken,
+                    ),
+                  )
+                : Image.asset(
+                    AppAssets.exercisesBackground,
+                    fit: BoxFit.cover,
+                    color: Colors.black.withValues(alpha: 0.5),
+                    colorBlendMode: BlendMode.darken,
+                  ),
           ),
           // Gradient overlay
           Positioned.fill(

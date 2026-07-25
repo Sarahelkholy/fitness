@@ -1,5 +1,5 @@
 import 'package:fitness/core/values/api_end_points.dart';
-import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 import 'package:fitness/features/exercise/data/models/exercise_response.dart';
 import 'package:injectable/injectable.dart';

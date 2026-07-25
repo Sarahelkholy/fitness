@@ -17,8 +17,16 @@ class GetExercisesEvent extends ExerciseEvent {
 
 class GetDifficultyLevelsEvent extends ExerciseEvent {
   final String? primeMoverMuscleId;
+  final Exercise? initialExercise;
+  final String? initialExerciseId;
+  final String? initialDifficultyLevel;
 
-  GetDifficultyLevelsEvent({this.primeMoverMuscleId});
+  GetDifficultyLevelsEvent({
+    this.primeMoverMuscleId,
+    this.initialExercise,
+    this.initialExerciseId,
+    this.initialDifficultyLevel,
+  });
 }
 
 class SelectExerciseEvent extends ExerciseEvent {

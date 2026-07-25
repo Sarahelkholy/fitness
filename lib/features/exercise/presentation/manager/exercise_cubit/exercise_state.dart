@@ -11,6 +11,9 @@ class ExerciseState extends Equatable {
   final int currentPage;
   final int totalPages;
   final String? primeMoverMuscleId;
+  final Exercise? initialExercise;
+  final String? initialExerciseId;
+  final String? initialDifficultyLevel;
 
   const ExerciseState({
     this.exercisesState = const BaseState(),
@@ -20,6 +23,9 @@ class ExerciseState extends Equatable {
     this.currentPage = 1,
     this.totalPages = 0,
     this.primeMoverMuscleId,
+    this.initialExercise,
+    this.initialExerciseId,
+    this.initialDifficultyLevel,
   });
 
   ExerciseState copyWith({
@@ -31,19 +37,34 @@ class ExerciseState extends Equatable {
     int? currentPage,
     int? totalPages,
     String? primeMoverMuscleId,
+    Exercise? initialExercise,
+    String? initialExerciseId,
+    String? initialDifficultyLevel,
+    bool? clearInitialExercise,
   }) {
+    final nextInitialExercise = (clearInitialExercise ?? false)
+        ? null
+        : (initialExercise ?? this.initialExercise);
+
     return ExerciseState(
       exercisesState: exercisesState ?? this.exercisesState,
       difficultyLevelsState:
           difficultyLevelsState ?? this.difficultyLevelsState,
       selectedExercise: (clearSelectedExercise ?? false)
-          ? null
-          : (selectedExercise ?? this.selectedExercise),
+          ? nextInitialExercise
+          : (selectedExercise ?? this.selectedExercise ?? nextInitialExercise),
       selectedDifficultyLevel:
           selectedDifficultyLevel ?? this.selectedDifficultyLevel,
       currentPage: currentPage ?? this.currentPage,
       totalPages: totalPages ?? this.totalPages,
       primeMoverMuscleId: primeMoverMuscleId ?? this.primeMoverMuscleId,
+      initialExercise: nextInitialExercise,
+      initialExerciseId: (clearInitialExercise ?? false)
+          ? null
+          : (initialExerciseId ?? this.initialExerciseId),
+      initialDifficultyLevel: (clearInitialExercise ?? false)
+          ? null
+          : (initialDifficultyLevel ?? this.initialDifficultyLevel),
     );
   }
 
@@ -56,5 +77,8 @@ class ExerciseState extends Equatable {
     currentPage,
     totalPages,
     primeMoverMuscleId,
+    initialExercise,
+    initialExerciseId,
+    initialDifficultyLevel,
   ];
 }

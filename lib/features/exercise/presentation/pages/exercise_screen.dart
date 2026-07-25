@@ -3,6 +3,7 @@ import 'package:fitness/core/shared_widgets/custom_tab_bar.dart';
 import 'package:fitness/core/utils/app_assets.dart';
 import 'package:fitness/core/utils/app_colors.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
+import 'package:fitness/features/exercise/domain/entities/exercise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -15,8 +16,17 @@ import '../widgets/selected_exercise_header.dart';
 
 class ExerciseScreen extends StatefulWidget {
   final String primeMoverMuscleId;
+  final Exercise? initialExercise;
+  final String? initialExerciseId;
+  final String? initialDifficultyLevel;
 
-  const ExerciseScreen({super.key, required this.primeMoverMuscleId});
+  const ExerciseScreen({
+    super.key,
+    required this.primeMoverMuscleId,
+    this.initialExercise,
+    this.initialExerciseId,
+    this.initialDifficultyLevel,
+  });
 
   @override
   State<ExerciseScreen> createState() => _ExerciseScreenState();
@@ -31,7 +41,12 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     super.initState();
     _cubit = context.read<ExerciseCubit>();
     _cubit.doIntent(
-      GetDifficultyLevelsEvent(primeMoverMuscleId: widget.primeMoverMuscleId),
+      GetDifficultyLevelsEvent(
+        primeMoverMuscleId: widget.primeMoverMuscleId,
+        initialExercise: widget.initialExercise,
+        initialExerciseId: widget.initialExerciseId,
+        initialDifficultyLevel: widget.initialDifficultyLevel,
+      ),
     );
     _scrollController.addListener(_onScroll);
   }
@@ -114,6 +129,35 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     );
   }
 
+  void _scrollToSelectedExercise(ExerciseState state) {
+    final selected = state.selectedExercise ?? state.initialExercise;
+    final exercises = state.exercisesState.data;
+    if (selected == null || exercises == null || exercises.isEmpty) return;
+
+    final targetId = selected.id;
+    final targetName = selected.exercise?.toLowerCase();
+
+    final index = exercises.indexWhere((e) =>
+        (targetId != null && targetId.isNotEmpty && e.id == targetId) ||
+        (targetName != null &&
+            targetName.isNotEmpty &&
+            e.exercise?.toLowerCase() == targetName));
+
+    if (index > 0) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!_scrollController.hasClients) return;
+        final targetOffset = index * 120.0;
+        final maxOffset = _scrollController.position.maxScrollExtent;
+        final offset = targetOffset.clamp(0.0, maxOffset);
+        _scrollController.animateTo(
+          offset,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -127,7 +171,14 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
         ),
         centerTitle: false,
       ),
-      body: BlocBuilder<ExerciseCubit, ExerciseState>(
+      body: BlocConsumer<ExerciseCubit, ExerciseState>(
+        listener: (context, state) {
+          if (state.exercisesState.isSuccess &&
+              state.exercisesState.data != null &&
+              state.exercisesState.data!.isNotEmpty) {
+            _scrollToSelectedExercise(state);
+          }
+        },
         builder: (context, state) {
           if (state.difficultyLevelsState.isLoading &&
               state.difficultyLevelsState.data == null) {
@@ -142,11 +193,14 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
               BlocBuilder<ExerciseCubit, ExerciseState>(
                 buildWhen: (previous, current) =>
                     previous.selectedExercise != current.selectedExercise ||
+                    previous.initialExercise != current.initialExercise ||
                     previous.exercisesState.isLoading !=
                         current.exercisesState.isLoading,
                 builder: (context, state) {
-                  if (state.exercisesState.isLoading &&
-                      state.currentPage == 1) {
+                  // Show initial exercise immediately while loading
+                  final exercise =
+                      state.selectedExercise ?? state.initialExercise;
+                  if (exercise == null) {
                     return const SizedBox(
                       height: 300,
                       child: Center(
@@ -154,9 +208,6 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                       ),
                     );
                   }
-                  final exercise = state.selectedExercise;
-                  if (exercise == null) return const SizedBox.shrink();
-
                   return SelectedExerciseHeader(exercise: exercise);
                 },
               ),

@@ -1,5 +1,6 @@
 import 'package:fitness/config/di/di.dart';
 import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
+import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/features/popular_tarining/presentation/view_model/popular_training_cubit.dart';
 import 'package:fitness/features/popular_tarining/presentation/view_model/popular_training_intents.dart';
 import 'package:fitness/features/popular_tarining/presentation/view_model/popular_training_states.dart';
@@ -62,79 +63,103 @@ class PopularTrainingScreen extends StatelessWidget {
               itemCount: items.length,
               itemBuilder: (context, index) {
                 final item = items[index];
-                return Card(
-                  margin: const EdgeInsets.only(bottom: 16),
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item.exercise.exercise ?? 'Unknown Exercise',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                return InkWell(
+                  onTap: () {
+                    final muscleId = item.exercise.primeMoverMuscle ??
+                        '69d982ef85f6bfa972bf2248';
+                    Navigator.pushNamed(
+                      context,
+                      Routes.exerciseRoute,
+                      arguments: {
+                        'primeMoverMuscleId': muscleId,
+                        'initialExercise': item.exercise,
+                        if (item.exercise.id != null &&
+                            item.exercise.id!.isNotEmpty)
+                          'exerciseId': item.exercise.id,
+                        if (item.exercise.exercise != null &&
+                            item.exercise.exercise!.isNotEmpty)
+                          'exerciseName': item.exercise.exercise,
+                        if (item.exercise.difficultyLevel != null &&
+                            item.exercise.difficultyLevel!.isNotEmpty)
+                          'difficultyLevel': item.exercise.difficultyLevel,
+                      },
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Card(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.exercise.exercise ?? 'Unknown Exercise',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.fitness_center,
-                              size: 16,
-                              color: Colors.blue,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              'Muscle: ${item.exercise.targetMuscleGroup ?? 'N/A'}',
-                              style: TextStyle(
-                                color: Colors.grey[700],
-                                fontSize: 14,
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.fitness_center,
+                                size: 16,
+                                color: Colors.blue,
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 4),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.bar_chart,
-                              size: 16,
-                              color: Colors.green,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              'Level: ${item.displayLevel}',
-                              style: TextStyle(
-                                color: Colors.grey[700],
-                                fontSize: 14,
+                              const SizedBox(width: 4),
+                              Text(
+                                'Muscle: ${item.exercise.targetMuscleGroup ?? 'N/A'}',
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                  fontSize: 14,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 4),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.format_list_numbered,
-                              size: 16,
-                              color: Colors.orange,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              'Exercises Available: ${item.exerciseCount}',
-                              style: TextStyle(
-                                color: Colors.grey[700],
-                                fontSize: 14,
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.bar_chart,
+                                size: 16,
+                                color: Colors.green,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              const SizedBox(width: 4),
+                              Text(
+                                'Level: ${item.displayLevel}',
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.format_list_numbered,
+                                size: 16,
+                                color: Colors.orange,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                'Exercises Available: ${item.exerciseCount}',
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

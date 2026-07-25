@@ -13,6 +13,13 @@ abstract class ApiEndPoints {
   static const String verifyRestOtp = "/auth/verifyResetCode";
   static const String resetPassword = "/auth/resetPassword";
 
+  static const String randomExercises = "/exercises/random";
+
+  ///? ================== Get All Muscles Group =================
+  static const String getAllMusclesGroup = "/muscles";
+
+  ///? ================ Get Muscles Group using id
+  static const String getMuscleGroupId = "/musclesGroup/by-muscle-group";
   static const String exercisesByMuscleDifficulty =
       "/exercises/by-muscle-difficulty";
   static const String difficultyLevels =
