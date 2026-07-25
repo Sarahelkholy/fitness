@@ -18,14 +18,13 @@ class CustomScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.pureBlack.withValues(alpha: .5),
         image: DecorationImage(
           image: AssetImage(backgroundImage),
           fit: BoxFit.cover,
         ),
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.pureBlack.withValues(alpha: .5),
         appBar: appBar,
         body: body,
       ),

@@ -16,34 +16,29 @@ class CustomTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: tabs.length,
-        separatorBuilder: (context, index) => const SizedBox(width: 16),
-        itemBuilder: (context, index) {
-          final isSelected = index == selectedIndex;
-          return GestureDetector(
-            onTap: () => onTabChanged(index),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: isSelected ? AppColors.main : Colors.transparent,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: Text(
-                  tabs[index],
-                  style: AppTextStyles.bold12(
-                    context,
-                  ).copyWith(color: AppColors.white),
-                ),
-              ),
-            ),
-          );
-        },
+    return DefaultTabController(
+      key: ValueKey(selectedIndex),
+      length: tabs.length,
+      initialIndex: selectedIndex,
+      child: TabBar(
+        isScrollable: true,
+        tabAlignment: TabAlignment.start,
+        onTap: onTabChanged,
+        indicator: BoxDecoration(
+          color: AppColors.main,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        indicatorSize: TabBarIndicatorSize.tab,
+        dividerColor: Colors.transparent,
+        overlayColor: WidgetStateProperty.all(Colors.transparent),
+        splashFactory: NoSplash.splashFactory,
+        labelColor: AppColors.white,
+        unselectedLabelColor: AppColors.white,
+        labelStyle: AppTextStyles.bold12(context),
+        unselectedLabelStyle: AppTextStyles.bold12(context),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        labelPadding: const EdgeInsets.symmetric(horizontal: 16),
+        tabs: tabs.map((tab) => Tab(text: tab)).toList(),
       ),
     );
   }
