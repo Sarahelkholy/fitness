@@ -36,7 +36,6 @@ class CustomTabBar extends StatelessWidget {
         unselectedLabelColor: AppColors.white,
         labelStyle: AppTextStyles.bold12(context),
         unselectedLabelStyle: AppTextStyles.bold12(context),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
         labelPadding: const EdgeInsets.symmetric(horizontal: 16),
         tabs: tabs.map((tab) => Tab(text: tab)).toList(),
       ),
