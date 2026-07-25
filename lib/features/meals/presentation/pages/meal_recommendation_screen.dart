@@ -5,6 +5,7 @@ import 'package:fitness/core/shared_widgets/custom_loading_indicator.dart';
 import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:fitness/core/shared_widgets/custom_tab_bar.dart';
 import 'package:fitness/core/utils/app_assets.dart';
+import 'package:fitness/core/values/keys_strings.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_cubit.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_event.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_state.dart';
@@ -62,6 +63,7 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
         title: Text(localizations.foodRecommendation),
       ),
       body: RefreshIndicator(
+        key: const Key(KeysStrings.mealRecommendationRefreshIndicator),
         onRefresh: () async {
           _cubit.doEvents(GetCategoriesEvent());
         },
@@ -72,7 +74,6 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
           ),
           child: Stack(
             children: [
-              ListView(physics: const AlwaysScrollableScrollPhysics()),
               BlocBuilder<MealRecommendationCubit, MealRecommendationState>(
                 builder: (context, state) {
                   if (state.categoriesState.isLoading) {
@@ -95,27 +96,12 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
                     );
                   }
 
-                  if (state.mealsState.data == null &&
-                      !state.mealsState.isLoading &&
-                      categories.isNotEmpty) {
-                    final index = (widget.initialIndex < categories.length)
-                        ? widget.initialIndex
-                        : 0;
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      _cubit.doEvents(
-                        GetMealsByCategoryEvent(
-                          category: categories[index].name,
-                          index: index,
-                        ),
-                      );
-                    });
-                  }
-
                   return SafeArea(
                     child: Column(
                       children: [
                         const SizedBox(height: 20),
                         CustomTabBar(
+                          key: const Key(KeysStrings.mealRecommendationTabBar),
                           tabs: categories.map((e) => e.name).toList(),
                           selectedIndex: state.selectedCategoryIndex,
                           onTabChanged: (index) {
@@ -156,6 +142,9 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
                                 );
                               } else if (state.mealsState.data != null) {
                                 return GridView.builder(
+                                  key: const Key(
+                                    KeysStrings.mealRecommendationGridView,
+                                  ),
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,

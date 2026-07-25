@@ -86,4 +86,18 @@ abstract class KeysStrings {
   static const registerFormNextButtonStep4 = 'register_form_next_button_step4';
   static const registerFormNextButtonStep5 = 'register_form_next_button_step5';
   static const registerFormNextButtonStep6 = 'register_form_next_button_step6';
+
+  // Meal Recommendation Screen
+  static const mealRecommendationRefreshIndicator =
+      'meal_recommendation_refresh_indicator';
+  static const mealRecommendationTabBar = 'meal_recommendation_tab_bar';
+  static const mealRecommendationGridView = 'meal_recommendation_grid_view';
+
+  // Meal Details Screen
+  static const mealDetailsImage = 'meal_details_image';
+  static const mealDetailsPlayButton = 'meal_details_play_button';
+  static const mealDetailsBackButton = 'meal_details_back_button';
+  static const mealDetailsName = 'meal_details_name';
+  static const mealDetailsInstructions = 'meal_details_instructions';
+  static const mealDetailsIngredientsList = 'meal_details_ingredients_list';
 }
