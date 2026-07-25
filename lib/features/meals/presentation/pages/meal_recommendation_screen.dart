@@ -29,6 +29,7 @@ class MealRecommendationScreen extends StatefulWidget {
 class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
   late AppLocalizations localizations;
   late final MealRecommendationCubit _cubit;
+  late int initialIndex = widget.initialIndex;
 
   @override
   void initState() {
@@ -65,7 +66,7 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
       body: RefreshIndicator(
         key: const Key(KeysStrings.mealRecommendationRefreshIndicator),
         onRefresh: () async {
-          _cubit.doEvents(GetCategoriesEvent());
+          _cubit.doEvents(GetCategoriesEvent(initialIndex: initialIndex));
         },
         color: AppColors.main,
         child: Padding(
@@ -82,7 +83,9 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
                     return CustomErrorWidget(
                       errorMessage: state.categoriesState.errorMessage!,
                       haveTryAgain: true,
-                      onPressed: () => _cubit.doEvents(GetCategoriesEvent()),
+                      onPressed: () => _cubit.doEvents(
+                        GetCategoriesEvent(initialIndex: initialIndex),
+                      ),
                     );
                   }
 
@@ -92,7 +95,9 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
                     return CustomErrorWidget(
                       errorMessage: localizations.noCategoriesFound,
                       haveTryAgain: true,
-                      onPressed: () => _cubit.doEvents(GetCategoriesEvent()),
+                      onPressed: () => _cubit.doEvents(
+                        GetCategoriesEvent(initialIndex: initialIndex),
+                      ),
                     );
                   }
 
@@ -106,6 +111,7 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
                           selectedIndex: state.selectedCategoryIndex,
                           onTabChanged: (index) {
                             if (state.selectedCategoryIndex == index) return;
+                            initialIndex = index;
                             _cubit.doEvents(
                               GetMealsByCategoryEvent(
                                 category: categories[index].name,
