@@ -1,6 +1,7 @@
 import 'package:fitness/core/shared_widgets/cached_network_image_wrapper.dart';
 import 'package:fitness/core/shared_widgets/custom_error_widget.dart';
 import 'package:fitness/core/shared_widgets/custom_loading_indicator.dart';
+import 'package:fitness/core/values/keys_strings.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_details_cubit/meal_details_event.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_details_cubit/meal_details_state.dart';
@@ -45,7 +46,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     if (videoId != null) {
       _controller = YoutubePlayerController(
         initialVideoId: videoId,
-        flags: const YoutubePlayerFlags(autoPlay: true, mute: false),
+        flags: const YoutubePlayerFlags(autoPlay: false, mute: false),
       );
     }
   }
@@ -102,6 +103,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                         children: [
                           Text(
                             meal.name,
+                            key: const Key(KeysStrings.mealDetailsName),
                             style: AppTextStyles.medium24(
                               context,
                             ).copyWith(color: AppColors.white),
@@ -109,6 +111,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                           const SizedBox(height: 12),
                           Text(
                             meal.instructions,
+                            key: const Key(KeysStrings.mealDetailsInstructions),
                             style: AppTextStyles.regular16(
                               context,
                             ).copyWith(color: AppColors.white),
@@ -146,7 +149,10 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                       padding: const EdgeInsets.symmetric(
                         horizontal: AppConstants.paddingHorizontal,
                       ),
-                      child: MealIngredientsList(ingredients: meal.ingredients),
+                      child: MealIngredientsList(
+                        key: const Key(KeysStrings.mealDetailsIngredientsList),
+                        ingredients: meal.ingredients,
+                      ),
                     ),
                     const SizedBox(height: 20),
                   ],
@@ -175,6 +181,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                             )
                           else
                             CachedNetworkImageWrapper(
+                              key: const Key(KeysStrings.mealDetailsImage),
                               imagePath: meal.image,
                               height: 350,
                               width: double.infinity,
@@ -184,6 +191,9 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                             Positioned.fill(
                               child: Center(
                                 child: IconButton(
+                                  key: const Key(
+                                    KeysStrings.mealDetailsPlayButton,
+                                  ),
                                   icon: const Icon(
                                     Icons.play_circle_fill,
                                     color: AppColors.white,
@@ -199,6 +209,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                             top: 20,
                             start: 16,
                             child: IconButton(
+                              key: const Key(KeysStrings.mealDetailsBackButton),
                               icon: const CircleAvatar(
                                 backgroundColor: AppColors.main,
                                 child: Icon(
@@ -225,6 +236,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                   alignment: Alignment.center,
                   children: [
                     CachedNetworkImageWrapper(
+                      key: const Key(KeysStrings.mealDetailsImage),
                       imagePath: meal.image,
                       height: 350,
                       width: double.infinity,
@@ -233,6 +245,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                       top: 20,
                       start: 16,
                       child: IconButton(
+                        key: const Key(KeysStrings.mealDetailsBackButton),
                         icon: const CircleAvatar(
                           backgroundColor: AppColors.main,
                           child: Icon(

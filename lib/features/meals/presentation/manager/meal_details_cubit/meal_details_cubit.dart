@@ -50,7 +50,6 @@ class MealDetailsCubit extends BaseCubit<MealDetailsState, BaseEvent> {
             mealDetailsStateParam: BaseState(errorMessage: result.errorMessage),
           ),
         );
-        emitEvent(DisplayErrorEvent(errorMsg: result.errorMessage));
     }
   }
 }

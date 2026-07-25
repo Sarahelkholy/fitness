@@ -1,6 +1,10 @@
 sealed class MealRecommendationEvents {}
 
-class GetCategoriesEvent extends MealRecommendationEvents {}
+class GetCategoriesEvent extends MealRecommendationEvents {
+  final int initialIndex;
+
+  GetCategoriesEvent({this.initialIndex = 0});
+}
 
 class GetMealsByCategoryEvent extends MealRecommendationEvents {
   final String category;

@@ -5,6 +5,7 @@ import 'package:fitness/core/shared_widgets/custom_loading_indicator.dart';
 import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:fitness/core/shared_widgets/custom_tab_bar.dart';
 import 'package:fitness/core/utils/app_assets.dart';
+import 'package:fitness/core/values/keys_strings.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_cubit.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_event.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_state.dart';
@@ -28,6 +29,7 @@ class MealRecommendationScreen extends StatefulWidget {
 class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
   late AppLocalizations localizations;
   late final MealRecommendationCubit _cubit;
+  late int initialIndex = widget.initialIndex;
 
   @override
   void initState() {
@@ -62,8 +64,9 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
         title: Text(localizations.foodRecommendation),
       ),
       body: RefreshIndicator(
+        key: const Key(KeysStrings.mealRecommendationRefreshIndicator),
         onRefresh: () async {
-          _cubit.doEvents(GetCategoriesEvent());
+          _cubit.doEvents(GetCategoriesEvent(initialIndex: initialIndex));
         },
         color: AppColors.main,
         child: Padding(
@@ -72,7 +75,6 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
           ),
           child: Stack(
             children: [
-              ListView(physics: const AlwaysScrollableScrollPhysics()),
               BlocBuilder<MealRecommendationCubit, MealRecommendationState>(
                 builder: (context, state) {
                   if (state.categoriesState.isLoading) {
@@ -81,7 +83,9 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
                     return CustomErrorWidget(
                       errorMessage: state.categoriesState.errorMessage!,
                       haveTryAgain: true,
-                      onPressed: () => _cubit.doEvents(GetCategoriesEvent()),
+                      onPressed: () => _cubit.doEvents(
+                        GetCategoriesEvent(initialIndex: initialIndex),
+                      ),
                     );
                   }
 
@@ -91,24 +95,10 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
                     return CustomErrorWidget(
                       errorMessage: localizations.noCategoriesFound,
                       haveTryAgain: true,
-                      onPressed: () => _cubit.doEvents(GetCategoriesEvent()),
+                      onPressed: () => _cubit.doEvents(
+                        GetCategoriesEvent(initialIndex: initialIndex),
+                      ),
                     );
-                  }
-
-                  if (state.mealsState.data == null &&
-                      !state.mealsState.isLoading &&
-                      categories.isNotEmpty) {
-                    final index = (widget.initialIndex < categories.length)
-                        ? widget.initialIndex
-                        : 0;
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      _cubit.doEvents(
-                        GetMealsByCategoryEvent(
-                          category: categories[index].name,
-                          index: index,
-                        ),
-                      );
-                    });
                   }
 
                   return SafeArea(
@@ -116,10 +106,12 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
                       children: [
                         const SizedBox(height: 20),
                         CustomTabBar(
+                          key: const Key(KeysStrings.mealRecommendationTabBar),
                           tabs: categories.map((e) => e.name).toList(),
                           selectedIndex: state.selectedCategoryIndex,
                           onTabChanged: (index) {
                             if (state.selectedCategoryIndex == index) return;
+                            initialIndex = index;
                             _cubit.doEvents(
                               GetMealsByCategoryEvent(
                                 category: categories[index].name,
@@ -156,6 +148,9 @@ class _MealRecommendationScreenState extends State<MealRecommendationScreen> {
                                 );
                               } else if (state.mealsState.data != null) {
                                 return GridView.builder(
+                                  key: const Key(
+                                    KeysStrings.mealRecommendationGridView,
+                                  ),
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,

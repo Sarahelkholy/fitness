@@ -112,7 +112,7 @@ abstract class RouteGenerator {
             builder: (_) => BlocProvider(
               create: (context) =>
                   getIt<MealRecommendationCubit>()
-                    ..doEvents(GetCategoriesEvent()),
+                    ..doEvents(GetCategoriesEvent(initialIndex: index)),
               child: MealRecommendationScreen(initialIndex: index),
             ),
           );
