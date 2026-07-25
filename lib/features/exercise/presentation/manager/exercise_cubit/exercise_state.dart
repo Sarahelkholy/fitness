@@ -70,15 +70,15 @@ class ExerciseState extends Equatable {
 
   @override
   List<Object?> get props => [
-        exercisesState,
-        difficultyLevelsState,
-        selectedExercise,
-        selectedDifficultyLevel,
-        currentPage,
-        totalPages,
-        primeMoverMuscleId,
-        initialExercise,
-        initialExerciseId,
-        initialDifficultyLevel,
-      ];
+    exercisesState,
+    difficultyLevelsState,
+    selectedExercise,
+    selectedDifficultyLevel,
+    currentPage,
+    totalPages,
+    primeMoverMuscleId,
+    initialExercise,
+    initialExerciseId,
+    initialDifficultyLevel,
+  ];
 }

@@ -7,14 +7,13 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 void main() {
   const tExercise = Exercise(
     exercise: 'Push Up',
-    shortYoutubeDemonstrationLink: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    shortYoutubeDemonstrationLink:
+        'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   );
 
   Widget createWidgetUnderTest() {
     return const MaterialApp(
-      home: Scaffold(
-        body: SelectedExerciseHeader(exercise: tExercise),
-      ),
+      home: Scaffold(body: SelectedExerciseHeader(exercise: tExercise)),
     );
   }
 

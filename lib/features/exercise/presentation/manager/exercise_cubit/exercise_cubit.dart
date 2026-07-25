@@ -43,7 +43,10 @@ class ExerciseCubit extends Cubit<ExerciseState> {
       state.copyWith(
         exercisesState: pageToFetch == 1
             ? const BaseState(isLoading: true)
-            : state.exercisesState.copyWith(isLoading: true, errorMessage: null),
+            : state.exercisesState.copyWith(
+                isLoading: true,
+                errorMessage: null,
+              ),
         currentPage: pageToFetch == 1 ? 1 : state.currentPage,
         clearSelectedExercise: pageToFetch == 1,
       ),
@@ -111,30 +114,32 @@ class ExerciseCubit extends Cubit<ExerciseState> {
 
         emit(
           state.copyWith(
-            difficultyLevelsState:
-                BaseState(isSuccess: true, data: levels),
+            difficultyLevelsState: BaseState(isSuccess: true, data: levels),
             selectedDifficultyLevel: selectedLevel,
           ),
         );
 
         if (selectedLevel != null) {
-          _getExercises(GetExercisesEvent(
-            primeMoverMuscleId: event.primeMoverMuscleId,
-            difficultyLevelId: selectedLevel.id,
-          ));
+          _getExercises(
+            GetExercisesEvent(
+              primeMoverMuscleId: event.primeMoverMuscleId,
+              difficultyLevelId: selectedLevel.id,
+            ),
+          );
         }
       case Failure<List<DifficultyLevel>>():
         emit(
           state.copyWith(
-            difficultyLevelsState:
-                BaseState(errorMessage: result.errorMessage),
+            difficultyLevelsState: BaseState(errorMessage: result.errorMessage),
           ),
         );
     }
   }
 
   Exercise? _resolveSelectedExercise(
-      List<Exercise> allExercises, int pageToFetch) {
+    List<Exercise> allExercises,
+    int pageToFetch,
+  ) {
     if (pageToFetch != 1 || allExercises.isEmpty) {
       return state.selectedExercise ?? state.initialExercise;
     }
@@ -144,20 +149,25 @@ class ExerciseCubit extends Cubit<ExerciseState> {
 
     if ((targetId != null && targetId.isNotEmpty) ||
         (targetName != null && targetName.isNotEmpty)) {
-      final matchedIndex = allExercises.indexWhere((e) =>
-          (targetId != null && targetId.isNotEmpty && e.id == targetId) ||
-          (targetName != null &&
-              targetName.isNotEmpty &&
-              e.exercise?.toLowerCase() == targetName.toLowerCase()));
+      final matchedIndex = allExercises.indexWhere(
+        (e) =>
+            (targetId != null && targetId.isNotEmpty && e.id == targetId) ||
+            (targetName != null &&
+                targetName.isNotEmpty &&
+                e.exercise?.toLowerCase() == targetName.toLowerCase()),
+      );
 
       if (matchedIndex != -1) return allExercises[matchedIndex];
     }
 
-    return state.selectedExercise ?? state.initialExercise ?? allExercises.first;
+    return state.selectedExercise ??
+        state.initialExercise ??
+        allExercises.first;
   }
 
   DifficultyLevel? _resolveSelectedDifficultyLevel(
-      List<DifficultyLevel> levels) {
+    List<DifficultyLevel> levels,
+  ) {
     if (levels.isEmpty) return null;
 
     final targetDiff =
@@ -198,6 +208,7 @@ class ExerciseCubit extends Cubit<ExerciseState> {
       ),
     );
     _getExercises(
-        GetExercisesEvent(difficultyLevelId: event.difficultyLevel.id));
+      GetExercisesEvent(difficultyLevelId: event.difficultyLevel.id),
+    );
   }
 }

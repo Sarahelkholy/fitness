@@ -3,9 +3,10 @@ import 'package:fitness/core/helpers/custom_logger.dart';
 import 'package:fitness/core/shared_widgets/custom_bottom_nav.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
 import 'package:fitness/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:fitness/features/auth/presentation/pages/forget_password/view/screens/password_enter_email_screen.dart';
+import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart';
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/register_form_cubit/register_form_cubit.dart';
-import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart';
 import 'package:fitness/features/auth/presentation/pages/register/register_screen.dart';
 import 'package:fitness/features/chat_screen.dart';
 import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_cubit.dart';
@@ -15,8 +16,9 @@ import 'package:fitness/features/exercise/presentation/pages/upcoming_feature_sc
 import 'package:fitness/features/exercise/presentation/manager/exercise_cubit/exercise_cubit.dart';
 import 'package:fitness/features/exercise/presentation/pages/exercise_screen.dart';
 import 'package:fitness/features/exercise/domain/entities/exercise.dart';
-import 'package:fitness/features/exercise/presentation/pages/temp_screen.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_event.dart';
+import 'package:fitness/features/popular_tarining/presentation/view/popular_training_screen.dart';
+import 'package:fitness/features/popular_tarining/presentation/view_model/popular_training_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,6 +44,14 @@ abstract class RouteGenerator {
         /// home screen
         case Routes.homeRoute:
           return MaterialPageRoute(builder: (_) => const HomeScreen());
+        case Routes.forgetPasswordRoute:
+          return MaterialPageRoute(
+            builder: (_) => const ForgetPasswordScreen(),
+          );
+
+        ///================ OnBoardingScreen ================
+        case Routes.onboardingRoute:
+          return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
 
         /// login screen
         case Routes.loginRoute:
@@ -51,10 +61,6 @@ abstract class RouteGenerator {
               child: const LoginScreen(),
             ),
           );
-
-        ///================ OnBoardingScreen ================
-        case Routes.onboardingRoute:
-          return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
 
         /// register screen
         case Routes.registerRoute:
@@ -74,7 +80,15 @@ abstract class RouteGenerator {
             ),
           );
 
-        /// bottom nav bar screen
+        ///
+        case Routes.popularTrainingRoute:
+          return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (context) => getIt<PopularTrainingCubit>(),
+              child: const PopularTrainingScreen(),
+            ),
+          );
+
         case Routes.bottomNavBarRoute:
           final args = settings.arguments as Map<String, dynamic>?;
 
@@ -117,10 +131,6 @@ abstract class RouteGenerator {
               ),
             ),
           );
-
-        /// temp screen
-        case Routes.tempRoute:
-          return MaterialPageRoute(builder: (_) => const TempScreen());
 
         /// meal recommendation screen
         case Routes.mealRecommendationRoute:

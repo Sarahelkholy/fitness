@@ -224,7 +224,20 @@ class _LoginScreenState extends State<LoginScreen> with EventHandlerMixin {
                                     ),
                                   ),
                                   const SizedBox(height: 24),
-
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        Routes.forgetPasswordRoute,
+                                      );
+                                    },
+                                    child: Text(
+                                      localizations.forgetPassword,
+                                      style: const TextStyle(
+                                        color: AppColors.orangePrimaryVariant,
+                                      ),
+                                    ),
+                                  ),
                                   const OrDivider(),
                                   const SizedBox(height: 24),
                                   SocialRowWidget(

@@ -19,11 +19,13 @@ abstract class Routes {
 
   static const String activeOrderDetails = "/activeOrderDetails";
   static const String orderSuccess = "/orderSuccess";
+  static const String popularTrainingRoute = "/popularTraining";
 
   static const String smartCoachRoute = "/smartCoachRoute";
   static const String upcomingFeatureRoute = "/upcomingFeatureRoute";
   static const String exerciseRoute = "/exercise";
   static const String tempRoute = "/temp";
+
   static const String mealRecommendationRoute = "/mealRecommendation";
   static const String mealDetailsRoute = "/mealDetails";
 }

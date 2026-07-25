@@ -14,7 +14,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
-class MockExerciseCubit extends MockCubit<ExerciseState> implements ExerciseCubit {}
+class MockExerciseCubit extends MockCubit<ExerciseState>
+    implements ExerciseCubit {}
 
 void main() {
   late MockExerciseCubit mockCubit;
@@ -37,7 +38,9 @@ void main() {
     );
   }
 
-  testWidgets('should display loading indicator when state is loading', (WidgetTester tester) async {
+  testWidgets('should display loading indicator when state is loading', (
+    WidgetTester tester,
+  ) async {
     // arrange
     when(() => mockCubit.state).thenReturn(
       const ExerciseState(difficultyLevelsState: BaseState(isLoading: true)),
@@ -50,14 +53,19 @@ void main() {
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 
-  testWidgets('should display exercises when state is success', (WidgetTester tester) async {
+  testWidgets('should display exercises when state is success', (
+    WidgetTester tester,
+  ) async {
     // arrange
     const tDifficultyLevels = [DifficultyLevel(id: '1', name: 'Beginner')];
     const tExercises = [Exercise(id: '1', exercise: 'Push Up')];
-    
+
     when(() => mockCubit.state).thenReturn(
       ExerciseState(
-        difficultyLevelsState: const BaseState(isSuccess: true, data: tDifficultyLevels),
+        difficultyLevelsState: const BaseState(
+          isSuccess: true,
+          data: tDifficultyLevels,
+        ),
         exercisesState: const BaseState(isSuccess: true, data: tExercises),
         selectedDifficultyLevel: tDifficultyLevels[0],
         selectedExercise: tExercises[0],
@@ -75,14 +83,19 @@ void main() {
     expect(find.text('Push Up'), findsOneWidget);
   });
 
-  testWidgets('should call SelectExerciseEvent when an exercise is tapped', (WidgetTester tester) async {
+  testWidgets('should call SelectExerciseEvent when an exercise is tapped', (
+    WidgetTester tester,
+  ) async {
     // arrange
     const tDifficultyLevels = [DifficultyLevel(id: '1', name: 'Beginner')];
     const tExercises = [Exercise(id: '1', exercise: 'Push Up')];
-    
+
     when(() => mockCubit.state).thenReturn(
       ExerciseState(
-        difficultyLevelsState: const BaseState(isSuccess: true, data: tDifficultyLevels),
+        difficultyLevelsState: const BaseState(
+          isSuccess: true,
+          data: tDifficultyLevels,
+        ),
         exercisesState: const BaseState(isSuccess: true, data: tExercises),
         selectedDifficultyLevel: tDifficultyLevels[0],
       ),
@@ -95,6 +108,8 @@ void main() {
     await tester.tap(find.byType(ExerciseListItem));
 
     // assert
-    verify(() => mockCubit.doIntent(any(that: isA<SelectExerciseEvent>()))).called(1);
+    verify(
+      () => mockCubit.doIntent(any(that: isA<SelectExerciseEvent>())),
+    ).called(1);
   });
 }

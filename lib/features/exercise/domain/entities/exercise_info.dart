@@ -18,10 +18,10 @@ class ExerciseInfo extends Equatable {
 
   @override
   List<Object?> get props => [
-        message,
-        totalExercises,
-        totalPages,
-        currentPage,
-        exercises,
-      ];
+    message,
+    totalExercises,
+    totalPages,
+    currentPage,
+    exercises,
+  ];
 }

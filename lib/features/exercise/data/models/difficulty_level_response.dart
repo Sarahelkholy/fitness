@@ -44,10 +44,7 @@ class DifficultyLevelDto {
   @JsonKey(name: "name")
   String? name;
 
-  DifficultyLevelDto({
-    this.id,
-    this.name,
-  });
+  DifficultyLevelDto({this.id, this.name});
 
   factory DifficultyLevelDto.fromJson(Map<String, dynamic> json) =>
       _$DifficultyLevelDtoFromJson(json);

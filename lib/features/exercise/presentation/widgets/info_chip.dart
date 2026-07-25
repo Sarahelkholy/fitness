@@ -6,11 +6,7 @@ class InfoChip extends StatelessWidget {
   final String label;
   final bool isHighlight;
 
-  const InfoChip({
-    super.key,
-    required this.label,
-    this.isHighlight = false,
-  });
+  const InfoChip({super.key, required this.label, this.isHighlight = false});
 
   @override
   Widget build(BuildContext context) {
