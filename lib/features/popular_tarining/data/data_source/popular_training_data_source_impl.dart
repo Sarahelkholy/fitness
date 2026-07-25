@@ -12,8 +12,27 @@ class PopularTrainingDataSourceImpl implements PopularTrainingDataSource {
   @override
   Future<Result<List<String>>> getRandomPrimeMoverMuscles() async {
     try {
-      final result = await _apiClient.getRandomPrimeMoverMuscles();
-      return Success(data: result);
+      final response = await _apiClient.getRandomExercises(
+        targetMuscleGroupId: "69d982ef85f6bfa972bf2248", // Default muscle group (Abdominals)
+        difficultyLevelId: "69d982ed85f6bfa972bf2216", // Default level (Beginner)
+        limit: 10,
+      );
+      final List<String> muscleIds = response.exercises
+              ?.map((e) => e.primeMoverMuscle)
+              .whereType<String>()
+              .toSet()
+              .toList() ??
+          [];
+      
+      // Fallback: If the API returns no exercises for the default group, use known valid muscle IDs
+      // so the downstream cubit can retrieve difficulty levels and exercises successfully.
+      if (muscleIds.isEmpty) {
+        muscleIds.addAll([
+          "69d982ef85f6bfa972bf2248", // Abdominals / Rectus Abdominis
+        ]);
+      }
+      
+      return Success(data: muscleIds);
     } catch (e) {
       return Failure(errorMessage: e.toString());
     }
