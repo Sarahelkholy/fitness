@@ -12,6 +12,7 @@ import 'package:fitness/features/exercise/presentation/manager/exercise_cubit/ex
 import 'package:fitness/features/exercise/presentation/pages/exercise_screen.dart';
 import 'package:fitness/features/exercise/presentation/pages/home_screen.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_event.dart';
+import 'package:fitness/features/popular_tarining/presentation/view/popular_training_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -73,7 +74,15 @@ abstract class RouteGenerator {
             ),
           );
 
-        /// bottom nav bar screen
+        ///
+        case Routes.popularTrainingRoute:
+          return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (context) => getIt<ExerciseCubit>(),
+              child: const PopularTrainingScreen(),
+            ),
+          );
+
         case Routes.bottomNavBarRoute:
           final args = settings.arguments as Map<String, dynamic>?;
 
