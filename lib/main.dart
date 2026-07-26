@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
 
             title: 'Fitness APP',
 
-            initialRoute: Routes.bottomNavBarRoute,
+            initialRoute: Routes.splashRoute,
 
             onGenerateRoute: RouteGenerator.getRoute,
 

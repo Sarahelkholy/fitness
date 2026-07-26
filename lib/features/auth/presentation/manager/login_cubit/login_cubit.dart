@@ -12,6 +12,9 @@ import 'package:fitness/features/auth/presentation/manager/login_cubit/login_sta
 import 'package:injectable/injectable.dart';
 
 import '../../../../../config/base_state/base_state.dart';
+import '../../../../../config/di/di.dart';
+import '../../../../../config/user/manager/user_cubit.dart';
+import '../../../../../config/user/manager/user_events.dart';
 import '../../../data/models/requests/login_request.dart';
 import 'login_event.dart';
 
@@ -48,6 +51,8 @@ class LoginCubit extends BaseCubit<LoginState, BaseEvent> {
             loginWithApi: BaseState(data: result.data, isSuccess: true),
           ),
         );
+        getIt<UserCubit>().doEvent(SetUserDataEvent(user: result.data));
+
         emitEvent(
           const NavigationEvent(
             routeName: Routes.bottomNavBarRoute,
@@ -87,9 +92,13 @@ class LoginCubit extends BaseCubit<LoginState, BaseEvent> {
                 ),
               ),
             );
+
+            getIt<UserCubit>().doEvent(
+              SetUserDataEvent(user: loginResult.data),
+            );
             emitEvent(
               const NavigationEvent(
-                routeName: Routes.homeRoute,
+                routeName: Routes.bottomNavBarRoute,
                 type: NavigationType.pushReplacementAndRemoveUntil,
               ),
             );
@@ -134,9 +143,12 @@ class LoginCubit extends BaseCubit<LoginState, BaseEvent> {
                 ),
               ),
             );
+            getIt<UserCubit>().doEvent(
+              SetUserDataEvent(user: loginResult.data),
+            );
             emitEvent(
               const NavigationEvent(
-                routeName: Routes.homeRoute,
+                routeName: Routes.bottomNavBarRoute,
                 type: NavigationType.pushReplacementAndRemoveUntil,
               ),
             );

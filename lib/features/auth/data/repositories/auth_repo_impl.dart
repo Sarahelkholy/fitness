@@ -38,6 +38,8 @@ class AuthRepoImpl implements AuthRepo {
             key: CacheKeys.token,
             value: response.data.token!,
           );
+
+          await _secureCache.saveData(key: CacheKeys.rememberMe, value: 'true');
         }
         return Success(data: response.data.user!.toEntity());
       case Failure<AuthResponse>():
@@ -56,6 +58,11 @@ class AuthRepoImpl implements AuthRepo {
             await _secureCache.saveData(
               key: CacheKeys.token,
               value: response.data.token!,
+            );
+
+            await _secureCache.saveData(
+              key: CacheKeys.rememberMe,
+              value: 'true',
             );
           }
 
