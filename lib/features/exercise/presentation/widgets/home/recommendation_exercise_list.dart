@@ -1,13 +1,12 @@
 import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/features/exercise/domain/entities/home/random_exercises_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'recommendation_card.dart';
 
 class RecommendationExerciseList extends StatelessWidget {
-  final List<RandomExerciseEntity> exercises;
+  final List<RandomExerciseEntity> muscles;
 
-  const RecommendationExerciseList({super.key, required this.exercises});
+  const RecommendationExerciseList({super.key, required this.muscles});
 
   @override
   Widget build(BuildContext context) {
@@ -15,42 +14,29 @@ class RecommendationExerciseList extends StatelessWidget {
       height: 120,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: exercises.length,
+        itemCount: muscles.length,
         itemBuilder: (context, index) {
-          final exercise = exercises[index];
-          final videoId = YoutubePlayer.convertUrlToId(
-            exercise.shortYoutubeDemonstrationLink ?? '',
-          );
-          final thumbnailUrl = videoId != null
-              ? 'https://img.youtube.com/vi/$videoId/hqdefault.jpg'
-              : null;
+          final muscle = muscles[index];
 
           return GestureDetector(
             onTap: () {
-              final muscleId =
-                  (exercise.primeMoverMuscleId != null &&
-                          exercise.primeMoverMuscleId!.isNotEmpty)
-                      ? exercise.primeMoverMuscleId!
-                      : '69d982ef85f6bfa972bf2248';
+              String muscleId = '';
+              if (muscle.id != null && muscle.id!.isNotEmpty) {
+                muscleId = muscle.id!;
+              } else if (muscle.name != null && muscle.name!.isNotEmpty) {
+                muscleId = muscle.name!;
+              }
               Navigator.pushNamed(
                 context,
                 Routes.exerciseRoute,
-                arguments: {
-                  'primeMoverMuscleId': muscleId,
-                  'initialExercise': exercise.toExercise(),
-                  if (exercise.id != null && exercise.id!.isNotEmpty)
-                    'exerciseId': exercise.id,
-                  if (exercise.exercise != null && exercise.exercise!.isNotEmpty)
-                    'exerciseName': exercise.exercise,
-                  if (exercise.difficultyLevel != null &&
-                      exercise.difficultyLevel!.isNotEmpty)
-                    'difficultyLevel': exercise.difficultyLevel,
-                },
+                arguments: {'primeMoverMuscleId': muscleId},
               );
             },
             child: RecommendationCard(
-              title: exercise.exercise,
-              networkImage: thumbnailUrl,
+              title: muscle.name,
+              networkImage: muscle.image is String
+                  ? muscle.image as String
+                  : null,
             ),
           );
         },

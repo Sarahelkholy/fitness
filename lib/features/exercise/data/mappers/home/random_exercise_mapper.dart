@@ -1,16 +1,8 @@
 import 'package:fitness/features/exercise/data/models/home/random_exercises_response.dart';
 import 'package:fitness/features/exercise/domain/entities/home/random_exercises_entity.dart';
 
-extension ExerciseModelMapper on Exercises {
+extension MusclesMapper on Muscles {
   RandomExerciseEntity toEntity() {
-    return RandomExerciseEntity(
-      id: Id,
-      exercise: exercise,
-      difficultyLevel: difficultyLevel,
-      targetMuscleGroup: targetMuscleGroup,
-      primeMoverMuscle: primeMoverMuscle,
-      primeMoverMuscleId: primeMoverMuscleId,
-      shortYoutubeDemonstrationLink: shortYoutubeDemonstrationLink,
-    );
+    return RandomExerciseEntity(id: id, name: name, image: image);
   }
 }

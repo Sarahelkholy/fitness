@@ -24,16 +24,8 @@ class HomeRepoImpl implements HomeRepo {
   HomeRepoImpl(this._homeRemoteDataSource);
 
   @override
-  Future<Result<RandomExercisesResponseEntity>> getRandomExercises({
-    required String targetMuscleGroupId,
-    required String difficultyLevelId,
-    int limit = 3,
-  }) async {
-    final response = await _homeRemoteDataSource.getRandomExercises(
-      targetMuscleGroupId: targetMuscleGroupId,
-      difficultyLevelId: difficultyLevelId,
-      limit: limit,
-    );
+  Future<Result<RandomExercisesResponseEntity>> getRandomExercises() async {
+    final response = await _homeRemoteDataSource.getRandomExercises();
 
     switch (response) {
       case Success<RandomExercisesResponse>():

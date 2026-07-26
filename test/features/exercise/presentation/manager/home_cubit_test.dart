@@ -8,38 +8,31 @@ import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_s
 import 'package:fitness/features/meals/domain/entities/category_entity.dart';
 import 'package:fitness/features/meals/domain/use_cases/get_categories_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:fitness/features/exercise/domain/use_cases/get_all_muscles_group_use_case.dart';
-import 'package:fitness/features/exercise/domain/use_cases/get_difficulty_levels_use_case.dart';
+import 'home_cubit_test.mocks.dart';
 
-class MockGetRandomExercisesUseCase extends Mock
-    implements GetRandomExercisesUseCase {}
-
-class MockGetCategoriesUseCase extends Mock
-    implements GetCategoriesUseCase {}
-
-class MockGetAllMusclesGroupUseCase extends Mock
-    implements GetAllMusclesGroupUseCase {}
-
-class MockGetDifficultyLevelsUseCase extends Mock
-    implements GetDifficultyLevelsUseCase {}
+@GenerateNiceMocks([
+  MockSpec<GetRandomExercisesUseCase>(),
+  MockSpec<GetCategoriesUseCase>(),
+])
 void main() {
   late MockGetRandomExercisesUseCase mockGetRandomExercisesUseCase;
   late MockGetCategoriesUseCase mockGetCategoriesUseCase;
-  late MockGetAllMusclesGroupUseCase mockGetAllMusclesGroupUseCase;
-  late MockGetDifficultyLevelsUseCase mockGetDifficultyLevelsUseCase;
   late HomeCubit homeCubit;
+
+  const tLanguage = 'en';
+  const tEntity = RandomExercisesResponseEntity(
+    message: 'Success',
+    totalMuscles: 0,
+    muscles: [],
+  );
+  final tCategories = <CategoryEntity>[];
 
   setUpAll(() {
     provideDummy<Result<RandomExercisesResponseEntity>>(
-      Success(
-        data: const RandomExercisesResponseEntity(
-          message: 'Success',
-          totalExercises: 0,
-          exercises: [],
-        ),
-      ),
+      Success(data: tEntity),
     );
     provideDummy<Result<List<CategoryEntity>>>(
       Success(data: <CategoryEntity>[]),
@@ -49,13 +42,9 @@ void main() {
   setUp(() {
     mockGetRandomExercisesUseCase = MockGetRandomExercisesUseCase();
     mockGetCategoriesUseCase = MockGetCategoriesUseCase();
-    mockGetAllMusclesGroupUseCase = MockGetAllMusclesGroupUseCase();
-    mockGetDifficultyLevelsUseCase = MockGetDifficultyLevelsUseCase();
     homeCubit = HomeCubit(
       mockGetRandomExercisesUseCase,
       mockGetCategoriesUseCase,
-      mockGetAllMusclesGroupUseCase,
-      mockGetDifficultyLevelsUseCase,
     );
   });
 
@@ -68,58 +57,35 @@ void main() {
   });
 
   group('GetRandomExercises Event', () {
-    const tTargetMuscleGroupId = '123';
-    const tDifficultyLevelId = '456';
-    const tLimit = 3;
-    const tEntity = RandomExercisesResponseEntity(
-      message: 'Success',
-      totalExercises: 0,
-      exercises: [],
-    );
-
     blocTest<HomeCubit, HomeState>(
       'emits [HomeLoading, HomeSuccess] when GetRandomExercises succeeds',
       build: () {
-        when(mockGetRandomExercisesUseCase.call(
-          targetMuscleGroupId: tTargetMuscleGroupId,
-          difficultyLevelId: tDifficultyLevelId,
-          limit: tLimit,
-        )).thenAnswer((_) async => Success(data: tEntity));
+        when(mockGetRandomExercisesUseCase.call(language: tLanguage))
+            .thenAnswer((_) async => Success(data: tEntity));
         return homeCubit;
       },
-      act: (cubit) => cubit.doEvents(GetRandomExercises(
-        targetMuscleGroupId: tTargetMuscleGroupId,
-        difficultyLevelId: tDifficultyLevelId,
-        limit: tLimit,
-      )),
+      act: (cubit) => cubit.doEvents(GetRandomExercises(language: tLanguage)),
       expect: () => [
         HomeLoading(),
         const HomeSuccess(randomExercisesResponseEntity: tEntity),
       ],
       verify: (_) {
-        verify(mockGetRandomExercisesUseCase.call(
-          targetMuscleGroupId: tTargetMuscleGroupId,
-          difficultyLevelId: tDifficultyLevelId,
-          limit: tLimit,
-        )).called(1);
+        verify(
+          mockGetRandomExercisesUseCase.call(language: tLanguage),
+        ).called(1);
       },
     );
 
     blocTest<HomeCubit, HomeState>(
       'emits [HomeLoading, HomeFailure] when GetRandomExercises fails',
       build: () {
-        when(mockGetRandomExercisesUseCase.call(
-          targetMuscleGroupId: tTargetMuscleGroupId,
-          difficultyLevelId: tDifficultyLevelId,
-          limit: tLimit,
-        )).thenAnswer((_) async => Failure(errorMessage: 'Error loading exercises'));
+        when(mockGetRandomExercisesUseCase.call(language: tLanguage))
+            .thenAnswer(
+          (_) async => Failure(errorMessage: 'Error loading exercises'),
+        );
         return homeCubit;
       },
-      act: (cubit) => cubit.doEvents(GetRandomExercises(
-        targetMuscleGroupId: tTargetMuscleGroupId,
-        difficultyLevelId: tDifficultyLevelId,
-        limit: tLimit,
-      )),
+      act: (cubit) => cubit.doEvents(GetRandomExercises(language: tLanguage)),
       expect: () => [
         HomeLoading(),
         const HomeFailure(errorMessage: 'Error loading exercises'),
@@ -128,8 +94,6 @@ void main() {
   });
 
   group('GetFoodCategories Event', () {
-    final tCategories = <CategoryEntity>[];
-
     blocTest<HomeCubit, HomeState>(
       'emits [HomeLoading, HomeSuccess] when GetFoodCategories succeeds',
       build: () {
@@ -150,8 +114,9 @@ void main() {
     blocTest<HomeCubit, HomeState>(
       'emits [HomeLoading, HomeFailure] when GetFoodCategories fails',
       build: () {
-        when(mockGetCategoriesUseCase.call())
-            .thenAnswer((_) async => Failure(errorMessage: 'Error loading categories'));
+        when(mockGetCategoriesUseCase.call()).thenAnswer(
+          (_) async => Failure(errorMessage: 'Error loading categories'),
+        );
         return homeCubit;
       },
       act: (cubit) => cubit.doEvents(GetFoodCategories()),

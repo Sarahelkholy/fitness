@@ -19,11 +19,7 @@ abstract class HomeApiClient {
   factory HomeApiClient(Dio dio) = _HomeApiClient;
 
   @GET(ApiEndPoints.randomExercises)
-  Future<RandomExercisesResponse> getRandomExercises({
-    @Query("targetMuscleGroupId") required String targetMuscleGroupId,
-    @Query("difficultyLevelId") required String difficultyLevelId,
-    @Query("limit") int limit = 3,
-  });
+  Future<RandomExercisesResponse> getRandomExercises();
 
   ///? ============= Get All Muscles Group =================
   @GET(ApiEndPoints.getAllMusclesGroup)

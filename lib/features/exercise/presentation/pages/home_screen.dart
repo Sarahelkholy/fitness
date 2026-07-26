@@ -44,11 +44,9 @@ class HomeScreen extends StatelessWidget {
                   builder: (context, state) {
                     if (state is HomeSuccess &&
                         state.randomExercisesResponseEntity != null) {
-                      final exercisesList =
-                          state.randomExercisesResponseEntity!.exercises ?? [];
-                      return RecommendationExerciseList(
-                        exercises: exercisesList,
-                      );
+                      final musclesList =
+                          state.randomExercisesResponseEntity!.muscles ?? [];
+                      return RecommendationExerciseList(muscles: musclesList);
                     } else if (state is HomeFailure) {
                       return Center(
                         child: Text(
@@ -94,13 +92,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
 
-                HeadlineWidget(
-                  title: local.popularTraining,
-                  isViewAll: true,
-                  onViewAllPressed: () {
-                    Navigator.pushNamed(context, Routes.popularTrainingRoute);
-                  },
-                ),
+                HeadlineWidget(title: local.popularTraining),
                 const SizedBox(height: 16),
                 const PopularTrainingSection(),
               ],

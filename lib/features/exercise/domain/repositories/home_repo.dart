@@ -6,11 +6,7 @@ import '../entities/difficulty_level.dart';
 import '../entities/exercise_info.dart';
 
 abstract interface class HomeRepo {
-  Future<Result<RandomExercisesResponseEntity>> getRandomExercises({
-    required String targetMuscleGroupId,
-    required String difficultyLevelId,
-    int limit = 3,
-  });
+  Future<Result<RandomExercisesResponseEntity>> getRandomExercises();
 
   ///? =========== Get All Muscles Group ==============
   Future<Result<List<GetAllMusclesGroupEntity>>> getAllMusclesGroup({

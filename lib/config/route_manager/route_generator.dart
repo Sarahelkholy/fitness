@@ -121,10 +121,7 @@ abstract class RouteGenerator {
               child: ExerciseScreen(
                 primeMoverMuscleId: args?['primeMoverMuscleId'] ?? '',
                 initialExercise: initialExercise,
-                initialExerciseId:
-                    args?['exerciseId'] ??
-                    args?['initialExerciseId'] ??
-                    initialExercise?.id,
+                initialExerciseId: args?['exerciseId'] ?? initialExercise?.id,
                 initialDifficultyLevel:
                     args?['difficultyLevel'] ??
                     initialExercise?.difficultyLevel,
