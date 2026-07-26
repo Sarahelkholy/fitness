@@ -28,10 +28,10 @@ abstract class HomeApiClient {
   );
 
   ///? ================= Get Muscle Using id ===================
-  @GET(ApiEndPoints.getMuscleGroupId)
+  @GET("${ApiEndPoints.getMuscleGroupId}/{id}")
   Future<GetMusclesGroupIdResponse> getMuscleGroupId(
     @Header('accept-language') String language,
-    @Query('muscleGroupId') String muscleGroupId,
+    @Path('id') String id,
   );
   @GET(ApiEndPoints.exercisesByMuscleDifficulty)
   Future<ExerciseResponse> getExercises({

@@ -6,9 +6,10 @@ import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_c
 import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_state.dart';
 import 'package:fitness/features/exercise/presentation/widgets/headline_widget.dart';
 import 'package:fitness/features/exercise/presentation/widgets/home/categories_list.dart';
+import 'package:fitness/features/exercise/presentation/widgets/home/popular_training_section.dart';
 import 'package:fitness/features/exercise/presentation/widgets/home/recommendation_exercise_list.dart';
 import 'package:fitness/features/exercise/presentation/widgets/home/recommendation_food_list.dart';
-import 'package:fitness/features/exercise/presentation/widgets/home/popular_training_section.dart';
+import 'package:fitness/features/exercise/presentation/widgets/home/shimmer/recommendation_list_shimmer.dart';
 import 'package:fitness/features/exercise/presentation/widgets/home/upcoming_workouts_section.dart';
 import 'package:fitness/features/exercise/presentation/widgets/home/user_info_bar.dart';
 import 'package:flutter/material.dart';
@@ -55,12 +56,18 @@ class HomeScreen extends StatelessWidget {
                         ),
                       );
                     }
-                    return const Center(child: CircularProgressIndicator());
+                    return const RecommendationListShimmer();
                   },
                 ),
                 const SizedBox(height: 24),
 
-                HeadlineWidget(title: local.upcomingWorkouts, isViewAll: true),
+                HeadlineWidget(
+                  title: local.upcomingWorkouts,
+                  isViewAll: true,
+                  onViewAllPressed: () {
+                    Navigator.pushNamed(context, Routes.workoutRoute);
+                  },
+                ),
                 const UpcomingWorkoutsSection(),
                 const SizedBox(height: 24),
 
@@ -87,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       );
                     }
-                    return const Center(child: CircularProgressIndicator());
+                    return const RecommendationListShimmer();
                   },
                 ),
                 const SizedBox(height: 24),

@@ -7,86 +7,96 @@ import 'package:injectable/injectable.dart';
 import '../../../../../config/base_cubit/base_cubit.dart';
 import '../../../../../config/base_cubit/base_event.dart';
 import '../../../../../config/base_state/base_state.dart';
-import '../../../domain/entities/get_muscles_by_group_id_entity.dart';
 import '../../../domain/use_cases/get_muscles_group_id_use_case.dart';
 
 @injectable
 class MusclesCubit extends BaseCubit<MusclesState, BaseEvent> {
-  MusclesCubit(this._getAllMusclesGroupUseCase, this._getMusclesGroupIdUseCase)
-    : super(MusclesState());
   final GetAllMusclesGroupUseCase _getAllMusclesGroupUseCase;
   final GetMusclesGroupIdUseCase _getMusclesGroupIdUseCase;
 
-  ///? ================== function Event =========================
-  void doIntent(MusclesEvent event) {
+  MusclesCubit(this._getAllMusclesGroupUseCase, this._getMusclesGroupIdUseCase)
+    : super(const MusclesState());
+
+  void doEvents(MusclesEvent event) {
     switch (event) {
-      case GetAllMuscles():
+      case GetAllMusclesEvent():
         _getAllMuscles(language: event.language);
-      case GetMusclesId():
-        _getMusclesId(
+      case GetWorkoutsByMuscleGroupIdEvent():
+        _getWorkoutsByMuscleGroupId(
           language: event.language,
           muscleGroupId: event.muscleGroupId,
+          index: event.index,
         );
     }
   }
 
-  ///? ================= Get All Muscles ====================
   Future<void> _getAllMuscles({required String language}) async {
-    emit(state.copyWith(getAllMusclesGroup: const BaseState(isLoading: true)));
+    emit(
+      state.copyWith(
+        musclesGroupsState: const BaseState(isLoading: true),
+        selectedMuscleGroupIndex: 0,
+      ),
+    );
+
     final result = await _getAllMusclesGroupUseCase.call(language: language);
+
     switch (result) {
       case Success<List<GetAllMusclesGroupEntity>>():
         emit(
           state.copyWith(
-            getAllMusclesGroup: BaseState(data: result.data, isSuccess: true),
+            musclesGroupsState: BaseState(data: result.data, isSuccess: true),
           ),
         );
-        if (result.data != null && result.data!.isNotEmpty) {
-          final defaultGroup = result.data!.firstWhere(
-            (element) =>
-                element.name?.toLowerCase().contains('abdominal') ?? false,
-            orElse: () => result.data!.first,
+        if (result.data.isNotEmpty) {
+          final index = (state.selectedMuscleGroupIndex < result.data.length)
+              ? state.selectedMuscleGroupIndex
+              : 0;
+          final muscleGroupId = result.data[index].id ?? "";
+          _getWorkoutsByMuscleGroupId(
+            language: language,
+            muscleGroupId: muscleGroupId,
+            index: index,
           );
-          if (defaultGroup.id != null) {
-            _getMusclesId(language: language, muscleGroupId: defaultGroup.id!);
-          }
         }
-
       case Failure<List<GetAllMusclesGroupEntity>>():
         emit(
           state.copyWith(
-            getAllMusclesGroup: BaseState(errorMessage: result.errorMessage),
+            musclesGroupsState: BaseState(errorMessage: result.errorMessage),
           ),
         );
-        emitEvent(DisplayErrorEvent(errorMsg: result.errorMessage));
     }
   }
 
-  ///? ================ Get All Muscles ID  ====================
-  Future<void> _getMusclesId({
+  Future<void> _getWorkoutsByMuscleGroupId({
     required String language,
     required String muscleGroupId,
+    required int index,
   }) async {
-    emit(state.copyWith(getMusclesByGroupId: const BaseState(isLoading: true)));
+    emit(
+      state.copyWith(
+        workoutsState: const BaseState(isLoading: true),
+        selectedMuscleGroupIndex: index,
+      ),
+    );
+
     final result = await _getMusclesGroupIdUseCase.call(
       language: language,
       muscleGroupId: muscleGroupId,
     );
-    switch (result) {
-      case Success<List<GetMusclesByGroupIdEntity>>():
-        emit(
-          state.copyWith(
-            getMusclesByGroupId: BaseState(data: result.data, isSuccess: true),
-          ),
-        );
 
-      case Failure<List<GetMusclesByGroupIdEntity>>():
+    switch (result) {
+      case Success():
         emit(
           state.copyWith(
-            getMusclesByGroupId: BaseState(errorMessage: result.errorMessage),
+            workoutsState: BaseState(data: result.data, isSuccess: true),
           ),
         );
-        emitEvent(DisplayErrorEvent(errorMsg: result.errorMessage));
+      case Failure():
+        emit(
+          state.copyWith(
+            workoutsState: BaseState(errorMessage: result.errorMessage),
+          ),
+        );
     }
   }
 }

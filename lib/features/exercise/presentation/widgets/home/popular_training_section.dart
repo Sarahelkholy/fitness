@@ -1,6 +1,6 @@
 import 'package:fitness/config/di/di.dart';
 import 'package:fitness/config/route_manager/routes.dart';
-import 'package:fitness/core/utils/app_colors.dart';
+import 'package:fitness/features/exercise/presentation/widgets/home/shimmer/popular_training_section_shimmer.dart';
 import 'package:fitness/features/exercise/presentation/widgets/home/popular_training_card.dart';
 import 'package:fitness/features/popular_tarining/presentation/view_model/popular_training_cubit.dart';
 import 'package:fitness/features/popular_tarining/presentation/view_model/popular_training_intents.dart';
@@ -15,17 +15,13 @@ class PopularTrainingSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<PopularTrainingCubit>()
-        ..doEvents(const LoadPopularTrainingIntent()),
+      create: (context) =>
+          getIt<PopularTrainingCubit>()
+            ..doEvents(const LoadPopularTrainingIntent()),
       child: BlocBuilder<PopularTrainingCubit, PopularTrainingStates>(
         builder: (context, state) {
           if (state.isLoading) {
-            return const SizedBox(
-              height: 180,
-              child: Center(
-                child: CircularProgressIndicator(color: AppColors.main),
-              ),
-            );
+            return const PopularTrainingSectionShimmer();
           }
 
           if (state.errorMessage != null) {
@@ -66,13 +62,14 @@ class PopularTrainingSection extends StatelessWidget {
                   level: item.displayLevel,
                   networkImage: thumbnailUrl,
                   onTap: () {
-                    final muscleId = (item.exercise.primeMoverMuscle != null &&
+                    final muscleId =
+                        (item.exercise.primeMoverMuscle != null &&
                             item.exercise.primeMoverMuscle!.isNotEmpty)
                         ? item.exercise.primeMoverMuscle!
                         : (item.exercise.targetMuscleGroup != null &&
-                                item.exercise.targetMuscleGroup!.isNotEmpty)
-                            ? item.exercise.targetMuscleGroup!
-                            : '69d982ef85f6bfa972bf2248';
+                              item.exercise.targetMuscleGroup!.isNotEmpty)
+                        ? item.exercise.targetMuscleGroup!
+                        : '69d982ef85f6bfa972bf2248';
 
                     Navigator.pushNamed(
                       context,

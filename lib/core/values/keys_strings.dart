@@ -89,4 +89,8 @@ abstract class KeysStrings {
   static const registerFormNextButtonStep4 = 'register_form_next_button_step4';
   static const registerFormNextButtonStep5 = 'register_form_next_button_step5';
   static const registerFormNextButtonStep6 = 'register_form_next_button_step6';
+  // Workout Screen
+  static const workoutRefreshIndicator = 'workout_refresh_indicator';
+  static const workoutTabBar = 'workout_tab_bar';
+  static const workoutGridView = 'workout_grid_view';
 }

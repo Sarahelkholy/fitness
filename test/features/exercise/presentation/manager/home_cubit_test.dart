@@ -22,7 +22,6 @@ void main() {
   late MockGetCategoriesUseCase mockGetCategoriesUseCase;
   late HomeCubit homeCubit;
 
-  const tLanguage = 'en';
   const tEntity = RandomExercisesResponseEntity(
     message: 'Success',
     totalMuscles: 0,
@@ -31,9 +30,7 @@ void main() {
   final tCategories = <CategoryEntity>[];
 
   setUpAll(() {
-    provideDummy<Result<RandomExercisesResponseEntity>>(
-      Success(data: tEntity),
-    );
+    provideDummy<Result<RandomExercisesResponseEntity>>(Success(data: tEntity));
     provideDummy<Result<List<CategoryEntity>>>(
       Success(data: <CategoryEntity>[]),
     );
@@ -60,32 +57,30 @@ void main() {
     blocTest<HomeCubit, HomeState>(
       'emits [HomeLoading, HomeSuccess] when GetRandomExercises succeeds',
       build: () {
-        when(mockGetRandomExercisesUseCase.call(language: tLanguage))
-            .thenAnswer((_) async => Success(data: tEntity));
+        when(
+          mockGetRandomExercisesUseCase.call(),
+        ).thenAnswer((_) async => Success(data: tEntity));
         return homeCubit;
       },
-      act: (cubit) => cubit.doEvents(GetRandomExercises(language: tLanguage)),
+      act: (cubit) => cubit.doEvents(GetRandomExercises()),
       expect: () => [
         HomeLoading(),
         const HomeSuccess(randomExercisesResponseEntity: tEntity),
       ],
       verify: (_) {
-        verify(
-          mockGetRandomExercisesUseCase.call(language: tLanguage),
-        ).called(1);
+        verify(mockGetRandomExercisesUseCase.call()).called(1);
       },
     );
 
     blocTest<HomeCubit, HomeState>(
       'emits [HomeLoading, HomeFailure] when GetRandomExercises fails',
       build: () {
-        when(mockGetRandomExercisesUseCase.call(language: tLanguage))
-            .thenAnswer(
+        when(mockGetRandomExercisesUseCase.call()).thenAnswer(
           (_) async => Failure(errorMessage: 'Error loading exercises'),
         );
         return homeCubit;
       },
-      act: (cubit) => cubit.doEvents(GetRandomExercises(language: tLanguage)),
+      act: (cubit) => cubit.doEvents(GetRandomExercises()),
       expect: () => [
         HomeLoading(),
         const HomeFailure(errorMessage: 'Error loading exercises'),
@@ -97,15 +92,13 @@ void main() {
     blocTest<HomeCubit, HomeState>(
       'emits [HomeLoading, HomeSuccess] when GetFoodCategories succeeds',
       build: () {
-        when(mockGetCategoriesUseCase.call())
-            .thenAnswer((_) async => Success(data: tCategories));
+        when(
+          mockGetCategoriesUseCase.call(),
+        ).thenAnswer((_) async => Success(data: tCategories));
         return homeCubit;
       },
       act: (cubit) => cubit.doEvents(GetFoodCategories()),
-      expect: () => [
-        HomeLoading(),
-        HomeSuccess(foodCategories: tCategories),
-      ],
+      expect: () => [HomeLoading(), HomeSuccess(foodCategories: tCategories)],
       verify: (_) {
         verify(mockGetCategoriesUseCase.call()).called(1);
       },

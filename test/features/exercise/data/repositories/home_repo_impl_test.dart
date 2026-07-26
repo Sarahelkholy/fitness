@@ -38,45 +38,27 @@ void main() {
   });
 
   group('getRandomExercises', () {
-    const tTargetMuscleGroupId = '123';
-    const tDifficultyLevelId = '456';
-    const tLimit = 3;
-
     test(
       'should return Success<RandomExercisesResponseEntity> when data source succeeds',
       () async {
         final tResponse = RandomExercisesResponse(
           message: 'Success',
-          totalExercises: 0,
-          exercises: [],
+          totalMuscles: 0,
+          muscles: [],
         );
 
         when(
-          mockHomeRemoteDataSource.getRandomExercises(
-            targetMuscleGroupId: tTargetMuscleGroupId,
-            difficultyLevelId: tDifficultyLevelId,
-            limit: tLimit,
-          ),
+          mockHomeRemoteDataSource.getRandomExercises(),
         ).thenAnswer((_) async => Success(data: tResponse));
 
-        final result = await repository.getRandomExercises(
-          targetMuscleGroupId: tTargetMuscleGroupId,
-          difficultyLevelId: tDifficultyLevelId,
-          limit: tLimit,
-        );
+        final result = await repository.getRandomExercises();
 
         expect(result, isA<Success<RandomExercisesResponseEntity>>());
         expect(
           (result as Success<RandomExercisesResponseEntity>).data.message,
           equals('Success'),
         );
-        verify(
-          mockHomeRemoteDataSource.getRandomExercises(
-            targetMuscleGroupId: tTargetMuscleGroupId,
-            difficultyLevelId: tDifficultyLevelId,
-            limit: tLimit,
-          ),
-        ).called(1);
+        verify(mockHomeRemoteDataSource.getRandomExercises()).called(1);
       },
     );
 
@@ -84,18 +66,10 @@ void main() {
       const tError = 'Something went wrong';
 
       when(
-        mockHomeRemoteDataSource.getRandomExercises(
-          targetMuscleGroupId: tTargetMuscleGroupId,
-          difficultyLevelId: tDifficultyLevelId,
-          limit: tLimit,
-        ),
+        mockHomeRemoteDataSource.getRandomExercises(),
       ).thenAnswer((_) async => Failure(errorMessage: tError));
 
-      final result = await repository.getRandomExercises(
-        targetMuscleGroupId: tTargetMuscleGroupId,
-        difficultyLevelId: tDifficultyLevelId,
-        limit: tLimit,
-      );
+      final result = await repository.getRandomExercises();
 
       expect(result, isA<Failure<RandomExercisesResponseEntity>>());
       expect(
