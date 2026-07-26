@@ -6,22 +6,22 @@ import '../../../../core/values/api_end_points.dart';
 import '../../data/module/response/get_muscles_group_id_response.dart';
 part 'home_api_client.g.dart';
 
-// @injectable
+@injectable
 @RestApi()
 abstract class HomeApiClient {
   @factoryMethod
   factory HomeApiClient(Dio dio) = _HomeApiClient;
 
   ///? ============= Get All Muscles Group =================
-  @POST(ApiEndPoints.getAllMusclesGroup)
+  @GET(ApiEndPoints.getAllMusclesGroup)
   Future<GetAllMusclesGroupResponse> getAllMusclesGroup(
     @Header('accept-language') String language,
   );
 
   ///? ================= Get Muscle Using id ===================
-  @POST(ApiEndPoints.getMuscleGroupId)
+  @GET("${ApiEndPoints.getMuscleGroupId}/{id}")
   Future<GetMusclesGroupIdResponse> getMuscleGroupId(
     @Header('accept-language') String language,
-    @Query('muscleGroupId') String muscleGroupId,
+    @Path('id') String id,
   );
 }

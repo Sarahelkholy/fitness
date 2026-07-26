@@ -6,6 +6,9 @@ import 'package:fitness/features/exercise/presentation/pages/home_screen.dart';
 import 'package:fitness/features/profile_screen.dart';
 import 'package:fitness/features/exercise/presentation/pages/workout_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../config/di/di.dart';
+import '../../features/exercise/presentation/manager/muscles_cubit/muscles_cubit.dart';
 import '../shared_widgets/svg_wrapper.dart';
 import '../utils/app_colors.dart';
 
@@ -29,7 +32,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     screens = [
       const HomeScreen(),
       const ChatScreen(),
-      const WorkoutScreen(),
+      BlocProvider(
+        create: (context) => getIt<MusclesCubit>(),
+        child: const WorkoutScreen(),
+      ),
       const ProfileScreen(),
     ];
   }

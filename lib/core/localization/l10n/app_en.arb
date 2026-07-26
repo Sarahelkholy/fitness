@@ -97,5 +97,7 @@
   "smartCoach":"Smart coach",
   "workouts":"Workouts",
   "profile": "Profile",
-  "mealNotFound": "Meal not found"
+  "mealNotFound": "Meal not found",
+  "noMusclesFound": "No muscle groups found",
+  "noWorkoutsFound": "No workouts found for this muscle group"
 }

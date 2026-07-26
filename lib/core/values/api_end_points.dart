@@ -16,7 +16,7 @@ abstract class ApiEndPoints {
   ///? ================== Get All Muscles Group =================
   static const String getAllMusclesGroup = "/muscles";
   ///? ================ Get Muscles Group using id
-  static const String getMuscleGroupId="/musclesGroup/by-muscle-group";
+  static const String getMuscleGroupId = "/musclesGroup";
 
   static const String getMealsCategories = "/categories.php";
   static const String getMealsByCategory = "/filter.php";
