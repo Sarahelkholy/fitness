@@ -37,17 +37,10 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     );
   }
 
-  Future<Result<RandomExercisesResponse>> getRandomExercises({
-    required String targetMuscleGroupId,
-    required String difficultyLevelId,
-    int limit = 3,
-  }) {
+  @override
+  Future<Result<RandomExercisesResponse>> getRandomExercises() {
     return executeApi<RandomExercisesResponse>(() {
-      return _apiClient.getRandomExercises(
-        targetMuscleGroupId: targetMuscleGroupId,
-        difficultyLevelId: difficultyLevelId,
-        limit: limit,
-      );
+      return _apiClient.getRandomExercises();
     });
   }
 

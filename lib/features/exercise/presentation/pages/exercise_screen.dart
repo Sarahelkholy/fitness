@@ -137,11 +137,13 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     final targetId = selected.id;
     final targetName = selected.exercise?.toLowerCase();
 
-    final index = exercises.indexWhere((e) =>
-        (targetId != null && targetId.isNotEmpty && e.id == targetId) ||
-        (targetName != null &&
-            targetName.isNotEmpty &&
-            e.exercise?.toLowerCase() == targetName));
+    final index = exercises.indexWhere(
+      (e) =>
+          (targetId != null && targetId.isNotEmpty && e.id == targetId) ||
+          (targetName != null &&
+              targetName.isNotEmpty &&
+              e.exercise?.toLowerCase() == targetName),
+    );
 
     if (index > 0) {
       WidgetsBinding.instance.addPostFrameCallback((_) {

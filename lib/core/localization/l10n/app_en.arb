@@ -142,5 +142,7 @@
   "noMealsFound": "No meals found for this category",
   "category": "Category",
   "area": "Area",
-  "country": "Country"
+  "country": "Country",
+  "noMusclesFound": "No muscle groups found",
+  "noWorkoutsFound": "No workouts found for this muscle group"
 }

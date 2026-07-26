@@ -3,15 +3,15 @@ import 'package:fitness/features/exercise/domain/entities/home/random_exercises_
 
 class RandomExercisesResponseEntity extends Equatable {
   final String? message;
-  final int? totalExercises;
-  final List<RandomExerciseEntity>? exercises;
+  final int? totalMuscles;
+  final List<RandomExerciseEntity>? muscles;
 
   const RandomExercisesResponseEntity({
     this.message,
-    this.totalExercises,
-    this.exercises,
+    this.totalMuscles,
+    this.muscles,
   });
 
   @override
-  List<Object?> get props => [message, totalExercises, exercises];
+  List<Object?> get props => [message, totalMuscles, muscles];
 }

@@ -6,10 +6,8 @@ extension RandomExercisesResponseMapper on RandomExercisesResponse {
   RandomExercisesResponseEntity toEntity() {
     return RandomExercisesResponseEntity(
       message: message,
-      totalExercises: totalExercises,
-      exercises: exercises
-          ?.map((exerciseModel) => exerciseModel.toEntity())
-          .toList(),
+      totalMuscles: totalMuscles,
+      muscles: muscles?.map((muscleModel) => muscleModel.toEntity()).toList(),
     );
   }
 }

@@ -9,11 +9,7 @@ import '../models/difficulty_level_response.dart';
 import '../models/exercise_response.dart';
 
 abstract interface class HomeRemoteDataSource {
-  Future<Result<RandomExercisesResponse>> getRandomExercises({
-    required String targetMuscleGroupId,
-    required String difficultyLevelId,
-    int limit = 3,
-  });
+  Future<Result<RandomExercisesResponse>> getRandomExercises();
 
   Future<ExerciseResponse> getExercises({
     String? primeMoverMuscleId,

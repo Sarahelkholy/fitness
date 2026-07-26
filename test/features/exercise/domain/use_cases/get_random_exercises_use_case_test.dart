@@ -18,8 +18,8 @@ void main() {
       Success(
         data: const RandomExercisesResponseEntity(
           message: 'Success',
-          totalExercises: 0,
-          exercises: [],
+          totalMuscles: 0,
+          muscles: [],
         ),
       ),
     );
@@ -30,45 +30,27 @@ void main() {
     useCase = GetRandomExercisesUseCase(mockHomeRepo);
   });
 
-  const tTargetMuscleGroupId = '123';
-  const tDifficultyLevelId = '456';
-  const tLimit = 3;
-
   test(
     'should return Success<RandomExercisesResponseEntity> when repository call succeeds',
     () async {
       const tEntity = RandomExercisesResponseEntity(
         message: 'Success',
-        totalExercises: 0,
-        exercises: [],
+        totalMuscles: 0,
+        muscles: [],
       );
 
       when(
-        mockHomeRepo.getRandomExercises(
-          targetMuscleGroupId: tTargetMuscleGroupId,
-          difficultyLevelId: tDifficultyLevelId,
-          limit: tLimit,
-        ),
+        mockHomeRepo.getRandomExercises(),
       ).thenAnswer((_) async => Success(data: tEntity));
 
-      final result = await useCase.call(
-        targetMuscleGroupId: tTargetMuscleGroupId,
-        difficultyLevelId: tDifficultyLevelId,
-        limit: tLimit,
-      );
+      final result = await useCase.call();
 
       expect(result, isA<Success<RandomExercisesResponseEntity>>());
       expect(
         (result as Success<RandomExercisesResponseEntity>).data,
         equals(tEntity),
       );
-      verify(
-        mockHomeRepo.getRandomExercises(
-          targetMuscleGroupId: tTargetMuscleGroupId,
-          difficultyLevelId: tDifficultyLevelId,
-          limit: tLimit,
-        ),
-      ).called(1);
+      verify(mockHomeRepo.getRandomExercises()).called(1);
     },
   );
 
@@ -76,30 +58,16 @@ void main() {
     const tError = 'Repo Error';
 
     when(
-      mockHomeRepo.getRandomExercises(
-        targetMuscleGroupId: tTargetMuscleGroupId,
-        difficultyLevelId: tDifficultyLevelId,
-        limit: tLimit,
-      ),
+      mockHomeRepo.getRandomExercises(),
     ).thenAnswer((_) async => Failure(errorMessage: tError));
 
-    final result = await useCase.call(
-      targetMuscleGroupId: tTargetMuscleGroupId,
-      difficultyLevelId: tDifficultyLevelId,
-      limit: tLimit,
-    );
+    final result = await useCase.call();
 
     expect(result, isA<Failure<RandomExercisesResponseEntity>>());
     expect(
       (result as Failure<RandomExercisesResponseEntity>).errorMessage,
       equals(tError),
     );
-    verify(
-      mockHomeRepo.getRandomExercises(
-        targetMuscleGroupId: tTargetMuscleGroupId,
-        difficultyLevelId: tDifficultyLevelId,
-        limit: tLimit,
-      ),
-    ).called(1);
+    verify(mockHomeRepo.getRandomExercises()).called(1);
   });
 }

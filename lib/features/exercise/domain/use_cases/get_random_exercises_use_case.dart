@@ -9,15 +9,7 @@ class GetRandomExercisesUseCase {
 
   GetRandomExercisesUseCase(this._homeRepo);
 
-  Future<Result<RandomExercisesResponseEntity>> call({
-    required String targetMuscleGroupId,
-    required String difficultyLevelId,
-    int limit = 3,
-  }) {
-    return _homeRepo.getRandomExercises(
-      targetMuscleGroupId: targetMuscleGroupId,
-      difficultyLevelId: difficultyLevelId,
-      limit: limit,
-    );
+  Future<Result<RandomExercisesResponseEntity>> call() {
+    return _homeRepo.getRandomExercises();
   }
 }

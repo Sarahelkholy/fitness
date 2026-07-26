@@ -1,23 +1,36 @@
+import 'package:equatable/equatable.dart';
 import 'package:fitness/config/base_state/base_state.dart';
 import '../../../domain/entities/get_all_muscles_group_entity.dart';
 import '../../../domain/entities/get_muscles_by_group_id_entity.dart';
 
-class MusclesState {
-  MusclesState({this.getAllMusclesGroup,this.getMusclesByGroupId});
+class MusclesState extends Equatable {
+  final BaseState<List<GetAllMusclesGroupEntity>> musclesGroupsState;
+  final BaseState<List<GetMusclesByGroupIdEntity>> workoutsState;
+  final int selectedMuscleGroupIndex;
 
-  ///? ================= Get All Muscles ====================
-  BaseState<List<GetAllMusclesGroupEntity>>? getAllMusclesGroup = const BaseState();
-
-  ///? ================= Get Muscles Group id ====================
-  BaseState<List<GetMusclesByGroupIdEntity>>? getMusclesByGroupId = const BaseState();
+  const MusclesState({
+    this.musclesGroupsState = const BaseState(),
+    this.workoutsState = const BaseState(),
+    this.selectedMuscleGroupIndex = 0,
+  });
 
   MusclesState copyWith({
-    BaseState<List<GetAllMusclesGroupEntity>>? getAllMusclesGroup,
-    BaseState<List<GetMusclesByGroupIdEntity>>? getMusclesByGroupId,
+    BaseState<List<GetAllMusclesGroupEntity>>? musclesGroupsState,
+    BaseState<List<GetMusclesByGroupIdEntity>>? workoutsState,
+    int? selectedMuscleGroupIndex,
   }) {
     return MusclesState(
-      getAllMusclesGroup: getAllMusclesGroup ?? this.getAllMusclesGroup,
-      getMusclesByGroupId: getMusclesByGroupId ?? this.getMusclesByGroupId,
+      musclesGroupsState: musclesGroupsState ?? this.musclesGroupsState,
+      workoutsState: workoutsState ?? this.workoutsState,
+      selectedMuscleGroupIndex:
+          selectedMuscleGroupIndex ?? this.selectedMuscleGroupIndex,
     );
   }
+
+  @override
+  List<Object?> get props => [
+    musclesGroupsState,
+    workoutsState,
+    selectedMuscleGroupIndex,
+  ];
 }

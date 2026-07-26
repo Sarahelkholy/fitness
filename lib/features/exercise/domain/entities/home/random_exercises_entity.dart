@@ -1,44 +1,25 @@
 import 'package:equatable/equatable.dart';
-import '../exercise.dart';
+import 'package:fitness/features/exercise/data/models/home/random_exercises_response.dart';
 
 class RandomExerciseEntity extends Equatable {
   final String? id;
-  final String? exercise;
-  final String? difficultyLevel;
-  final String? targetMuscleGroup;
-  final String? primeMoverMuscle;
-  final String? primeMoverMuscleId;
-  final String? shortYoutubeDemonstrationLink;
+  final String? name;
+  final dynamic image;
 
-  const RandomExerciseEntity({
-    this.id,
-    this.exercise,
-    this.difficultyLevel,
-    this.targetMuscleGroup,
-    this.primeMoverMuscle,
-    this.primeMoverMuscleId,
-    this.shortYoutubeDemonstrationLink,
-  });
+  const RandomExerciseEntity({this.id, this.name, this.image});
 
-  Exercise toExercise() {
-    return Exercise(
-      id: id,
-      exercise: exercise,
-      difficultyLevel: difficultyLevel,
-      targetMuscleGroup: targetMuscleGroup,
-      primeMoverMuscle: primeMoverMuscle,
-      shortYoutubeDemonstrationLink: shortYoutubeDemonstrationLink,
+  factory RandomExerciseEntity.fromMuscle(Muscles muscle) {
+    return RandomExerciseEntity(
+      id: muscle.id,
+      name: muscle.name,
+      image: muscle.image,
     );
   }
 
+  Muscles toMuscles() {
+    return Muscles(id: id, name: name, image: image);
+  }
+
   @override
-  List<Object?> get props => [
-    id,
-    exercise,
-    difficultyLevel,
-    targetMuscleGroup,
-    primeMoverMuscle,
-    primeMoverMuscleId,
-    shortYoutubeDemonstrationLink,
-  ];
+  List<Object?> get props => [id, name, image];
 }

@@ -8,6 +8,8 @@ import 'package:fitness/core/values/app_strings.dart';
 import 'package:fitness/features/exercise/presentation/manager/muscles_cubit/muscles_cubit.dart';
 import 'package:fitness/features/exercise/presentation/manager/muscles_cubit/muscles_event.dart';
 import 'package:fitness/features/exercise/presentation/manager/muscles_cubit/muscles_state.dart';
+import 'package:fitness/features/exercise/presentation/widgets/home/shimmer/tabs_shimmer.dart';
+import 'package:fitness/features/exercise/presentation/widgets/home/shimmer/upcoming_workouts_list_shimmer.dart';
 import 'package:fitness/features/exercise/presentation/widgets/home/upcoming_workout_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,15 +31,13 @@ class _UpcomingWorkoutsSectionState extends State<UpcomingWorkoutsSection> {
     final local = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (context) =>
-          getIt<MusclesCubit>()
-            ..doIntent(GetAllMuscles(language: AppStrings.current.localeName)),
+      create: (context) => getIt<MusclesCubit>()
+        ..doEvents(GetAllMusclesEvent(language: AppStrings.current.localeName)),
       child: BlocBuilder<MusclesCubit, MusclesState>(
         builder: (context, state) {
-          final musclesGroupState = state.getAllMusclesGroup;
-          final musclesGroups = musclesGroupState?.data ?? [];
-
-          final musclesByGroupState = state.getMusclesByGroupId;
+          final musclesGroupState = state.musclesGroupsState;
+          final musclesGroups = musclesGroupState.data ?? [];
+          final musclesByGroupState = state.workoutsState;
 
           if (musclesGroups.isNotEmpty && !_isInitialSelectionDone) {
             final abdominalIndex = musclesGroups.indexWhere(
@@ -52,16 +52,13 @@ class _UpcomingWorkoutsSectionState extends State<UpcomingWorkoutsSection> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (musclesGroupState?.isLoading == true)
-                const SizedBox(
-                  height: 40,
-                  child: Center(child: CircularProgressIndicator()),
-                )
-              else if (musclesGroupState?.errorMessage != null)
+              if (musclesGroupState.isLoading == true)
+                const TabsShimmer()
+              else if (musclesGroupState.errorMessage != null)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    'Error: ${musclesGroupState!.errorMessage}',
+                    'Error: ${musclesGroupState.errorMessage}',
                     style: const TextStyle(color: Colors.red, fontSize: 12),
                   ),
                 )
@@ -74,10 +71,11 @@ class _UpcomingWorkoutsSectionState extends State<UpcomingWorkoutsSection> {
                       _selectedIndex = index;
                     });
                     final selectedGroup = musclesGroups[index];
-                    context.read<MusclesCubit>().doIntent(
-                      GetMusclesId(
+                    context.read<MusclesCubit>().doEvents(
+                      GetWorkoutsByMuscleGroupIdEvent(
                         language: AppStrings.current.localeName,
                         muscleGroupId: selectedGroup.id ?? '',
+                        index: index,
                       ),
                     );
                   },
@@ -91,25 +89,22 @@ class _UpcomingWorkoutsSectionState extends State<UpcomingWorkoutsSection> {
                   ),
                 ),
               const SizedBox(height: 16),
-              if (musclesByGroupState?.isLoading == true)
-                const SizedBox(
-                  height: 120,
-                  child: Center(child: CircularProgressIndicator()),
-                )
-              else if (musclesByGroupState?.errorMessage != null)
+              if (musclesByGroupState.isLoading == true)
+                const UpcomingWorkoutsListShimmer()
+              else if (musclesByGroupState.errorMessage != null)
                 SizedBox(
                   height: 120,
                   child: Center(
                     child: Text(
-                      'Error: ${musclesByGroupState!.errorMessage}',
+                      'Error: ${musclesByGroupState.errorMessage}',
                       style: AppTextStyles.regular14(
                         context,
                       ).copyWith(color: AppColors.error, fontSize: 12),
                     ),
                   ),
                 )
-              else if (musclesByGroupState?.data != null &&
-                  musclesByGroupState!.data!.isNotEmpty)
+              else if (musclesByGroupState.data != null &&
+                  musclesByGroupState.data!.isNotEmpty)
                 SizedBox(
                   height: 120,
                   child: ListView.builder(
@@ -119,14 +114,11 @@ class _UpcomingWorkoutsSectionState extends State<UpcomingWorkoutsSection> {
                       final exercise = musclesByGroupState.data![index];
                       return GestureDetector(
                         onTap: () {
-                          if (exercise.id != null &&
-                              exercise.id!.isNotEmpty) {
+                          if (exercise.id != null && exercise.id!.isNotEmpty) {
                             Navigator.pushNamed(
                               context,
                               Routes.exerciseRoute,
-                              arguments: {
-                                'primeMoverMuscleId': exercise.id!,
-                              },
+                              arguments: {'primeMoverMuscleId': exercise.id!},
                             );
                           }
                         },
@@ -138,7 +130,7 @@ class _UpcomingWorkoutsSectionState extends State<UpcomingWorkoutsSection> {
                     },
                   ),
                 )
-              else if (musclesByGroupState?.isSuccess == true)
+              else if (musclesByGroupState.isSuccess == true)
                 SizedBox(
                   height: 120,
                   child: Center(

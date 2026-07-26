@@ -103,4 +103,8 @@ abstract class KeysStrings {
   static const mealDetailsName = 'meal_details_name';
   static const mealDetailsInstructions = 'meal_details_instructions';
   static const mealDetailsIngredientsList = 'meal_details_ingredients_list';
+  // Workout Screen
+  static const workoutRefreshIndicator = 'workout_refresh_indicator';
+  static const workoutTabBar = 'workout_tab_bar';
+  static const workoutGridView = 'workout_grid_view';
 }

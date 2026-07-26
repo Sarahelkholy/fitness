@@ -3,8 +3,8 @@ import 'package:fitness/config/user/manager/user_events.dart';
 import 'package:fitness/config/user/manager/user_state.dart';
 import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:fitness/core/utils/app_assets.dart';
-import 'package:fitness/core/utils/app_colors.dart';
 import 'package:fitness/core/utils/app_text_styles.dart';
+import 'package:fitness/features/exercise/presentation/widgets/home/shimmer/user_info_bar_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,13 +29,10 @@ class _UserInfoBarState extends State<UserInfoBar> {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         if (state.isLoading) {
-          return const Center(
-            child: CircularProgressIndicator(color: AppColors.white),
-          );
+          return const UserInfoBarShimmer();
         }
 
         final firstName = state.user?.firstName ?? '';
-
         final userPhoto = state.user?.photo;
 
         return Row(

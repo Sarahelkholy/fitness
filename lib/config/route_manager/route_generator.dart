@@ -11,11 +11,13 @@ import 'package:fitness/features/auth/presentation/pages/register/register_scree
 import 'package:fitness/features/chat_screen.dart';
 import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_events.dart';
+import 'package:fitness/features/exercise/presentation/manager/muscles_cubit/muscles_cubit.dart';
 import 'package:fitness/features/exercise/presentation/pages/home_screen.dart';
 import 'package:fitness/features/exercise/presentation/pages/upcoming_feature_screen.dart';
 import 'package:fitness/features/exercise/presentation/manager/exercise_cubit/exercise_cubit.dart';
 import 'package:fitness/features/exercise/presentation/pages/exercise_screen.dart';
 import 'package:fitness/features/exercise/domain/entities/exercise.dart';
+import 'package:fitness/features/exercise/presentation/pages/workout_screen.dart';
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_event.dart';
 import 'package:fitness/features/popular_tarining/presentation/view/popular_training_screen.dart';
 import 'package:fitness/features/popular_tarining/presentation/view_model/popular_training_cubit.dart';
@@ -117,6 +119,14 @@ abstract class RouteGenerator {
             builder: (_) => const UpcomingFeatureScreen(),
           );
 
+        case Routes.workoutRoute:
+          return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (context) => getIt<MusclesCubit>(),
+              child: const WorkoutScreen(),
+            ),
+          );
+
         /// exercise screen
         case Routes.exerciseRoute:
           final args = settings.arguments as Map<String, dynamic>?;
@@ -127,10 +137,7 @@ abstract class RouteGenerator {
               child: ExerciseScreen(
                 primeMoverMuscleId: args?['primeMoverMuscleId'] ?? '',
                 initialExercise: initialExercise,
-                initialExerciseId:
-                    args?['exerciseId'] ??
-                    args?['initialExerciseId'] ??
-                    initialExercise?.id,
+                initialExerciseId: args?['exerciseId'] ?? initialExercise?.id,
                 initialDifficultyLevel:
                     args?['difficultyLevel'] ??
                     initialExercise?.difficultyLevel,
