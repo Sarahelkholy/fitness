@@ -43,7 +43,13 @@ abstract class RouteGenerator {
 
         /// home screen
         case Routes.homeRoute:
-          return MaterialPageRoute(builder: (_) => const HomeScreen());
+          return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (context) => getIt<HomeCubit>(),
+              child: const HomeScreen(),
+            ),
+          );
+
         case Routes.forgetPasswordRoute:
           return MaterialPageRoute(
             builder: (_) => const ForgetPasswordScreen(),
