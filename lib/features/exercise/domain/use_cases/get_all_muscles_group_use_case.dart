@@ -7,8 +7,9 @@ import '../repositories/home_repo.dart';
 class GetAllMusclesGroupUseCase {
   final HomeRepo _repo;
   const GetAllMusclesGroupUseCase(this._repo);
-  Future<Result<List<GetAllMusclesGroupEntity>>> call({required String language}) {
+  Future<Result<List<GetAllMusclesGroupEntity>>> call({
+    required String language,
+  }) {
     return _repo.getAllMusclesGroup(language: language);
   }
-
 }

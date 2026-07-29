@@ -28,7 +28,7 @@ class CategoriesList extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
       decoration: BoxDecoration(
-        color: AppColors.darkCharcoal.withOpacity(0.8),
+        color: AppColors.darkCharcoal.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -77,7 +77,7 @@ class CategoriesList extends StatelessWidget {
                   Container(
                     height: 40,
                     width: 0.5,
-                    color: AppColors.white.withOpacity(0.1),
+                    color: AppColors.white.withValues(alpha: 0.1),
                   ),
               ],
             ),

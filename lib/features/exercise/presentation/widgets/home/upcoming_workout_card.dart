@@ -29,7 +29,7 @@ class UpcomingWorkoutCard extends StatelessWidget {
             height: 25,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: AppColors.darkCharcoal.withOpacity(0.5),
+              color: AppColors.darkCharcoal.withValues(alpha: 0.5),
               borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(50),
                 bottomLeft: Radius.circular(50),

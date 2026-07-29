@@ -22,7 +22,7 @@ void main() {
 
   setUpAll(() {
     provideDummy<Result<RandomExercisesResponse>>(
-      Success(data: RandomExercisesResponse()),
+      Success(data: const RandomExercisesResponse()),
     );
     provideDummy<Result<GetAllMusclesGroupResponse>>(
       Success(data: GetAllMusclesGroupResponse()),
@@ -41,7 +41,7 @@ void main() {
     test(
       'should return Success<RandomExercisesResponseEntity> when data source succeeds',
       () async {
-        final tResponse = RandomExercisesResponse(
+        const tResponse = RandomExercisesResponse(
           message: 'Success',
           totalMuscles: 0,
           muscles: [],

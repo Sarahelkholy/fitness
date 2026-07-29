@@ -65,7 +65,8 @@ class PopularTrainingScreen extends StatelessWidget {
                 final item = items[index];
                 return InkWell(
                   onTap: () {
-                    final muscleId = item.exercise.primeMoverMuscle ??
+                    final muscleId =
+                        item.exercise.primeMoverMuscle ??
                         '69d982ef85f6bfa972bf2248';
                     Navigator.pushNamed(
                       context,

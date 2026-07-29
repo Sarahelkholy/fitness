@@ -30,7 +30,7 @@ void main() {
     test(
       'should return Success<RandomExercisesResponse> when call to apiClient is successful',
       () async {
-        final tResponse = RandomExercisesResponse(
+        const tResponse = RandomExercisesResponse(
           message: 'Success',
           totalMuscles: 1,
           muscles: [],

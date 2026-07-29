@@ -25,9 +25,7 @@ class RecommendationCard extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            Positioned.fill(
-              child: _buildImage(),
-            ),
+            Positioned.fill(child: _buildImage()),
             Container(
               height: 35,
               width: double.infinity,
@@ -58,24 +56,17 @@ class RecommendationCard extends StatelessWidget {
         return Image.network(
           path,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) => Image.asset(
-            AppAssets.exercisesBackground,
-            fit: BoxFit.cover,
-          ),
+          errorBuilder: (context, error, stackTrace) =>
+              Image.asset(AppAssets.exercisesBackground, fit: BoxFit.cover),
         );
       }
       return Image.asset(
         path,
         fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => Image.asset(
-          AppAssets.exercisesBackground,
-          fit: BoxFit.cover,
-        ),
+        errorBuilder: (context, error, stackTrace) =>
+            Image.asset(AppAssets.exercisesBackground, fit: BoxFit.cover),
       );
     }
-    return Image.asset(
-      AppAssets.exercisesBackground,
-      fit: BoxFit.cover,
-    );
+    return Image.asset(AppAssets.exercisesBackground, fit: BoxFit.cover);
   }
 }

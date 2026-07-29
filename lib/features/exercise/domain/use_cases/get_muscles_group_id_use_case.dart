@@ -9,7 +9,13 @@ class GetMusclesGroupIdUseCase {
   const GetMusclesGroupIdUseCase(this._repo);
 
   ///? ================= Get Muscle Using id ===================
-  Future<Result<List<GetMusclesByGroupIdEntity>>> call({required String language, required String muscleGroupId}) {
-    return _repo.getMusclesByGroupId(language: language, muscleGroupId: muscleGroupId);
+  Future<Result<List<GetMusclesByGroupIdEntity>>> call({
+    required String language,
+    required String muscleGroupId,
+  }) {
+    return _repo.getMusclesByGroupId(
+      language: language,
+      muscleGroupId: muscleGroupId,
+    );
   }
 }

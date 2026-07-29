@@ -26,8 +26,7 @@ class PopularTrainingDataSourceImpl implements PopularTrainingDataSource {
         final groups = groupsResult.data.musclesGroup ?? [];
         for (final group in groups) {
           if (group.id != null && group.id!.isNotEmpty) {
-            final musclesByGroup =
-                await _homeRemoteDataSource.getMuscleGroupId(
+            final musclesByGroup = await _homeRemoteDataSource.getMuscleGroupId(
               language: "en",
               muscleGroupId: group.id!,
             );
@@ -49,7 +48,8 @@ class PopularTrainingDataSourceImpl implements PopularTrainingDataSource {
           difficultyLevelId: "69d982ed85f6bfa972bf2216",
           limit: 10,
         );
-        final fetched = response.exercises
+        final fetched =
+            response.exercises
                 ?.map((e) => e.primeMoverMuscle)
                 .whereType<String>()
                 .toList() ??
