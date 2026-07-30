@@ -65,4 +65,39 @@ abstract class KeysStrings {
   static const onBoardingNext = 'Next';
   static const onBoardingBack = 'Back';
   static const onBoardingDoIt = 'DoIt';
+
+  // Register Screen
+  static const registerFirstNameField = 'register_first_name_field';
+  static const registerLastNameField = 'register_last_name_field';
+  static const registerEmailField = 'register_email_field';
+  static const registerPasswordField = 'register_password_field';
+  static const registerNextButton = 'register_next_button';
+  static const registerGoogleButton = 'register_google_button';
+  static const registerFacebookButton = 'register_facebook_button';
+  static const registerLoginButton = 'register_login_button';
+
+  // Register Form Screen
+  static const registerFormMaleButton = 'register_form_male_button';
+  static const registerFormFemaleButton = 'register_form_female_button';
+  static const registerFormNextButton = 'register_form_next_button';
+  static const registerFormNextButtonStep1 = 'register_form_next_button_step1';
+  static const registerFormNextButtonStep2 = 'register_form_next_button_step2';
+  static const registerFormNextButtonStep3 = 'register_form_next_button_step3';
+  static const registerFormNextButtonStep4 = 'register_form_next_button_step4';
+  static const registerFormNextButtonStep5 = 'register_form_next_button_step5';
+  static const registerFormNextButtonStep6 = 'register_form_next_button_step6';
+
+  // Meal Recommendation Screen
+  static const mealRecommendationRefreshIndicator =
+      'meal_recommendation_refresh_indicator';
+  static const mealRecommendationTabBar = 'meal_recommendation_tab_bar';
+  static const mealRecommendationGridView = 'meal_recommendation_grid_view';
+
+  // Meal Details Screen
+  static const mealDetailsImage = 'meal_details_image';
+  static const mealDetailsPlayButton = 'meal_details_play_button';
+  static const mealDetailsBackButton = 'meal_details_back_button';
+  static const mealDetailsName = 'meal_details_name';
+  static const mealDetailsInstructions = 'meal_details_instructions';
+  static const mealDetailsIngredientsList = 'meal_details_ingredients_list';
 }
