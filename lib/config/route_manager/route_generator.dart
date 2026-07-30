@@ -21,6 +21,11 @@ import 'package:fitness/features/exercise/presentation/pages/workout_screen.dart
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_event.dart';
 import 'package:fitness/features/popular_tarining/presentation/view/popular_training_screen.dart';
 import 'package:fitness/features/popular_tarining/presentation/view_model/popular_training_cubit.dart';
+import 'package:fitness/features/profile/presentation/pages/change_password_screen.dart';
+import 'package:fitness/features/profile/presentation/pages/edit_profile_screen.dart';
+import 'package:fitness/features/profile/presentation/pages/help_screen.dart';
+import 'package:fitness/features/profile/presentation/pages/privacy_policy_screen.dart';
+import 'package:fitness/features/profile/presentation/pages/security_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -170,6 +175,25 @@ abstract class RouteGenerator {
               child: MealDetailsScreen(mealId: mealId),
             ),
           );
+
+        /// edit profile
+        case Routes.editProfileRoute:
+          return MaterialPageRoute(builder: (_) => const EditProfileScreen());
+
+        /// change password
+        case Routes.changPasswordRoute:
+          return MaterialPageRoute(
+            builder: (_) => const ChangePasswordScreen(),
+          );
+
+        case Routes.profileSecurityRoute:
+          return MaterialPageRoute(builder: (_) => const SecurityScreen());
+
+        case Routes.profileHelpRoute:
+          return MaterialPageRoute(builder: (_) => const HelpScreen());
+
+        case Routes.profilePrivacyRoute:
+          return MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen());
 
         /// Default
         default:

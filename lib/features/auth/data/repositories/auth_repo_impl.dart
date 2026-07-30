@@ -1,3 +1,6 @@
+import 'package:fitness/features/auth/data/mappers/logout_response_mapper.dart';
+import 'package:fitness/features/auth/data/models/responses/logout_response.dart';
+import 'package:fitness/features/auth/domain/entities/logout_response_entity.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../config/error_handling/result.dart';
@@ -139,6 +142,22 @@ class AuthRepoImpl implements AuthRepo {
         return Success(data: response.data);
       case Failure<SocialUser>():
         return Failure(errorMessage: response.errorMessage);
+    }
+  }
+
+  @override
+  Future<Result<LogoutResponseEntity>> logout() async {
+    var response = await _authRemoteDataSource.logout();
+    switch (response) {
+      case Success<LogoutResponse>():
+        await _secureCache.removeData(key: CacheKeys.token);
+        await _secureCache.removeData(key: CacheKeys.rememberMe);
+
+        return Success<LogoutResponseEntity>(data: response.data.toEntity());
+      case Failure<LogoutResponse>():
+        return Failure<LogoutResponseEntity>(
+          errorMessage: response.errorMessage,
+        );
     }
   }
 }

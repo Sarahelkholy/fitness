@@ -1,3 +1,5 @@
+import 'package:fitness/features/auth/domain/entities/logout_response_entity.dart';
+
 import '../../../../config/error_handling/result.dart';
 import '../../../../config/social_auth/social_user.dart';
 import '../../../../config/user/domain/entities/user_entity.dart';
@@ -11,6 +13,8 @@ abstract interface class AuthRepo {
   Future<Result<UserEntity>> login(LoginRequest loginRequest);
 
   Future<Result<UserEntity>> register(RegisterRequest registerRequest);
+
+  Future<Result<LogoutResponseEntity>> logout();
 
   Future<Result<String>> forgetPassword(
     ForgetPasswordRequest forgetPasswordRequest,

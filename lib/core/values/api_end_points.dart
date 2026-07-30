@@ -6,6 +6,8 @@ abstract class ApiEndPoints {
   static const String editProfile = "/auth/editProfile";
   static const String login = "/auth/signin";
   static const String register = "/auth/signup";
+  static const String logout = "/auth/logout";
+
   static const String fcmBaseUrl = 'https://fcm.googleapis.com';
   static const String fcmSendPath = '/v1/projects/{projectId}/messages:send';
 

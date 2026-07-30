@@ -144,5 +144,20 @@
   "area": "Area",
   "country": "Country",
   "noMusclesFound": "No muscle groups found",
-  "noWorkoutsFound": "No workouts found for this muscle group"
+  "noWorkoutsFound": "No workouts found for this muscle group",
+
+  "editProfile":"Edit Profile",
+  "changePassword":"Change Password",
+  "security":"Security",
+  "privacyPolicy":"Privacy Policy",
+  "help":"Help",
+  "logout":"Logout",
+  "selectLanguage":"Select Language",
+  "english":"English",
+  "arabic":"Arabic",
+  "logoutDialog":"Are you sure to close the application?",
+  "yes":"Yes",
+  "no":"No"
+
+
 }

@@ -1,3 +1,4 @@
+import 'package:fitness/features/auth/data/models/responses/logout_response.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../../config/error_handling/execute_api.dart';
 import '../../../../../config/error_handling/result.dart';
@@ -66,6 +67,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
 
       return AuthResponse(message: 'Password reset successfully.');
+    });
+  }
+
+  @override
+  Future<Result<LogoutResponse>> logout() {
+    return executeApi(() async {
+      return await _apiClient.logout();
     });
   }
 }

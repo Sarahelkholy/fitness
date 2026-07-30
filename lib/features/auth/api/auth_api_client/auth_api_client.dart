@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:fitness/features/auth/data/models/responses/logout_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -26,6 +27,9 @@ abstract class AuthApiClient {
   @POST(ApiEndPoints.register)
   @Extra({ApiStrings.requireAuth: false})
   Future<AuthResponse> register(@Body() RegisterRequest registerRequest);
+
+  @GET(ApiEndPoints.logout)
+  Future<LogoutResponse> logout();
 
   @POST(ApiEndPoints.forgetPassword)
   @Extra({ApiStrings.requireAuth: false})
