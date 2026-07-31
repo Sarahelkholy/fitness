@@ -8,12 +8,12 @@ import 'package:fitness/features/auth/presentation/widgets/register_form/selecti
 import 'package:flutter/material.dart';
 
 class ActivityEditView extends StatefulWidget {
-  final String initialActivity;
+  final String? initialActivity;
   final Function(String) onActivitySaved;
 
   const ActivityEditView({
     super.key,
-    required this.initialActivity,
+    this.initialActivity,
     required this.onActivitySaved,
   });
 
@@ -27,20 +27,23 @@ class _ActivityEditViewState extends State<ActivityEditView> {
   @override
   void initState() {
     super.initState();
-    _selectedActivity = widget.initialActivity;
+    _selectedActivity = widget.initialActivity ?? '';
   }
 
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context)!;
     final size = MediaQuery.sizeOf(context);
-
     final activityOptions = [
-      SelectionOption(value: 'Rookie', label: local.level1),
-      SelectionOption(value: 'Beginner', label: local.level2),
-      SelectionOption(value: 'Intermediate', label: local.level3),
-      SelectionOption(value: 'Advance', label: local.level4),
-      SelectionOption(value: 'True Beast', label: local.level5),
+      SelectionOption(value: 'level1', label: local.level1),
+
+      SelectionOption(value: 'level2', label: local.level2),
+
+      SelectionOption(value: 'level3', label: local.level3),
+
+      SelectionOption(value: 'level4', label: local.level4),
+
+      SelectionOption(value: 'level5', label: local.level5),
     ];
 
     return CustomScaffold(

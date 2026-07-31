@@ -156,5 +156,14 @@
   "arabic": "العربية",
   "logoutDialog":"هل أنت تأكد من إغلاق التطبيق؟",
   "yes":"نعم",
-  "no":"لا"
+  "no":"لا",
+  "weightGoal":"الوزن المستهدف",
+  "photoUpdatedSuccessfully":"تم تحديث الصورة بنجاح",
+  "profileUpdatedSuccessfully":"تم تحديث الملف الشخصي بنجاح",
+  "activityLevel":"مستوى النشاط",
+  "weightGoal":"الوزن المستهدف",
+  "photoUpdatedSuccessfully":"تم تحديث الصورة بنجاح",
+  "profileUpdatedSuccessfully":"تم تحديث الملف الشخصي بنجاح",
+  "activityLevel":"مستوى النشاط",
+  "kG":"كجم"
 }

@@ -50,12 +50,22 @@ class _EditProfileViewState extends State<EditProfileView> {
     _selectedGoal = user?.goal;
     _selectedActivityLevel = user?.activityLevel;
 
+    // Initialize with empty text; actual label will be set in didChangeDependencies
+    _activityLevelController = TextEditingController();
     _weightController = TextEditingController(
       text: _selectedWeight != null ? '$_selectedWeight KG' : '',
     );
     _goalController = TextEditingController(text: _selectedGoal ?? '');
-    _activityLevelController = TextEditingController(
-      text: _selectedActivityLevel ?? '',
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final local = AppLocalizations.of(context)!;
+    // Set the activity level label based on the current selected level
+    _activityLevelController.text = getActivityLabel(
+      _selectedActivityLevel,
+      local,
     );
   }
 
@@ -107,7 +117,7 @@ class _EditProfileViewState extends State<EditProfileView> {
     });
   }
 
-  void _navigateToGoalEdit() {
+  void _navigateToGoalEdit(AppLocalizations local) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -124,16 +134,42 @@ class _EditProfileViewState extends State<EditProfileView> {
     );
   }
 
+  String getActivityLabel(String? level, AppLocalizations local) {
+    switch (level) {
+      case "level1":
+        return local.level1;
+
+      case "level2":
+        return local.level2;
+
+      case "level3":
+        return local.level3;
+
+      case "level4":
+        return local.level4;
+
+      case "level5":
+        return local.level5;
+
+      default:
+        return "";
+    }
+  }
+
   void _navigateToActivityEdit() {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => ActivityEditView(
-          initialActivity: _selectedActivityLevel ?? '',
+          initialActivity: _selectedActivityLevel,
           onActivitySaved: (value) {
             setState(() {
               _selectedActivityLevel = value;
-              _activityLevelController.text = value;
+
+              _activityLevelController.text = getActivityLabel(
+                value,
+                AppLocalizations.of(context)!,
+              );
             });
           },
         ),
@@ -149,21 +185,21 @@ class _EditProfileViewState extends State<EditProfileView> {
     return BlocListener<EditProfileCubit, EditProfileState>(
       listener: (context, state) {
         if (state.editProfileState.isSuccess) {
-          AppSnackBar.success(context, "Profile updated successfully");
+          AppSnackBar.success(context, local.profileUpdatedSuccessfully);
           context.read<UserCubit>().doEvent(GetUserDataEvent());
         } else if (state.editProfileState.errorMessage != null) {
           AppSnackBar.error(context, state.editProfileState.errorMessage!);
         }
 
         if (state.updateUserDataState.isSuccess) {
-          AppSnackBar.success(context, "User data updated successfully");
+          AppSnackBar.success(context, local.profileUpdatedSuccessfully);
           context.read<UserCubit>().doEvent(GetUserDataEvent());
         } else if (state.updateUserDataState.errorMessage != null) {
           AppSnackBar.error(context, state.updateUserDataState.errorMessage!);
         }
 
         if (state.uploadPhotoState.isSuccess) {
-          AppSnackBar.success(context, "Photo uploaded successfully");
+          AppSnackBar.success(context, local.photoUpdatedSuccessfully);
           context.read<UserCubit>().doEvent(GetUserDataEvent());
         } else if (state.uploadPhotoState.errorMessage != null) {
           AppSnackBar.error(context, state.uploadPhotoState.errorMessage!);
@@ -275,7 +311,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                           child: AbsorbPointer(
                             child: _buildTextField(
                               controller: _weightController,
-                              hint: "KG",
+                              hint: local.kG,
                             ),
                           ),
                         ),
@@ -286,11 +322,11 @@ class _EditProfileViewState extends State<EditProfileView> {
                         label: local.yourGoal,
                         local: local,
                         child: GestureDetector(
-                          onTap: _navigateToGoalEdit,
+                          onTap: () => _navigateToGoalEdit,
                           child: AbsorbPointer(
                             child: _buildTextField(
                               controller: _goalController,
-                              hint: "Goal",
+                              hint: local.weightGoal,
                             ),
                           ),
                         ),
@@ -305,7 +341,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                           child: AbsorbPointer(
                             child: _buildTextField(
                               controller: _activityLevelController,
-                              hint: "Activity Level",
+                              hint: local.activityLevel,
                             ),
                           ),
                         ),
