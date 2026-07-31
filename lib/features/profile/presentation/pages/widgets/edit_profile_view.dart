@@ -117,12 +117,12 @@ class _EditProfileViewState extends State<EditProfileView> {
     });
   }
 
-  void _navigateToGoalEdit(String? goal) {
+  void _navigateToGoalEdit() {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => GoalEditView(
-          initialGoal: goal ?? _selectedGoal ?? '',
+          initialGoal: _selectedGoal ?? '',
           onGoalSaved: (value) {
             setState(() {
               _selectedGoal = value;
@@ -322,7 +322,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                         label: local.yourGoal,
                         local: local,
                         child: GestureDetector(
-                          onTap: () => _navigateToGoalEdit(_selectedGoal),
+                          onTap: _navigateToGoalEdit,
                           child: AbsorbPointer(
                             child: _buildTextField(
                               controller: _goalController,
