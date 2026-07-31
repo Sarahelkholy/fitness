@@ -118,9 +118,7 @@ class _SplashScreenState extends State<SplashScreen>
         child: Center(
           child: FadeTransition(
             opacity: _fadeAnimation,
-            child: Image.asset(
-              AppAssets.splashScreenLogoImage,
-            ),
+            child: Image.asset(AppAssets.splashScreenLogoImage),
           ),
         ),
       ),

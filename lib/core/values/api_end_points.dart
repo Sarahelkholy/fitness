@@ -13,7 +13,14 @@ abstract class ApiEndPoints {
   static const String verifyRestOtp = "/auth/verifyResetCode";
   static const String resetPassword = "/auth/resetPassword";
 
+  static const String exercisesByMuscleDifficulty =
+      "/exercises/by-muscle-difficulty";
+  static const String difficultyLevels =
+      "/levels/difficulty-levels/by-prime-mover";
+
   static const String getMealsCategories = "/categories.php";
   static const String getMealsByCategory = "/filter.php";
   static const String getMealDetails = "/lookup.php";
+
+  static const String getRandomPrimeMoverMusclesEndpoint = '/exercises/random';
 }

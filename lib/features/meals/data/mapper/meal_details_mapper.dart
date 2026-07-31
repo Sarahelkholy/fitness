@@ -49,12 +49,12 @@ extension MealDetailsMapper on MealDetailsModel {
     return ingredients;
   }
 
-  void _addIfNotEmpty(List<IngredientEntity> list,
-      String? name,
-      String? measure,) {
-    if (name != null && name
-        .trim()
-        .isNotEmpty) {
+  void _addIfNotEmpty(
+    List<IngredientEntity> list,
+    String? name,
+    String? measure,
+  ) {
+    if (name != null && name.trim().isNotEmpty) {
       list.add(IngredientEntity(name: name, measure: measure ?? ""));
     }
   }

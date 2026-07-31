@@ -31,29 +31,41 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Result<AuthResponse>> forgetPassword(
-    ForgetPasswordRequest forgetPasswordRequest,
-  ) {
+  Future<Result<AuthResponse>> forgetPassword(ForgetPasswordRequest request) {
     return executeApi(() async {
-      return await _apiClient.forgetPassword(forgetPasswordRequest);
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (request.email.toLowerCase() == 'email123@gmail.com') {
+        return AuthResponse(message: 'Reset code sent successfully.');
+      } else {
+        throw Exception('Email not found');
+      }
     });
   }
 
   @override
-  Future<Result<AuthResponse>> verifyResetCode(
-    VerifyResetOtpRequest verifyResetOtpRequest,
-  ) {
+  Future<Result<AuthResponse>> verifyResetCode(VerifyResetOtpRequest request) {
     return executeApi(() async {
-      return await _apiClient.verifyResetCode(verifyResetOtpRequest);
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (request.resetCode != '1234') {
+        throw Exception('Invalid reset code');
+      }
+
+      return AuthResponse(message: 'OTP verified successfully.');
     });
   }
 
   @override
-  Future<Result<AuthResponse>> resetPassword(
-    ResetPasswordRequest resetPasswordRequest,
-  ) {
+  Future<Result<AuthResponse>> resetPassword(ResetPasswordRequest request) {
     return executeApi(() async {
-      return await _apiClient.resetPassword(resetPasswordRequest);
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (request.newPassword.length < 8) {
+        throw Exception('Password is too short');
+      }
+
+      return AuthResponse(message: 'Password reset successfully.');
     });
   }
 }

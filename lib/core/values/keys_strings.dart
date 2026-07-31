@@ -53,13 +53,16 @@ abstract class KeysStrings {
 
   //// On boarding screen
   static const onBoardingTitle1 = 'The price of excellence  is discipline';
-  static const onBoardingDesc1 = 'Lorem ipsum dolor sit amet consectetur. Eu urna ut gravida quis id pretium purus. Mauris massa ';
+  static const onBoardingDesc1 =
+      'Lorem ipsum dolor sit amet consectetur. Eu urna ut gravida quis id pretium purus. Mauris massa ';
 
   static const onBoardingTitle2 = 'Fitness has never been so  much fun';
-  static const onBoardingDesc2 = 'Lorem ipsum dolor sit amet consectetur. Eu urna ut gravida quis id pretium purus. Mauris massa ';
+  static const onBoardingDesc2 =
+      'Lorem ipsum dolor sit amet consectetur. Eu urna ut gravida quis id pretium purus. Mauris massa ';
 
   static const onBoardingTitle3 = 'NO MORE EXCUSES Do It Now';
-  static const onBoardingDesc3 = 'Lorem ipsum dolor sit amet consectetur. Eu urna ut gravida quis id pretium purus. Mauris massa ';
+  static const onBoardingDesc3 =
+      'Lorem ipsum dolor sit amet consectetur. Eu urna ut gravida quis id pretium purus. Mauris massa ';
 
   static const onBoardingSkip = 'Skip';
   static const onBoardingNext = 'Next';
