@@ -36,14 +36,14 @@ class _GoalEditViewState extends State<GoalEditView> {
     final size = MediaQuery.sizeOf(context);
 
     final goalOptions = [
-      SelectionOption(value: 'Gain Weight', label: local.gainWeight),
-      SelectionOption(value: 'Lose Weight', label: local.loseWeight),
-      SelectionOption(value: 'Get Fitter', label: local.getFitted),
+      SelectionOption(value: 'Gain weight', label: local.gainWeight),
+      SelectionOption(value: 'Lose weight', label: local.loseWeight),
+      SelectionOption(value: 'Get fitted', label: local.getFitted),
       SelectionOption(
-        value: 'Gain More Flexible',
+        value: 'Get more flexible',
         label: local.gainMoreFlexible,
       ),
-      SelectionOption(value: 'Learn The Basic', label: local.learnTheBasic),
+      SelectionOption(value: 'Learn the basic', label: local.learnTheBasic),
     ];
 
     return CustomScaffold(

@@ -161,7 +161,14 @@
   "arabic":"Arabic",
   "logoutDialog":"Are you sure to close the application?",
   "yes":"Yes",
-  "no":"No"
-
-
+  "no":"No",
+   "weightGoal":"Weight Goal",
+  "photoUpdatedSuccessfully":"Photo updated successfully",
+  "profileUpdatedSuccessfully":"Profile updated successfully",
+  "activityLevel":"Activity Level",
+  "weightGoal":"Weight Goal",
+  "photoUpdatedSuccessfully":"Photo updated successfully",
+  "profileUpdatedSuccessfully":"Profile updated successfully",
+  "activityLevel":"Activity Level",
+  "kG":"kg"
 }

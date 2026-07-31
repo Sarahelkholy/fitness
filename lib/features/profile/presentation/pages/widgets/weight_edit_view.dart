@@ -1,3 +1,4 @@
+import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:fitness/core/utils/app_colors.dart';
@@ -44,6 +45,7 @@ class _WeightEditViewState extends State<WeightEditView> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
@@ -52,9 +54,9 @@ class _WeightEditViewState extends State<WeightEditView> {
         children: [
           const Spacer(),
 
-          const Text(
-            "WHAT IS YOUR WEIGHT ?",
-            style: TextStyle(
+          Text(
+            local.whatIsYourWeight,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -63,16 +65,16 @@ class _WeightEditViewState extends State<WeightEditView> {
 
           const SizedBox(height: 12),
 
-          const Text(
-            "This Helps Us Create Your Personalized Plan",
-            style: TextStyle(color: Colors.white70, fontSize: 14),
+          Text(
+            local.thisHelpsUsCreateYourPersonalizedPlan,
+            style: const TextStyle(color: Colors.white70, fontSize: 14),
           ),
 
           SizedBox(height: height * .05),
 
-          const Text(
-            "Kg",
-            style: TextStyle(
+          Text(
+            local.kg,
+            style: const TextStyle(
               color: AppColors.main,
               fontSize: 12,
               fontWeight: FontWeight.bold,
@@ -173,9 +175,9 @@ class _WeightEditViewState extends State<WeightEditView> {
                   ),
                 ),
 
-                child: const Text(
-                  "Done",
-                  style: TextStyle(
+                child: Text(
+                  local.done,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
