@@ -1,0 +1,9 @@
+[
+    {
+        "Rookie": "level1",
+        "Beginner": "level2",
+        "Intermediate": "level3",
+        "Advance": "level4",
+        "True Beast": "level5"
+    }
+]

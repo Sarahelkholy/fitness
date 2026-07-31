@@ -50,12 +50,14 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
     switch (result) {
       case Success<EditProfileResponse>():
+        print('****************editprofile ${result.data.message}');
         emit(
           state.copyWith(
             editProfileState: BaseState(isSuccess: true, data: result.data),
           ),
         );
       case Failure<EditProfileResponse>():
+        print('-----------------editprofile error ${result.errorMessage}');
         emit(
           state.copyWith(
             editProfileState: BaseState(errorMessage: result.errorMessage),
@@ -71,12 +73,14 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     );
     switch (result) {
       case Success<UploadPhotoResponse>():
+        print('****************photouploaded ${result.data.message}');
         emit(
           state.copyWith(
             uploadPhotoState: BaseState(isSuccess: true, data: result.data),
           ),
         );
       case Failure<UploadPhotoResponse>():
+        print('-----------------photouploaded error ${result.errorMessage}');
         emit(
           state.copyWith(
             uploadPhotoState: BaseState(errorMessage: result.errorMessage),
@@ -92,12 +96,14 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     );
     switch (result) {
       case Success<UserEntity>():
+        print('****************user updated ${result.data}');
         emit(
           state.copyWith(
             updateUserDataState: BaseState(isSuccess: true, data: result.data),
           ),
         );
       case Failure<UserEntity>():
+        print('-----------------user updated error ${result.errorMessage}');
         emit(
           state.copyWith(
             updateUserDataState: BaseState(errorMessage: result.errorMessage),

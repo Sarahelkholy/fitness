@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:fitness/config/user/manager/user_cubit.dart';
 import 'package:fitness/config/user/manager/user_events.dart';
 import 'package:fitness/config/user/manager/user_state.dart';
-import 'package:fitness/config/user/data/models/requests/update_user_data_request.dart';
 import 'package:fitness/core/helpers/app_snack_bar.dart';
 import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:fitness/core/shared_widgets/custom_button.dart';
@@ -46,7 +45,7 @@ class _EditProfileViewState extends State<EditProfileView> {
     _firstNameController = TextEditingController(text: user?.firstName ?? '');
     _lastNameController = TextEditingController(text: user?.lastName ?? '');
     _emailController = TextEditingController(text: user?.email ?? '');
-    
+
     _selectedWeight = user?.weight;
     _selectedGoal = user?.goal;
     _selectedActivityLevel = user?.activityLevel;
@@ -76,28 +75,36 @@ class _EditProfileViewState extends State<EditProfileView> {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     if (image != null && mounted) {
-      context
-          .read<EditProfileCubit>()
-          .doIntents(OnUploadPhotoPressed(File(image.path)));
+      context.read<EditProfileCubit>().doIntents(
+        OnUploadPhotoPressed(File(image.path)),
+      );
     }
   }
 
   void _navigateToWeightEdit() {
     final user = context.read<UserCubit>().state.user;
+    final initialWeight =
+        _selectedWeight?.toInt() ?? user?.weight.toInt() ?? 90;
+    final controller = PageController(initialPage: initialWeight - 1);
+
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => WeightEditView(
-          initialWeight: _selectedWeight ?? user?.weight ?? 90,
-          onWeightSaved: (value) {
+          selectedWeight: initialWeight,
+          // pageController: controller,
+          onNext: (value) {
             setState(() {
               _selectedWeight = value;
               _weightController.text = '$value KG';
             });
+            Navigator.pop(context);
           },
         ),
       ),
-    );
+    ).then((_) {
+      controller.dispose();
+    });
   }
 
   void _navigateToGoalEdit() {
@@ -166,7 +173,8 @@ class _EditProfileViewState extends State<EditProfileView> {
         builder: (context, userState) {
           final user = userState.user;
           final userPhoto = user?.photo;
-          final displayName = '${user?.firstName ?? ''} ${user?.lastName ?? ''}';
+          final displayName =
+              '${user?.firstName ?? ''} ${user?.lastName ?? ''}';
 
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
@@ -199,10 +207,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                               radius: 54,
                               backgroundImage:
                                   userPhoto != null && userPhoto.isNotEmpty
-                                      ? NetworkImage(userPhoto) as ImageProvider
-                                      : const AssetImage(
-                                        AppAssets.userTestImage,
-                                      ),
+                                  ? NetworkImage(userPhoto) as ImageProvider
+                                  : const AssetImage(AppAssets.userTestImage),
                             ),
                           ),
                           Positioned(
@@ -256,7 +262,8 @@ class _EditProfileViewState extends State<EditProfileView> {
 
                       // Email Field (Read only to match typical profile views, editable if requested)
                       _buildTextField(
-                        controller: _emailController,
+                        controller:
+                            _emailController, // Fixed: pass controller instead of text
                         hint: local.email,
                         icon: Icons.mail_outline,
                         keyboardType: TextInputType.emailAddress,
@@ -314,7 +321,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                       // Save Button
                       BlocBuilder<EditProfileCubit, EditProfileState>(
                         builder: (context, editState) {
-                          final isLoading = editState.editProfileState.isLoading ||
+                          final isLoading =
+                              editState.editProfileState.isLoading ||
                               editState.updateUserDataState.isLoading;
 
                           return SizedBox(
@@ -325,26 +333,21 @@ class _EditProfileViewState extends State<EditProfileView> {
                               isLoading: isLoading,
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  // Update names
                                   context.read<EditProfileCubit>().doIntents(
                                     OnEditProfilePressed(
                                       EditProfileRequest(
                                         firstName: _firstNameController.text,
                                         lastName: _lastNameController.text,
-                                      ),
-                                    ),
-                                  );
-
-                                  // Update user details (Weight, Goal, Activity Level)
-                                  context.read<EditProfileCubit>().doIntents(
-                                    OnUpdateUserDataPressed(
-                                      UpdateUserDataRequest(
-                                        gender: user?.gender ?? 'male',
-                                        height: user?.height ?? 170,
-                                        weight: _selectedWeight ?? user?.weight ?? 70,
-                                        age: user?.age ?? 25,
-                                        goal: _selectedGoal ?? user?.goal ?? 'Gain Weight',
-                                        activityLevel: _selectedActivityLevel ?? user?.activityLevel ?? 'Rookie',
+                                        email: _emailController.text,
+                                        gender: user?.gender,
+                                        height: user?.height.toDouble(),
+                                        weight:
+                                            (_selectedWeight ?? user?.weight)
+                                                ?.toDouble(),
+                                        goal: _selectedGoal ?? user?.goal,
+                                        activityLevel:
+                                            _selectedActivityLevel ??
+                                            user?.activityLevel,
                                       ),
                                     ),
                                   );
@@ -403,9 +406,11 @@ class _EditProfileViewState extends State<EditProfileView> {
     required String hint,
     IconData? icon,
     TextInputType? keyboardType,
+    bool readOnly = false,
   }) {
     return TextFormField(
       controller: controller,
+      readOnly: readOnly,
       keyboardType: keyboardType,
       style: AppTextStyles.regular16(context).copyWith(color: AppColors.white),
       decoration: InputDecoration(

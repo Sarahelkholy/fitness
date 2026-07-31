@@ -1,14 +1,15 @@
-import 'package:fitness/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
+import 'package:fitness/core/utils/app_colors.dart';
 
 class WeightEditView extends StatefulWidget {
-  final num initialWeight;
-  final Function(int) onWeightSaved;
+  final int selectedWeight;
+  final ValueChanged<int> onNext;
 
   const WeightEditView({
     super.key,
-    required this.initialWeight,
-    required this.onWeightSaved,
+    required this.selectedWeight,
+    required this.onNext,
   });
 
   @override
@@ -16,165 +17,177 @@ class WeightEditView extends StatefulWidget {
 }
 
 class _WeightEditViewState extends State<WeightEditView> {
-  final PageController _pageController = PageController(initialPage: 40);
-  int _selectedWeight = 40;
+  static const int minWeight = 1;
+  static const int maxWeight = 200;
+
+  late final PageController _pageController;
+
+  late int currentWeight;
+
+  @override
+  void initState() {
+    super.initState();
+
+    currentWeight = widget.selectedWeight;
+
+    _pageController = PageController(
+      viewportFraction: 0.25,
+      initialPage: currentWeight - minWeight,
+    );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Spacer(),
-        Text(
-          "WHAT IS YOUR WEIGHT ?",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          "This Helps Us Create Your Personalized Plan",
-          style: TextStyle(fontSize: 14, color: Colors.white70),
-        ),
-        const SizedBox(height: 40),
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
 
-        // Weight Display
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            // Center line indicator
-            Positioned(
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 2,
-                color: Colors.white.withOpacity(0.2),
-                margin: const EdgeInsets.only(bottom: 45),
-              ),
+    return CustomScaffold(
+      body: Column(
+        children: [
+          const Spacer(),
+
+          const Text(
+            "WHAT IS YOUR WEIGHT ?",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
-            SizedBox(
-              height: 120,
-              child: PageView.builder(
-                controller: _pageController,
-                scrollDirection: Axis.horizontal,
-                physics: const FixedExtentScrollPhysics(),
-                itemCount: 200,
-                itemBuilder: (context, index) {
-                  final weight = index + 1;
-                  return Center(
-                    child: AnimatedScale(
-                      scale: weight == _selectedWeight ? 1.0 : 0.7,
-                      duration: const Duration(milliseconds: 300),
-                      child: Text(
-                        weight.toString(),
-                        style: TextStyle(
-                          fontSize: weight == _selectedWeight ? 64 : 40,
-                          fontWeight: weight == _selectedWeight
-                              ? FontWeight.bold
-                              : FontWeight.w500,
-                          color: weight == _selectedWeight
-                              ? Colors.white
-                              : Colors.white24,
+          ),
+
+          const SizedBox(height: 12),
+
+          const Text(
+            "This Helps Us Create Your Personalized Plan",
+            style: TextStyle(color: Colors.white70, fontSize: 14),
+          ),
+
+          SizedBox(height: height * .05),
+
+          const Text(
+            "Kg",
+            style: TextStyle(
+              color: AppColors.main,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          SizedBox(height: height * .02),
+
+          SizedBox(
+            height: 90,
+
+            child: Stack(
+              alignment: Alignment.center,
+
+              children: [
+                // Container(height: 1, color: Colors.white24),
+                PageView.builder(
+                  controller: _pageController,
+
+                  itemCount: maxWeight - minWeight + 1,
+
+                  physics: const BouncingScrollPhysics(),
+
+                  onPageChanged: (index) {
+                    setState(() {
+                      currentWeight = index + minWeight;
+                    });
+                  },
+
+                  itemBuilder: (context, index) {
+                    final weight = index + minWeight;
+
+                    final distance = (currentWeight - weight).abs();
+
+                    return AnimatedScale(
+                      scale: distance == 0
+                          ? 1
+                          : distance == 1
+                          ? .75
+                          : .55,
+
+                      duration: const Duration(milliseconds: 200),
+
+                      child: Center(
+                        child: AnimatedDefaultTextStyle(
+                          duration: const Duration(milliseconds: 200),
+
+                          style: TextStyle(
+                            fontSize: distance == 0 ? 42 : 22,
+
+                            fontWeight: FontWeight.w800,
+
+                            color: distance == 0
+                                ? AppColors.main
+                                : Colors.white38,
+                          ),
+
+                          child: Text("$weight"),
                         ),
                       ),
-                    ),
-                  );
-                },
-              ),
+                    );
+                  },
+                ),
+
+                const Positioned(
+                  bottom: -5,
+
+                  child: Icon(
+                    Icons.arrow_drop_up,
+                    size: 38,
+                    color: AppColors.main,
+                  ),
+                ),
+              ],
             ),
-            // Gradient overlay to fade top/bottom
-            Positioned.fill(
-              child: IgnorePointer(
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.black.withOpacity(0.8),
-                        Colors.transparent,
-                        Colors.transparent,
-                        Colors.black.withOpacity(0.8),
-                      ],
-                      stops: const [0.0, 0.4, 0.6, 1.0],
-                    ),
+          ),
+
+          const Spacer(),
+
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * .08),
+
+            child: SizedBox(
+              width: double.infinity,
+
+              child: ElevatedButton(
+                onPressed: () {
+                  widget.onNext(currentWeight);
+                },
+
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.main,
+
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                ),
+
+                child: const Text(
+                  "Done",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-          ],
-        ),
-
-        const SizedBox(height: 16),
-
-        Text(
-          "kg",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
           ),
-        ),
 
-        const Spacer(),
-
-        // Custom Number Picker
-        // CustomNumberPicker(
-        //   initialValue: _selectedWeight,
-        //   min: 1,
-        //   max: 200,
-        //   onChanged: (value) {
-        //     setState(() {
-        //       _selectedWeight = value;
-        //     });
-        //     _pageController.animateToPage(
-        //       value - 1,
-        //       duration: const Duration(milliseconds: 500),
-        //       curve: Curves.easeOut,
-        //     );
-        //   },
-        //   itemHeight: 70,
-        //   diameterRatio: 2.0,
-        //   perspective: 0.003,
-        // ),
-        const SizedBox(height: 32),
-
-        // Next Button
-        Container(
-          width: double.infinity,
-          margin: const EdgeInsets.symmetric(horizontal: 32),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            gradient: const LinearGradient(
-              colors: [AppColors.main, AppColors.darkMaroon70],
-            ),
-          ),
-          child: ElevatedButton(
-            onPressed: () {
-              // Handle next action
-              print("Selected weight: $_selectedWeight");
-            },
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(100),
-              ),
-            ),
-            child: const Text(
-              "Next",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-        const Spacer(flex: 2),
-      ],
+          SizedBox(height: height * .04),
+        ],
+      ),
     );
   }
 }

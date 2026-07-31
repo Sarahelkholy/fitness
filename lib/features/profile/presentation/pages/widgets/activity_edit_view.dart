@@ -76,9 +76,9 @@ class _ActivityEditViewState extends State<ActivityEditView> {
               const SizedBox(height: 40),
               Text(
                 local.yourRegularPhysicalActivityLevel.toUpperCase(),
-                style: AppTextStyles.bold20(context).copyWith(
-                  color: AppColors.white,
-                ),
+                style: AppTextStyles.bold20(
+                  context,
+                ).copyWith(color: AppColors.white),
                 textAlign: TextAlign.center,
               ),
               const Spacer(),

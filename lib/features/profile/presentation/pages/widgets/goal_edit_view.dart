@@ -39,7 +39,10 @@ class _GoalEditViewState extends State<GoalEditView> {
       SelectionOption(value: 'Gain Weight', label: local.gainWeight),
       SelectionOption(value: 'Lose Weight', label: local.loseWeight),
       SelectionOption(value: 'Get Fitter', label: local.getFitted),
-      SelectionOption(value: 'Gain More Flexible', label: local.gainMoreFlexible),
+      SelectionOption(
+        value: 'Gain More Flexible',
+        label: local.gainMoreFlexible,
+      ),
       SelectionOption(value: 'Learn The Basic', label: local.learnTheBasic),
     ];
 
@@ -76,17 +79,17 @@ class _GoalEditViewState extends State<GoalEditView> {
               const SizedBox(height: 40),
               Text(
                 local.whatIsYourGoal.toUpperCase(),
-                style: AppTextStyles.bold20(context).copyWith(
-                  color: AppColors.white,
-                ),
+                style: AppTextStyles.bold20(
+                  context,
+                ).copyWith(color: AppColors.white),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
               Text(
                 local.thisHelpsUsCreateYourPersonalizedPlan,
-                style: AppTextStyles.regular12(context).copyWith(
-                  color: AppColors.grayBD,
-                ),
+                style: AppTextStyles.regular12(
+                  context,
+                ).copyWith(color: AppColors.grayBD),
                 textAlign: TextAlign.center,
               ),
               const Spacer(),

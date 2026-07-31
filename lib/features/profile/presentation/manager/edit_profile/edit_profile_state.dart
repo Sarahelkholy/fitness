@@ -25,8 +25,8 @@ class EditProfileState extends Equatable {
 
   @override
   List<Object> get props => [
-        editProfileState,
-        uploadPhotoState,
-        updateUserDataState,
-      ];
+    editProfileState,
+    uploadPhotoState,
+    updateUserDataState,
+  ];
 }

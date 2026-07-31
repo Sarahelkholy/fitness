@@ -16,10 +16,10 @@ abstract class ProfileApiClient {
   @factoryMethod
   factory ProfileApiClient(Dio dio) = _ProfileApiClient;
 
-  @GET(ApiEndPoints.editProfile)
+  @PUT(ApiEndPoints.editProfile)
   Future<EditProfileResponse> editProfile(@Body() EditProfileRequest request);
 
   @PUT(ApiEndPoints.uploadPhoto)
   @MultiPart()
-  Future<UploadPhotoResponse> uploadPhoto(@Part() File file);
+  Future<UploadPhotoResponse> uploadPhoto(@Part(name: "photo") File file);
 }
