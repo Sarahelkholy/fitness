@@ -96,4 +96,3 @@ class _CustomWebViewScreenState extends State<CustomWebViewScreen> {
     );
   }
 }
-

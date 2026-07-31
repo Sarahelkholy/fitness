@@ -243,7 +243,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 24),
-
                       // First Name Field
                       _buildTextField(
                         controller: _firstNameController,
@@ -251,7 +250,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                         icon: Icons.person_outline,
                       ),
                       const SizedBox(height: 16),
-
                       // Last Name Field
                       _buildTextField(
                         controller: _lastNameController,
@@ -259,7 +257,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                         icon: Icons.person_outline,
                       ),
                       const SizedBox(height: 16),
-
                       // Email Field (Read only to match typical profile views, editable if requested)
                       _buildTextField(
                         controller:
@@ -269,7 +266,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                         keyboardType: TextInputType.emailAddress,
                       ),
                       const SizedBox(height: 24),
-
                       // Weight Field Section (Tap to Edit)
                       _buildLabeledSection(
                         label: local.yourWeight,
@@ -285,7 +281,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                         ),
                       ),
                       const SizedBox(height: 20),
-
                       // Goal Field Section (Tap to Edit)
                       _buildLabeledSection(
                         label: local.yourGoal,
@@ -301,7 +296,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                         ),
                       ),
                       const SizedBox(height: 20),
-
                       // Activity Level Field Section (Tap to Edit)
                       _buildLabeledSection(
                         label: local.yourActivityLevel,
