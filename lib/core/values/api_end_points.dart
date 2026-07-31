@@ -30,4 +30,5 @@ abstract class ApiEndPoints {
   static const String getMealDetails = "/lookup.php";
 
   static const String getRandomPrimeMoverMusclesEndpoint = '/exercises/random';
+  static const String uploadPhoto = "/auth/upload-photo";
 }

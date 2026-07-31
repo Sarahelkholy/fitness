@@ -1,0 +1,20 @@
+import 'package:json_annotation/json_annotation.dart';
+import 'dart:convert';
+
+part 'upload_photo_response.g.dart';
+
+@JsonSerializable()
+class UploadPhotoResponse {
+  @JsonKey(name: "message")
+  final String? message;
+
+  UploadPhotoResponse({this.message});
+
+  UploadPhotoResponse copyWith({String? message}) =>
+      UploadPhotoResponse(message: message ?? this.message);
+
+  factory UploadPhotoResponse.fromJson(Map<String, dynamic> json) =>
+      _$UploadPhotoResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UploadPhotoResponseToJson(this);
+}
