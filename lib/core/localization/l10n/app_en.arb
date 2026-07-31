@@ -144,5 +144,10 @@
   "area": "Area",
   "country": "Country",
   "noMusclesFound": "No muscle groups found",
-  "noWorkoutsFound": "No workouts found for this muscle group"
+  "noWorkoutsFound": "No workouts found for this muscle group",
+  "passwordMinLength": "Password must be at least 8 characters long.",
+  "createNewPassword": "Create a new password",
+  "currentPassword":"Current Password",
+  "done": "Done",
+   "oldAndNewPasswordSame": "The new password must be different from the current password"
 }

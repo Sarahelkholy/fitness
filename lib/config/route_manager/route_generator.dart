@@ -34,6 +34,8 @@ import '../../features/meals/presentation/manager/meal_details_cubit/meal_detail
 import '../../features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_cubit.dart';
 import '../../features/meals/presentation/pages/meal_details_screen.dart';
 import '../../features/meals/presentation/pages/meal_recommendation_screen.dart';
+import '../../features/profile/presentation/manager/change_password_cubit/change_password_cubit.dart';
+import '../../features/profile/presentation/pages/change_password_screen.dart';
 
 abstract class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -171,6 +173,14 @@ abstract class RouteGenerator {
             ),
           );
 
+          ///? ============= Change Password ==================
+        case Routes.changPasswordRoute:
+          return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (_) => getIt<ChangePasswordCubit>(),
+              child: const ChangePasswordScreen(),
+            ),
+          );
         /// Default
         default:
           return _errorRoute();
