@@ -13,6 +13,20 @@ class BaseState<T> extends Equatable {
     this.data,
   });
 
+  BaseState<T> copyWith({
+    bool? isLoading,
+    bool? isSuccess,
+    String? errorMessage,
+    T? data,
+  }) {
+    return BaseState<T>(
+      isLoading: isLoading ?? this.isLoading,
+      isSuccess: isSuccess ?? this.isSuccess,
+      errorMessage: errorMessage ?? this.errorMessage,
+      data: data ?? this.data,
+    );
+  }
+
   @override
   List<Object?> get props => [isLoading, errorMessage, isSuccess, data];
 }

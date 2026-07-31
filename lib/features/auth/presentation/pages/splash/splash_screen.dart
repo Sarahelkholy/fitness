@@ -81,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen>
     final isSuccess = results[1] as bool;
 
     if (isSuccess) {
-      Navigator.pushReplacementNamed(context, Routes.homeRoute);
+      Navigator.pushReplacementNamed(context, Routes.bottomNavBarRoute);
     } else {
       Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
     }
@@ -118,9 +118,7 @@ class _SplashScreenState extends State<SplashScreen>
         child: Center(
           child: FadeTransition(
             opacity: _fadeAnimation,
-            child: Image.asset(
-              AppAssets.splashScreenLogoImage,
-            ),
+            child: Image.asset(AppAssets.splashScreenLogoImage),
           ),
         ),
       ),

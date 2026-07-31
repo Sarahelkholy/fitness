@@ -19,4 +19,9 @@ abstract class Routes {
 
   static const String mealRecommendationRoute = "/mealRecommendation";
   static const String mealDetailsRoute = "/mealDetails";
+  static const String activeOrderDetails = "/activeOrderDetails";
+  static const String orderSuccess = "/orderSuccess";
+
+  static const String exerciseRoute = "/exercise";
+  static const String tempRoute = "/temp";
 }
