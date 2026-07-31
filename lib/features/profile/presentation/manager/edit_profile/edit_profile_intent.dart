@@ -24,3 +24,12 @@ class OnUploadPhotoPressed extends EditProfileIntent {
   @override
   List<Object> get props => [file];
 }
+
+class OnUpdateUserDataPressed extends EditProfileIntent {
+  final UpdateUserDataRequest request;
+
+  const OnUpdateUserDataPressed(this.request);
+
+  @override
+  List<Object> get props => [request];
+}

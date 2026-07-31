@@ -21,6 +21,7 @@ import 'package:fitness/features/exercise/presentation/pages/workout_screen.dart
 import 'package:fitness/features/meals/presentation/manager/meal_recommendation_cubit/meal_recommendation_event.dart';
 import 'package:fitness/features/popular_tarining/presentation/view/popular_training_screen.dart';
 import 'package:fitness/features/popular_tarining/presentation/view_model/popular_training_cubit.dart';
+import 'package:fitness/features/profile/presentation/pages/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -170,6 +171,9 @@ abstract class RouteGenerator {
               child: MealDetailsScreen(mealId: mealId),
             ),
           );
+
+        case Routes.editProfileRoute:
+          return MaterialPageRoute(builder: (_) => const EditProfileScreen());
 
         /// Default
         default:
