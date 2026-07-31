@@ -144,5 +144,17 @@
   "yourWeight": "وزنك",
   "yourGoal": "هدفك",
   "yourActivityLevel": "مستوى نشاطك",
-  "tapToEdit": "اضغط للتعديل"
+  "tapToEdit": "اضغط للتعديل",
+
+  "changePassword": "تغيير كلمة المرور",
+  "security": "الأمان",
+  "privacyPolicy": "سياسة الخصوصية",
+  "help": "المساعدة",
+  "logout": "تسجيل الخروج",
+  "selectLanguage": "اختر اللغة",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+  "logoutDialog":"هل أنت تأكد من إغلاق التطبيق؟",
+  "yes":"نعم",
+  "no":"لا"
 }

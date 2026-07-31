@@ -149,5 +149,19 @@
   "yourWeight": "Your Weight",
   "yourGoal": "Your Goal",
   "yourActivityLevel": "Your Activity Level",
-  "tapToEdit": "tap To Edit"
+  "tapToEdit": "tap To Edit",
+
+  "changePassword":"Change Password",
+  "security":"Security",
+  "privacyPolicy":"Privacy Policy",
+  "help":"Help",
+  "logout":"Logout",
+  "selectLanguage":"Select Language",
+  "english":"English",
+  "arabic":"Arabic",
+  "logoutDialog":"Are you sure to close the application?",
+  "yes":"Yes",
+  "no":"No"
+
+
 }

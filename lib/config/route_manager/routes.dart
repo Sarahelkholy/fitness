@@ -30,4 +30,11 @@ abstract class Routes {
 
   static const String mealRecommendationRoute = "/mealRecommendation";
   static const String mealDetailsRoute = "/mealDetails";
+
+    static const String profileSecurityRoute = "/profileSecurity";
+        static const String profileHelpRoute = "/profileHelp";
+                static const String profilePrivacyRoute = "/profilePrivacy";
+
+
+
 }

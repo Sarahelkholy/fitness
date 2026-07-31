@@ -1,3 +1,5 @@
+import 'package:fitness/features/auth/data/models/responses/logout_response.dart';
+
 import '../../../../../config/error_handling/result.dart';
 import '../../models/requests/forget_password_request.dart';
 import '../../models/requests/login_request.dart';
@@ -10,6 +12,8 @@ abstract interface class AuthRemoteDataSource {
   Future<Result<AuthResponse>> login(LoginRequest loginRequest);
 
   Future<Result<AuthResponse>> register(RegisterRequest registerRequest);
+
+  Future<Result<LogoutResponse>> logout();
 
   Future<Result<AuthResponse>> forgetPassword(
     ForgetPasswordRequest forgetPasswordRequest,
