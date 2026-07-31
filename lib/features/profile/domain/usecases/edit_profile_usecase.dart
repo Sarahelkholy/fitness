@@ -1,3 +1,4 @@
+import 'package:fitness/config/error_handling/result.dart';
 import 'package:fitness/features/profile/api/data_sources/models/request/edit_profile_request.dart';
 import 'package:fitness/features/profile/api/data_sources/models/response/edit_profile_response.dart';
 import 'package:fitness/features/profile/domain/repositories/profile_repo.dart';
@@ -9,7 +10,7 @@ class EditProfileUsecase {
 
   EditProfileUsecase(this._repo);
 
-  Future<EditProfileResponse> call(EditProfileRequest request) async {
+  Future<Result<EditProfileResponse>> call(EditProfileRequest request) async {
     return _repo.editProfile(request);
   }
 }

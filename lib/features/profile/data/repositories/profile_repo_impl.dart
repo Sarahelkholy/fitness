@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fitness/config/error_handling/result.dart';
 import 'package:fitness/features/profile/api/data_sources/models/request/edit_profile_request.dart';
 import 'package:fitness/features/profile/api/data_sources/models/response/edit_profile_response.dart';
 import 'package:fitness/features/profile/api/data_sources/models/response/upload_photo_response.dart';
@@ -14,12 +15,14 @@ class ProfileRepoImpl implements ProfileRepo {
   ProfileRepoImpl(this._remoteDataSource);
 
   @override
-  Future<EditProfileResponse> editProfile(EditProfileRequest request) async {
+  Future<Result<EditProfileResponse>> editProfile(
+    EditProfileRequest request,
+  ) async {
     return _remoteDataSource.editProfile(request);
   }
 
   @override
-  Future<UploadPhotoResponse> uploadPhoto(File file) async {
+  Future<Result<UploadPhotoResponse>> uploadPhoto(File file) async {
     return _remoteDataSource.uploadPhoto(file);
   }
 }
