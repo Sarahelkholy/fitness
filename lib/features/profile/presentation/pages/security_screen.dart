@@ -1,5 +1,6 @@
 import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:fitness/core/shared_widgets/custom_web_view_screen.dart';
+import 'package:fitness/core/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class SecurityScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class SecurityScreen extends StatelessWidget {
 
     return CustomWebViewScreen(
       title: locale.security,
-      fileName: 'security.html',
+      fileName: AppConstants.securityScreen,
     );
   }
 }

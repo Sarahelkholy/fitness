@@ -1,5 +1,6 @@
 import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:fitness/core/shared_widgets/custom_web_view_screen.dart';
+import 'package:fitness/core/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class HelpScreen extends StatelessWidget {
@@ -9,6 +10,9 @@ class HelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
 
-    return CustomWebViewScreen(title: locale.help, fileName: 'help.html');
+    return CustomWebViewScreen(
+      title: locale.help,
+      fileName: AppConstants.helpScreen,
+    );
   }
 }

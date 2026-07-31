@@ -1,5 +1,5 @@
-// lib/core/shared_widgets/custom_web_view_screen.dart
-
+import 'package:fitness/core/localization/l10n/app_localizations.dart';
+import 'package:fitness/core/shared_widgets/custom_error_widget.dart';
 import 'package:fitness/core/shared_widgets/custom_loading_indicator.dart';
 import 'package:fitness/core/utils/app_colors.dart';
 import 'package:fitness/core/utils/app_constants.dart';
@@ -23,6 +23,7 @@ class CustomWebViewScreen extends StatefulWidget {
 class _CustomWebViewScreenState extends State<CustomWebViewScreen> {
   late final WebViewController controller;
   bool isLoading = true;
+  bool hasError = false;
 
   @override
   void initState() {
@@ -33,10 +34,23 @@ class _CustomWebViewScreenState extends State<CustomWebViewScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageStarted: (_) {
-            setState(() => isLoading = true);
+            setState(() {
+              isLoading = true;
+              hasError = false;
+            });
           },
           onPageFinished: (_) {
-            setState(() => isLoading = false);
+            if (!hasError) {
+              setState(() => isLoading = false);
+            }
+          },
+          onWebResourceError: (WebResourceError error) {
+            if (error.isForMainFrame ?? true) {
+              setState(() {
+                isLoading = false;
+                hasError = true;
+              });
+            }
           },
         ),
       )
@@ -47,15 +61,32 @@ class _CustomWebViewScreenState extends State<CustomWebViewScreen> {
       );
   }
 
+  void _reloadPage() {
+    setState(() {
+      isLoading = true;
+      hasError = false;
+    });
+    controller.reload();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: AppColors.darkCharcoal,
       appBar: AppBar(title: Text(widget.title)),
       body: Stack(
         children: [
-          WebViewWidget(controller: controller),
-          if (isLoading)
+          if (!hasError) WebViewWidget(controller: controller),
+          if (hasError)
+            Center(
+              child: CustomErrorWidget(
+                errorMessage: localizations.unexpectedErrorMessage,
+                haveTryAgain: true,
+                onPressed: _reloadPage,
+              ),
+            ),
+          if (isLoading && !hasError)
             Container(
               color: AppColors.darkCharcoal,
               child: const CustomLoadingIndicator(),
@@ -65,3 +96,4 @@ class _CustomWebViewScreenState extends State<CustomWebViewScreen> {
     );
   }
 }
+

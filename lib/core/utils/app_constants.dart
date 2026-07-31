@@ -6,6 +6,10 @@ abstract class AppConstants {
   static const profileWebScreensBaseUrl =
       'https://elevate-flutter-team.github.io/fitness-app-webviews/';
 
+  static const helpScreen = 'help.html';
+  static const securityScreen = 'security.html';
+  static const privacyPolicyScreen = 'privacy-policy.html';
+
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
