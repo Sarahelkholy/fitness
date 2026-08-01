@@ -1,9 +1,11 @@
 import 'package:injectable/injectable.dart';
 import '../../../../config/error_handling/result.dart';
+import '../../domain/entities/chat_message_entity.dart';
 import '../../domain/entities/chatbot_entity.dart';
 import '../../domain/repositories/chatbot_repo.dart';
 import '../data_sources/remote/chatbot_remote_data_source.dart';
-import '../mapper/chatbot_mapper.dart';
+import '../mapper/chat_message_mapper.dart';
+import '../mapper/chatbot_response_mapper.dart';
 import '../models/requests/chatbot_request.dart';
 import '../models/responses/chatbot_response.dart';
 

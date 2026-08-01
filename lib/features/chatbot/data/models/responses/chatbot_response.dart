@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../requests/chatbot_request.dart';
+import '../requests/chat_message_model.dart';
 
 part 'chatbot_response.g.dart';
 

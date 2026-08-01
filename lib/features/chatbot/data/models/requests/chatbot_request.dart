@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'chat_message_model.dart';
 
 part 'chatbot_request.g.dart';
 
@@ -21,19 +22,4 @@ class ChatbotRequest {
       _$ChatbotRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$ChatbotRequestToJson(this);
-}
-
-@JsonSerializable()
-class ChatMessageModel {
-  @JsonKey(name: "role")
-  final String role;
-  @JsonKey(name: "content")
-  final String content;
-
-  ChatMessageModel({required this.role, required this.content});
-
-  factory ChatMessageModel.fromJson(Map<String, dynamic> json) =>
-      _$ChatMessageModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ChatMessageModelToJson(this);
 }

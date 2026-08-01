@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import '../../../../config/error_handling/result.dart';
+import '../entities/chat_message_entity.dart';
 import '../entities/chatbot_entity.dart';
 import '../repositories/chatbot_repo.dart';
 

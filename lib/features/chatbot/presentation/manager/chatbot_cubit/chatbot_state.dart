@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import '../../../../../config/base_state/base_state.dart';
+import '../../../domain/entities/chat_message_entity.dart';
 import '../../../domain/entities/chatbot_entity.dart';
 
 class ChatbotState extends Equatable {

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'chat_message_entity.dart';
 
 class ChatbotEntity extends Equatable {
   final String model;
@@ -13,14 +14,4 @@ class ChatbotEntity extends Equatable {
 
   @override
   List<Object?> get props => [model, message, done];
-}
-
-class ChatMessageEntity extends Equatable {
-  final String role;
-  final String content;
-
-  const ChatMessageEntity({required this.role, required this.content});
-
-  @override
-  List<Object?> get props => [role, content];
 }
