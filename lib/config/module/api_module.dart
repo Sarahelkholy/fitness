@@ -105,10 +105,25 @@ abstract class ApiModule {
 
   @Named(ApiStrings.mealsDio)
   @lazySingleton
-  Dio provideFcmDio(PrettyDioLogger logger) {
+  Dio provideMealsDio(PrettyDioLogger logger) {
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiEndPoints.mealsBaseUrl,
+        connectTimeout: const Duration(seconds: 10),
+        sendTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
+      ),
+    );
+    dio.interceptors.add(logger);
+    return dio;
+  }
+
+  @Named(ApiStrings.chatBotDio)
+  @lazySingleton
+  Dio provideChatBotDio(PrettyDioLogger logger) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: ApiEndPoints.chatBotBaseUrl,
         connectTimeout: const Duration(seconds: 10),
         sendTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),

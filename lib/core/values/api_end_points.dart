@@ -1,6 +1,8 @@
 abstract class ApiEndPoints {
   static const String baseUrl = "https://fitness.elevateegy.com/api/v1";
   static const String mealsBaseUrl = "https://www.themealdb.com/api/json/v1/1";
+  static const String chatBotBaseUrl =
+      "https://0pdjxgwd-11434.uks1.devtunnels.ms";
 
   static const String getUserData = "/auth/profile-data";
   static const String editProfile = "/auth/editProfile";
@@ -30,6 +32,8 @@ abstract class ApiEndPoints {
   static const String getMealsCategories = "/categories.php";
   static const String getMealsByCategory = "/filter.php";
   static const String getMealDetails = "/lookup.php";
+
+  static const String chatPath = "/api/chat";
 
   static const String getRandomPrimeMoverMusclesEndpoint = '/exercises/random';
   static const String uploadPhoto = "/auth/upload-photo";
