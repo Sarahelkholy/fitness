@@ -1,7 +1,8 @@
 import 'dart:ui'; // Required for ImageFilter
 import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:fitness/core/utils/app_assets.dart';
-import 'package:fitness/features/chat_screen.dart';
+import 'package:fitness/features/chatbot/presentation/manager/chatbot_cubit/chatbot_cubit.dart';
+import 'package:fitness/features/chatbot/presentation/pages/chat_screen.dart';
 import 'package:fitness/features/exercise/presentation/pages/home_screen.dart';
 import 'package:fitness/features/exercise/presentation/pages/workout_screen.dart';
 import 'package:fitness/features/profile/presentation/pages/profile_screen.dart';
@@ -31,7 +32,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     currentIndex = widget.initialIndex;
     screens = [
       const HomeScreen(),
-      const ChatScreen(),
+      BlocProvider(
+        create: (context) => getIt<ChatbotCubit>(),
+        child: const ChatScreen(),
+      ),
       BlocProvider(
         create: (context) => getIt<MusclesCubit>(),
         child: const WorkoutScreen(),

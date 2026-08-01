@@ -8,7 +8,7 @@ import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/register_form_cubit/register_form_cubit.dart';
 import 'package:fitness/features/auth/presentation/pages/register/register_screen.dart';
-import 'package:fitness/features/chat_screen.dart';
+import 'package:fitness/features/chatbot/presentation/pages/chat_screen.dart';
 import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_events.dart';
 import 'package:fitness/features/exercise/presentation/manager/muscles_cubit/muscles_cubit.dart';

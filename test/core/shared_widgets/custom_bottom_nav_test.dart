@@ -2,7 +2,7 @@ import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:fitness/core/shared_widgets/custom_bottom_nav.dart';
 import 'package:fitness/core/shared_widgets/svg_wrapper.dart';
 import 'package:fitness/core/utils/app_assets.dart';
-import 'package:fitness/features/chat_screen.dart';
+import 'package:fitness/features/chatbot/presentation/pages/chat_screen.dart';
 import 'package:fitness/features/exercise/presentation/pages/home_screen.dart';
 import 'package:fitness/features/exercise/presentation/pages/workout_screen.dart';
 import 'package:fitness/features/profile/presentation/pages/profile_screen.dart';
