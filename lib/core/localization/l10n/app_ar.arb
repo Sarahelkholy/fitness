@@ -165,5 +165,11 @@
   "photoUpdatedSuccessfully":"تم تحديث الصورة بنجاح",
   "profileUpdatedSuccessfully":"تم تحديث الملف الشخصي بنجاح",
   "activityLevel":"مستوى النشاط",
-  "kG":"كجم"
+  "kG":"كجم",
+  "passwordMinLength": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.",
+      "createNewPassword": "إنشاء كلمة مرور جديدة",
+      "currentPassword":"كلمة المرور الحالية",
+      "done": "تم",
+      "oldAndNewPasswordSame": "يجب أن تكون كلمة المرور الجديدة \nمختلفة عن كلمة المرور الحالية"
+
 }

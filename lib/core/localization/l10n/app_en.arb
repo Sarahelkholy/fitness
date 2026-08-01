@@ -170,5 +170,10 @@
   "photoUpdatedSuccessfully":"Photo updated successfully",
   "profileUpdatedSuccessfully":"Profile updated successfully",
   "activityLevel":"Activity Level",
-  "kG":"kg"
+  "kG":"kg",
+  "passwordMinLength": "Password must be at least 8 characters long.",
+  "createNewPassword": "Create a new password",
+  "currentPassword":"Current Password",
+  "done": "Done",
+   "oldAndNewPasswordSame": "The new password must be different from the current password"
 }

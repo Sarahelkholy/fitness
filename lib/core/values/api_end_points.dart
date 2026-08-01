@@ -33,4 +33,7 @@ abstract class ApiEndPoints {
 
   static const String getRandomPrimeMoverMusclesEndpoint = '/exercises/random';
   static const String uploadPhoto = "/auth/upload-photo";
+
+  ///? ===================== Change Password ==================
+  static const String changePassword = '/auth/change-password';
 }

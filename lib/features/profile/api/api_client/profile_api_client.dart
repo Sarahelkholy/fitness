@@ -8,6 +8,10 @@ import 'package:fitness/features/profile/api/data_sources/models/response/upload
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../../../../core/values/api_end_points.dart';
+import '../../data/models/request/change_password_request.dart';
+import '../../data/models/response/change_password_response.dart';
+
 part 'profile_api_client.g.dart';
 
 @injectable
@@ -22,4 +26,10 @@ abstract class ProfileApiClient {
   @PUT(ApiEndPoints.uploadPhoto)
   @MultiPart()
   Future<UploadPhotoResponse> uploadPhoto(@Part(name: "photo") File file);
+
+  ///? ========= Change password ========
+  @PATCH(ApiEndPoints.changePassword)
+  Future<ChangePasswordResponse> changePassword(
+    @Body() ChangePasswordRequest changePasswordRequest,
+  );
 }

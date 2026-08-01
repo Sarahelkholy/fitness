@@ -8,6 +8,8 @@ import 'package:fitness/features/profile/api/data_sources/models/response/edit_p
 import 'package:fitness/features/profile/api/data_sources/models/response/upload_photo_response.dart';
 import 'package:fitness/features/profile/data/data_sources/profile_remote_data_source.dart';
 import 'package:injectable/injectable.dart';
+import '../../data/models/request/change_password_request.dart';
+import '../../data/models/response/change_password_response.dart';
 
 @Injectable(as: ProfileRemoteDataSource)
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
@@ -28,6 +30,19 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   Future<Result<UploadPhotoResponse>> uploadPhoto(File file) async {
     return executeApi(() async {
       return await _apiClient.uploadPhoto(file);
+    });
+  }
+
+  @override
+  Future<Result<ChangePasswordResponse>> changePassword({
+    required String password,
+    required String newPassword,
+  }) {
+    return executeApi(() async {
+      final response = await _apiClient.changePassword(
+        ChangePasswordRequest(password: password, newPassword: newPassword),
+      );
+      return response;
     });
   }
 }
