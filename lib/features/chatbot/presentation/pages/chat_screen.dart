@@ -1,11 +1,10 @@
 import 'dart:ui';
-
+import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:fitness/core/utils/app_assets.dart';
 import 'package:fitness/core/utils/app_colors.dart';
 import 'package:fitness/features/chatbot/presentation/manager/chatbot_cubit/chatbot_cubit.dart';
 import 'package:fitness/features/chatbot/presentation/manager/chatbot_cubit/chatbot_state.dart';
-import 'package:fitness/features/chatbot/presentation/pages/chat_with_bot_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -129,12 +128,9 @@ class ChatScreen extends StatelessWidget {
                                 // Get Started Button (Frame 4)
                                 ElevatedButton(
                                   onPressed: () {
-                                    Navigator.push(
+                                    Navigator.pushNamed(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ChatWithBotScreen(),
-                                      ),
+                                      Routes.chatWithBotRoute,
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(

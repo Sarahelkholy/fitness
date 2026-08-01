@@ -3,7 +3,6 @@ import 'package:fitness/config/user/manager/user_state.dart';
 import 'package:fitness/features/exercise/domain/use_cases/get_difficulty_levels_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'config/di/di.dart';
 import 'config/route_manager/route_generator.dart';
 import 'config/route_manager/routes.dart';
@@ -61,7 +60,7 @@ class _MyAppState extends State<MyApp> {
 
             title: 'Fitness APP',
 
-            initialRoute: Routes.bottomNavBarRoute,
+            initialRoute: Routes.splashRoute,
 
             onGenerateRoute: RouteGenerator.getRoute,
 

@@ -1,6 +1,10 @@
 import 'package:fitness/core/shared_widgets/custom_scaffold.dart';
 import 'package:fitness/core/utils/app_colors.dart';
+import 'package:fitness/features/chatbot/presentation/manager/chatbot_cubit/chatbot_cubit.dart';
+import 'package:fitness/features/chatbot/presentation/manager/chatbot_cubit/chatbot_event.dart';
+import 'package:fitness/features/chatbot/presentation/manager/chatbot_cubit/chatbot_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatWithBotScreen extends StatefulWidget {
   const ChatWithBotScreen({super.key});
@@ -13,12 +17,34 @@ class _ChatWithBotScreenState extends State<ChatWithBotScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   bool _isTyping = false;
-  final List<Map<String, dynamic>> _messages = [
-    {
-      'text': 'Hello! I am your AI fitness coach. How can I help you today?',
-      'isBot': true,
-    },
-  ];
+  late final List<Map<String, dynamic>> _messages;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeMessages();
+  }
+
+  void _initializeMessages() {
+    final state = context.read<ChatbotCubit>().state;
+    if (state.messages.isNotEmpty) {
+      _messages = state.messages
+          .map((msg) => {
+                'text': msg.content,
+                'isBot': msg.role == 'model',
+              })
+          .toList();
+    } else {
+      _messages = [
+        {
+          'text':
+              'Hello! I am your AI fitness coach. How can I help you today?',
+          'isBot': true,
+        },
+      ];
+    }
+    _scrollToBottom();
+  }
 
   @override
   void dispose() {
@@ -40,147 +66,148 @@ class _ChatWithBotScreenState extends State<ChatWithBotScreen> {
   }
 
   void _sendMessage() {
-    if (_messageController.text.trim().isEmpty) return;
+    final text = _messageController.text.trim();
+    if (text.isEmpty) return;
 
     setState(() {
-      _messages.add({'text': _messageController.text.trim(), 'isBot': false});
+      _messages.add({'text': text, 'isBot': false});
       _messageController.clear();
       _isTyping = true;
     });
     _scrollToBottom();
 
-    // Simulate bot response
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        setState(() {
-          _isTyping = false;
-          _messages.add({
-            'text': 'That sounds great! Let\'s work on that together.',
-            'isBot': true,
-          });
-        });
-        _scrollToBottom();
-      }
-    });
+    context.read<ChatbotCubit>().doEvents(SendMessageEvent(text));
   }
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text(
-          'Smart Coach',
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: 'Baloo_Thambi_2',
-            fontWeight: FontWeight.w600,
+    return BlocListener<ChatbotCubit, ChatbotState>(
+      listenWhen: (previous, current) => previous.messages != current.messages,
+      listener: (context, state) {
+        if (state.messages.isNotEmpty && state.messages.last.role == 'model') {
+          setState(() {
+            _isTyping = false;
+            _messages.add({'text': state.messages.last.content, 'isBot': true});
+          });
+          _scrollToBottom();
+        }
+      },
+      child: CustomScaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+            onPressed: () => Navigator.pop(context),
           ),
-        ),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              controller: _scrollController,
-              padding: const EdgeInsets.all(16),
-              itemCount: _messages.length + (_isTyping ? 1 : 0),
-              itemBuilder: (context, index) {
-                if (index == _messages.length) {
-                  return const Align(
-                    alignment: Alignment.centerLeft,
-                    child: TypingIndicator(),
-                  );
-                }
-                final message = _messages[index];
-                final isBot = message['isBot'] as bool;
-
-                return Align(
-                  alignment: isBot
-                      ? Alignment.centerLeft
-                      : Alignment.centerRight,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      color: isBot ? AppColors.darkCharcoal : AppColors.main,
-                      borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(20),
-                        topRight: const Radius.circular(20),
-                        bottomLeft: Radius.circular(isBot ? 0 : 20),
-                        bottomRight: Radius.circular(isBot ? 20 : 0),
-                      ),
-                    ),
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width * 0.75,
-                    ),
-                    child: Text(
-                      message['text'],
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Baloo_Thambi_2',
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                );
-              },
+          title: const Text(
+            'Smart Coach',
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Baloo_Thambi_2',
+              fontWeight: FontWeight.w600,
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: AppColors.darkCharcoal.withOpacity(0.8),
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(30),
+          centerTitle: true,
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                controller: _scrollController,
+                padding: const EdgeInsets.all(16),
+                itemCount: _messages.length + (_isTyping ? 1 : 0),
+                itemBuilder: (context, index) {
+                  if (index == _messages.length) {
+                    return const Align(
+                      alignment: Alignment.centerLeft,
+                      child: TypingIndicator(),
+                    );
+                  }
+                  final message = _messages[index];
+                  final isBot = message['isBot'] as bool;
+
+                  return Align(
+                    alignment: isBot
+                        ? Alignment.centerLeft
+                        : Alignment.centerRight,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      decoration: BoxDecoration(
+                        color: isBot ? AppColors.darkCharcoal : AppColors.main,
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(20),
+                          topRight: const Radius.circular(20),
+                          bottomLeft: Radius.circular(isBot ? 0 : 20),
+                          bottomRight: Radius.circular(isBot ? 20 : 0),
+                        ),
+                      ),
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.75,
+                      ),
+                      child: Text(
+                        message['text'],
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Baloo_Thambi_2',
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _messageController,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'Type your message...',
-                      hintStyle: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: AppColors.darkCharcoal.withOpacity(0.8),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(30),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _messageController,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: 'Type your message...',
+                        hintStyle: TextStyle(
+                          color: Colors.white.withOpacity(0.5),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide.none,
+                        ),
+                        fillColor: Colors.white.withOpacity(0.1),
+                        filled: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
                       ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
-                        borderSide: BorderSide.none,
-                      ),
-                      fillColor: Colors.white.withOpacity(0.1),
-                      filled: true,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
-                      ),
+                      onSubmitted: (_) => _sendMessage(),
                     ),
-                    onSubmitted: (_) => _sendMessage(),
                   ),
-                ),
-                const SizedBox(width: 8),
-                CircleAvatar(
-                  backgroundColor: AppColors.main,
-                  child: IconButton(
-                    icon: const Icon(Icons.send, color: Colors.white),
-                    onPressed: _sendMessage,
+                  const SizedBox(width: 8),
+                  CircleAvatar(
+                    backgroundColor: AppColors.main,
+                    child: IconButton(
+                      icon: const Icon(Icons.send, color: Colors.white),
+                      onPressed: _sendMessage,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
