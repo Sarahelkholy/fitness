@@ -8,53 +8,26 @@ class FirebaseService implements DatabaseService {
 
   FirebaseService(this._firestore);
 
-  /// Helper for creating a typed [DocumentReference] intended for reading.
-  /// The [toFirestore] is intentionally unimplemented as this ref is for reads.
-  DocumentReference<T> _getReadDocRef<T>(
-    String path,
-    T Function(Map<String, dynamic> json) fromFirestore,
-  ) {
-    return _firestore
-        .doc(path)
-        .withConverter<T>(
-          fromFirestore: (snapshot, _) => fromFirestore(snapshot.data() ?? {}),
-          toFirestore: (_, _) =>
-              throw UnimplementedError("Read-only reference"),
-        );
-  }
-
-  /// Helper for creating a typed [CollectionReference] intended for reading.
-  CollectionReference<T> _getReadCollectionRef<T>(
-    String path,
-    T Function(Map<String, dynamic> json) fromFirestore,
-  ) {
-    return _firestore
-        .collection(path)
-        .withConverter<T>(
-          fromFirestore: (snapshot, _) => fromFirestore(snapshot.data() ?? {}),
-          toFirestore: (_, _) =>
-              throw UnimplementedError("Read-only reference"),
-        );
-  }
-
   @override
   Future<T?> getDocument<T>({
     required String path,
-    required T Function(Map<String, dynamic> json) fromFirestore,
+    required T Function(Map<String, dynamic> json, String id) fromFirestore,
   }) async {
-    final docRef = _getReadDocRef<T>(path, fromFirestore);
-    final snapshot = await docRef.get();
-    return snapshot.data();
+    final snapshot = await _firestore.doc(path).get();
+    if (snapshot.exists) {
+      return fromFirestore(snapshot.data() ?? {}, snapshot.id);
+    }
+    return null;
   }
 
   @override
   Future<List<T>> getCollection<T>({
     required String path,
-    required T Function(Map<String, dynamic> json) fromFirestore,
+    required T Function(Map<String, dynamic> json, String id) fromFirestore,
     Map<String, dynamic>? queryParams,
     int? limit,
   }) async {
-    Query<T> query = _getReadCollectionRef<T>(path, fromFirestore);
+    Query query = _firestore.collection(path);
 
     if (queryParams != null) {
       queryParams.forEach((field, value) {
@@ -67,7 +40,9 @@ class FirebaseService implements DatabaseService {
     }
 
     final snapshot = await query.get();
-    return snapshot.docs.map((doc) => doc.data()).toList();
+    return snapshot.docs
+        .map((doc) => fromFirestore(doc.data() as Map<String, dynamic>, doc.id))
+        .toList();
   }
 
   @override
@@ -77,8 +52,6 @@ class FirebaseService implements DatabaseService {
     required Map<String, dynamic> Function(T value) toFirestore,
     bool merge = true,
   }) async {
-    // For writing, we don't need withConverter's fromFirestore.
-    // We manually map the data to a map and use the raw Firestore API.
     await _firestore.doc(path).set(toFirestore(data), SetOptions(merge: merge));
   }
 
@@ -110,21 +83,23 @@ class FirebaseService implements DatabaseService {
   @override
   Stream<T?> watchDocument<T>({
     required String path,
-    required T Function(Map<String, dynamic> json) fromFirestore,
+    required T Function(Map<String, dynamic> json, String id) fromFirestore,
   }) {
-    return _getReadDocRef<T>(
-      path,
-      fromFirestore,
-    ).snapshots().map((s) => s.data());
+    return _firestore.doc(path).snapshots().map((snapshot) {
+      if (snapshot.exists) {
+        return fromFirestore(snapshot.data() ?? {}, snapshot.id);
+      }
+      return null;
+    });
   }
 
   @override
   Stream<List<T>> watchCollection<T>({
     required String path,
-    required T Function(Map<String, dynamic> json) fromFirestore,
+    required T Function(Map<String, dynamic> json, String id) fromFirestore,
     Map<String, dynamic>? queryParams,
   }) {
-    Query<T> query = _getReadCollectionRef<T>(path, fromFirestore);
+    Query query = _firestore.collection(path);
 
     if (queryParams != null) {
       queryParams.forEach((field, value) {
@@ -132,6 +107,12 @@ class FirebaseService implements DatabaseService {
       });
     }
 
-    return query.snapshots().map((s) => s.docs.map((d) => d.data()).toList());
+    return query.snapshots().map((snapshot) {
+      return snapshot.docs
+          .map(
+            (doc) => fromFirestore(doc.data() as Map<String, dynamic>, doc.id),
+          )
+          .toList();
+    });
   }
 }

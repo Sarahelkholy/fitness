@@ -8,7 +8,9 @@ import 'package:fitness/features/auth/presentation/pages/login/login_screen.dart
 import 'package:fitness/features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:fitness/features/auth/presentation/manager/register_form_cubit/register_form_cubit.dart';
 import 'package:fitness/features/auth/presentation/pages/register/register_screen.dart';
-import 'package:fitness/features/chat_screen.dart';
+import 'package:fitness/features/chatbot/presentation/manager/chatbot_cubit/chatbot_cubit.dart';
+import 'package:fitness/features/chatbot/presentation/pages/chatbot_screen.dart';
+import 'package:fitness/features/chatbot/presentation/pages/welcome_screen_chatbot.dart';
 import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:fitness/features/exercise/presentation/manager/home_cubit/home_events.dart';
 import 'package:fitness/features/exercise/presentation/manager/muscles_cubit/muscles_cubit.dart';
@@ -46,11 +48,15 @@ abstract class RouteGenerator {
       switch (settings.name) {
         /// Splash Screen
         case Routes.splashRoute:
-          return MaterialPageRoute(builder: (_) => const SplashScreen());
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const SplashScreen(),
+          );
 
         /// home screen
         case Routes.homeRoute:
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BlocProvider(
               create: (context) => getIt<HomeCubit>(),
               child: const HomeScreen(),
@@ -59,16 +65,21 @@ abstract class RouteGenerator {
 
         case Routes.forgetPasswordRoute:
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => const ForgetPasswordScreen(),
           );
 
         ///================ OnBoardingScreen ================
         case Routes.onboardingRoute:
-          return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const OnBoardingScreen(),
+          );
 
         /// login screen
         case Routes.loginRoute:
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BlocProvider<LoginCubit>(
               create: (context) => getIt<LoginCubit>(),
               child: const LoginScreen(),
@@ -78,6 +89,7 @@ abstract class RouteGenerator {
         /// register screen
         case Routes.registerRoute:
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BlocProvider(
               create: (context) => getIt<RegisterCubit>(),
               child: const RegisterScreen(),
@@ -87,6 +99,7 @@ abstract class RouteGenerator {
         /// register form screen
         case Routes.registerFormRoute:
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BlocProvider(
               create: (context) => getIt<RegisterFormCubit>(),
               child: const RegisterFormScreen(),
@@ -96,6 +109,7 @@ abstract class RouteGenerator {
         ///
         case Routes.popularTrainingRoute:
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BlocProvider(
               create: (context) => getIt<PopularTrainingCubit>(),
               child: const PopularTrainingScreen(),
@@ -106,6 +120,7 @@ abstract class RouteGenerator {
           final args = settings.arguments as Map<String, dynamic>?;
 
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BlocProvider(
               create: (context) => getIt<HomeCubit>()
                 ..doEvents(GetRandomExercises())
@@ -117,15 +132,23 @@ abstract class RouteGenerator {
           );
 
         case Routes.smartCoachRoute:
-          return MaterialPageRoute(builder: (_) => const ChatScreen());
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => BlocProvider.value(
+              value: getIt<ChatbotCubit>(),
+              child: const WelcomeScreenChatbot(),
+            ),
+          );
 
         case Routes.upcomingFeatureRoute:
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => const UpcomingFeatureScreen(),
           );
 
         case Routes.workoutRoute:
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BlocProvider(
               create: (context) => getIt<MusclesCubit>(),
               child: const WorkoutScreen(),
@@ -137,6 +160,7 @@ abstract class RouteGenerator {
           final args = settings.arguments as Map<String, dynamic>?;
           final initialExercise = args?['initialExercise'] as Exercise?;
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BlocProvider(
               create: (context) => getIt<ExerciseCubit>(),
               child: ExerciseScreen(
@@ -155,6 +179,7 @@ abstract class RouteGenerator {
           final index = settings.arguments as int? ?? 0;
 
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BlocProvider(
               create: (context) =>
                   getIt<MealRecommendationCubit>()
@@ -168,6 +193,7 @@ abstract class RouteGenerator {
           final mealId = settings.arguments as String;
 
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BlocProvider(
               create: (context) =>
                   getIt<MealDetailsCubit>()
@@ -178,22 +204,54 @@ abstract class RouteGenerator {
 
         /// edit profile
         case Routes.editProfileRoute:
-          return MaterialPageRoute(builder: (_) => const EditProfileScreen());
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const EditProfileScreen(),
+          );
 
         /// change password
         case Routes.changPasswordRoute:
           return MaterialPageRoute(
+            settings: settings,
             builder: (_) => const ChangePasswordScreen(),
           );
 
         case Routes.profileSecurityRoute:
-          return MaterialPageRoute(builder: (_) => const SecurityScreen());
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const SecurityScreen(),
+          );
 
         case Routes.profileHelpRoute:
-          return MaterialPageRoute(builder: (_) => const HelpScreen());
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const HelpScreen(),
+          );
 
         case Routes.profilePrivacyRoute:
-          return MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen());
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const PrivacyPolicyScreen(),
+          );
+
+        case Routes.welcomeScreenChatbot:
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => BlocProvider.value(
+              value: getIt<ChatbotCubit>(),
+              child: const WelcomeScreenChatbot(),
+            ),
+          );
+
+        case Routes.chatScreen:
+          final chatId = settings.arguments as String?;
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => BlocProvider.value(
+              value: getIt<ChatbotCubit>(),
+              child: ChatbotScreen(chatId: chatId),
+            ),
+          );
 
         /// Default
         default:

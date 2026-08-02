@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Widget? body;
+  final Widget? drawer;
+  final Widget? endDrawer;
   final PreferredSizeWidget? appBar;
   final String backgroundImage;
 
@@ -12,6 +14,8 @@ class CustomScaffold extends StatelessWidget {
     this.body,
     this.appBar,
     this.backgroundImage = AppAssets.authBackgroundImage,
+    this.drawer,
+    this.endDrawer,
   });
 
   @override
@@ -24,6 +28,8 @@ class CustomScaffold extends StatelessWidget {
         ),
       ),
       child: Scaffold(
+        drawer: drawer,
+        endDrawer: endDrawer,
         backgroundColor: AppColors.pureBlack.withValues(alpha: .5),
         appBar: appBar,
         body: body,

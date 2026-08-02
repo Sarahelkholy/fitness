@@ -8,7 +8,8 @@ extension ChatbotResponseMapper on ChatbotResponse {
     return ChatbotEntity(
       model: model ?? "",
       message:
-          message?.toEntity() ?? const ChatMessageEntity(role: "", content: ""),
+          message?.toEntity() ??
+          ChatMessageEntity(role: "", content: "", timestamp: DateTime.now()),
       done: done ?? false,
     );
   }

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness/config/user/manager/user_cubit.dart';
 import 'package:fitness/config/user/manager/user_state.dart';
 import 'package:fitness/features/exercise/domain/use_cases/get_difficulty_levels_use_case.dart';
@@ -14,9 +15,12 @@ import 'core/theme/app_theme.dart';
 import 'core/utils/app_constants.dart';
 import 'core/values/app_strings.dart';
 import 'features/exercise/domain/use_cases/get_exercises_use_case.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   configureDependencies();
 

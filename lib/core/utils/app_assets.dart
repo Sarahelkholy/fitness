@@ -51,4 +51,9 @@ abstract class AppAssets {
       "$_baseImagesPath/exercise_background_blur.png";
 
   static const String mealsBackground = "$_baseImagesPath/food.png";
+
+  static const String chatbotBackground =
+      "$_baseImagesPath/chatbot_background.png";
+  static const String chatbotImage = "$_baseImagesPath/chatbot_image.png";
+  static const String loadingLottie = "$_baseIconsPath/loading.json";
 }

@@ -3,12 +3,16 @@ import '../models/requests/chat_message_model.dart';
 
 extension ChatMessageMapper on ChatMessageModel {
   ChatMessageEntity toEntity() {
-    return ChatMessageEntity(role: role, content: content);
+    return ChatMessageEntity(
+      role: role,
+      content: content,
+      timestamp: timestamp ?? DateTime.now(),
+    );
   }
 }
 
 extension ChatMessageEntityMapper on ChatMessageEntity {
   ChatMessageModel toModel() {
-    return ChatMessageModel(role: role, content: content);
+    return ChatMessageModel(role: role, content: content, timestamp: timestamp);
   }
 }

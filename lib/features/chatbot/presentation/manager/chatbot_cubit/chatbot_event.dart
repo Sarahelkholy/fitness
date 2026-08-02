@@ -5,3 +5,15 @@ class SendMessageEvent extends ChatbotEvents {
 
   SendMessageEvent(this.message);
 }
+
+class StartNewChatEvent extends ChatbotEvents {}
+
+class LoadChatEvent extends ChatbotEvents {
+  final String chatId;
+
+  LoadChatEvent(this.chatId);
+}
+
+class GetChatsHistoryEvent extends ChatbotEvents {}
+
+class RetrySendMessageEvent extends ChatbotEvents {}

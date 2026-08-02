@@ -1,7 +1,8 @@
-import 'dart:ui'; // Required for ImageFilter
+import 'dart:ui';
+
+import 'package:fitness/config/route_manager/routes.dart';
 import 'package:fitness/core/localization/l10n/app_localizations.dart';
 import 'package:fitness/core/utils/app_assets.dart';
-import 'package:fitness/features/chat_screen.dart';
 import 'package:fitness/features/exercise/presentation/pages/home_screen.dart';
 import 'package:fitness/features/exercise/presentation/pages/workout_screen.dart';
 import 'package:fitness/features/profile/presentation/pages/profile_screen.dart';
@@ -31,7 +32,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     currentIndex = widget.initialIndex;
     screens = [
       const HomeScreen(),
-      const ChatScreen(),
+      const SizedBox.shrink(),
       BlocProvider(
         create: (context) => getIt<MusclesCubit>(),
         child: const WorkoutScreen(),
@@ -47,9 +48,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBody: true,
-
       body: IndexedStack(index: currentIndex, children: screens),
-
       bottomNavigationBar: SafeArea(
         child: Container(
           height: 70,
@@ -93,6 +92,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
+          if (index == 1) {
+            Navigator.pushNamed(context, Routes.welcomeScreenChatbot);
+            return;
+          }
           if (currentIndex == index) return;
           setState(() {
             currentIndex = index;

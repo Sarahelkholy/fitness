@@ -3,14 +3,14 @@ abstract class DatabaseService {
   /// Throws an exception if the document does not exist.
   Future<T?> getDocument<T>({
     required String path,
-    required T Function(Map<String, dynamic> json) fromFirestore,
+    required T Function(Map<String, dynamic> json, String id) fromFirestore,
   });
 
   /// Fetches a collection of documents and converts them to a list of [T].
   /// Optionally filters by [queryParams] and [limit].
   Future<List<T>> getCollection<T>({
     required String path,
-    required T Function(Map<String, dynamic> json) fromFirestore,
+    required T Function(Map<String, dynamic> json, String id) fromFirestore,
     Map<String, dynamic>? queryParams,
     int? limit,
   });
@@ -48,13 +48,13 @@ abstract class DatabaseService {
   /// Listens to real-time updates for a document at [path].
   Stream<T?> watchDocument<T>({
     required String path,
-    required T Function(Map<String, dynamic> json) fromFirestore,
+    required T Function(Map<String, dynamic> json, String id) fromFirestore,
   });
 
   /// Listens to real-time updates for a collection at [path].
   Stream<List<T>> watchCollection<T>({
     required String path,
-    required T Function(Map<String, dynamic> json) fromFirestore,
+    required T Function(Map<String, dynamic> json, String id) fromFirestore,
     Map<String, dynamic>? queryParams,
   });
 }

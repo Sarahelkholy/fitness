@@ -34,4 +34,7 @@ abstract class Routes {
   static const String profileSecurityRoute = "/profileSecurity";
   static const String profileHelpRoute = "/profileHelp";
   static const String profilePrivacyRoute = "/profilePrivacy";
+
+  static const String welcomeScreenChatbot = "/welcomeScreenChatbot";
+  static const String chatScreen = "/chatScreen";
 }

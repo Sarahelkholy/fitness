@@ -124,9 +124,9 @@ abstract class ApiModule {
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiEndPoints.chatBotBaseUrl,
-        connectTimeout: const Duration(seconds: 10),
-        sendTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 10),
+        connectTimeout: const Duration(seconds: 40),
+        sendTimeout: const Duration(seconds: 40),
+        receiveTimeout: const Duration(seconds: 40),
       ),
     );
     dio.interceptors.add(logger);

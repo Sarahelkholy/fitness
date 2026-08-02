@@ -1,10 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:fitness/core/values/app_strings.dart';
 
 class NetworkException {
   static String getMessageError(Exception exception) {
-    if (exception is DioException) {
+    if (exception is FirebaseException) {
+      return _handleFirebaseException(exception);
+    } else if (exception is DioException) {
       switch (exception.type) {
         case DioExceptionType.connectionTimeout:
           return AppStrings.current.connectionTimeoutMessage;
@@ -37,6 +40,19 @@ class NetworkException {
       return _handlePlatformException(exception);
     } else {
       return AppStrings.current.unexpectedErrorMessage;
+    }
+  }
+
+  static String _handleFirebaseException(FirebaseException e) {
+    switch (e.code) {
+      case 'permission-denied':
+        return "Access denied. Please check your permissions.";
+      case 'unavailable':
+        return "Service temporarily unavailable. Please try again later.";
+      case 'not-found':
+        return "Requested data not found.";
+      default:
+        return e.message ?? AppStrings.current.unexpectedErrorMessage;
     }
   }
 
